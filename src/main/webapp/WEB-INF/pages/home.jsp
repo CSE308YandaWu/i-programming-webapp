@@ -20,7 +20,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <%--<link rel="icon" href="../../favicon.ico">--%>
 
     <title>Home Page</title>
 
@@ -48,28 +48,27 @@
                     <nav>
                         <ul class="nav masthead-nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Help</a></li>
+                            <%--<li><a href="#">Sign in</a></li>--%>
                         </ul>
                     </nav>
                 </div>
             </div>
             <div class="inner cover">
                 <h1 class="cover-heading">Welcome to I-Programming!</h1>
-                <p class="lead">I-Programing is an online informal education web app that uses an
-                    innovative approach to develop an interactive student progress verification
+                <p class="lead">I-Programing is an online informal education web app that uses an innovative approach to develop an interactive student progress verification
                     system to help users learn a programing language in an easy and fast
                     way.</p>
-                <p class="lead">
+                <%--<p class="lead">--%>
                     <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
                     <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
-                    <div id="my-signin2"></div>
+                    <div id="my-signin2" class="btn"></div>
 
-                </p>
+                <%--</p>--%>
             </div>
             <div class="mastfoot">
                 <div class="inner">
-                    <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    <p>Developed by Dark Blue Team.</p>
                 </div>
             </div>
 
