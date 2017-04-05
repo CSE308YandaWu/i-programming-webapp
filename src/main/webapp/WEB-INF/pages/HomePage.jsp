@@ -9,14 +9,19 @@
 <html>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 <head>
     <title>Iprogramming</title>
 </head>
 <body>
 Welcome, dark blue. let's start coding.
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<%--<div class="g-signin2" data-onsuccess="onSignIn"></div>--%>
 <a href="#" onclick="signOut();">Sign out</a>
+<div id="my-signin2"></div>
+
+
+
 </body>
 </html>
 

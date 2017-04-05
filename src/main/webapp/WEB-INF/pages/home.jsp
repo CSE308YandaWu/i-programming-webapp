@@ -10,7 +10,9 @@
 <html lang="en">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,9 +61,10 @@
                     system to help users learn a programing language in an easy and fast
                     way.</p>
                 <p class="lead">
-                    <a href="#" class="btn btn-lg btn-default">Learn more</a>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    <a href="#" onclick="signOut();">Sign out</a>
+                    <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
+                    <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
+                    <div id="my-signin2"></div>
+
                 </p>
             </div>
             <div class="mastfoot">
