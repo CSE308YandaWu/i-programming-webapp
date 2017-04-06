@@ -21,13 +21,14 @@ public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "HomePage";
+		return "home";
 	}
-	@RequestMapping("/hello")
-	public String hello(){return "HelloWorld";}
+	@RequestMapping("/main")
+	public String main(){return "main";}
 
-	@RequestMapping("/out")
-	public String out(){return "out";}
+//	@RequestMapping("/hello")
+//	public String hello(){return "HelloWorld";}
+//
 
 
 }

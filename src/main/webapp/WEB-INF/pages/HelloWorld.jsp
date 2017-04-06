@@ -17,15 +17,9 @@
 </head>
 <body>
 Hello World!
-<form id="myForm2"><input type="hidden"></form>
-<%--<form action="/out" method="get">--%>
-<%--<button type="submit">OUT</button><br>--%>
-<%--</form>--%>
+<%--<form id="myForm2"><input type="hidden"></form>--%>
 <%--<div id="userEmail"></div>--%>
-
 <%--<a href="#" onclick="signOut();">GET ME OUT</a>--%>
-
-<a href="#" onclick="ff10();">GET ME OUT</a>
-
+<a href="#" onclick="ff10();">GET ME BACK</a>
 </body>
 </html>

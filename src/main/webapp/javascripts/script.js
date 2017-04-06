@@ -33,6 +33,15 @@ function signOut() {
     // document.getElementById("myGod").action = "/out";
     // document.getElementById("myGod").submit();
 }
+function toMain(){
+    document.getElementById("formToMain").action = "/main";
+    document.getElementById("formToMain").submit();
+}
+function backToHome(){
+    document.getElementById("formToHome").action = "/";
+    document.getElementById("formToHome").submit();
+}
+
 function ff20(){
     document.getElementById("myForm").action = "/hello";
     document.getElementById("myForm").submit();
