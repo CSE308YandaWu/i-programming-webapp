@@ -25,13 +25,13 @@
 
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#" onclick="create_courseToHome();">Back to Home</a>
-        <form id="create_courseToHome"><input type="hidden"></form>
+    <li style="float:right"><a class="active" href="#" onclick="createCourseToHome();">Back to Home</a>
+        <form id="createCourseToHome"><input type="hidden"></form>
     </li>
 </ul>
 
 <h1>--------------------Create Course--------------------</h1>
-<td class="container1">
+<div class="container1">
 
     <table class="table1">
         <tr>

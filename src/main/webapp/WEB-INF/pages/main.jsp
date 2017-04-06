@@ -58,7 +58,7 @@
                                 <form id="createCourse"><input type="hidden"></form>
                             </li>
                             <li><a href="#" class="addCourse" onclick="toSearchCourse()">Add Course</a>
-                                <form action="/search_course" id="addCourse"><input type="hidden"></form>
+                                <form id="searchCourse"><input type="hidden"></form>
                             </li>
                         </ul>
                     </nav>
@@ -142,7 +142,10 @@
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">CSE 111</a>
+                    <a href="#" class="list-group-item list-group-item-action" onclick="toEditCourse()">CSE 111
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <form id="toEditCourse"><input type="hidden"></form>
+                    </a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 123</a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 235</a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 456</a>

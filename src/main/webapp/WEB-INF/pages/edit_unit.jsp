@@ -24,7 +24,9 @@
 
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#">Back to Home</a></li>
+    <li style="float:right"><a class="active" href="#" onclick="editUnitToHome();">Back to Home</a>
+        <form id="editUnitToHome"><input type="hidden"></form>
+    </li>
 </ul>
 
 <h1>--------------------Edit Unit--------------------</h1>
@@ -75,6 +77,10 @@
 
 </div>
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
 
 </body>
 </html>

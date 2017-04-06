@@ -24,11 +24,13 @@
 
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#">Back to Home</a></li>
+    <li style="float:right"><a class="active" href="#" onclick="editLessonToHome();">Back to Home</a>
+        <form id="editLessonToHome"><input type="hidden"></form>
+    </li>
 </ul>
 
 <h1>--------------------Create Course--------------------</h1>
-<td class="container1">
+<div class="container1">
 
     <table class="table1">
         <tr>
@@ -107,9 +109,12 @@
 
 
     </table>
+</div>
 
-    </div>
 
-
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
 </body>
 </html>

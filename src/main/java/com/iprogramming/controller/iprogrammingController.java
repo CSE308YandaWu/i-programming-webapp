@@ -25,25 +25,33 @@ public class iprogrammingController {
 	@RequestMapping("/main")
 	public String main(){return "main";}
 
-//	@RequestMapping("/hello")
-//	public String hello(){return "HelloWorld";}
-//
-	@RequestMapping("/create_course")
+	@RequestMapping("/createCourse")
 	public String createCourse(){return "create_course";}
 
-	@RequestMapping("/search_course")
+	@RequestMapping("/editCourse")
+	public String editCourse(){return "editcourse";}
+
+	@RequestMapping("/editUnit")
+	public String edit_unit(){return "edit_unit";}
+
+	@RequestMapping("/editLesson")
+	public String editLesson(){return "editLesson";}
+
+	@RequestMapping("/searchCourse")
 	public String searchCourse(){
 		return "search_course";
 	}
+
+
 
 	@RequestMapping("/course_page")
 	public String coursePage(){
 		return "coursepage";
 	}
 
-	@RequestMapping("/edit_lesson")
-	public String edit_lesson(){
-		return "editLesson";
-	}
+//	@RequestMapping("/hello")
+//	public String hello(){return "HelloWorld";}
+//
+
 
 }

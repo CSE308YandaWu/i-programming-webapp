@@ -43,7 +43,9 @@
                     <h3 class="masthead-brand">I-Programming</h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="#" onclick="editCourseToHome();">Home</a>
+                                <form id="editCourseToHome"><input type="hidden"></form>
+                            </li>
                             <li><a href="#">Help</a></li>
                             <%--<li><a href="#">Sign in</a></li>--%>
                         </ul>
@@ -53,8 +55,12 @@
             <div class="inner editcourse">
                 <h3 class="editlabel">--------Edit Course--------</h3>
                 <div class="add-btns-group">
-                    <button type="button" class="btn btn-primary">Add Unit</button>
-                    <button type="button" class="btn btn-primary">Add Lesson</button>
+                    <button type="button" class="btn btn-primary" onclick="toEditUnit();">Add Unit
+                        <form id="toEditUnit"><input type="hidden" ></form>
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson
+                        <form id="toEditLesson"><input type="hidden" ></form>
+                    </button>
                 </div>
                 <div class="outlinelist">
                     <h3 class="outlinelabel">Course Outline</h3>

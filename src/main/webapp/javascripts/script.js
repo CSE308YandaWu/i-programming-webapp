@@ -39,16 +39,37 @@ function toMain(){
     document.getElementById("formToMain").action = "/main";
     document.getElementById("formToMain").submit();
 }
+
 /* Main Page Create Course button */
 function toCreateCourse(){
-    document.getElementById("createCourse").action = "/create_course";
+    document.getElementById("createCourse").action = "/createCourse";
     document.getElementById("createCourse").submit();
 }
 /* Main Page Add Course button */
 function toSearchCourse(){
-    document.getElementById("addCourse").submit();
+    document.getElementById("searchCourse").action = "/searchCourse";
+    document.getElementById("searchCourse").submit();
 }
 
+/* Main Page Edit Course button */
+function toEditCourse(){
+    document.getElementById("toEditCourse").action = "/editCourse";
+    document.getElementById("toEditCourse").submit();
+}
+
+/* Edit Course Page Add Unit button */
+function toEditUnit(){
+    document.getElementById("toEditUnit").action = "/editUnit";
+    document.getElementById("toEditUnit").submit();
+}
+
+/* Edit Course Page Add lesson button */
+function toEditLesson(){
+    document.getElementById("toEditLesson").action = "/editLesson";
+    document.getElementById("toEditLesson").submit();
+}
+
+//////////////////
 function toCoursePage() {
     var name = document.getElementById("coursecode").innerHTML;
     alert(name);
@@ -56,27 +77,41 @@ function toCoursePage() {
     alert(document.getElementById("entercourse").getAttribute("coursecode"));
     document.getElementById("entercourse").submit();
 }
+///////////////////
 
 /* Main Page Home button */
 function mainToHome(){
     document.getElementById("mainToHome").action = "/";
     document.getElementById("mainToHome").submit();
 }
-/* create_course Page Home button                                   NOT YET */
-function create_courseToHome(){
-    document.getElementById("create_courseToHome").action = "/";
-    document.getElementById("create_courseToHome").submit();
+/* create_course Page Home button */
+function createCourseToHome(){
+    document.getElementById("createCourseToHome").action = "/";
+    document.getElementById("createCourseToHome").submit();
 }
-/* search_course Page Home button                                    NOT YET */
-function search_courseToHome(){
-    document.getElementById("search_courseToHome").action = "/";
-    document.getElementById("search_courseToHome").submit();
+/* search_course Page Home button */
+function searchCourseToHome(){
+    document.getElementById("searchCourseToHome").action = "/";
+    document.getElementById("searchCourseToHome").submit();
+}
+/* editCourse Page Home button */
+function editCourseToHome(){
+    document.getElementById("editCourseToHome").action = "/";
+    document.getElementById("editCourseToHome").submit();
+}
+/* editUnit Page Home button */
+function editUnitToHome(){
+    document.getElementById("editUnitToHome").action = "/";
+    document.getElementById("editUnitToHome").submit();
 }
 /* editLesson Page Home button */
 function editLessonToHome(){
     document.getElementById("editLessonToHome").action = "/";
     document.getElementById("editLessonToHome").submit();
 }
+
+
+
 
 
 function ff20(){
