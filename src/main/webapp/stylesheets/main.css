@@ -51,13 +51,20 @@ h1 {
 
 .table1 td{
     padding: 30px;
+    text-align: right;
+
 }
 
 .input_label{
     width:180px;
     clear:left;
-    text-align:right;
+    text-align:left;
     padding-right:30px;
+}
+
+.textA{
+    display: flex;
+    justify-content: right;
 }
 .search_result{
     text-align: center;
