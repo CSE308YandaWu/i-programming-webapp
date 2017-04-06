@@ -145,7 +145,7 @@ function editLessonToEditCourseCancel(){
 }
 
 /**
- * ---------------------------------------testing functions---------------------------------------
+ * ---------------------------------------test functions---------------------------------------
  */
 
 function toCoursePage() {

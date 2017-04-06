@@ -69,8 +69,8 @@
                 <form id="editUnitToEditCourseConfirm"><input type="hidden"></form>
             </td>
             <td>
-                <input name="cancel" type="submit" value="Cancel" onclick="editLessonToEditCourseCancel();">
-                <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
+                <input name="cancel" type="submit" value="Cancel" onclick="editUnitToEditCourseCancel();">
+                <form id="editUnitToEditCourseCancel"><input type="hidden"></form>
             </td>
         </tr>
 
