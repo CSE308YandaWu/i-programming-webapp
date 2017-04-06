@@ -63,7 +63,7 @@ function mainToHome(){
     document.getElementById("mainToHome").submit();
 }
 /* create_course Page Home button                                   NOT YET */
-function createToHome(){
+function create_courseToHome(){
     document.getElementById("create_courseToHome").action = "/";
     document.getElementById("create_courseToHome").submit();
 }

@@ -14,6 +14,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Search Course</title>
     <meta charset="utf-8">
@@ -24,11 +25,9 @@
 
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#">Back to Home</a></li>
-
-    <%--<li class="active"><a href="#" onclick="mainToHome();">Home</a>--%>
-    <%--<form id="mainToHome"><input type="hidden"></form>--%>
-    <%--</li>--%>
+    <li style="float:right"><a class="active" href="#" onclick="create_courseToHome();">Back to Home</a>
+        <form id="create_courseToHome"><input type="hidden"></form>
+    </li>
 </ul>
 
 <h1>--------------------Create Course--------------------</h1>
@@ -104,6 +103,10 @@
 
 </div>
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
 
 </body>
 </html>

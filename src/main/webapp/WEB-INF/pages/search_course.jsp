@@ -60,6 +60,10 @@
 
 </div>
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
 
 </body>
 </html>
