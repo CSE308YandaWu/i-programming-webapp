@@ -21,7 +21,7 @@ public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "search_course";
+		return "edit_lesson";
 	}
 	@RequestMapping("/main")
 	public String main(){return "main";}
