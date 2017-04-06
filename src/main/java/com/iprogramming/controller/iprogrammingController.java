@@ -26,20 +26,20 @@ public class iprogrammingController {
 	public String main(){return "main";}
 
 	@RequestMapping("/createCourse")
-	public String createCourse(){return "create_course";}
+	public String createCourse(){return "createCourse";}
 
 	@RequestMapping("/editCourse")
-	public String editCourse(){return "editcourse";}
+	public String editCourse(){return "editCourse";}
 
 	@RequestMapping("/editUnit")
-	public String edit_unit(){return "edit_unit";}
+	public String edit_unit(){return "editUnit";}
 
 	@RequestMapping("/editLesson")
 	public String editLesson(){return "editLesson";}
 
 	@RequestMapping("/searchCourse")
 	public String searchCourse(){
-		return "search_course";
+		return "searchCourse";
 	}
 
 
