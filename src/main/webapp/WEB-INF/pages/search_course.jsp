@@ -30,7 +30,7 @@
 <h1>--------------------Search Course--------------------</h1>
 
 <div class="container1">
-    <table id="table1">
+    <table class="table1">
         <tr>
             <td>
                 <span class="input_label"><strong>Course Title:</strong></span>
@@ -40,13 +40,14 @@
             </td>
         </tr>
 
-        <tr></tr>
     </table>
+
     <div class="search_result">
-        <label>CSE 220: Systems Fundamentals I  01/09/2017
-            
-            Instructors: Kevin McDonnell · 217 Enrolled</label>
+        <span class="input_label">CSE 220: Systems Fundamentals I  01/09/2017
+
+                    Instructors: Kevin McDonnell · 217 Enrolled</span>
     </div>
+
 
     <div class="join_course">
         <lable>Course Access Code:</lable>

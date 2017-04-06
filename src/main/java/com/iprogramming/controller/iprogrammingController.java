@@ -22,7 +22,7 @@ public class iprogrammingController {
 	@RequestMapping("/")
 	public String home() {
 
-		return "main";
+		return "edit_unit";
 	}
 
 
