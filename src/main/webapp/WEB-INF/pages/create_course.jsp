@@ -91,10 +91,12 @@
 
         <tr>
             <td>
-                <input name="confirm" type="submit"  value="Confirm">
+                <input name="confirm" type="submit"  value="Confirm" onclick="createCourseToMainConfirm();">
+                <form id="createCourseToMainConfirm"><input type="hidden"></form>
             </td>
             <td>
-                <input name="cancel" type="submit" value="Cancel">
+                <input name="cancel" type="submit" value="Cancel" onclick="createCourseToMainCancel();">
+                <form id="createCourseToMainCancel"><input type="hidden"></form>
             </td>
         </tr>
 

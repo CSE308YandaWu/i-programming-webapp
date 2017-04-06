@@ -65,10 +65,12 @@
         </tr>
         <tr>
             <td>
-                <input name="confirm" type="submit"  value="Confirm">
+                <input name="confirm" type="submit"  value="Confirm" onclick="editUnitToEditCourseConfirm();">
+                <form id="editUnitToEditCourseConfirm"><input type="hidden"></form>
             </td>
             <td>
-                <input name="cancel" type="submit" value="Cancel">
+                <input name="cancel" type="submit" value="Cancel" onclick="editLessonToEditCourseCancel();">
+                <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
             </td>
         </tr>
 

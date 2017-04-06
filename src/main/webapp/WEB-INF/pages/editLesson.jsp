@@ -118,11 +118,13 @@
                 <div class="row">
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseConfirm();">Save</button>
+                        <form id="editLessonToEditCourseConfirm"><input type="hidden"></form>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>
+                        <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,9 @@
  * Created by YandaWu on 4/1/2017.
  */
 
+/**
+ * ---------------------------------------Google sign-in functions---------------------------------------
+ */
 function onSuccess(googleUser) {
     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     // document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
@@ -9,7 +12,6 @@ function onSuccess(googleUser) {
     // document.getElementById("myForm").action = "/hello";
     // document.getElementById("myForm").submit();
 }
-
 function onFailure(error) {
     console.log(error);
 }
@@ -24,7 +26,6 @@ function renderButton() {
         'onfailure': onFailure
     });
 }
-
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -34,12 +35,16 @@ function signOut() {
     // document.getElementById("myGod").action = "/out";
     // document.getElementById("myGod").submit();
 }
+
+/**
+ * ---------------------------------------Button functions in all pages---------------------------------------
+ */
+
 /* Home Page sign-in button */
 function toMain(){
     document.getElementById("formToMain").action = "/main";
     document.getElementById("formToMain").submit();
 }
-
 /* Main Page Create Course button */
 function toCreateCourse(){
     document.getElementById("createCourse").action = "/createCourse";
@@ -50,35 +55,25 @@ function toSearchCourse(){
     document.getElementById("searchCourse").action = "/searchCourse";
     document.getElementById("searchCourse").submit();
 }
-
 /* Main Page Edit Course button */
 function toEditCourse(){
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
 }
-
 /* Edit Course Page Add Unit button */
 function toEditUnit(){
     document.getElementById("toEditUnit").action = "/editUnit";
     document.getElementById("toEditUnit").submit();
 }
-
 /* Edit Course Page Add lesson button */
 function toEditLesson(){
     document.getElementById("toEditLesson").action = "/editLesson";
     document.getElementById("toEditLesson").submit();
 }
 
-//////////////////
-function toCoursePage() {
-    var name = document.getElementById("coursecode").innerHTML;
-    alert(name);
-    document.getElementById("entercourse").setAttribute("coursecode", name);
-    alert(document.getElementById("entercourse").getAttribute("coursecode"));
-    document.getElementById("entercourse").submit();
-}
-///////////////////
-
+/**
+ * ---------------------------------------Home Button functions for all pages---------------------------------------
+ */
 /* Main Page Home button */
 function mainToHome(){
     document.getElementById("mainToHome").action = "/";
@@ -110,9 +105,56 @@ function editLessonToHome(){
     document.getElementById("editLessonToHome").submit();
 }
 
+/**
+ * ---------------------------------------Back navigation button functions for all pages---------------------------------------
+ */
+/* createCourse Page confirm button */
+function createCourseToMainConfirm(){
+    document.getElementById("createCourseToMainConfirm").action = "/main";
+    document.getElementById("createCourseToMainConfirm").submit();
+}
+/* createCourse Page cancel button */
+function createCourseToMainCancel(){
+    document.getElementById("createCourseToMainCancel").action = "/main";
+    document.getElementById("createCourseToMainCancel").submit();
+}
+/* searchCourse Page add button */
+function searchCourseToMain(){
+    document.getElementById("searchCourseToMain").action = "/main";
+    document.getElementById("searchCourseToMain").submit();
+}
+/* editUnit Page confirm button */
+function editUnitToEditCourseConfirm(){
+    document.getElementById("editUnitToEditCourseConfirm").action = "/editCourse";
+    document.getElementById("editUnitToEditCourseConfirm").submit();
+}
+/* editUnit Page cancel button */
+function editUnitToEditCourseCancel(){
+    document.getElementById("editUnitToEditCourseCancel").action = "/editCourse";
+    document.getElementById("editUnitToEditCourseCancel").submit();
+}
+/* editLesson Page confirm button */
+function editLessonToEditCourseConfirm(){
+    document.getElementById("editLessonToEditCourseConfirm").action = "/editCourse";
+    document.getElementById("editLessonToEditCourseConfirm").submit();
+}
+/* createCourse Page cancel button */
+function editLessonToEditCourseCancel(){
+    document.getElementById("editLessonToEditCourseCancel").action = "/editCourse";
+    document.getElementById("editLessonToEditCourseCancel").submit();
+}
 
+/**
+ * ---------------------------------------testing functions---------------------------------------
+ */
 
-
+function toCoursePage() {
+    var name = document.getElementById("coursecode").innerHTML;
+    alert(name);
+    document.getElementById("entercourse").setAttribute("coursecode", name);
+    alert(document.getElementById("entercourse").getAttribute("coursecode"));
+    document.getElementById("entercourse").submit();
+}
 
 function ff20(){
     document.getElementById("myForm").action = "/hello";

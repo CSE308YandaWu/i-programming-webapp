@@ -54,7 +54,8 @@
     <div class="join_course">
         <lable>Course Access Code:</lable>
         <input name="AccessCode" type="text" size="10" value="">
-        <input id="join_btn" type="submit" value="Add" >
+        <input id="join_btn" type="submit" value="Add" onclick="searchCourseToMain();">
+        <form id="searchCourseToMain"><input type="hidden"></form>
     </div>
 
 
