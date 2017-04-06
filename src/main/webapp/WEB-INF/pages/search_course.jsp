@@ -33,7 +33,7 @@
     <table class="table1">
         <tr>
             <td>
-                <span class="input_label"><strong>Course Title:</strong></span>
+                <span ><strong>Course Title:</strong></span>
             </td>
             <td>
                 <input name="CourseId" type="text" size="40" value="CSE220">
