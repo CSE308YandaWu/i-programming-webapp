@@ -45,6 +45,14 @@
                     <h3 class="masthead-brand">I-Programming</h3>
                     <nav>
                         <ul class="nav masthead-nav">
+                            <li><a>
+                                <%
+                                    String user = request.getParameter("userEmail");
+                                    pageContext.setAttribute("user", user);
+                                    out.println(user);
+                                %>
+                            </a>
+                            </li>
                             <li class="active"><a href="#" onclick="mainToHome();">Home</a>
                                 <form id="mainToHome"><input type="hidden"></form>
                             </li>
@@ -142,8 +150,8 @@
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action" onclick="toEditCourse()">CSE 111
-                        <button type="button" class="btn btn-primary">Edit</button>
+                    <a href="#" class="list-group-item list-group-item-action">CSE 111
+                        <button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>
                         <form id="toEditCourse"><input type="hidden"></form>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 123</a>
@@ -156,7 +164,9 @@
                 <h2>My Enrolled Courses</h2>
                 <div class="list-group">
                     <form id="entercourse" action="/course_page">
-                        <a href="#" onclick="toCoursePage()" id="coursecode" class="list-group-item list-group-item-action">CSE 308</a>
+                        <a href="#" onclick="toCoursePage()" id="coursename"
+                           class="list-group-item list-group-item-action">CSE 308</a>
+                        <input type="hidden" id="nameinput" name="coursename">
                     </form>
                     <a href="#" class="list-group-item list-group-item-action">CSE 336</a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 320</a>

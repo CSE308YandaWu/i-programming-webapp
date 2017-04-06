@@ -11,6 +11,9 @@ function onSuccess(googleUser) {
 
     // document.getElementById("myForm").action = "/hello";
     // document.getElementById("myForm").submit();
+
+    var userEmail = googleUser.getBasicProfile().getEmail();
+    document.getElementById('userEmail').setAttribute("value", userEmail);
 }
 function onFailure(error) {
     console.log(error);
@@ -149,10 +152,10 @@ function editLessonToEditCourseCancel(){
  */
 
 function toCoursePage() {
-    var name = document.getElementById("coursecode").innerHTML;
-    alert(name);
-    document.getElementById("entercourse").setAttribute("coursecode", name);
-    alert(document.getElementById("entercourse").getAttribute("coursecode"));
+    var name = document.getElementById("coursename").innerHTML;
+    // alert(name);
+    document.getElementById("nameinput").setAttribute("value", name);
+    // alert(document.getElementById("nameinput").getAttribute("value"));
     document.getElementById("entercourse").submit();
 }
 

@@ -63,7 +63,7 @@
                     <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
                     <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
                     <div id="my-signin2" class="btn" data-onsuccess="onSignIn" onclick="toMain();"></div>
-                    <form id="formToMain"><input type="hidden" ></form>
+                    <form id="formToMain"><input type="hidden" id="userEmail" name="userEmail"></form>
                 <%--</p>--%>
             </div>
             <div class="mastfoot">
