@@ -56,7 +56,7 @@
             </div>
             <div class="inner cover">
                 <h1 class="cover-heading">Welcome to I-Programming!</h1>
-                <p class="lead">I-Programing is a online platform that not only allows you to teach the world and share your knowledge by easily creating your own online courses,
+                <p class="lead">I-Programing is an online platform that not only allows you to teach the world and share your knowledge by easily creating your own online courses,
                     but also allows you to gain the knowledge by taking the online course that was created by others. </p>
                 <%--<p class="lead">--%>
                     <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
