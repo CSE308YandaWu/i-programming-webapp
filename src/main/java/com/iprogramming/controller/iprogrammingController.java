@@ -21,9 +21,13 @@ public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-
-		return "main";
+		return "HomePage";
 	}
+	@RequestMapping("/hello")
+	public String hello(){return "HelloWorld";}
+
+	@RequestMapping("/out")
+	public String out(){return "out";}
 
 
 }
