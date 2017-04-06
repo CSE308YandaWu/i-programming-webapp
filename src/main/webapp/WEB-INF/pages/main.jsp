@@ -47,9 +47,11 @@
                         <ul class="nav masthead-nav">
                             <li><a>
                                 <%
-                                    String user = request.getParameter("userEmail");
-                                    pageContext.setAttribute("user", user);
-                                    out.println(user);
+                                    if(session.getAttribute("user") == null){
+                                        String user = request.getParameter("userEmail");
+                                        session.setAttribute("user", user);
+                                    }
+                                    out.println(session.getAttribute("user"));
                                 %>
                             </a>
                             </li>
