@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: GangdiHuang
-  Date: 4/5/17
-  Time: 6:39 PM
+  Date: 4/6/17
+  Time: 1:20 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -27,34 +27,51 @@
     <li style="float:right"><a class="active" href="#">Back to Home</a></li>
 </ul>
 
-<h1>--------------------Search Course--------------------</h1>
-
+<h1>--------------------Edit Unit--------------------</h1>
 <div class="container1">
+
     <table class="table1">
         <tr>
             <td>
-                <span ><strong>Course Title:</strong></span>
+                <span ><strong>Unit ID:</strong></span>
             </td>
+
             <td>
-                <input name="CourseId" type="text" size="40" value="CSE220">
+                <input name="UnitId" type="text" size="40" value="">
             </td>
         </tr>
 
+        <tr>
+            <td>
+                <span ><strong>Unit Title:</strong></span>
+            </td>
+            <td>
+                <input name="UnitTitle" type="text" size="40" value="">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span><strong>Status:</strong></span>
+            </td>
+            <td>
+                <select >
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input name="confirm" type="submit"  value="Confirm">
+            </td>
+            <td>
+                <input name="cancel" type="submit" value="Cancel">
+            </td>
+        </tr>
+
+
     </table>
-
-    <div class="search_result">
-        <span class="input_label">CSE 220: Systems Fundamentals I  01/09/2017
-
-                    Instructors: Kevin McDonnell · 217 Enrolled</span>
-    </div>
-
-
-    <div class="join_course">
-        <lable>Course Access Code:</lable>
-        <input name="AccessCode" type="text" size="10" value="">
-        <input id="join_btn" type="submit" value="Add" >
-    </div>
-
 
 </div>
 

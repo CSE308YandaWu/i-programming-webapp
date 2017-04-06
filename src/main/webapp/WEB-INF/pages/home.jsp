@@ -62,7 +62,10 @@
                 <%--<p class="lead">--%>
                     <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
                     <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
-                    <div id="my-signin2" class="btn"></div>
+                    <div id="my-signin2" class="btn" data-onsuccess="onSignIn" onclick="toMain();"></div>
+                    <form id="formToMain">
+                        <input type="hidden" >
+                    </form>
 
                 <%--</p>--%>
             </div>
