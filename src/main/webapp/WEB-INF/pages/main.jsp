@@ -53,7 +53,8 @@
                     <nav>
                         <ul class="coursefunctions nav masthead-nav">
                             <li><a href="#" class="createcourse">Create Course</a></li>
-                            <li><a href="#" class="addcourse">Add Course</a></li>
+                            <li><a href="#" class="addcourse" onclick="toSearchCourse()">Add Course</a>
+                            <form action="/search_course" id="addcourse"><input type="hidden"></form></li>
                         </ul>
                     </nav>
                 </div>
@@ -146,7 +147,9 @@
             <div class="inner enrolledlist">
                 <h2>My Enrolled Courses</h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">CSE 308</a>
+                    <form id="entercourse" action="/course_page">
+                        <a href="#" onclick="toCoursePage()" id="coursecode" class="list-group-item list-group-item-action">CSE 308</a>
+                    </form>
                     <a href="#" class="list-group-item list-group-item-action">CSE 336</a>
                     <a href="#" class="list-group-item list-group-item-action">CSE 320</a>
                 </div>

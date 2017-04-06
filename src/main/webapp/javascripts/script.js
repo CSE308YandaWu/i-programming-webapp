@@ -33,3 +33,15 @@ function renderButton() {
         'onfailure': onFailure
     });
 }
+
+function toSearchCourse(){
+    document.getElementById("addcourse").submit();
+}
+
+function toCoursePage() {
+    var name = document.getElementById("coursecode").innerHTML;
+    alert(name);
+    document.getElementById("entercourse").setAttribute("coursecode", name);
+    alert(document.getElementById("entercourse").getAttribute("coursecode"));
+    document.getElementById("entercourse").submit();
+}
