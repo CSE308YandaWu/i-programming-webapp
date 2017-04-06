@@ -25,6 +25,10 @@
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
     <li style="float:right"><a class="active" href="#">Back to Home</a></li>
+
+    <%--<li class="active"><a href="#" onclick="mainToHome();">Home</a>--%>
+    <%--<form id="mainToHome"><input type="hidden"></form>--%>
+    <%--</li>--%>
 </ul>
 
 <h1>--------------------Create Course--------------------</h1>

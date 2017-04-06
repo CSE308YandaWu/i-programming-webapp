@@ -24,7 +24,9 @@
 
 <ul class="navUl">
     <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#">Back to Home</a></li>
+    <li style="float:right"><a class="active" href="#" onclick="search_courseToHome();">Back to Home</a>
+        <form id="search_courseToHome"><input type="hidden"></form>
+    </li>
 </ul>
 
 <h1>--------------------Search Course--------------------</h1>

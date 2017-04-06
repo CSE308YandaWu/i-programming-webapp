@@ -19,14 +19,17 @@ public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "edit_lesson";
+		return "home";
 	}
+
 	@RequestMapping("/main")
 	public String main(){return "main";}
 
 //	@RequestMapping("/hello")
 //	public String hello(){return "HelloWorld";}
 //
+	@RequestMapping("/create_course")
+	public String createCourse(){return "create_course";}
 
 	@RequestMapping("/search_course")
 	public String searchCourse(){
@@ -37,4 +40,10 @@ public class iprogrammingController {
 	public String coursePage(){
 		return "coursepage";
 	}
+
+	@RequestMapping("/edit_lesson")
+	public String edit_lesson(){
+		return "editLesson";
+	}
+
 }

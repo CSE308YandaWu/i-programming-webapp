@@ -45,17 +45,21 @@
                     <h3 class="masthead-brand">I-Programming</h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#" onclick="backToHome();">Home</a></li>
+                            <li class="active"><a href="#" onclick="mainToHome();">Home</a>
+                                <form id="mainToHome"><input type="hidden"></form>
+                            </li>
                             <li><a href="#">Help</a></li>
-                            <form id="formToHome"><input type="hidden"></form>
                             <%--<li><a href="#">Sign in</a></li>--%>
                         </ul>
                     </nav>
                     <nav>
                         <ul class="coursefunctions nav masthead-nav">
-                            <li><a href="#" class="createcourse">Create Course</a></li>
-                            <li><a href="#" class="addcourse" onclick="toSearchCourse()">Add Course</a>
-                            <form action="/search_course" id="addcourse"><input type="hidden"></form></li>
+                            <li><a href="#" class="createCourse" onclick="toCreateCourse()">Create Course</a>
+                                <form id="createCourse"><input type="hidden"></form>
+                            </li>
+                            <li><a href="#" class="addCourse" onclick="toSearchCourse()">Add Course</a>
+                                <form action="/search_course" id="addCourse"><input type="hidden"></form>
+                            </li>
                         </ul>
                     </nav>
                 </div>

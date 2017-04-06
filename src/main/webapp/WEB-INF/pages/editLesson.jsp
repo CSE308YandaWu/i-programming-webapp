@@ -48,7 +48,9 @@
                     <h3 class="masthead-brand">I-Programming</h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="#" onclick="editLessonToHome();">Home</a>
+                                <form id="editLessonToHome"><input type="hidden"></form>
+                            </li>
                             <li><a href="#">Help</a></li>
                             <%--<li><a href="#">Sign in</a></li>--%>
                         </ul>
