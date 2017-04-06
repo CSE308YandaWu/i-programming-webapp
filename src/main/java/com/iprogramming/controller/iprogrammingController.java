@@ -17,13 +17,24 @@ import com.google.appengine.api.users.UserServiceFactory;
 @Controller
 public class iprogrammingController {
 
-    Entity workingList;
-
 	@RequestMapping("/")
 	public String home() {
+		return "edit_lesson";
+	}
+	@RequestMapping("/main")
+	public String main(){return "main";}
 
-		return "main";
+//	@RequestMapping("/hello")
+//	public String hello(){return "HelloWorld";}
+//
+
+	@RequestMapping("/search_course")
+	public String searchCourse(){
+		return "search_course";
 	}
 
-
+	@RequestMapping("/course_page")
+	public String coursePage(){
+		return "coursepage";
+	}
 }

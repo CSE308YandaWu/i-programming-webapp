@@ -1,16 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: YandaWu
+  User: JIAQI ZHANG
   Date: 4/5/2017
-  Time: 12:50 PM
+  Time: 11:32 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
 <head>
@@ -22,7 +20,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Home Page</title>
+    <title>Edit Course</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,9 +34,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
-
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="cover-container">
@@ -54,20 +50,28 @@
                     </nav>
                 </div>
             </div>
-            <div class="inner cover">
-                <h1 class="cover-heading">Welcome to I-Programming!</h1>
-                <p class="lead">I-Programing is an online informal education web app that uses an innovative approach to develop an interactive student progress verification
-                    system to help users learn a programing language in an easy and fast
-                    way.</p>
-                <%--<p class="lead">--%>
-                    <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
-                    <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
-                    <div id="my-signin2" class="btn" data-onsuccess="onSignIn" onclick="toMain();"></div>
-                    <form id="formToMain">
-                        <input type="hidden" >
-                    </form>
-
-                <%--</p>--%>
+            <div class="inner editcourse">
+                <h3 class="editlabel">--------Edit Course--------</h3>
+                <div class="add-btns-group">
+                    <button type="button" class="btn btn-primary">Add Unit</button>
+                    <button type="button" class="btn btn-primary">Add Lesson</button>
+                </div>
+                <div class="outlinelist">
+                    <h3 class="outlinelabel">Course Outline</h3>
+                    <ul>
+                        <li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>
+                        <ol>
+                            <li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>
+                            <li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>
+                            <li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>
+                        </ol>
+                        <li><a href="#">Unit 2 - Interpreting Result</a>(<a href="#">Edit</a>)</li>
+                        <ol>
+                            <li><a href="#">Lesson 1....</a>(<a href="#">Edit</a>)</li>
+                            <li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>
+                        </ol>
+                    </ul>
+                </div>
             </div>
             <div class="mastfoot">
                 <div class="inner">
@@ -82,9 +86,13 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>

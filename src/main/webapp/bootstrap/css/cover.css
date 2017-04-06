@@ -199,3 +199,11 @@ h2 {
     float: left;
     margin-left: 20%;
 }
+
+.add-btns-group {
+    float: right;
+}
+
+.outlinelist{
+    text-align: left;
+}
