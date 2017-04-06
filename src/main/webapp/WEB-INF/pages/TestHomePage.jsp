@@ -20,7 +20,7 @@ Welcome, dark blue. let's start coding.
 
 
 <a href="#" onclick="signOut();">Sign out</a>
-
+<div id="userEmail1"></div>
 <%--<form action="/hello" method="get">--%>
     <%--<button type="submit">Submit</button><br>--%>
 <%--</form>--%>

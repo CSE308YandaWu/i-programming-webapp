@@ -14,6 +14,7 @@ function onSuccess(googleUser) {
 
     var userEmail = googleUser.getBasicProfile().getEmail();
     document.getElementById('userEmail').setAttribute("value", userEmail);
+    toMain();
 }
 function onFailure(error) {
     console.log(error);
@@ -79,32 +80,32 @@ function toEditLesson(){
  */
 /* Main Page Home button */
 function mainToHome(){
-    document.getElementById("mainToHome").action = "/";
+    document.getElementById("mainToHome").action = "/main";
     document.getElementById("mainToHome").submit();
 }
 /* create_course Page Home button */
 function createCourseToHome(){
-    document.getElementById("createCourseToHome").action = "/";
+    document.getElementById("createCourseToHome").action = "/main";
     document.getElementById("createCourseToHome").submit();
 }
 /* search_course Page Home button */
 function searchCourseToHome(){
-    document.getElementById("searchCourseToHome").action = "/";
+    document.getElementById("searchCourseToHome").action = "/main";
     document.getElementById("searchCourseToHome").submit();
 }
 /* editCourse Page Home button */
 function editCourseToHome(){
-    document.getElementById("editCourseToHome").action = "/";
+    document.getElementById("editCourseToHome").action = "/main";
     document.getElementById("editCourseToHome").submit();
 }
 /* editUnit Page Home button */
 function editUnitToHome(){
-    document.getElementById("editUnitToHome").action = "/";
+    document.getElementById("editUnitToHome").action = "/main";
     document.getElementById("editUnitToHome").submit();
 }
 /* editLesson Page Home button */
 function editLessonToHome(){
-    document.getElementById("editLessonToHome").action = "/";
+    document.getElementById("editLessonToHome").action = "/main";
     document.getElementById("editLessonToHome").submit();
 }
 

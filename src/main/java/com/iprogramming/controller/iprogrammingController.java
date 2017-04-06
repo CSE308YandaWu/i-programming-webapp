@@ -49,9 +49,9 @@ public class iprogrammingController {
 		return "coursepage";
 	}
 
-//	@RequestMapping("/hello")
-//	public String hello(){return "HelloWorld";}
-//
+	@RequestMapping("/hello")
+	public String hello(){return "HelloWorld";}
+
 
 
 }
