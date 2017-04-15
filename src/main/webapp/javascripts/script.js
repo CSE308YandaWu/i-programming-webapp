@@ -5,16 +5,19 @@
 /**
  * ---------------------------------------Google sign-in functions---------------------------------------
  */
+
 function onSuccess(googleUser) {
     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    // document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
+    // alert(googleUser.getBasicProfile().getName());
+    // var id_token = googleUser.getAuthResponse().id_token;
+    // alert(id_token);
 
-    // document.getElementById("myForm").action = "/hello";
-    // document.getElementById("myForm").submit();
+    //document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
 
     var userEmail = googleUser.getBasicProfile().getEmail();
     document.getElementById('userEmail').setAttribute("value", userEmail);
     toMain();
+
 }
 function onFailure(error) {
     console.log(error);

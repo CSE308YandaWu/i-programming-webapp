@@ -16,10 +16,13 @@
     <title>Hello World!</title>
 </head>
 
-<body onload="userEmailDisplay()">
+<body>
 Hello World!
-
+<div id="my-signin2"></div>
+<%--<div id="my-signin2" style="display: none;"></div>--%>
 <div id="userEmail"></div>
+<a href="#" onclick="signOut();">Sign out</a>
+
 <%--<a href="#" onclick="signOut();">GET ME OUT</a>--%>
 <a href="#" onclick="ff10();">GET ME BACK</a>
 <form id="myForm2"><input type="hidden" id="input1" name="email"></form>
