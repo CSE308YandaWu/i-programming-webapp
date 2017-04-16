@@ -15,6 +15,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
+
 <head>
     <title>Search Course</title>
     <meta charset="utf-8">
@@ -24,10 +26,18 @@
 <body>
 
 <ul class="navUl">
-    <li><a href="#">I-programming</a></li>
-    <li style="float:right"><a class="active" href="#" onclick="createCourseToHome();">Back to Home</a>
+
+    <li>
+        <a href="#" onclick="createCourseToHome()">I-Programming</a>
         <form id="createCourseToHome"><input type="hidden"></form>
     </li>
+    <li style="float:right">
+        <div id="my-signin2" style="display: none;"></div>
+        <div id="userEmail"></div>
+        <a href="#" onclick="signOut()">Sign out</a>
+        <form id="signOutToHome"><input type="hidden"></form>
+    </li>
+
 </ul>
 
 <h1>--------------------Create Course--------------------</h1>
@@ -108,7 +118,15 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>

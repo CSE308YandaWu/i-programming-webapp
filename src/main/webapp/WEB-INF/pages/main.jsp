@@ -42,24 +42,31 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">I-Programming</h3>
+                    <h3 class="masthead-brand">
+                        <a href="#" onclick="mainToHome()">I-Programming</a>
+                        <form id="mainToHome"><input type="hidden"></form>
+                    </h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li><a>
-                                <%
-                                    if(session.getAttribute("user") == null){
-                                        String user = request.getParameter("userEmail");
-                                        session.setAttribute("user", user);
-                                    }
-                                    out.println(session.getAttribute("user"));
-                                %>
-                            </a>
+                            <%--<li><a>--%>
+                                <%--<%--%>
+                                    <%--if(session.getAttribute("user") == null){--%>
+                                        <%--String user = request.getParameter("userEmail");--%>
+                                        <%--session.setAttribute("user", user);--%>
+                                    <%--}--%>
+                                    <%--out.println(session.getAttribute("user"));--%>
+                                <%--%>--%>
+                            <%--</a>--%>
+                            <%--</li>--%>
+                            <li class="active">
+                                <div id="my-signin2" style="display: none;"></div>
+                                <div id="userEmail"></div>
+                                <%--<form id="mainToHome"><input type="hidden"></form>--%>
                             </li>
-                            <li class="active"><a href="#" onclick="mainToHome();">Home</a>
-                                <form id="mainToHome"><input type="hidden"></form>
+                            <li>
+                                <a href="#" onclick="signOut();">Sign out</a>
+                                <form id="signOutToHome"><input type="hidden"></form>
                             </li>
-                            <li><a href="#">Help</a></li>
-                            <%--<li><a href="#">Sign in</a></li>--%>
                         </ul>
                     </nav>
                     <nav>

@@ -14,7 +14,7 @@ function onSuccess(googleUser) {
     if(document.getElementById('userEmail') != null){
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }
-    ff20();
+    toMain();
 
     // var userEmail = googleUser.getBasicProfile().getEmail();
     // document.getElementById('userEmail').setAttribute("value", userEmail);
@@ -39,11 +39,9 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
-        ff10();
+        signOutToHome();//back to home after sign out
     });
     //document.getElementById('userEmail').style.display='none';
-    // document.getElementById("myGod").action = "/out";
-    // document.getElementById("myGod").submit();
 }
 
 /**
@@ -82,7 +80,7 @@ function toEditLesson(){
 }
 
 /**
- * ---------------------------------------Home Button functions for all pages---------------------------------------
+ * ---------------------------------------Home/Sign-Out Button functions for all pages---------------------------------------
  */
 /* Main Page Home button */
 function mainToHome(){
@@ -114,7 +112,11 @@ function editLessonToHome(){
     document.getElementById("editLessonToHome").action = "/main";
     document.getElementById("editLessonToHome").submit();
 }
-
+/* signOut function for all pages back to home page */
+function signOutToHome(){
+    document.getElementById("signOutToHome").action = "/";
+    document.getElementById("signOutToHome").submit();
+}
 /**
  * ---------------------------------------Back navigation button functions for all pages---------------------------------------
  */
