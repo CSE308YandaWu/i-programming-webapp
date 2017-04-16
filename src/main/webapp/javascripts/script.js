@@ -11,12 +11,14 @@ function onSuccess(googleUser) {
     // alert(googleUser.getBasicProfile().getName());
     // var id_token = googleUser.getAuthResponse().id_token;
     // alert(id_token);
+    if(document.getElementById('userEmail') != null){
+        document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
+    }
+    ff20();
 
-    //document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
-
-    var userEmail = googleUser.getBasicProfile().getEmail();
-    document.getElementById('userEmail').setAttribute("value", userEmail);
-    toMain();
+    // var userEmail = googleUser.getBasicProfile().getEmail();
+    // document.getElementById('userEmail').setAttribute("value", userEmail);
+    // toMain();
 
 }
 function onFailure(error) {
@@ -37,6 +39,7 @@ function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
+        ff10();
     });
     //document.getElementById('userEmail').style.display='none';
     // document.getElementById("myGod").action = "/out";

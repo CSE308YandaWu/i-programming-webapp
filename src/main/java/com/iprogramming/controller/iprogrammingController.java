@@ -19,7 +19,7 @@ public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "home";
+		return "TestHomePage";
 	}
 
 	@RequestMapping("/main")

@@ -16,7 +16,8 @@
 </head>
 <body>
 Welcome, dark blue. let's start coding.
-<div id="my-signin2" data-onsuccess="onSignIn" onclick="ff20();"></div>
+<%--<div id="my-signin2" data-onsuccess="onSignIn" onclick="ff20();"></div>--%>
+<div id="my-signin2" data-onsuccess="onSignIn"></div>
 
 <%--<a href="#" onclick="signOut();">Sign out</a>--%>
 <%--<div id="userEmail1"></div>--%>
