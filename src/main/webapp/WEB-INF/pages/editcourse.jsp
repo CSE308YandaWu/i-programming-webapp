@@ -40,14 +40,20 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">I-Programming</h3>
+                    <h3 class="masthead-brand">
+                        <a href="#" onclick="editCourseToHome()">I-Programming</a>
+                        <form id="editCourseToHome"><input type="hidden"></form>
+                    </h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#" onclick="editCourseToHome();">Home</a>
-                                <form id="editCourseToHome"><input type="hidden"></form>
+                            <li class="active">
+                                <div id="my-signin2" style="display: none;"></div>
+                                <div id="userEmail"></div>
                             </li>
-                            <li><a href="#">Help</a></li>
-                            <%--<li><a href="#">Sign in</a></li>--%>
+                            <li>
+                                <a href="#" onclick="signOut();">Sign out</a>
+                                <form id="signOutToHome"><input type="hidden"></form>
+                            </li>
                         </ul>
                     </nav>
                 </div>

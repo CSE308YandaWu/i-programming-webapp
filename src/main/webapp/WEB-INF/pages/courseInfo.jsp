@@ -8,9 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
 <head>
@@ -44,12 +42,20 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">I-Programming</h3>
+                    <h3 class="masthead-brand">
+                        <a href="#" onclick="courseInfoToHome()">I-Programming</a>
+                        <form id="courseInfoToHome"><input type="hidden"></form>
+                    </h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Help</a></li>
-                            <%--<li><a href="#">Sign in</a></li>--%>
+                            <li class="active">
+                                <div id="my-signin2" style="display: none;"></div>
+                                <div id="userEmail"></div>
+                            </li>
+                            <li>
+                                <a href="#" onclick="signOut();">Sign out</a>
+                                <form id="signOutToHome"><input type="hidden"></form>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -101,8 +107,14 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/script.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>

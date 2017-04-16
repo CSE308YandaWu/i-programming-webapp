@@ -1,6 +1,6 @@
 /**
- * Created by YandaWu on 4/1/2017.
- */
+    * Created by YandaWu on 4/1/2017.
+    */
 
 /**
  * ---------------------------------------Google sign-in functions---------------------------------------
@@ -96,6 +96,11 @@ function createCourseToHome(){
 function searchCourseToHome(){
     document.getElementById("searchCourseToHome").action = "/main";
     document.getElementById("searchCourseToHome").submit();
+}
+/* courseInfo Page Home button */
+function courseInfoToHome(){
+    document.getElementById("courseInfoToHome").action = "/main";
+    document.getElementById("courseInfoToHome").submit();
 }
 /* editCourse Page Home button */
 function editCourseToHome(){

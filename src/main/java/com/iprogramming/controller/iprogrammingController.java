@@ -42,12 +42,12 @@ public class iprogrammingController {
 		return "searchCourse";
 	}
 
-	/* test pages */
 	@RequestMapping("/course_page")
 	public String coursePage(){
-		return "coursepage";
+		return "courseInfo";
 	}
 
+    /* test pages */
 	@RequestMapping("/hello")
 	public String hello(){return "HelloWorld";}
 
