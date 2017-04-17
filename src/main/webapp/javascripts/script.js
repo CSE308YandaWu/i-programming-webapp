@@ -11,10 +11,10 @@ function onSuccess(googleUser) {
     // alert(googleUser.getBasicProfile().getName());
     // var id_token = googleUser.getAuthResponse().id_token;
     // alert(id_token);
-    if(document.getElementById('userEmail') != null){
+    if(document.getElementById('userEmail') != null){//home page doesn't have userEmial
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }
-    toMain();
+    toMain();//only works in home page.
 
     // var userEmail = googleUser.getBasicProfile().getEmail();
     // document.getElementById('userEmail').setAttribute("value", userEmail);
