@@ -46,12 +46,12 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
+			<version>21.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
-			<version>${objectify.version}</version>
+			<version>5.1.17</version>
 		</dependency>
 		<!-- [END Objectify_Dependencies] -->
 
