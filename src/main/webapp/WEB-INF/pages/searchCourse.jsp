@@ -32,10 +32,13 @@
         <form id="searchCourseToHome"><input type="hidden"></form>
     </li>
     <li style="float:right">
-        <div id="my-signin2" style="display: none;"></div>
-        <div id="userEmail"></div>
         <a href="#" onclick="signOut()">Sign out</a>
         <form id="signOutToHome"><input type="hidden"></form>
+    </li>
+
+    <li style="float:right">
+        <a id="my-signin2" style="display: none;"></a>
+        <a id="userEmail"></a>
     </li>
 
 </ul>

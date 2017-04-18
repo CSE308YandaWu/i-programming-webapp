@@ -22,98 +22,217 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<ul class="navUl">
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">
+                        <a href="#" onclick="createCourseToHome()">I-Programming</a>
+                        <form id="createCourseToHome"><input type="hidden"></form>
+                    </h3>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li class="active">
+                                <a id="my-signin2" style="display: none;"></a>
+                                <a id="userEmail"></a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="signOut()">Sign out</a>
+                                <form id="signOutToHome"><input type="hidden"></form>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="inner editLesson">
+                <h2>--------------------Create Course--------------------</h2>
+                <table class="table1">
+                    <tr>
+                        <td>
+                            <span ><strong>Course ID:</strong></span>
+                        </td>
 
-    <li>
-        <a href="#" onclick="createCourseToHome()">I-Programming</a>
-        <form id="createCourseToHome"><input type="hidden"></form>
-    </li>
-    <li style="float:right">
-        <div id="my-signin2" style="display: none;"></div>
-        <div id="userEmail"></div>
-        <a href="#" onclick="signOut()">Sign out</a>
-        <form id="signOutToHome"><input type="hidden"></form>
-    </li>
+                        <td>
+                            <input name="courseId" style="color:black" type="text" size="40" value="">
+                        </td>
+                    </tr>
 
-</ul>
+                    <tr>
+                        <td>
+                            <span ><strong>Course Title:</strong></span>
+                        </td>
+                        <td>
+                            <input name="courseTitle" style="color:black" type="text" size="40" value="">
+                        </td>
+                    </tr>
 
-<h1>--------------------Create Course--------------------</h1>
-<div class="container1">
+                    <tr>
+                        <td>
+                            <span ><strong>Instructor:</strong></span>
+                        </td>
+                        <td>
+                            <input name="instructor" style="color:black" type="text" size="40" value="">
+                        </td>
+                    </tr>
 
-    <table class="table1">
-        <tr>
-            <td>
-                <span ><strong>Course ID:</strong></span>
-            </td>
-
-            <td>
-                <input name="courseId" type="text" size="40" value="">
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <span ><strong>Course Title:</strong></span>
-            </td>
-            <td>
-                <input name="courseTitle" type="text" size="40" value="">
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <span ><strong>Instructor:</strong></span>
-            </td>
-            <td>
-                <input name="instructor" type="text" size="40" value="">
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <span ><strong> <br>Description:</br> </strong></span>
-
-
-            </td>
-            <td>
-                <textarea rows="7" cols="38" ></textarea>
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>
-                <span><strong>Status:</strong></span>
-            </td>
-            <td>
-                <select>
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
-                </select>
-            </td>
-        </tr>
+                    <tr>
+                        <td>
+                            <span ><strong> <br>Description:</br> </strong></span>
 
 
+                        </td>
+                        <td>
+                            <textarea rows="7" cols="38" style="color:black"></textarea>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span><strong>Status:</strong></span>
+                        </td>
+                        <td>
+                            <select style="color:black">
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                        </td>
+                    </tr>
 
 
-        <tr>
-            <td>
-                <input name="confirm" type="submit"  value="Confirm" onclick="createCourseToMainConfirm();">
-                <form id="createCourseToMainConfirm"><input type="hidden"></form>
-            </td>
-            <td>
-                <input name="cancel" type="submit" value="Cancel" onclick="createCourseToMainCancel();">
-                <form id="createCourseToMainCancel"><input type="hidden"></form>
-            </td>
-        </tr>
 
 
-    </table>
+                    <tr>
+                        <td>
+                            <input name="confirm" type="submit"  value="Confirm" style="color:black" onclick="createCourseToMainConfirm();">
+                            <form id="createCourseToMainConfirm"><input type="hidden"></form>
+                        </td>
+                        <td>
+                            <input name="cancel" type="submit" value="Cancel"  style="color:black" onclick="createCourseToMainCancel();">
+                            <form id="createCourseToMainCancel"><input type="hidden"></form>
+                        </td>
+                    </tr>
 
+
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+<%--<ul class="navUl">--%>
+
+    <%--<li>--%>
+        <%--<a href="#" onclick="createCourseToHome()">I-Programming</a>--%>
+        <%--<form id="createCourseToHome"><input type="hidden"></form>--%>
+    <%--</li>--%>
+    <%--<li style="float:right">--%>
+        <%--<a href="#" onclick="signOut()">Sign out</a>--%>
+        <%--<form id="signOutToHome"><input type="hidden"></form>--%>
+    <%--</li>--%>
+    <%--<li style="float:right">--%>
+        <%--<a id="my-signin2" style="display: none;"></a>--%>
+        <%--<a id="userEmail"></a>--%>
+    <%--</li>--%>
+
+<%--</ul>--%>
+
+<%--<h1>--------------------Create Course--------------------</h1>--%>
+<%--<div class="container1">--%>
+
+    <%--<table class="table1">--%>
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<span ><strong>Course ID:</strong></span>--%>
+            <%--</td>--%>
+
+            <%--<td>--%>
+                <%--<input name="courseId" type="text" size="40" value="">--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<span ><strong>Course Title:</strong></span>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<input name="courseTitle" type="text" size="40" value="">--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<span ><strong>Instructor:</strong></span>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<input name="instructor" type="text" size="40" value="">--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<span ><strong> <br>Description:</br> </strong></span>--%>
+
+
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<textarea rows="7" cols="38" ></textarea>--%>
+            <%--</td>--%>
+
+        <%--</tr>--%>
+
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<span><strong>Status:</strong></span>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<select>--%>
+                    <%--<option value="public">Public</option>--%>
+                    <%--<option value="private">Private</option>--%>
+                <%--</select>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
+
+
+
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<input name="confirm" type="submit"  value="Confirm" onclick="createCourseToMainConfirm();">--%>
+                <%--<form id="createCourseToMainConfirm"><input type="hidden"></form>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<input name="cancel" type="submit" value="Cancel" onclick="createCourseToMainCancel();">--%>
+                <%--<form id="createCourseToMainCancel"><input type="hidden"></form>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
+
+    <%--</table>--%>
+
+<%--</div>--%>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
