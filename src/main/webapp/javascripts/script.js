@@ -14,7 +14,8 @@ function onSuccess(googleUser) {
     if(document.getElementById('userEmail') != null){//home page doesn't have userEmial
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }
-    toMain();//only works in home page.
+    ff20();
+    //toMain();//only works in home page.
 
     // var userEmail = googleUser.getBasicProfile().getEmail();
     // document.getElementById('userEmail').setAttribute("value", userEmail);

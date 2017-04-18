@@ -1,25 +1,20 @@
 package com.iprogramming.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import com.google.appengine.api.datastore.*;
+import com.googlecode.objectify.ObjectifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+
+import Beans.Users;
 
 @Controller
 public class iprogrammingController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "home";
+		return "TestHomePage";
 	}
 
 	@RequestMapping("/main")
@@ -49,8 +44,15 @@ public class iprogrammingController {
 
     /* test pages */
 	@RequestMapping("/hello")
-	public String hello(){return "HelloWorld";}
-
-
-
+//	public String hello(){return "HelloWorld";}
+	public String hello(Model model){
+		Users user;
+		String email = "ff20";
+		String email2 = "ff30";
+		user = new Users(email);
+		ObjectifyService.ofy().save().entity(user).now();
+		user = new Users(email2);
+		ObjectifyService.ofy().save().entity(user).now();
+		return "HelloWorld";
+	}
 }
