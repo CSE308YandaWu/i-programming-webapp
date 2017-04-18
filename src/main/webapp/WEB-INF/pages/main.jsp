@@ -58,9 +58,9 @@
                                 <%--%>--%>
                             <%--</a>--%>
                             <%--</li>--%>
-                            <li class="active">
+                            <li>
                                 <div id="my-signin2" style="display: none;"></div>
-                                <div id="userEmail"></div>
+                                <a id="userEmail"></a>
                                 <%--<form id="mainToHome"><input type="hidden"></form>--%>
                             </li>
                             <li>

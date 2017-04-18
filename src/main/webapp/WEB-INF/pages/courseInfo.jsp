@@ -48,9 +48,9 @@
                     </h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active">
+                            <li>
                                 <div id="my-signin2" style="display: none;"></div>
-                                <div id="userEmail"></div>
+                                <a id="userEmail"></a>
                             </li>
                             <li>
                                 <a href="#" onclick="signOut();">Sign out</a>
