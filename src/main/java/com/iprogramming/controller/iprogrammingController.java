@@ -1,5 +1,6 @@
 package com.iprogramming.controller;
 
+import com.googlecode.objectify.ObjectifyService;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,40 +26,30 @@ public class iprogrammingController {
         return "home";
     }
 
-    @RequestMapping("/main")
-    public String main() {
-        return "main";
-    }
+	@RequestMapping("/main")
+	public String main(){return "main";}
 
-    @RequestMapping("/createCourse")
-    public String createCourse() {
-        return "createCourse_edit";
-    }
+	@RequestMapping("/createCourse")
+	public String createCourse(){return "createCourse";}
 
-    @RequestMapping("/editCourse")
-    public String editCourse() {
-        return "editCourse";
-    }
+	@RequestMapping("/editCourse")
+	public String editCourse(){return "editCourse";}
 
-    @RequestMapping("/editUnit")
-    public String edit_unit() {
-        return "editUnit";
-    }
+	@RequestMapping("/editUnit")
+	public String edit_unit(){return "editUnit";}
 
-    @RequestMapping("/editLesson")
-    public String editLesson() {
-        return "editLesson";
-    }
+	@RequestMapping("/editLesson")
+	public String editLesson(){return "editLesson";}
 
-    @RequestMapping("/searchCourse")
-    public String searchCourse() {
-        return "searchCourse";
-    }
+	@RequestMapping("/searchCourse")
+	public String searchCourse(){
+		return "searchCourse";
+	}
 
-    @RequestMapping("/course_page")
-    public String coursePage() {
-        return "courseInfo";
-    }
+	@RequestMapping("/course_page")
+	public String coursePage(){
+		return "courseInfo";
+	}
 
     /* test pages */
     @RequestMapping("/hello")
@@ -98,4 +89,16 @@ public class iprogrammingController {
     }
 
 
+	@RequestMapping("/hello")
+//	public String hello(){return "HelloWorld";}
+	public String hello(Model model){
+		Users user;
+		String email = "ff20";
+		String email2 = "ff30";
+		user = new Users(email);
+		ObjectifyService.ofy().save().entity(user).now();
+		user = new Users(email2);
+		ObjectifyService.ofy().save().entity(user).now();
+		return "HelloWorld";
+	}
 }
