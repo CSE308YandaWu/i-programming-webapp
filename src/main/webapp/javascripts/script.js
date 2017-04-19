@@ -17,9 +17,9 @@ function onSuccess(googleUser) {
 
     document.getElementById('userEmail').setAttribute("value", googleUser.getBasicProfile().getEmail());
 
+    //ff20();
     toMain();//only works in home page.
-    ff20();
-    //toMain();//only works in home page.
+
 
     // var userEmail = googleUser.getBasicProfile().getEmail();
     // document.getElementById('userEmail').setAttribute("value", userEmail);

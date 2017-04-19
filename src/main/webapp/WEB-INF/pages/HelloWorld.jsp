@@ -70,7 +70,7 @@ userEmail is: <%=userEmail%>
         String key = request.getParameter("key");
         List<Course> courses;
         if (key != null){
-            Key<User> theUser = Key.create(User.class, key);
+            Key<Beans.User> theUser = Key.create(Beans.User.class, key);
 
             courses = ObjectifyService.ofy()
                     .load()

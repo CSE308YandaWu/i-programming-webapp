@@ -1,5 +1,6 @@
 package com.iprogramming.controller;
 
+import Beans.Users;
 import com.googlecode.objectify.ObjectifyService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class iprogrammingController {
 	public String main(){return "main";}
 
 	@RequestMapping("/createCourse")
-	public String createCourse(){return "createCourse";}
+	public String createCourse(){return "createCourse_edit";}
 
 	@RequestMapping("/editCourse")
 	public String editCourse(){return "editCourse";}

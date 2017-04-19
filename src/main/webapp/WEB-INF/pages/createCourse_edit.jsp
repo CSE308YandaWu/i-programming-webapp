@@ -27,7 +27,6 @@
         .pagecontainer {
             width: 50%;
             margin: auto;
-
         }
     </style>
 </head>
