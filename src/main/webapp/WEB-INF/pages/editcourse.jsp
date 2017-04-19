@@ -60,6 +60,16 @@
             </div>
             <div class="inner editcourse">
                 <h3 class="editlabel">--------Edit Course--------</h3>
+                <div class="course-info">
+                    <table class="table1">
+                        <tr><td>User:</td><td>${model.email}</td></tr>
+                        <tr><td>Course Id:</td><td>${model.id}</td></tr>
+                        <tr><td>Course Title:</td><td>${model.title}</td></tr>
+                        <tr><td>Instructor:</td><td>${model.instructor}</td></tr>
+                        <tr><td>Status:</td><td>${model.status}</td></tr>
+                        <tr><td>Description:</td><td>${model.description}</td></tr>
+                    </table>
+                </div>
                 <div class="add-btns-group">
                     <button type="button" class="btn btn-primary" onclick="toEditUnit();">Add Unit
                         <form id="toEditUnit"><input type="hidden" ></form>

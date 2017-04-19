@@ -1,4 +1,8 @@
-<%--
+<%@ page import="Beans.Course" %>
+<%@ page import="Beans.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.googlecode.objectify.Key" %>
+<%@ page import="com.googlecode.objectify.ObjectifyService" %><%--
   Created by IntelliJ IDEA.
   User: JIAQI ZHANG
   Date: 4/5/2017
@@ -6,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,13 +54,13 @@
                     <nav>
                         <ul class="nav masthead-nav">
                             <%--<li><a>--%>
-                                <%--<%--%>
-                                    <%--if(session.getAttribute("user") == null){--%>
-                                        <%--String user = request.getParameter("userEmail");--%>
-                                        <%--session.setAttribute("user", user);--%>
-                                    <%--}--%>
-                                    <%--out.println(session.getAttribute("user"));--%>
-                                <%--%>--%>
+                            <%--<%--%>
+                            <%--if(session.getAttribute("user") == null){--%>
+                            <%--String user = request.getParameter("userEmail");--%>
+                            <%--session.setAttribute("user", user);--%>
+                            <%--}--%>
+                            <%--out.println(session.getAttribute("user"));--%>
+                            <%--%>--%>
                             <%--</a>--%>
                             <%--</li>--%>
                             <li>
@@ -159,14 +164,40 @@
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">CSE 111
-                        <button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>
-                        <form id="toEditCourse"><input type="hidden"></form>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 123</a>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 235</a>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 456</a>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 222</a>
+                    <%
+                        if (session.getAttribute("user") == null) {
+                            session.setAttribute("user", request.getParameter("userEmail"));
+                        }
+                        String user = (String) session.getAttribute("user");
+                        List<Course> courses;
+
+                        Key<User> theUser = Key.create(User.class, user);
+
+                        courses = ObjectifyService.ofy()
+                                .load()
+                                .type(Course.class)
+                                .ancestor(theUser)
+                                .list();
+                        pageContext.setAttribute("courses", courses);
+                    %>
+                    <c:choose>
+                        <c:when test="${empty courses}">
+                            You have not create any courses yet.
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="x" items="${courses}">
+                                <a href="#" class="list-group-item list-group-item-action">${x.title}</a>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
+                        <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
+                        <%--<form id="toEditCourse"><input type="hidden"></form>--%>
+                    <%--</a>--%>
+                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 123</a>--%>
+                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 235</a>--%>
+                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 456</a>--%>
+                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 222</a>--%>
                 </div>
             </div>
             <div class="inner enrolledlist">

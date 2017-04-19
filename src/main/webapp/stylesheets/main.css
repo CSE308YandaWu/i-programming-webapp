@@ -31,7 +31,7 @@ h1 {
 }
 
 .container1{
-    position: absolute;
+    /*position: absolute;*/
     top: 20%;
     width: 100%;
     height: 500px;

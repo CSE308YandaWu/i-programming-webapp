@@ -9,7 +9,6 @@ a:hover {
     color: #fff;
 }
 
-.
     /* Custom default button */
 .btn-default,
 .btn-default:hover,
@@ -210,4 +209,12 @@ h2 {
 
 .text{
     text-align: left;
+}
+
+.table1{
+    width: 50%;
+    text-align: left;
+    margin-bottom: 100px;
+    margin-top: 100px;
+
 }

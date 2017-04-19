@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.googlecode.objectify.ObjectifyService" %>
+<%@ page import="Beans.Course"%>
+<%@ page import="java.util.List" %>
+<%@ page import="Beans.User" %>
+<%@ page import="com.googlecode.objectify.Key" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -26,5 +32,65 @@ Hello World!
 <%--<a href="#" onclick="signOut();">GET ME OUT</a>--%>
 <a href="#" onclick="ff10();">GET ME BACK</a>
 <form id="myForm2"><input type="hidden" id="input1" name="email"></form>
+<div>
+    <form action="/test">
+        Email: <input name="email"><br>
+        Course Title: <input name="title"><br>
+        <input type="submit" value="Add">
+    </form>
+    <form action="/test">
+        Key: <input name="key" id="key"><input type="submit" value="search">
+    </form>
+
+    <%
+        String key = request.getParameter("key");
+        List<Course> courses;
+        if (key != null){
+            Key<User> theUser = Key.create(User.class, key);
+
+            courses = ObjectifyService.ofy()
+                    .load()
+                    .type(Course.class)
+                    .ancestor(theUser)
+                    .list();
+        }
+        else{
+            courses = ObjectifyService.ofy()
+                    .load()
+                    .type(Course.class)
+                    .list();
+        }
+
+
+
+
+        if (courses.isEmpty()) {
+    %>
+    <p>Course List has no courses.</p>
+    <%
+    } else {
+    %>
+    <p>Courses:</p><br>
+    <%
+        // Look at all of our greetings
+        for (Course c : courses) {
+            pageContext.setAttribute("course_title", c.title);
+            String author;
+            if (c.email == null) {
+                author = "An anonymous person";
+            } else {
+                author = c.email;
+            }
+            pageContext.setAttribute("course_email", author);
+    %>
+    <p><b>${fn:escapeXml(course_email)}</b> adds:</p>
+    <blockquote>${fn:escapeXml(course_title)}</blockquote>
+    <%
+            }
+        }
+    %>
+
+
+</div>
 </body>
 </html>
