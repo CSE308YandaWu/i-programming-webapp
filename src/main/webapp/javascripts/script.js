@@ -124,7 +124,7 @@ function editLessonToHome(){
 }
 /* signOut function for all pages back to home page */
 function signOutToHome(){
-    document.getElementById("signOutToHome").action = "/";
+    document.getElementById("signOutToHome").action = "/logout";
     document.getElementById("signOutToHome").submit();
 }
 /**

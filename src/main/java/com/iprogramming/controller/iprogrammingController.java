@@ -19,6 +19,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class iprogrammingController {
 
@@ -88,6 +90,12 @@ public class iprogrammingController {
 
         return new ModelAndView("editCourse", "model", newCourse);
     }
+
+    @RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "home";
+	}
 
 
 	@RequestMapping("/hello")
