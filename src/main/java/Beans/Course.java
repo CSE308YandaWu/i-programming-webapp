@@ -74,6 +74,17 @@ public class Course {
         this.status = status;
     }
 
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public List<Unit> getUnits() { return units; }
+    public void addUnit(Unit unit) { this.units.add(unit); }
+
     public Course() {
 
     }
