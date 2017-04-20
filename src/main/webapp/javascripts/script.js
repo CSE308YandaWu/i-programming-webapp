@@ -186,3 +186,7 @@ function ff10(){
     document.getElementById("myForm2").action = "/";
     document.getElementById("myForm2").submit();
 }
+function ff30(){
+    document.getElementById("serve").action = "/serve";
+    document.getElementById("serve").submit();
+}
