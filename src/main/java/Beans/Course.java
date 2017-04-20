@@ -2,6 +2,7 @@ package Beans;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
 
@@ -18,7 +19,7 @@ public class Course {
     public Key<User> userEmail;
 
     public String email;
-    public String title;
+    @Index public String title;
     public String instructor;
     public String description;
     public String status;
@@ -72,6 +73,17 @@ public class Course {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public List<Unit> getUnits() { return units; }
+    public void addUnit(Unit unit) { this.units.add(unit); }
 
     public Course() {
 

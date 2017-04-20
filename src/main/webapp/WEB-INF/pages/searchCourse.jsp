@@ -5,11 +5,13 @@
   Time: 6:39 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="Beans.Course" %>
+<%@ page import="Beans.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.googlecode.objectify.Key" %>
+<%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<%@ page import="com.google.appengine.api.users.User" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
@@ -24,6 +26,12 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
 </head>
 <body>
+
+<script>
+    function do_search(){
+        var title = document.getElementById()
+    }
+</script>
 
 <ul class="navUl">
 
@@ -52,16 +60,48 @@
                 <span ><strong>Course Title:</strong></span>
             </td>
             <td>
-                <input name="CourseId" type="text" size="40" value="CSE220">
+                <input name="CourseTitle" id="CourseTitle" type="text" size="40" form="searchClass">
             </td>
+            <td>
+                <input id="search_btn" type="submit" value="Search" form="searchClass">
+            </td>
+            <form action="#" type="hidden" id="searchClass"></form>
         </tr>
 
     </table>
 
     <div class="search_result">
-        <span class="input_label">CSE 220: Systems Fundamentals I  01/09/2017
-
-                    Instructors: Kevin McDonnell · 217 Enrolled</span>
+        <h2>Search Result</h2>
+        <div class="list-group">
+            <%
+                String title = request.getParameter("CourseTitle");
+                List<Course> courses;
+                courses = ObjectifyService.ofy()
+                        .load()
+                        .type(Course.class)
+                        .filter("title =",title)
+                        .list();
+                pageContext.setAttribute("courses", courses);
+            %>
+            <c:choose>
+                <c:when test="${empty courses}">
+                    No course found!
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="x" items="${courses}">
+                        <a href="#" class="list-group-item list-group-item-action">${x.title}</a>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+            <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
+            <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
+            <%--<form id="toEditCourse"><input type="hidden"></form>--%>
+            <%--</a>--%>
+            <%--<a href="#" class="list-group-item list-group-item-action">CSE 123</a>--%>
+            <%--<a href="#" class="list-group-item list-group-item-action">CSE 235</a>--%>
+            <%--<a href="#" class="list-group-item list-group-item-action">CSE 456</a>--%>
+            <%--<a href="#" class="list-group-item list-group-item-action">CSE 222</a>--%>
+        </div>
     </div>
 
 
