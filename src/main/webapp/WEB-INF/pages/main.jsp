@@ -43,10 +43,13 @@
 
 <body>
 <%
+
+
     if (session.getAttribute("user") == null) {
         session.setAttribute("user", request.getParameter("userEmail"));
     }
     String user = (String) session.getAttribute("user");
+    List<Course> courses;
     System.out.println(user);
     User existUser = ObjectifyService.ofy()
             .load()
@@ -72,16 +75,13 @@
     session.setAttribute("userObject", existUser);
 
 
-    List<Course> courses;
-
-
-    Key<User> theUser = Key.create(User.class, user);
-
-    courses = ObjectifyService.ofy()
+   courses = ObjectifyService.ofy()
             .load()
             .type(Course.class)
-            .ancestor(theUser)
+            .filter("email", user)
+            .order("-dateCreated")
             .list();
+   System.out.print(courses);
     pageContext.setAttribute("courses", courses);
 %>
 
@@ -146,7 +146,7 @@
                         Empty!
                     </c:when>
                     <c:otherwise>
-                        <c:forEach var="x" items="${courses}">
+                        <c:forEach var="x" items="${courses1}">
                             <li class="list-group-item">
                                 <div class="panel panel-default panel1">
                                     <div class="panel-heading">
@@ -174,21 +174,6 @@
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
                 <div class="list-group">
-                    <%
-                        if (session.getAttribute("user") == null) {
-                            session.setAttribute("user", request.getParameter("userEmail"));
-                        }
-                        String user = (String) session.getAttribute("user");
-                        List<Course> courses;
-
-                        courses = ObjectifyService.ofy()
-                                .load()
-                                .type(Course.class)
-                                .filter("email", user)
-                                .order("-dateCreated")
-                                .list();
-                        pageContext.setAttribute("courses", courses);
-                    %>
                     <c:choose>
                         <c:when test="${empty courses}">
                             You have not create any courses yet.

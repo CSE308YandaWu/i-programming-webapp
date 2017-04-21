@@ -14,7 +14,7 @@ import java.util.List;
  * Created by JIAQI ZHANG on 4/17/2017.
  */
 @Entity
-public class Course {
+public class Course implements Serializable{
     @Id
     public String id;
     @Index
@@ -22,7 +22,6 @@ public class Course {
     @Index
     public String title;
     @Index public String courseId;
-    @Index public String title;
     public String instructor;
     public String description;
     public String status;
