@@ -178,26 +178,26 @@
                         if (session.getAttribute("user") == null) {
                             session.setAttribute("user", request.getParameter("userEmail"));
                         }
-                        String user = (String) session.getAttribute("user");
-                        List<Course> courses;
+                        user = (String) session.getAttribute("user");
+                        List<Course> createdCourses;
 
-                        courses = ObjectifyService.ofy()
+                        createdCourses = ObjectifyService.ofy()
                                 .load()
                                 .type(Course.class)
                                 .filter("email", user)
                                 .order("-dateCreated")
                                 .list();
-                        pageContext.setAttribute("courses", courses);
+                        pageContext.setAttribute("courses", createdCourses);
                     %>
                     <c:choose>
                         <c:when test="${empty courses}">
-                            You have not create any courses yet.
+                            You have not created any courses yet.
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${courses}">
                                 <a href="#" onclick="toEditCourse(this)" class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
-                                        <input type="hidden" value="${x.id}" id="cId">
+                                        <input type="hidden" value="${x.id}" id="cId" name="courseId">
                                         <input type="submit" value="Delete" class="btn btn-primary">
                                     </form><br>
                                     <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
@@ -205,6 +205,7 @@
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
+                    <form id="toEditCourse"><input type="hidden" name="courseId" id="courseId"></form>
                     <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
                         <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
                         <%--<form id="toEditCourse"><input type="hidden"></form>--%>
