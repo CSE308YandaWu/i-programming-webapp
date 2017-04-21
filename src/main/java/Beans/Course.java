@@ -14,7 +14,7 @@ import java.util.List;
  * Created by JIAQI ZHANG on 4/17/2017.
  */
 @Entity
-public class Course implements Serializable{
+public class Course implements Serializable {
     @Id
     public String id;
     @Index
