@@ -146,7 +146,7 @@ public class iprogrammingController {
 
 
         }
-        else {
+        if(!(existUser.getJoinedCourse()).contains(course)) {
             System.out.println("I don't know!");
             existUser.getJoinedCourse().add(course);
         }
