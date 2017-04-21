@@ -16,11 +16,10 @@ import java.util.List;
 public class Course {
     @Id
     public String id;
-    @Parent
-    public Key<User> userEmail;
-
+    @Index
     public String email;
-    @Index public String title;
+    @Index
+    public String title;
     public String instructor;
     public String description;
     public String status;
@@ -120,7 +119,6 @@ public class Course {
         this.instructor = instructor;
         this.description = description;
         this.status = status;
-        this.userEmail = Key.create(User.class, userEmail);
     }
 
 
@@ -128,7 +126,6 @@ public class Course {
     public Course(String user, String title) {
         this.email = user;
         this.title = title;
-        userEmail = Key.create(User.class, user);
     }
 
 //    public Course(String user, String title, String key){

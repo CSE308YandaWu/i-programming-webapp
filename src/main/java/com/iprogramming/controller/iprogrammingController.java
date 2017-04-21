@@ -4,12 +4,14 @@ import Beans.Users;
 
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.images.*;
-import com.googlecode.objectify.ObjectifyService;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.nio.ByteBuffer;
+import java.security.KeyFactory;
 import java.util.*;
 
 import Beans.Course;
+import com.googlecode.objectify.Key;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @Controller
 public class iprogrammingController {
 
@@ -57,7 +60,16 @@ public class iprogrammingController {
 	public String createCourse(){return "createCourse_edit";}
 
 	@RequestMapping("/editCourse")
-	public String editCourse(){return "editCourse";}
+	public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId){
+	    Course c = ofy().load().type(Course.class).id(courseId).now();
+	    return new ModelAndView("editCourse", "model", c);
+	}
+
+    @RequestMapping("/deleteCourse")
+    public String deleteCourse(@RequestParam(value = "courseId") String courseId) {
+        ofy().delete().type(Course.class).id(courseId).now();
+        return "main";
+    }
 
 	@RequestMapping("/editUnit")
 	public String edit_unit(){return "editUnit";}
@@ -88,7 +100,7 @@ public class iprogrammingController {
         if (email != null) {
             Course newCourse = new Course(email, course);
 
-            ObjectifyService.ofy().save().entity(newCourse).now();
+            ofy().save().entity(newCourse).now();
         }
 
 
@@ -106,7 +118,7 @@ public class iprogrammingController {
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
 
-        ObjectifyService.ofy().save().entity(newCourse).now();
+        ofy().save().entity(newCourse).now();
 
 
         return new ModelAndView("editCourse", "model", newCourse);
@@ -117,7 +129,9 @@ public class iprogrammingController {
 		session.invalidate();
 		return "home";
 	}
-	/* UPLOAD CONTROLLERS */
+
+
+    /* UPLOAD CONTROLLERS */
     Map<String, String> model = new HashMap<String, String>();
     /*  Upload pages */
     @RequestMapping(value = "/editLessonConfirm")

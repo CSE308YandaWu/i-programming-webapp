@@ -172,12 +172,10 @@
                         String user = (String) session.getAttribute("user");
                         List<Course> courses;
 
-                        Key<User> theUser = Key.create(User.class, user);
-
                         courses = ObjectifyService.ofy()
                                 .load()
                                 .type(Course.class)
-                                .ancestor(theUser)
+                                .filter("email", user)
                                 .order("-dateCreated")
                                 .list();
                         pageContext.setAttribute("courses", courses);
@@ -188,11 +186,17 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${courses}">
-                                <a href="#" class="list-group-item list-group-item-action">${x.title}<br>
-                                    <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span></a>
+                                <a href="#" onclick="toEditCourse(this)" class="list-group-item list-group-item-action">${x.title}
+                                    <form action="/deleteCourse" class="deletebutton">
+                                        <input type="hidden" value="${x.id}" id="cId">
+                                        <input type="submit" value="Delete" class="btn btn-primary">
+                                    </form><br>
+                                    <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
+                                </a>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
+                    <form id="toEditCourse"><input type="hidden" id="courseId" name="courseId"></form>
                     <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
                         <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
                         <%--<form id="toEditCourse"><input type="hidden"></form>--%>
