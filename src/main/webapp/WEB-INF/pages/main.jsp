@@ -120,22 +120,44 @@
             </div>
             <div class="inner toplist">
                 <h2>Top 5 Popular Courses</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="panel panel-default panel1">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" href="#collapse1">CSE 308</a>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>Instructor: Richard McKenna</p>
-                                    <span>Access Code: <input type="text" name="AccessCode" value="Code"></span>
-                                    <button type="button" class="btn btn-primary">Add</button>
+                <%
+                    String title = request.getParameter("CourseTitle");
+                    List<Course> courses1;
+                    courses1 = ObjectifyService.ofy()
+                            .load()
+                            .type(Course.class)
+                            .list();
+                    pageContext.setAttribute("courses1", courses1);
+                %>
+                <c:choose>
+                    <c:when test="${empty courses}">
+                        Empty!
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="x" items="${courses}">
+                            <li class="list-group-item">
+                                <div class="panel panel-default panel1">
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
+                                    </div>
+                                    <div id="${x.id}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p style="color:black">Instructors: ${x.instructor}</p>
+                                            <span>Access Code: <input style="color:black" type="text" name="AccessCode" value="Code"></span>
+                                            <form action="/enrollCourse">
+                                                <input name="courseId" type="hidden" value="${x.courseId}">
+                                                <input name="userEmail" type="hidden" value="${user}">
+                                                <input name="confirm" type="submit" value="Enroll">
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                            </li>
+
+                            <%--<li name=x.title >${x.title}</li>--%>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
