@@ -111,13 +111,7 @@ public class iprogrammingController {
 
         return new ModelAndView("editCourse", "model", newCourse);
     }
-
-	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam(value = "CourseId") String title) {
-    	System.out.print(title);
-		return new ModelAndView("searchCourse","courseTitle", title);
-	}
-
+    
     @RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
