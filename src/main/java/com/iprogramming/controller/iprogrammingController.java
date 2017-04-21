@@ -147,7 +147,7 @@ public class iprogrammingController {
     /* serve assignment/video/image */
     @RequestMapping(value = "/serve")
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
-        System.out.println("Serving:" + key);
+        //System.out.println("Serving:" + key);
         //BlobKey bk = new BlobKey("encoded_gs_key:L2dzL2ktcHJvZ3JhbW1pbmcuYXBwc3BvdC5jb20vazc4UkZJeVdjQXotU0RRRDB1M1JqUQ");
         BlobKey bk = new BlobKey(key);
         blobstoreService.serve(bk, res);
@@ -180,6 +180,22 @@ public class iprogrammingController {
         } else {
             //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
             String blob = blobKeys.getKeyString();
+            System.out.println("blob:" + blob);
+            ImagesService services = ImagesServiceFactory.getImagesService();
+            // Make an image from a Cloud Storage object, and transform it.
+            Image blobImage = ImagesServiceFactory.makeImageFromBlob(blobKeys);
+            Transform resize = ImagesServiceFactory.makeResize(100,100);
+            Image resizedImage = services.applyTransform(resize, blobImage);
+            // Write the transformed image back to a Cloud Storage object.
+            gcsService.createOrReplace(
+                    new GcsFilename("i-programming.appspot.com", "resizedImage.jpeg"),
+                    new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
+                    ByteBuffer.wrap(resizedImage.getImageData()));
+            //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
+            ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage.jpeg");
+            String url = services.getServingUrl(serve);
+            //System.out.println("url:" + url);
+            model.put("url", url);
             model.put("blobKeyI", blob);
         }
         return "editLesson";

@@ -65,7 +65,10 @@
             <h1 class="cover-heading">Course Content Page</h1>
             <br><br>
             <div class="inner cover">
-                <h3 class = "text">Slide Show Section
+                <h3 class = "text" >
+                    <p class="text">
+                        <p style="font-size:36px;">Slide Show Section</p>
+                    </p>
                     <br><br>
                     <%--<div id="ppt"><iframe src="https://docs.google.com/presentation/d/1cuyhAboik9tKx446da2ULyyQfyJGhjrlz983fUmrGgw/embed?start=false&loop=false&delayms=3000"--%>
                                           <%--frameborder="0" width="800" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
@@ -75,7 +78,8 @@
                     </div>
                     <br><br>
                     <p class="text">
-                        PDF Section
+                        <p style="font-size:36px;">PDF Section</p>
+                        <br>
                     </p>
                     <br><br>
                     <%--<div id="doc"><iframe src="https://docs.google.com/document/d/1GL_KRk1lLJEg3aiTbnKyzCY-8VP-SH33YryiwkSfUA0/pub?embedded=true"--%>
@@ -86,26 +90,33 @@
                     </div>
                     <br><br>
                     <p class="text">
-                        Assignment Section<br>
-                        <a href="#" onclick="serveAssignment();">View Assignment</a>
+                        <p style="font-size:36px;">Assignment Section</p>
+                        <br>
+                        <a href="#" onclick="serveAssignment();"><p style="color:deepskyblue;">View Assignment</p></a>
                         <form id="serveAssignment"><input type="hidden" name="key" value="${model.blobKeyA}"></form>
                     </p>
                     <br><br>
                     <p class="text">
-                        Image Section<br>
-                        <a href="#" onclick="serveImage();">View Image</a>
+                        <p style="font-size:36px;">Image Section</p>
+                        <br>
+                        Resized Image:
+                        <br>
+                        <img src=${model.url}>
+                        <br>
+                        <a href="#" onclick="serveImage();"><p style="color:deepskyblue;">View Original Image</p></a>
                         <form id="serveImage"><input type="hidden" name="key" value="${model.blobKeyI}"></form>
                     </p>
                     <br><br>
                     <p class="text">
-                        Image Section<br>
-                        <a href="#" onclick="serveVideo();">View Video</a>
+                    <p style="font-size:36px;">Video Section</p>
+                    <br>
+                        <a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>
                         <form id="serveVideo"><input type="hidden" name="key" value="${model.blobKeyV}"></form>
                     </p>
                     <br><br>
                 </h3>
                 <p class="text">
-                    blah blah balh....
+                    End of all sections
                 </p>
             </div>
             <div class="mastfoot">
@@ -113,7 +124,6 @@
                     <p>Developed by Dark Blue Team.</p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

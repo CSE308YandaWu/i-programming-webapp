@@ -129,19 +129,6 @@
                 <%--</div>--%>
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Google SlideShow Link:</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Google Document Link:</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="doccumentLink" class="form-control" name="docLink" placeholder="Insert URL here" form="lessonInfo">
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
                     <div class="col-md-4"><h4>Assignment:</h4></div>
                     <div class="col-md-7">
                         <form class="btn btn-lg btn-primary btn-block" action="<%= uploadUrlAssignment %>" method="post" enctype="multipart/form-data">
@@ -168,7 +155,19 @@
                         </form>
                     </div>
                 </div>
-
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Google SlideShow Link:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Google Document Link:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="doccumentLink" class="form-control" name="docLink" placeholder="Insert URL here" form="lessonInfo">
+                    </div>
+                </div>
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-5"></div>
