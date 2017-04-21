@@ -10,6 +10,8 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 
+/* user Bean has conflict with google user so we need to use USERS? */
+
 @Entity
 public class Users {
     @Id

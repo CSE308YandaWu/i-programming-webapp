@@ -3,27 +3,20 @@
  */
 
 /**
- * ---------------------------------------Google sign-in functions---------------------------------------
+ * ---------------------------------------Google sign-in/out functions---------------------------------------
  */
-
 function onSuccess(googleUser) {
     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    /* if user email changes, we might need to use the id_token to save the userInfo */
     // alert(googleUser.getBasicProfile().getName());
     // var id_token = googleUser.getAuthResponse().id_token;
     // alert(id_token);
     if (document.getElementById('userEmail') != null) {//home page doesn't have userEmial
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }
-
     document.getElementById('userEmail').setAttribute("value", googleUser.getBasicProfile().getEmail());
-
     //ff20();
-    toMain();//only works in home page.
-
-
-    // var userEmail = googleUser.getBasicProfile().getEmail();
-    // document.getElementById('userEmail').setAttribute("value", userEmail);
-    // toMain();
+    toMain();//from home page.to main page
 
 }
 function onFailure(error) {
@@ -48,7 +41,6 @@ function signOut() {
     });
     //document.getElementById('userEmail').style.display='none';
 }
-
 /**
  * ---------------------------------------Button functions in all pages---------------------------------------
  */
@@ -84,7 +76,6 @@ function toEditLesson() {
     document.getElementById("toEditLesson").action = "/editLesson";
     document.getElementById("toEditLesson").submit();
 }
-
 /**
  * ---------------------------------------Home/Sign-Out Button functions for all pages---------------------------------------
  */
@@ -179,7 +170,7 @@ function toCourseContent() {
     document.getElementById("toCourseContent").submit();
 }
 /**
- * ---------------------------------------Serve buttons---------------------------------------
+ * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
 function serveAssignment() {
     document.getElementById("serveAssignment").action = "/serve";

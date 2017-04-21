@@ -5,12 +5,11 @@
   Time: 10:11 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--this page is used with index.jsp to test the Blobstore--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ page import="com.googlecode.objectify.ObjectifyService" %>--%>
-<%--<%@ page import="Beans.Course"%>--%>
-<%--<%@ page import="java.util.List" %>--%>
-<%--<%@ page import="Beans.User" %>--%>
-<%--<%@ page import="com.googlecode.objectify.Key" %>--%>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
@@ -19,21 +18,6 @@
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
-<%--<%@ page import="com.google.appengine.api.users.User" %>--%>
-<%--<%@ page import="com.google.appengine.api.users.UserService" %>--%>
-<%--<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>--%>
-
-<%--<%@ page import="com.googlecode.objectify.Key" %>--%>
-<%--<%@ page import="com.googlecode.objectify.ObjectifyService" %>--%>
-<%--<%@ page import="Beans.Users" %>--%>
-<%--<%@ page import="com.googlecode.objectify.Result" %>--%>
-<%--<%@ page import="com.googlecode.objectify.cmd.Query" %>--%>
-<%--<%@ page import="com.google.appengine.api.datastore.QueryResultIterator" %>--%>
-
-
-<%@ page import="com.google.appengine.api.blobstore.BlobKey" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
 <head>
     <title>Hello World!</title>
 </head>

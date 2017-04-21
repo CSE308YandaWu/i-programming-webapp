@@ -5,6 +5,9 @@
   Time: 12:23 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--this page is used with HelloWorld.jsp to test the Blobstore--%>
+
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>

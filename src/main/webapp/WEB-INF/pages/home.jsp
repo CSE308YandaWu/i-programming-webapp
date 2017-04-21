@@ -59,8 +59,7 @@
                 <p class="lead">I-Programing is an online platform that not only allows you to teach the world and share your knowledge by easily creating your own online courses,
                     but also allows you to gain the knowledge by taking the online course that was created by others. </p>
                 <%--<p class="lead">--%>
-                    <%--<a href="#" class="btn btn-lg btn-default">Learn more</a>--%>
-                    <%--<div class="btn btn-lg btn-default" data-onsuccess="onSignIn"></div>--%>
+                <%--google SignIn Button--%>
                     <div id="my-signin2" class="btn" data-onsuccess="onSignIn"></div>
                     <form id="formToMain"><input type="hidden" id="userEmail" name="userEmail"></form>
                 <%--</p>--%>

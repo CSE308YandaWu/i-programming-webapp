@@ -162,10 +162,10 @@ public class iprogrammingController {
 		return "home";
 	}
 
-
-    /* UPLOAD CONTROLLERS */
+/* Blobstore, upload/serve slides/video/image/pdf controllers */
     Map<String, String> model = new HashMap<String, String>();
     /*  Upload pages */
+    /* When confirm button is clicked in editLesson Page */
     @RequestMapping(value = "/editLessonConfirm")
     public ModelAndView editLessonConfirm(@RequestParam(value = "pptLink") String pptLink,
                                       @RequestParam(value = "docLink") String docLink) {
@@ -176,11 +176,13 @@ public class iprogrammingController {
 //        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
 //        ObjectifyService.ofy().save().entity(newCourse).now();
     return new ModelAndView("courseContent", "model", model);
-}
+    }
+    /* courseContent Page */
     @RequestMapping("/courseContent")
     public ModelAndView courseContent(){
         return new ModelAndView("courseContent","model",model);
     }
+
     /* lecture upload/serve section, use Blobstore, Cloud Storage */
     /* all blobs need this */
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
@@ -191,6 +193,7 @@ public class iprogrammingController {
             .totalRetryPeriodMillis(15000)
             .build());
     /* serve assignment/video/image */
+    /* courseContent Page serving(video/pdf/image) function */
     @RequestMapping(value = "/serve")
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
         //System.out.println("Serving:" + key);
@@ -198,7 +201,7 @@ public class iprogrammingController {
         BlobKey bk = new BlobKey(key);
         blobstoreService.serve(bk, res);
     }
-
+    /* courseContent Page upload Assignment mapping */
     @RequestMapping(value = "/uploadAssignment")
     public String hold(HttpServletRequest req) throws IOException {
         Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
@@ -214,7 +217,7 @@ public class iprogrammingController {
         }
         return "editLesson";
     }
-
+    /* courseContent Page upload Image mapping */
     @RequestMapping(value = "/uploadImage")
     public String door(HttpServletRequest req) throws IOException {
         Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
@@ -246,7 +249,7 @@ public class iprogrammingController {
         }
         return "editLesson";
     }
-
+    /* courseContent Page upload Video mapping */
     @RequestMapping(value = "/uploadVideo")
     public String holdDoor(HttpServletRequest req) throws IOException {
         Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
@@ -262,7 +265,8 @@ public class iprogrammingController {
         }
         return "editLesson";
     }
-/* test functions between index.jsp and HelloWorld */
+
+    /* test blobstore functions between index.jsp and HelloWorld */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView helloWorld(HttpServletRequest req) throws IOException {
         System.out.println("req:" + req);
