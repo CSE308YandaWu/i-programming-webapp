@@ -79,3 +79,10 @@ h1 {
 #join_btn{
     margin-left: 20px;
 }
+
+
+.list-group >a{
+    font-size: 25px;
+    display: block;
+
+}

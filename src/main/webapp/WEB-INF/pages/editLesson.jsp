@@ -6,10 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
+
+<%
+    //create uploadUrl for upload form
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+    UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");
+    String uploadUrlAssignment = blobstoreService.createUploadUrl("/uploadAssignment", uploadOptions);
+    String uploadUrlImage = blobstoreService.createUploadUrl("/uploadImage", uploadOptions);
+    String uploadUrlVideo = blobstoreService.createUploadUrl("/uploadVideo", uploadOptions);
+%>
 
 <head>
     <meta charset="utf-8">
@@ -107,25 +121,60 @@
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Video Link:</h4></div>
+                    <div class="col-md-4"><h4>Lesson Body:</h4></div>
                     <div class="col-md-7">
-                        <input type="text" id="inputEditLink" class="form-control" name="Video Link" placeholder="Insert URL here">
+                        <!--label for="lessonBody">Lesson Body:</label-->
+                        <textarea class="form-control" rows="3" id="lessonBody"></textarea>
                     </div>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Lesson Body:</h4></div>
+                    <div class="col-md-4"><h4>Google SlideShow Link:</h4></div>
                     <div class="col-md-7">
-                        <!--label for="lessonBody">Lesson Body:</label-->
-                        <textarea class="form-control" rows="5" id="lessonBody"></textarea>
+                        <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Google Document Link:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="doccumentLink" class="form-control" name="docLink" placeholder="Insert URL here" form="lessonInfo">
+                    </div>
+                </div>
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Assignment:</h4></div>
+                    <div class="col-md-7">
+                        <form class="btn btn-lg btn-primary btn-block" action="<%= uploadUrlAssignment %>" method="post" enctype="multipart/form-data">
+                            <input type="file" name="myFileAssignment">
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Assignment">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Image:</h4></div>
+                    <div class="col-md-7">
+                        <form class="btn btn-lg btn-primary btn-block" action="<%= uploadUrlImage %>" method="post" enctype="multipart/form-data">
+                            <input type="file" name="myFileImage">
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Image">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Video:</h4></div>
+                    <div class="col-md-7">
+                        <form class="btn btn-lg btn-primary btn-block" action="<%= uploadUrlVideo %>" method="post" enctype="multipart/form-data">
+                            <input type="file" name="myFileVideo">
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Video">
+                        </form>
+                    </div>
+                </div>
+
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseConfirm();">Save</button>
-                        <form id="editLessonToEditCourseConfirm"><input type="hidden"></form>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
+                        <form id="lessonInfo"><input type="hidden"></form>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">

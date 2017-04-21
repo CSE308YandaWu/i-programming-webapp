@@ -16,17 +16,13 @@
 </head>
 <body>
 Welcome, dark blue. let's start coding.
-<%--<div id="my-signin2" data-onsuccess="onSignIn" onclick="ff20();"></div>--%>
-<div id="my-signin2" data-onsuccess="onSignIn"></div>
 
-<%--<a href="#" onclick="signOut();">Sign out</a>--%>
-<%--<div id="userEmail1"></div>--%>
-<%--<form action="/hello" method="get">--%>
-    <%--<button type="submit">Submit</button><br>--%>
+<%--<div id="my-signin2" data-onsuccess="onSignIn" onclick="ff20();"></div>--%>
+<%--<form id="myForm">--%>
+<%--<input type="hidden" >--%>
 <%--</form>--%>
-<form id="myForm">
-    <input type="hidden" >
-</form>
+<div id="my-signin2" data-onsuccess="onSignIn"></div>
+<a href="#" onclick="signOut();">Sign out</a>
 
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>

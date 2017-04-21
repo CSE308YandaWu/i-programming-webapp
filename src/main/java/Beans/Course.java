@@ -20,7 +20,7 @@ public class Course {
     public Key<User> userEmail;
 
     public String email;
-    public String title;
+    @Index public String title;
     public String instructor;
     public String description;
     public String status;
@@ -96,6 +96,17 @@ public class Course {
     }
 
     //Constructors
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public List<Unit> getUnits() { return units; }
+    public void addUnit(Unit unit) { this.units.add(unit); }
+
     public Course() {
         dateCreated = new Date();
         numEnrolled = 0;
