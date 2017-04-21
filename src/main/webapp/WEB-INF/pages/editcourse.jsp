@@ -84,7 +84,10 @@
                     <ul>
                         <li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>
                         <ol>
-                            <li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>
+                            <%--<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>--%>
+                            <li><a href="#" onclick="toCourseContent()">Introduction</a>(<a href="#">Edit</a>)
+                                <form id="toCourseContent"><input type="hidden"></form>
+                            </li>
                             <li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>
                             <li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>
                         </ol>
