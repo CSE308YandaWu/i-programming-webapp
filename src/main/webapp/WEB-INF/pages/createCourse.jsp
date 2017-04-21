@@ -112,9 +112,6 @@
                         </td>
                     </tr>
 
-
-
-
                     <tr>
                         <td>
                             <input name="confirm" type="submit"  value="Confirm" style="color:black" onclick="createCourseToMainConfirm();">

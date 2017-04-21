@@ -68,6 +68,7 @@
                         <tr><td>Instructor:</td><td>${model.instructor}</td></tr>
                         <tr><td>Status:</td><td>${model.status}</td></tr>
                         <tr><td>Description:</td><td>${model.description}</td></tr>
+                        <tr><td>Date Created: </td><td>${model.dateCreated}</td></tr>
                     </table>
                 </div>
                 <div class="add-btns-group">

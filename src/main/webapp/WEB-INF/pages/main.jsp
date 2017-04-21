@@ -177,6 +177,7 @@
                                 .load()
                                 .type(Course.class)
                                 .ancestor(theUser)
+                                .order("-dateCreated")
                                 .list();
                         pageContext.setAttribute("courses", courses);
                     %>
@@ -186,7 +187,8 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${courses}">
-                                <a href="#" class="list-group-item list-group-item-action">${x.title}</a>
+                                <a href="#" class="list-group-item list-group-item-action">${x.title}<br>
+                                    <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span></a>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>

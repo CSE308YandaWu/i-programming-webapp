@@ -2,9 +2,11 @@ package Beans;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,8 +25,12 @@ public class Course {
     public String description;
     public String status;
     public String accessCode;
+    @Index
+    public Date dateCreated;
+    public int numEnrolled;
     public List<Unit> units;
 
+    //Getters and Setters
     public String getId() {
         return id;
     }
@@ -73,11 +79,30 @@ public class Course {
         this.status = status;
     }
 
-    public Course() {
+    public Date getDateCreated() {
+        return dateCreated;
+    }
 
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public int getNumEnrolled() {
+        return numEnrolled;
+    }
+
+    public void setNumEnrolled(int numEnrolled) {
+        this.numEnrolled = numEnrolled;
+    }
+
+    //Constructors
+    public Course() {
+        dateCreated = new Date();
+        numEnrolled = 0;
     }
 
     public Course(String userEmail, String id, String title, String instructor, String description, String status) {
+        this();
         this.email = userEmail;
         this.id = id;
         this.title = title;
