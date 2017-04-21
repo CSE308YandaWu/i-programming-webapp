@@ -89,7 +89,7 @@
                 </c:when>
                 <c:otherwise>
                     <c:forEach var="x" items="${courses}">
-                        <a href="#" class="list-group-item list-group-item-action">${x.title}</a>
+                        <a href="#" >${x.title}</a>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
