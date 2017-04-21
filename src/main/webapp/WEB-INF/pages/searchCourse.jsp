@@ -24,6 +24,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
 </head>
 <body>
 
@@ -60,19 +65,19 @@
                 <span ><strong>Course Title:</strong></span>
             </td>
             <td>
-                <input name="CourseTitle" id="CourseTitle" type="text" size="40" form="searchClass">
+                <input style="color:black" name="CourseTitle" id="CourseTitle" type="text" size="40" form="searchClass">
             </td>
             <td>
-                <input id="search_btn" type="submit" value="Search" form="searchClass">
+                <input id="search_btn" type="submit" value="Search" style="color:black" form="searchClass">
             </td>
             <form action="#" type="hidden" id="searchClass"></form>
         </tr>
 
     </table>
 
-    <div class="search_result">
+    <div class="resultlist">
         <h2>Search Result</h2>
-        <div class="list-group">
+        <ul class="list-group">
             <%
                 String title = request.getParameter("CourseTitle");
                 List<Course> courses;
@@ -89,7 +94,26 @@
                 </c:when>
                 <c:otherwise>
                     <c:forEach var="x" items="${courses}">
-                        <a href="#" >${x.title}</a>
+                        <li class="list-group-item">
+                            <div class="panel panel-default panel1">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
+                                </div>
+                                <div id="${x.id}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p style="color:black">Instructors: ${x.instructor}</p>
+                                        <span>Access Code: <input style="color:black" type="text" name="AccessCode" value="Code"></span>
+                                        <form action="/enrollCourse">
+                                            <input name="courseId" type="hidden" value="${x.courseId}">
+                                            <input name="userEmail" type="hidden" value="${user}">
+                                            <input name="confirm" type="submit" value="Enroll">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <%--<li name=x.title >${x.title}</li>--%>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
@@ -101,16 +125,16 @@
             <%--<a href="#" class="list-group-item list-group-item-action">CSE 235</a>--%>
             <%--<a href="#" class="list-group-item list-group-item-action">CSE 456</a>--%>
             <%--<a href="#" class="list-group-item list-group-item-action">CSE 222</a>--%>
-        </div>
+        </ul>
     </div>
 
 
-    <div class="join_course">
-        <lable>Course Access Code:</lable>
-        <input name="AccessCode" type="text" size="10" value="">
-        <input id="join_btn" type="submit" value="Add" onclick="searchCourseToMain();">
-        <form id="searchCourseToMain"><input type="hidden"></form>
-    </div>
+    <%--<div class="join_course">--%>
+        <%--<lable>Course Access Code:</lable>--%>
+        <%--<input name="AccessCode" type="text" size="10" value="">--%>
+        <%--<input id="join_btn" type="submit" value="Add" onclick="searchCourseToMain();">--%>
+        <%--<form id="searchCourseToMain"><input type="hidden"></form>--%>
+    <%--</div>--%>
 
 
 </div>

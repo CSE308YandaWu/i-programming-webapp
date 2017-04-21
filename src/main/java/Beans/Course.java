@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Course {
     public String email;
     @Index
     public String title;
+    @Index public String courseId;
+    @Index public String title;
     public String instructor;
     public String description;
     public String status;
@@ -29,6 +32,13 @@ public class Course {
     public int numEnrolled;
     public List<Unit> units;
 
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String id) {
+        this.courseId = id;
+    }
     //Getters and Setters
     public String getId() {
         return id;
@@ -115,6 +125,7 @@ public class Course {
         this();
         this.email = userEmail;
         this.id = id;
+        this.courseId = id;
         this.title = title;
         this.instructor = instructor;
         this.description = description;

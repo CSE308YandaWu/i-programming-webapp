@@ -11,6 +11,7 @@ import java.security.KeyFactory;
 import java.util.*;
 
 import Beans.Course;
+import Beans.User;
 import com.googlecode.objectify.Key;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,6 @@ import java.nio.channels.Channels;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 @Controller
 public class iprogrammingController {
@@ -117,13 +117,45 @@ public class iprogrammingController {
 
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        User existUser = ObjectifyService.ofy().load().type(User.class).filter("userId =",userEmail).first().now();
+        if(existUser.getCreatedCourse() == null){
+            List<Course> newCreatedCourse = new ArrayList<Course> ();
+            newCreatedCourse.add(newCourse);
+            existUser.setCreatedCourse(newCreatedCourse);
+        }
+        else existUser.addCreatedCourse(newCourse);
+        ObjectifyService.ofy().save().entity(existUser).now();
 
         ofy().save().entity(newCourse).now();
 
 
         return new ModelAndView("editCourse", "model", newCourse);
     }
-    
+    @RequestMapping(value = "/enrollCourse")
+    public ModelAndView enrollCourse(@RequestParam(value = "courseId")String courseId,
+                                     @RequestParam(value = "userEmail") String userEmail){
+
+        Course course = ObjectifyService.ofy().load().type(Course.class).filter("courseId =",courseId).first().now();
+        User existUser = ObjectifyService.ofy().load().type(User.class).filter("userId =",userEmail).first().now();
+        if(existUser.getJoinedCourse() == null){
+            System.out.print("heheheheh!");
+            List<Course> newCreatedCourse = new ArrayList<Course> ();
+            newCreatedCourse.add(course);
+            existUser.setJoinedCourse(newCreatedCourse);
+            System.out.println(existUser.getJoinedCourse().size());
+
+
+        }
+        else {
+            System.out.println("I don't know!");
+            existUser.getJoinedCourse().add(course);
+        }
+        ObjectifyService.ofy().save().entity(existUser).now();
+        System.out.println(existUser.getJoinedCourse().size());
+        return new ModelAndView("main", "model", course);
+
+    }
+
     @RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
@@ -161,7 +193,7 @@ public class iprogrammingController {
     /* serve assignment/video/image */
     @RequestMapping(value = "/serve")
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
-        System.out.println("Serving:" + key);
+        //System.out.println("Serving:" + key);
         //BlobKey bk = new BlobKey("encoded_gs_key:L2dzL2ktcHJvZ3JhbW1pbmcuYXBwc3BvdC5jb20vazc4UkZJeVdjQXotU0RRRDB1M1JqUQ");
         BlobKey bk = new BlobKey(key);
         blobstoreService.serve(bk, res);
@@ -194,6 +226,22 @@ public class iprogrammingController {
         } else {
             //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
             String blob = blobKeys.getKeyString();
+            System.out.println("blob:" + blob);
+            ImagesService services = ImagesServiceFactory.getImagesService();
+            // Make an image from a Cloud Storage object, and transform it.
+            Image blobImage = ImagesServiceFactory.makeImageFromBlob(blobKeys);
+            Transform resize = ImagesServiceFactory.makeResize(100,100);
+            Image resizedImage = services.applyTransform(resize, blobImage);
+            // Write the transformed image back to a Cloud Storage object.
+            gcsService.createOrReplace(
+                    new GcsFilename("i-programming.appspot.com", "resizedImage.jpeg"),
+                    new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
+                    ByteBuffer.wrap(resizedImage.getImageData()));
+            //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
+            ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage.jpeg");
+            String url = services.getServingUrl(serve);
+            //System.out.println("url:" + url);
+            model.put("url", url);
             model.put("blobKeyI", blob);
         }
         return "editLesson";

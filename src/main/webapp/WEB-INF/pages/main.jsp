@@ -1,6 +1,7 @@
 <%@ page import="Beans.Course" %>
 <%@ page import="Beans.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %><%--
   Created by IntelliJ IDEA.
@@ -41,6 +42,48 @@
 </head>
 
 <body>
+<%
+    if (session.getAttribute("user") == null) {
+        session.setAttribute("user", request.getParameter("userEmail"));
+    }
+    String user = (String) session.getAttribute("user");
+    System.out.println(user);
+    User existUser = ObjectifyService.ofy()
+            .load()
+            .type(User.class)
+            .filter("userId =",user)
+            .first()
+            .now();
+
+
+
+    if(existUser == null){
+//        List<Course> createdCourse = new ArrayList<Course>();
+//        List<Course> joinedCourse = new ArrayList<Course>();
+//        createdCourse.add(new Course());
+//        System.out.print(createdCourse);
+        System.out.println("!!!!!!");
+        existUser = new User(user);
+        ObjectifyService.ofy().save().entity(existUser).now();
+    }
+    if(existUser.getJoinedCourse() == null){
+        System.out.println("this is null");
+    }
+    session.setAttribute("userObject", existUser);
+
+
+    List<Course> courses;
+
+
+    Key<User> theUser = Key.create(User.class, user);
+
+    courses = ObjectifyService.ofy()
+            .load()
+            .type(Course.class)
+            .ancestor(theUser)
+            .list();
+    pageContext.setAttribute("courses", courses);
+%>
 
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
@@ -104,62 +147,6 @@
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <div class="panel panel-default panel1">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" href="#collapse2">CSE 219</a>
-                            </div>
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>Instructor: Richard McKenna</p>
-                                    <span>Access Code: <input type="text" name="AccessCode" value="Code"></span>
-                                    <button type="button" class="btn btn-primary">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="panel panel-default panel1">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" href="#collapse3">CSE 320</a>
-                            </div>
-                            <div id="collapse3" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>Instructor: Jennifer Wong-Ma</p>
-                                    <span>Access Code: <input type="text" name="AccessCode" value="Code"></span>
-                                    <button type="button" class="btn btn-primary">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="panel panel-default panel1">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" href="#collapse4">CSE 220</a>
-                            </div>
-                            <div id="collapse4" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>Instructor: Jennifer Wong-Ma</p>
-                                    <span>Access Code: <input type="text" name="AccessCode" value="Code"><button
-                                            type="button" class="btn btn-primary">Add</button></span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="panel panel-default panel1">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" href="#collapse5">CSE 114</a>
-                            </div>
-                            <div id="collapse5" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <p>Instructor: Paul Fodor</p>
-                                    <span>Access Code: <input type="text" name="AccessCode" value="Code"><button
-                                            type="button" class="btn btn-primary">Add</button></span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
             <div class="inner createdlist">
@@ -196,7 +183,6 @@
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
-                    <form id="toEditCourse"><input type="hidden" id="courseId" name="courseId"></form>
                     <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
                         <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
                         <%--<form id="toEditCourse"><input type="hidden"></form>--%>
@@ -210,13 +196,20 @@
             <div class="inner enrolledlist">
                 <h2>My Enrolled Courses</h2>
                 <div class="list-group">
-                    <form id="entercourse" action="/course_page">
-                        <a href="#" onclick="toCoursePage()" id="coursename"
-                           class="list-group-item list-group-item-action">CSE 308</a>
-                        <input type="hidden" id="nameinput" name="coursename">
-                    </form>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 336</a>
-                    <a href="#" class="list-group-item list-group-item-action">CSE 320</a>
+                    <c:choose>
+                        <c:when test="${empty userObject.joinedCourse}">
+                            You have not join any courses yet.
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="x" items="${userObject.joinedCourse}">
+                                <form id="entercourse" action="/course_page">
+                                    <a href="#" onclick="toCoursePage()" id="coursename"
+                                    class="list-group-item list-group-item-action">${x.title}</a>
+                                    <input type="hidden" id="nameinput" name="coursename">
+                                </form>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <div class="mastfoot">

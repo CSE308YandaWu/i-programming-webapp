@@ -79,67 +79,54 @@
             </div>
             <div class="inner editLesson">
                 <h2>Edit Lesson</h2>
-                <h5>*denotes a required field</h5>
-                <div class="help-block"></div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Status:*</h4></div>
-                    <div class="col-md-7">
-                        <label class="radio-inline"><input type="radio" name="statusradio">Public</label>
-                        <label class="radio-inline"><input type="radio" name="statusradio">Private</label>
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Password:</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="inputEditTitle" class="form-control" name="Lesson Title" placeholder="Required if private">
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Lesson ID:*</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="inputEditLessonID" class="form-control" name="Lesson ID"  placeholder="eg. 1234" required autofocus>
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Parent Unit:*</h4></div>
-                    <div class="col-md-7">
-                        <div class="dropdown">
-                            <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown" value="Choose Parent Unit">
-                                Choose Parent Unit<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li onclick="dropdown(this.innerHTML);"><a href="#">Unit 1</a></li>
-                                <li onclick="dropdown(this.innerHTML);"><a href="#">Unit 2</a></li>
-                                <li onclick="dropdown(this.innerHTML);"><a href="#">Unit 3</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Lesson Body:</h4></div>
-                    <div class="col-md-7">
-                        <!--label for="lessonBody">Lesson Body:</label-->
-                        <textarea class="form-control" rows="3" id="lessonBody"></textarea>
-                    </div>
-                </div>
-                <div class="help-block"></div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Google SlideShow Link:</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4"><h4>Google Document Link:</h4></div>
-                    <div class="col-md-7">
-                        <input type="text" id="doccumentLink" class="form-control" name="docLink" placeholder="Insert URL here" form="lessonInfo">
-                    </div>
-                </div>
+                <%--<h5>*denotes a required field</h5>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-4"><h4>Status:*</h4></div>--%>
+                    <%--<div class="col-md-7">--%>
+                        <%--<label class="radio-inline"><input type="radio" name="statusradio">Public</label>--%>
+                        <%--<label class="radio-inline"><input type="radio" name="statusradio">Private</label>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-4"><h4>Password:</h4></div>--%>
+                    <%--<div class="col-md-7">--%>
+                        <%--<input type="text" id="inputEditTitle" class="form-control" name="Lesson Title" placeholder="Required if private">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-4"><h4>Lesson ID:*</h4></div>--%>
+                    <%--<div class="col-md-7">--%>
+                        <%--<input type="text" id="inputEditLessonID" class="form-control" name="Lesson ID"  placeholder="eg. 1234" required autofocus>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-4"><h4>Parent Unit:*</h4></div>--%>
+                    <%--<div class="col-md-7">--%>
+                        <%--<div class="dropdown">--%>
+                            <%--<button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown" value="Choose Parent Unit">--%>
+                                <%--Choose Parent Unit<span class="caret"></span>--%>
+                            <%--</button>--%>
+                            <%--<ul class="dropdown-menu">--%>
+                                <%--<li onclick="dropdown(this.innerHTML);"><a href="#">Unit 1</a></li>--%>
+                                <%--<li onclick="dropdown(this.innerHTML);"><a href="#">Unit 2</a></li>--%>
+                                <%--<li onclick="dropdown(this.innerHTML);"><a href="#">Unit 3</a></li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="help-block"></div>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-4"><h4>Lesson Body:</h4></div>--%>
+                    <%--<div class="col-md-7">--%>
+                        <%--<!--label for="lessonBody">Lesson Body:</label-->--%>
+                        <%--<textarea class="form-control" rows="3" id="lessonBody"></textarea>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-4"><h4>Assignment:</h4></div>
@@ -168,7 +155,19 @@
                         </form>
                     </div>
                 </div>
-
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Google SlideShow Link:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Google Document Link:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="doccumentLink" class="form-control" name="docLink" placeholder="Insert URL here" form="lessonInfo">
+                    </div>
+                </div>
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-5"></div>
