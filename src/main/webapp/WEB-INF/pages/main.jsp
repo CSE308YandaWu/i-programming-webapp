@@ -141,7 +141,7 @@
                     pageContext.setAttribute("courses1", courses1);
                 %>
                 <c:choose>
-                    <c:when test="${empty courses}">
+                    <c:when test="${empty courses1}">
                         Empty!
                     </c:when>
                     <c:otherwise>

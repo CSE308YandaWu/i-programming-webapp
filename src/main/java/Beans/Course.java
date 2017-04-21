@@ -20,6 +20,7 @@ public class Course implements Serializable {
     @Index
     public String email;
     @Index public String courseId;
+    @Index public String title;
     public String instructor;
     public String description;
     public String status;
