@@ -13,6 +13,7 @@ import Beans.Course;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -122,8 +123,25 @@ public class iprogrammingController {
 		session.invalidate();
 		return "home";
 	}
-
-/* lecture upload/serve section, use Blobstore, Cloud Storage */
+	/* UPLOAD CONTROLLERS */
+    Map<String, String> model = new HashMap<String, String>();
+    /*  Upload pages */
+    @RequestMapping(value = "/editLessonConfirm")
+    public ModelAndView editLessonConfirm(@RequestParam(value = "pptLink") String pptLink,
+                                      @RequestParam(value = "docLink") String docLink) {
+//        System.out.println("In controller, pptLink: " + pptLink);
+//        System.out.println("In controller, docLink: " + docLink);
+        model.put("pptLink", pptLink);
+        model.put("docLink", docLink);
+//        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+//        ObjectifyService.ofy().save().entity(newCourse).now();
+    return new ModelAndView("courseContent", "model", model);
+}
+    @RequestMapping("/courseContent")
+    public ModelAndView courseContent(){
+        return new ModelAndView("courseContent","model",model);
+    }
+    /* lecture upload/serve section, use Blobstore, Cloud Storage */
     /* all blobs need this */
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     /* image processing */
@@ -132,6 +150,7 @@ public class iprogrammingController {
             .retryMaxAttempts(10)
             .totalRetryPeriodMillis(15000)
             .build());
+    /* serve assignment/video/image */
     @RequestMapping(value = "/serve")
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
         System.out.println("Serving:" + key);
@@ -139,6 +158,55 @@ public class iprogrammingController {
         BlobKey bk = new BlobKey(key);
         blobstoreService.serve(bk, res);
     }
+
+    @RequestMapping(value = "/uploadAssignment")
+    public String hold(HttpServletRequest req) throws IOException {
+        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        String gcsFileName = finfos.get("myFileAssignment").get(0).getGsObjectName();
+        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+
+        if (blobKeys == null) {
+            System.out.println("uploadAssignment error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = blobKeys.getKeyString();
+            model.put("blobKeyA", blob);
+        }
+        return "editLesson";
+    }
+
+    @RequestMapping(value = "/uploadImage")
+    public String door(HttpServletRequest req) throws IOException {
+        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        String gcsFileName = finfos.get("myFileImage").get(0).getGsObjectName();
+        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+
+        if (blobKeys == null) {
+            System.out.println("uploadImage error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = blobKeys.getKeyString();
+            model.put("blobKeyI", blob);
+        }
+        return "editLesson";
+    }
+
+    @RequestMapping(value = "/uploadVideo")
+    public String holdDoor(HttpServletRequest req) throws IOException {
+        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        String gcsFileName = finfos.get("myFileVideo").get(0).getGsObjectName();
+        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+
+        if (blobKeys == null) {
+            System.out.println("uploadVideo error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = blobKeys.getKeyString();
+            model.put("blobKeyV", blob);
+        }
+        return "editLesson";
+    }
+/* test functions between index.jsp and HelloWorld */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView helloWorld(HttpServletRequest req) throws IOException {
         System.out.println("req:" + req);
@@ -177,7 +245,7 @@ public class iprogrammingController {
             String url = services.getServingUrl(serve);
             //String url = "empty url";
             System.out.println("url:" + url);
-            Map<String, String> model = new HashMap<String, String>();
+
             model.put("url", url);
             model.put("blobKey", blob);
             return new ModelAndView("HelloWorld", "model", model);

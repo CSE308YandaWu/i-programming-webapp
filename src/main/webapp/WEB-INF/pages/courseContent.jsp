@@ -1,12 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: JIAQI ZHANG
-  Date: 4/6/2017
-  Time: 3:29 AM
+  User: YandaWu
+  Date: 4/20/2017
+  Time: 5:31 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
@@ -20,7 +22,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Course Page</title>
+    <title>Course Content Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,8 +45,8 @@
             <div class="masthead clearfix">
                 <div class="inner">
                     <h3 class="masthead-brand">
-                        <a href="#" onclick="courseInfoToHome()">I-Programming</a>
-                        <form id="courseInfoToHome"><input type="hidden"></form>
+                        <a href="#" onclick="courseContentToHome()">I-Programming</a>
+                        <form id="courseContentToHome"><input type="hidden"></form>
                     </h3>
                     <nav>
                         <ul class="nav masthead-nav">
@@ -60,39 +62,51 @@
                     </nav>
                 </div>
             </div>
-            <h1 class="cover-heading">
-                <%
-                    String name = request.getParameter("coursename");
-                    pageContext.setAttribute("name", name);
-                    out.println(name);
-                %> Course Page</h1>
+            <h1 class="cover-heading">Course Content Page</h1>
+            <br><br>
             <div class="inner cover">
-                <h3 class = "text">Course Description</h3>
+                <h3 class = "text">Slide Show Section
+                    <br><br>
+                    <%--<div id="ppt"><iframe src="https://docs.google.com/presentation/d/1cuyhAboik9tKx446da2ULyyQfyJGhjrlz983fUmrGgw/embed?start=false&loop=false&delayms=3000"--%>
+                                          <%--frameborder="0" width="800" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
+                    <%--</div>--%>
+                    <div id="ppt"><iframe src="${model.pptLink}"
+                                          frameborder="0" width="800" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    </div>
+                    <br><br>
+                    <p class="text">
+                        PDF Section
+                    </p>
+                    <br><br>
+                    <%--<div id="doc"><iframe src="https://docs.google.com/document/d/1GL_KRk1lLJEg3aiTbnKyzCY-8VP-SH33YryiwkSfUA0/pub?embedded=true"--%>
+                                          <%--frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
+                    <%--</div>--%>
+                    <div id="doc"><iframe src="${model.docLink}"
+                                          frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    </div>
+                    <br><br>
+                    <p class="text">
+                        Assignment Section<br>
+                        <a href="#" onclick="serveAssignment();">View Assignment</a>
+                        <form id="serveAssignment"><input type="hidden" name="key" value="${model.blobKeyA}"></form>
+                    </p>
+                    <br><br>
+                    <p class="text">
+                        Image Section<br>
+                        <a href="#" onclick="serveImage();">View Image</a>
+                        <form id="serveImage"><input type="hidden" name="key" value="${model.blobKeyI}"></form>
+                    </p>
+                    <br><br>
+                    <p class="text">
+                        Image Section<br>
+                        <a href="#" onclick="serveVideo();">View Video</a>
+                        <form id="serveVideo"><input type="hidden" name="key" value="${model.blobKeyV}"></form>
+                    </p>
+                    <br><br>
+                </h3>
                 <p class="text">
-                    END....
-
-
+                    blah blah balh....
                 </p>
-                <div class="outlinelist">
-                    <h3 class="outlinelabel">Course Outline</h3>
-                    <ul>
-                        <li><a href="#">Unit 1 - Introduction</a></li>
-                        <ol>
-                            <li><a href="#" onclick="toCourseContent()">Introduction</a>
-                                <form id="toCourseContent"><input type="hidden"></form>
-                            </li>
-                            <li><a href="#">Filter image</a></li>
-                            <li><a href="#">How search works</a></li>
-                        </ol>
-                        <li><a href="#">Unit 2 - Interpreting Result</a></li>
-                        <ol>
-                            <li><a href="#">Lesson 1....</a></li>
-                            <li><a href="#">Lesson 2...</a></li>
-                        </ol>
-                    </ul>
-                </div>
-
-                <%--</p>--%>
             </div>
             <div class="mastfoot">
                 <div class="inner">

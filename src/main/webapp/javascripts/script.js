@@ -122,6 +122,11 @@ function editLessonToHome(){
     document.getElementById("editLessonToHome").action = "/main";
     document.getElementById("editLessonToHome").submit();
 }
+/* courseContent Page Home button */
+function courseContentToHome(){
+    document.getElementById("courseContentToHome").action = "/main";
+    document.getElementById("courseContentToHome").submit();
+}
 /* signOut function for all pages back to home page */
 function signOutToHome(){
     document.getElementById("signOutToHome").action = "/logout";
@@ -156,16 +161,37 @@ function editUnitToEditCourseCancel(){
     document.getElementById("editUnitToEditCourseCancel").submit();
 }
 /* editLesson Page confirm button */
-function editLessonToEditCourseConfirm(){
-    document.getElementById("editLessonToEditCourseConfirm").action = "/editCourse";
-    document.getElementById("editLessonToEditCourseConfirm").submit();
+function editLessonConfirm(){
+    document.getElementById("lessonInfo").action = "/editLessonConfirm";
+    document.getElementById("lessonInfo").submit();
 }
 /* createCourse Page cancel button */
 function editLessonToEditCourseCancel(){
     document.getElementById("editLessonToEditCourseCancel").action = "/editCourse";
     document.getElementById("editLessonToEditCourseCancel").submit();
 }
-
+/**
+ * ---------------------------------------Other navigation button---------------------------------------
+ */
+function toCourseContent(){
+    document.getElementById("toCourseContent").action = "/courseContent";
+    document.getElementById("toCourseContent").submit();
+}
+/**
+ * ---------------------------------------Serve buttons---------------------------------------
+ */
+function serveAssignment(){
+    document.getElementById("serveAssignment").action = "/serve";
+    document.getElementById("serveAssignment").submit();
+}
+function serveImage(){
+    document.getElementById("serveImage").action = "/serve";
+    document.getElementById("serveImage").submit();
+}
+function serveVideo(){
+    document.getElementById("serveVideo").action = "/serve";
+    document.getElementById("serveVideo").submit();
+}
 /**
  * ---------------------------------------test functions---------------------------------------
  */
