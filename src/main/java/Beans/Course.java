@@ -19,8 +19,6 @@ public class Course implements Serializable {
     public String id;
     @Index
     public String email;
-    @Index
-    public String title;
     @Index public String courseId;
     public String instructor;
     public String description;
