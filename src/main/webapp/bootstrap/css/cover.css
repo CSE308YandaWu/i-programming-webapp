@@ -185,6 +185,12 @@ h2 {
     width: 40%;
     float: right;
 }
+.resultlist{
+    text-align: left;
+    color: gray;
+    width: 40%;
+    margin: auto;
+}
 
 .panel-heading > a{
     color:gray;

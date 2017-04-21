@@ -10,6 +10,7 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 import Beans.Course;
+import Beans.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,13 +106,45 @@ public class iprogrammingController {
 
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        User existUser = ObjectifyService.ofy().load().type(User.class).filter("userId =",userEmail).first().now();
+        if(existUser.getCreatedCourse() == null){
+            List<Course> newCreatedCourse = new ArrayList<Course> ();
+            newCreatedCourse.add(newCourse);
+            existUser.setCreatedCourse(newCreatedCourse);
+        }
+        else existUser.addCreatedCourse(newCourse);
+        ObjectifyService.ofy().save().entity(existUser).now();
 
         ObjectifyService.ofy().save().entity(newCourse).now();
 
 
         return new ModelAndView("editCourse", "model", newCourse);
     }
-    
+    @RequestMapping(value = "/enrollCourse")
+    public ModelAndView enrollCourse(@RequestParam(value = "courseId")String courseId,
+                                     @RequestParam(value = "userEmail") String userEmail){
+
+        Course course = ObjectifyService.ofy().load().type(Course.class).filter("courseId =",courseId).first().now();
+        User existUser = ObjectifyService.ofy().load().type(User.class).filter("userId =",userEmail).first().now();
+        if(existUser.getJoinedCourse() == null){
+            System.out.print("heheheheh!");
+            List<Course> newCreatedCourse = new ArrayList<Course> ();
+            newCreatedCourse.add(course);
+            existUser.setJoinedCourse(newCreatedCourse);
+            System.out.println(existUser.getJoinedCourse().size());
+
+
+        }
+        else {
+            System.out.println("I don't know!");
+            existUser.getJoinedCourse().add(course);
+        }
+        ObjectifyService.ofy().save().entity(existUser).now();
+        System.out.println(existUser.getJoinedCourse().size());
+        return new ModelAndView("main", "model", course);
+
+    }
+
     @RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();

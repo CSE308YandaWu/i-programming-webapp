@@ -6,19 +6,21 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by JIAQI ZHANG on 4/17/2017.
  */
 @Entity
-public class Course {
+public class Course implements Serializable{
     @Id
     public String id;
     @Parent
     public Key<User> userEmail;
-
+    @Index
     public String email;
+    @Index public String courseId;
     @Index public String title;
     public String instructor;
     public String description;
@@ -26,6 +28,13 @@ public class Course {
     public String accessCode;
     public List<Unit> units;
 
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String id) {
+        this.courseId = id;
+    }
     public String getId() {
         return id;
     }
@@ -92,6 +101,7 @@ public class Course {
     public Course(String userEmail, String id, String title, String instructor, String description, String status) {
         this.email = userEmail;
         this.id = id;
+        this.courseId = id;
         this.title = title;
         this.instructor = instructor;
         this.description = description;
