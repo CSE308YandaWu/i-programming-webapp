@@ -69,8 +69,7 @@
             <div class="inner cover">
                 <h3 class = "text">Course Description</h3>
                 <p class="text">
-                    blah blah balh....
-
+                    END....
 
 
                 </p>
@@ -79,7 +78,9 @@
                     <ul>
                         <li><a href="#">Unit 1 - Introduction</a></li>
                         <ol>
-                            <li><a href="#">Introduction</a></li>
+                            <li><a href="#" onclick="toCourseContent()">Introduction</a>
+                                <form id="toCourseContent"><input type="hidden"></form>
+                            </li>
                             <li><a href="#">Filter image</a></li>
                             <li><a href="#">How search works</a></li>
                         </ol>
