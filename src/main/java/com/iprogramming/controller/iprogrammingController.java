@@ -167,14 +167,69 @@ public class iprogrammingController {
     /*  Upload pages */
     /* When confirm button is clicked in editLesson Page */
     @RequestMapping(value = "/editLessonConfirm")
-    public ModelAndView editLessonConfirm(@RequestParam(value = "pptLink") String pptLink,
-                                      @RequestParam(value = "docLink") String docLink) {
-//        System.out.println("In controller, pptLink: " + pptLink);
-//        System.out.println("In controller, docLink: " + docLink);
+    public ModelAndView editLessonConfirm(@RequestParam(value = "pptLink", required = false) String pptLink,
+                                          @RequestParam(value = "videoLink", required = false) String videoLink, HttpServletRequest req) throws IOException {
+
         model.put("pptLink", pptLink);
-        model.put("docLink", docLink);
+        model.put("videoLink",videoLink);
 //        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
 //        ObjectifyService.ofy().save().entity(newCourse).now();
+
+        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        String gcsVideoFileName = finfos.get("myFileVideo").get(0).getGsObjectName();
+        BlobKey videoBlobKey = blobstoreService.createGsBlobKey(gcsVideoFileName);
+
+        if (videoBlobKey == null) {
+            System.out.println("uploadVideo error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = videoBlobKey.getKeyString();
+            model.put("blobKeyV", blob);
+            System.out.println("VIDEO KEY: " + blob);
+        }
+
+        String gcsAssignmentFileName = finfos.get("myFileAssignment").get(0).getGsObjectName();
+        BlobKey assignmentBlobKey = blobstoreService.createGsBlobKey(gcsAssignmentFileName);
+        String gcsAssignmentFileName1 = finfos.get("myFileAssignment").get(1).getGsObjectName();
+        BlobKey assignmentBlobKey1 = blobstoreService.createGsBlobKey(gcsAssignmentFileName1);
+
+        if (assignmentBlobKey == null) {
+            System.out.println("uploadAssignment error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = assignmentBlobKey.getKeyString();
+            model.put("blobKeyA", blob);
+            String blob1 = assignmentBlobKey1.getKeyString();
+            model.put("blobKeyA1", blob1);
+        }
+
+        String gcsImageFileName = finfos.get("myFileImage").get(0).getGsObjectName();
+        BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
+
+        if (imageBlobKey == null) {
+            System.out.println("uploadImage error");
+        } else {
+            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+            String blob = imageBlobKey.getKeyString();
+            System.out.println("blob:" + blob);
+            ImagesService services = ImagesServiceFactory.getImagesService();
+            // Make an image from a Cloud Storage object, and transform it.
+            Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
+            Transform resize = ImagesServiceFactory.makeResize(100, 100);
+            Image resizedImage = services.applyTransform(resize, blobImage);
+            // Write the transformed image back to a Cloud Storage object.
+            gcsService.createOrReplace(
+                    new GcsFilename("i-programming.appspot.com", "resizedImage.jpeg"),
+                    new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
+                    ByteBuffer.wrap(resizedImage.getImageData()));
+            //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
+            ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage.jpeg");
+            String url = services.getServingUrl(serve);
+            //System.out.println("url:" + url);
+            model.put("url", url);
+            model.put("blobKeyI", blob);
+        }
+
     return new ModelAndView("courseContent", "model", model);
     }
     /* courseContent Page */
@@ -198,73 +253,99 @@ public class iprogrammingController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
         //System.out.println("Serving:" + key);
         //BlobKey bk = new BlobKey("encoded_gs_key:L2dzL2ktcHJvZ3JhbW1pbmcuYXBwc3BvdC5jb20vazc4UkZJeVdjQXotU0RRRDB1M1JqUQ");
+//        res.setContentType("application/force-download");
+//        res.setHeader("Content-Transfer-Encoding", "binary");
+//        String fname = bi.loadBlobInfo(blobKey).getFilename();
+//        res.setContentType("application/x-download");
+//        res.setHeader("Content-Disposition", "attachment; filename=" + fname);
+//        String ss = "wow";
+//        res.setHeader("Content-Disposition","attachment; filename="+ss+".jpg");
+        //res.setContentType("application/pdf");
+        //res.setHeader("Content-Disposition", "attachment;filename=sample.pdf");
         BlobKey bk = new BlobKey(key);
+        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
+        res.setContentType(blobInfo.getContentType());
+        System.out.println(blobInfo.getContentType());
+//        res.setHeader("Content-Disposition", "inline;");
         blobstoreService.serve(bk, res);
+        //res.sendRedirect("/serve-blob?key=" + bk.getKeyString());
+        //System.out.print(res);
     }
-    /* courseContent Page upload Assignment mapping */
-    @RequestMapping(value = "/uploadAssignment")
-    public String hold(HttpServletRequest req) throws IOException {
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
-        String gcsFileName = finfos.get("myFileAssignment").get(0).getGsObjectName();
-        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
 
-        if (blobKeys == null) {
-            System.out.println("uploadAssignment error");
-        } else {
-            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
-            String blob = blobKeys.getKeyString();
-            model.put("blobKeyA", blob);
-        }
-        return "editLesson";
-    }
-    /* courseContent Page upload Image mapping */
-    @RequestMapping(value = "/uploadImage")
-    public String door(HttpServletRequest req) throws IOException {
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
-        String gcsFileName = finfos.get("myFileImage").get(0).getGsObjectName();
-        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
-
-        if (blobKeys == null) {
-            System.out.println("uploadImage error");
-        } else {
-            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
-            String blob = blobKeys.getKeyString();
-            System.out.println("blob:" + blob);
-            ImagesService services = ImagesServiceFactory.getImagesService();
-            // Make an image from a Cloud Storage object, and transform it.
-            Image blobImage = ImagesServiceFactory.makeImageFromBlob(blobKeys);
-            Transform resize = ImagesServiceFactory.makeResize(100,100);
-            Image resizedImage = services.applyTransform(resize, blobImage);
-            // Write the transformed image back to a Cloud Storage object.
-            gcsService.createOrReplace(
-                    new GcsFilename("i-programming.appspot.com", "resizedImage.jpeg"),
-                    new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
-                    ByteBuffer.wrap(resizedImage.getImageData()));
-            //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
-            ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage.jpeg");
-            String url = services.getServingUrl(serve);
-            //System.out.println("url:" + url);
-            model.put("url", url);
-            model.put("blobKeyI", blob);
-        }
-        return "editLesson";
-    }
-    /* courseContent Page upload Video mapping */
-    @RequestMapping(value = "/uploadVideo")
-    public String holdDoor(HttpServletRequest req) throws IOException {
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
-        String gcsFileName = finfos.get("myFileVideo").get(0).getGsObjectName();
-        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
-
-        if (blobKeys == null) {
-            System.out.println("uploadVideo error");
-        } else {
-            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
-            String blob = blobKeys.getKeyString();
-            model.put("blobKeyV", blob);
-        }
-        return "editLesson";
-    }
+    /* NO MORE */
+        /* NO MORE */
+            /* NO MORE */
+                /* NO MORE */
+//    /* courseContent Page upload Assignment mapping */
+//    @RequestMapping(value = "/uploadAssignment")
+//    public String hold(HttpServletRequest req) throws IOException {
+//        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+//        String gcsFileName = finfos.get("myFileAssignment").get(0).getGsObjectName();
+//        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+//
+//        if (blobKeys == null) {
+//            System.out.println("uploadAssignment error");
+//        } else {
+//            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+//            String blob = blobKeys.getKeyString();
+//            model.put("blobKeyA", blob);
+//        }
+//        return "editLesson";
+//    }
+//    /* courseContent Page upload Image mapping */
+//    @RequestMapping(value = "/uploadImage")
+//    public String door(HttpServletRequest req) throws IOException {
+//        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+//        String gcsFileName = finfos.get("myFileImage").get(0).getGsObjectName();
+//        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+//
+//        if (blobKeys == null) {
+//            System.out.println("uploadImage error");
+//        } else {
+//            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+//            String blob = blobKeys.getKeyString();
+//            System.out.println("blob:" + blob);
+//            ImagesService services = ImagesServiceFactory.getImagesService();
+//            // Make an image from a Cloud Storage object, and transform it.
+//            Image blobImage = ImagesServiceFactory.makeImageFromBlob(blobKeys);
+//            Transform resize = ImagesServiceFactory.makeResize(100,100);
+//            Image resizedImage = services.applyTransform(resize, blobImage);
+//            // Write the transformed image back to a Cloud Storage object.
+//            gcsService.createOrReplace(
+//                    new GcsFilename("i-programming.appspot.com", "resizedImage.jpeg"),
+//                    new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
+//                    ByteBuffer.wrap(resizedImage.getImageData()));
+//            //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
+//            ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage.jpeg");
+//            String url = services.getServingUrl(serve);
+//            //System.out.println("url:" + url);
+//            model.put("url", url);
+//            model.put("blobKeyI", blob);
+//        }
+//        return "editLesson";
+//    }
+//
+//    /* courseContent Page upload Video mapping */
+//    @RequestMapping(value = "/uploadVideo")
+//    public String holdDoor(HttpServletRequest req) throws IOException {
+//        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+//        String gcsFileName = finfos.get("myFileVideo").get(0).getGsObjectName();
+//        BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
+//
+//        if (blobKeys == null) {
+//            System.out.println("uploadVideo error");
+//        } else {
+//            //String blob = blobKeys.get(0).getKeyString();                                         Bulk upload
+//            String blob = blobKeys.getKeyString();
+//            model.put("blobKeyV", blob);
+//        }
+//        return "editLesson";
+//    }
+                /* NO MORE */
+            /* NO MORE */
+        /* NO MORE */
+    /* NO MORE */
 
     /* test blobstore functions between index.jsp and HelloWorld */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

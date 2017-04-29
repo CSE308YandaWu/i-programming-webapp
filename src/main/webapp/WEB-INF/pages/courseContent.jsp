@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -66,35 +66,48 @@
             <br><br>
             <div class="inner cover">
                 <h3 class = "text" >
-                    <p class="text">
-                        <p style="font-size:36px;">Slide Show Section</p>
-                    </p>
                     <br><br>
-                    <%--<div id="ppt"><iframe src="https://docs.google.com/presentation/d/1cuyhAboik9tKx446da2ULyyQfyJGhjrlz983fUmrGgw/embed?start=false&loop=false&delayms=3000"--%>
-                                          <%--frameborder="0" width="800" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
-                    <%--</div>--%>
-                    <div id="ppt"><iframe src="${model.pptLink}"
-                                          frameborder="0" width="800" height="500" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-                    </div>
+                    <c:choose>
+                        <c:when test="${model.pptLink!=null}">
+                            <p class="text">
+                            <p style="font-size:36px;">Slide Show Section</p>
+                            <br>
+                            <br><br>
+                            <div id="doc">
+                                <iframe src="${model.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                            </div>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p style="font-size:36px;">nothing</p>
+                            <br />
+                        </c:otherwise>
+                    </c:choose>
+
                     <br><br>
-                    <p class="text">
-                        <p style="font-size:36px;">PDF Section</p>
-                        <br>
-                    </p>
+                    <c:choose>
+                        <c:when test="${model.videoLink!=null}">
+                            <p class="text">
+                            <p style="font-size:36px;">Video Lecture Section</p>
+                            <br>
+                            <br><br>
+                            <div id="doc">
+                                <iframe src="${model.videoLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                            </div>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p style="font-size:36px;">nothing</p>
+                            <br />
+                        </c:otherwise>
+                    </c:choose>
                     <br><br>
-                    <%--<div id="doc"><iframe src="https://docs.google.com/document/d/1GL_KRk1lLJEg3aiTbnKyzCY-8VP-SH33YryiwkSfUA0/pub?embedded=true"--%>
-                                          <%--frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
-                    <%--</div>--%>
-                    <div id="doc"><iframe src="${model.docLink}"
-                                          frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-                    </div>
-                    <br><br>
-                    <p class="text">
-                        <p style="font-size:36px;">Assignment Section</p>
-                        <br>
-                        <a href="#" onclick="serveAssignment();"><p style="color:deepskyblue;">View Assignment</p></a>
-                        <form id="serveAssignment"><input type="hidden" name="key" value="${model.blobKeyA}"></form>
-                    </p>
+                    <%--<p class="text">--%>
+                    <%--<p style="font-size:36px;">Video Section</p>--%>
+                    <%--<br>--%>
+                    <%--<a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>--%>
+                    <%--<form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV}" ></form>--%>
+                    <%--</p>--%>
                     <br><br>
                     <p class="text">
                         <p style="font-size:36px;">Image Section</p>
@@ -104,14 +117,17 @@
                         <img src=${model.url}>
                         <br>
                         <a href="#" onclick="serveImage();"><p style="color:deepskyblue;">View Original Image</p></a>
-                        <form id="serveImage"><input type="hidden" name="key" value="${model.blobKeyI}"></form>
+                        <form id="serveImage" target="_blank"><input type="hidden" name="key" value="${model.blobKeyI}" ></form>
                     </p>
                     <br><br>
                     <p class="text">
-                    <p style="font-size:36px;">Video Section</p>
+                    <p style="font-size:36px;">Assignment Section</p>
                     <br>
-                        <a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>
-                        <form id="serveVideo"><input type="hidden" name="key" value="${model.blobKeyV}"></form>
+                    <a href="#" onclick="serveAssignment();"><p style="color:deepskyblue;">View Assignment</p></a>
+                    <form id="serveAssignment" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA}"></form>
+
+                    <a href="#" onclick="serveAssignment1();"><p style="color:deepskyblue;">View Assignment1</p></a>
+                    <form id="serveAssignment1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA1}"></form>
                     </p>
                     <br><br>
                 </h3>

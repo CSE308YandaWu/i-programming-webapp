@@ -154,7 +154,7 @@ function editUnitToEditCourseCancel() {
 }
 /* editLesson Page confirm button */
 function editLessonConfirm() {
-    document.getElementById("lessonInfo").action = "/editLessonConfirm";
+    //document.getElementById("lessonInfo").action = "/editLessonConfirm";
     document.getElementById("lessonInfo").submit();
 }
 /* createCourse Page cancel button */
@@ -175,6 +175,10 @@ function toCourseContent() {
 function serveAssignment() {
     document.getElementById("serveAssignment").action = "/serve";
     document.getElementById("serveAssignment").submit();
+}
+function serveAssignment1() {
+    document.getElementById("serveAssignment1").action = "/serve";
+    document.getElementById("serveAssignment1").submit();
 }
 function serveImage() {
     document.getElementById("serveImage").action = "/serve";
