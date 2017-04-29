@@ -16,27 +16,35 @@ import java.util.List;
 @Entity
 public class Course implements Serializable {
     @Id
-    public String id;
+    private String id;
     @Index
-    public String email;
-    @Index public String courseId;
+    private String email;
     @Index public String title;
-    public String instructor;
-    public String description;
-    public String status;
-    public String accessCode;
+    private String instructor;
+    private String description;
+    private String status;
+    private String accessCode;
     @Index
-    public Date dateCreated;
-    public int numEnrolled;
-    public List<Unit> units;
+    private Date dateCreated;
+    @Index
+    private int numEnrolled;
 
-    public String getCourseId() {
-        return courseId;
+    //Constructors
+    public Course() {
+        dateCreated = new Date();
+        numEnrolled = 0;
     }
 
-    public void setCourseId(String id) {
-        this.courseId = id;
+    public Course(String userEmail, String id, String title, String instructor, String description, String status) {
+        this();
+        this.email = userEmail;
+        this.id = id;
+        this.title = title;
+        this.instructor = instructor;
+        this.description = description;
+        this.status = status;
     }
+
     //Getters and Setters
     public String getId() {
         return id;
@@ -102,7 +110,6 @@ public class Course implements Serializable {
         this.numEnrolled = numEnrolled;
     }
 
-    //Constructors
     public String getAccessCode() {
         return accessCode;
     }
@@ -111,36 +118,4 @@ public class Course implements Serializable {
         this.accessCode = accessCode;
     }
 
-    public List<Unit> getUnits() { return units; }
-    public void addUnit(Unit unit) { this.units.add(unit); }
-
-    public Course() {
-        dateCreated = new Date();
-        numEnrolled = 0;
-    }
-
-    public Course(String userEmail, String id, String title, String instructor, String description, String status) {
-        this();
-        this.email = userEmail;
-        this.id = id;
-        this.courseId = id;
-        this.title = title;
-        this.instructor = instructor;
-        this.description = description;
-        this.status = status;
-    }
-
-
-//    For testing
-    public Course(String user, String title) {
-        this.email = user;
-        this.title = title;
-    }
-
-//    public Course(String user, String title, String key){
-//        this(user, title);
-//        if( key != null ) {
-//            userEmail = Key.create(User.class, key);  // Creating the Ancestor key
-//        }
-//    }
 }

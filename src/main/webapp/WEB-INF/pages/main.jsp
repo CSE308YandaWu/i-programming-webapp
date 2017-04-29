@@ -3,7 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.googlecode.objectify.Key" %>
-<%@ page import="com.googlecode.objectify.ObjectifyService" %><%--
+<%@ page import="com.googlecode.objectify.ObjectifyService" %>
+<%@ page import="static com.googlecode.objectify.ObjectifyService.ofy" %>
+<%--
   Created by IntelliJ IDEA.
   User: JIAQI ZHANG
   Date: 4/5/2017
@@ -12,6 +14,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,33 +52,29 @@
         session.setAttribute("user", request.getParameter("userEmail"));
     }
     String user = (String) session.getAttribute("user");
-    List<Course> courses;
-    System.out.println(user);
-    User existUser = ObjectifyService.ofy()
+    List<Course> courses, createdCourses;
+//    System.out.println(user);
+    User existUser = ofy()
             .load()
             .type(User.class)
-            .filter("userId =",user)
-            .first()
+            .id(user)
             .now();
 
-
-
-    if(existUser == null){
+    if (existUser == null) {
 //        List<Course> createdCourse = new ArrayList<Course>();
 //        List<Course> joinedCourse = new ArrayList<Course>();
 //        createdCourse.add(new Course());
 //        System.out.print(createdCourse);
         System.out.println("!!!!!!");
         existUser = new User(user);
-        ObjectifyService.ofy().save().entity(existUser).now();
+        ofy().save().entity(existUser).now();
     }
-    if(existUser.getJoinedCourse() == null){
+    if (existUser.getJoinedCourse() == null) {
         System.out.println("this is null");
     }
     session.setAttribute("userObject", existUser);
 
-
-   courses = ObjectifyService.ofy()
+    courses = ofy()
             .load()
             .type(Course.class)
             .filter("email", user)
@@ -134,9 +133,11 @@
                 <%
                     String title = request.getParameter("CourseTitle");
                     List<Course> courses1;
-                    courses1 = ObjectifyService.ofy()
+                    courses1 = ofy()
                             .load()
                             .type(Course.class)
+//                            .order("-numEnrolled")
+                            .limit(5)
                             .list();
                     pageContext.setAttribute("courses1", courses1);
                 %>
@@ -154,9 +155,10 @@
                                     <div id="${x.id}" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <p style="color:black">Instructors: ${x.instructor}</p>
-                                            <span>Access Code: <input style="color:black" type="text" name="AccessCode" value="Code"></span>
+                                            <span>Access Code: <input style="color:black" type="text" name="AccessCode"
+                                                                      value="Code"></span>
                                             <form action="/enrollCourse">
-                                                <input name="courseId" type="hidden" value="${x.courseId}">
+                                                <input name="courseId" type="hidden" value="${x.id}">
                                                 <input name="userEmail" type="hidden" value="${user}">
                                                 <input name="confirm" type="submit" value="Enroll">
                                             </form>
@@ -174,19 +176,19 @@
                 <h2>My Created Courses</h2>
                 <div class="list-group">
                     <%--<%--%>
-                        <%--if (session.getAttribute("user") == null) {--%>
-                            <%--session.setAttribute("user", request.getParameter("userEmail"));--%>
-                        <%--}--%>
-                        <%--String user = (String) session.getAttribute("user");--%>
-                        <%--List<Course> courses;--%>
+                    <%--if (session.getAttribute("user") == null) {--%>
+                    <%--session.setAttribute("user", request.getParameter("userEmail"));--%>
+                    <%--}--%>
+                    <%--String user = (String) session.getAttribute("user");--%>
+                    <%--List<Course> courses;--%>
 
-                        <%--courses = ObjectifyService.ofy()--%>
-                                <%--.load()--%>
-                                <%--.type(Course.class)--%>
-                                <%--.filter("email", user)--%>
-                                <%--.order("-dateCreated")--%>
-                                <%--.list();--%>
-                        <%--pageContext.setAttribute("courses", courses);--%>
+                    <%--courses = ObjectifyService.ofy()--%>
+                    <%--.load()--%>
+                    <%--.type(Course.class)--%>
+                    <%--.filter("email", user)--%>
+                    <%--.order("-dateCreated")--%>
+                    <%--.list();--%>
+                    <%--pageContext.setAttribute("courses", courses);--%>
                     <%--%>--%>
                     <c:choose>
                         <c:when test="${empty courses}">
@@ -194,39 +196,45 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${courses}">
-                                <a href="#" onclick="toEditCourse(this)" class="list-group-item list-group-item-action">${x.title}
+                                <a href="#" onclick="toEditCourse(this)"
+                                   class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
                                         <input type="hidden" value="${x.id}" id="cId" name="courseId">
                                         <input type="submit" value="Delete" class="btn btn-primary">
-                                    </form><br>
+                                    </form>
+                                    <br>
                                     <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
                                 </a>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
                     <form id="toEditCourse"><input type="hidden" name="courseId" id="courseId"></form>
-                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
-                        <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
-                        <%--<form id="toEditCourse"><input type="hidden"></form>--%>
-                    <%--</a>--%>
-                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 123</a>--%>
-                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 235</a>--%>
-                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 456</a>--%>
-                    <%--<a href="#" class="list-group-item list-group-item-action">CSE 222</a>--%>
                 </div>
             </div>
             <div class="inner enrolledlist">
                 <h2>My Enrolled Courses</h2>
                 <div class="list-group">
+                    <%
+                        List<Course> joinedCourses = new ArrayList<Course>();
+                        if (existUser.getJoinedCourse() != null){
+                            Course c;
+                            for (String s: existUser.getJoinedCourse()) {
+                                c = ofy().load().type(Course.class).id(s).now();
+                                if (c!= null)
+                                    joinedCourses.add(c);
+                            }
+                        }
+                        pageContext.setAttribute("joinedCourses", joinedCourses);
+                    %>
                     <c:choose>
-                        <c:when test="${empty userObject.joinedCourse}">
-                            You have not join any courses yet.
+                        <c:when test="${empty joinedCourses}">
+                            You have not joined any courses yet.
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="x" items="${userObject.joinedCourse}">
+                            <c:forEach var="x" items="${joinedCourses}">
                                 <form id="entercourse" action="/course_page">
                                     <a href="#" onclick="toCoursePage()" id="coursename"
-                                    class="list-group-item list-group-item-action">${x.title}</a>
+                                       class="list-group-item list-group-item-action">${x.title}</a>
                                     <input type="hidden" id="nameinput" name="coursename">
                                 </form>
                             </c:forEach>

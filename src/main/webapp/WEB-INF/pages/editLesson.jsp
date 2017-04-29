@@ -177,7 +177,8 @@
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>
+                        <%--<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>--%>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
                         <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
                     </div>
                 </div>

@@ -18,36 +18,28 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     private String userEmail;
-    @Index
-    private String userId;
-    private List<Course> createdCourse;
-    private List<Course> joinedCourse;
+    private List<String> joinedCourse;
 
     //Access data
     public String getUserEmail() { return userEmail; }
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
 
-    public List<Course> getCreatedCourse() { return createdCourse; }
-    public void setCreatedCourse(List<Course> createdCourse) { this.createdCourse = createdCourse; }
-    public void addCreatedCourse(Course course) { this.createdCourse.add(course); }
-
-    public List<Course> getJoinedCourse() { return joinedCourse; }
-    public void setJoinedCourse(List<Course> joinedCourse) { this.joinedCourse = joinedCourse; }
-    public void addJoinedCourse(Course course) { this.joinedCourse.add(course); }
+    public List<String> getJoinedCourse() { return joinedCourse; }
+    public void setJoinedCourse(List<String> joinedCourse) { this.joinedCourse = joinedCourse; }
+    public void addJoinedCourse(Course course) { this.joinedCourse.add(course.getId()); }
 
     //Constructors
-    public User(){}
-
-    public User(String userEmail){
-        this.userEmail = userEmail;
-        this.userId = userEmail;
+    public User(){
+        joinedCourse = new ArrayList<String>();
     }
 
-    public User(String email, List<Course> createdCourse, List<Course> joinedCourse){
-        this.userEmail = email;
-        this.userId = email;
-        this.createdCourse = createdCourse;
-        this.joinedCourse = joinedCourse;
+    public User(String userEmail){
+        this();
+        this.userEmail = userEmail;
+    }
 
+    public User(String email, List<String> joinedCourse){
+        this.userEmail = email;
+        this.joinedCourse = joinedCourse;
     }
 }

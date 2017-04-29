@@ -127,6 +127,12 @@ function signOutToHome() {
 /**
  * ---------------------------------------Back navigation button functions for all pages---------------------------------------
  */
+
+
+function goBack(){
+    history.back();
+}
+
 /* createCourse Page confirm button */
 function createCourseToMainConfirm() {
     document.getElementById("createCourseToMainConfirm").action = "/main";

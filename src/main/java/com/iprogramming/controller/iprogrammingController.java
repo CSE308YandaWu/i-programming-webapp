@@ -13,6 +13,7 @@ import java.util.*;
 import Beans.Course;
 import Beans.User;
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,38 +94,24 @@ public class iprogrammingController {
         return "HelloWorld";
     }
 
-    @RequestMapping("/test")
-    public String test(@RequestParam(value = "email", required = false) String email,
-                       @RequestParam(value = "title", required = false) String course) {
-
-        if (email != null) {
-            Course newCourse = new Course(email, course);
-
-            ofy().save().entity(newCourse).now();
-        }
-
-
-        return "HelloWorld";
-    }
-
     @RequestMapping(value = "/createCourse1")
     public ModelAndView createCourse1(@RequestParam(value = "userEmail") String userEmail,
-                                      @RequestParam(value = "courseId") String courseId,
                                       @RequestParam(value = "courseTitle") String courseTitle,
                                       @RequestParam(value = "instructor") String instructor,
                                       @RequestParam(value = "description") String description,
                                       @RequestParam(value = "status") String status) {
 
+        String id = new ObjectifyFactory().allocateId(Course.class).getString();
+        Course newCourse = new Course(userEmail, id, courseTitle, instructor, description, status);
 
-        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
-        User existUser = ofy().load().type(User.class).filter("userId =",userEmail).first().now();
-        if(existUser.getCreatedCourse() == null){
-            List<Course> newCreatedCourse = new ArrayList<Course> ();
-            newCreatedCourse.add(newCourse);
-            existUser.setCreatedCourse(newCreatedCourse);
-        }
-        else existUser.addCreatedCourse(newCourse);
-        ofy().save().entity(existUser).now();
+//        User existUser = ofy().load().type(User.class).id(userEmail).now();
+//        if(existUser.getCreatedCourse() == null){
+//            List<Course> newCreatedCourse = new ArrayList<Course> ();
+//            newCreatedCourse.add(newCourse);
+//            existUser.setCreatedCourse(newCreatedCourse);
+//        }
+//        else existUser.addCreatedCourse(newCourse);
+//        ofy().save().entity(existUser).now();
 
         ofy().save().entity(newCourse).now();
 
@@ -135,24 +122,33 @@ public class iprogrammingController {
     public ModelAndView enrollCourse(@RequestParam(value = "courseId")String courseId,
                                      @RequestParam(value = "userEmail") String userEmail){
 
-        Course course = ofy().load().type(Course.class).filter("courseId =",courseId).first().now();
-        User existUser = ofy().load().type(User.class).filter("userId =",userEmail).first().now();
+        Course course = ofy().load().type(Course.class).id(courseId).now();
+        User existUser = ofy().load().type(User.class).id(userEmail).now();
         if(existUser.getJoinedCourse() == null){
-            System.out.print("heheheheh!");
-            List<Course> newCreatedCourse = new ArrayList<Course> ();
-            newCreatedCourse.add(course);
+            List<String> newCreatedCourse = new ArrayList<String> ();
+            newCreatedCourse.add(course.getId());
             existUser.setJoinedCourse(newCreatedCourse);
-            System.out.println(existUser.getJoinedCourse().size());
-
-
         }
-        if(!(existUser.getJoinedCourse()).contains(course)) {
-            System.out.println("I don't know!");
-            existUser.getJoinedCourse().add(course);
+        else if(!(existUser.getJoinedCourse()).contains(course.getId())){
+            existUser.getJoinedCourse().add(course.getId());
         }
         ofy().save().entity(existUser).now();
-        System.out.println(existUser.getJoinedCourse().size());
-        return new ModelAndView("main", "model", course);
+//        if(existUser.getJoinedCourse() == null){
+//            System.out.print("heheheheh!");
+//            List<Course> newCreatedCourse = new ArrayList<Course> ();
+//            newCreatedCourse.add(course);
+//            existUser.setJoinedCourse(newCreatedCourse);
+//            System.out.println(existUser.getJoinedCourse().size());
+//
+//
+//        }
+//        if(!(existUser.getJoinedCourse()).contains(course)) {
+//            System.out.println("I don't know!");
+//            existUser.getJoinedCourse().add(course);
+//        }
+//        ofy().save().entity(existUser).now();
+//        System.out.println(existUser.getJoinedCourse().size());
+        return new ModelAndView("main", "model", null);
 
     }
 

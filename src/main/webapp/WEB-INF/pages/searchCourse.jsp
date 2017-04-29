@@ -104,7 +104,7 @@
                                         <p style="color:black">Instructors: ${x.instructor}</p>
                                         <span>Access Code: <input style="color:black" type="text" name="AccessCode" value="Code"></span>
                                         <form action="/enrollCourse">
-                                            <input name="courseId" type="hidden" value="${x.courseId}">
+                                            <input name="courseId" type="hidden" value="${x.id}">
                                             <input name="userEmail" type="hidden" value="${user}">
                                             <input name="confirm" type="submit" value="Enroll">
                                         </form>
