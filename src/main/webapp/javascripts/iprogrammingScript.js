@@ -1,6 +1,6 @@
 /**
- * Created by YandaWu on 4/1/2017.
- */
+    * Created by YandaWu on 4/1/2017.
+    */
 
 /**
  * ---------------------------------------Google sign-in/out functions---------------------------------------

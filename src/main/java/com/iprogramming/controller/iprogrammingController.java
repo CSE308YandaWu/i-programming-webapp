@@ -1,7 +1,5 @@
 package com.iprogramming.controller;
 
-import Beans.Users;
-
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.images.*;
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -47,7 +45,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class iprogrammingController {
+public class IprogrammingController {
 
     @RequestMapping("/")
     public String home() {

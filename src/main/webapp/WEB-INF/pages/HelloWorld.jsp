@@ -14,7 +14,7 @@
 
 <html>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="/javascripts/script.js"></script>
+<script type="text/javascript" src="/javascripts/iprogrammingScript.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
