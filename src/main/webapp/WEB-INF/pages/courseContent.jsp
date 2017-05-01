@@ -93,6 +93,8 @@
                             <br><br>
                             <div id="doc">
                                 <iframe src="${model.videoLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                <%--second video--%>
+                                <iframe src="${model.videoLink1}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
@@ -102,12 +104,14 @@
                         </c:otherwise>
                     </c:choose>
                     <br><br>
-                    <%--<p class="text">--%>
-                    <%--<p style="font-size:36px;">Video Section</p>--%>
-                    <%--<br>--%>
-                    <%--<a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>--%>
-                    <%--<form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV}" ></form>--%>
-                    <%--</p>--%>
+                    <p class="text">
+                        <p style="font-size:36px;">Video Section</p>
+                        <br>
+                        <a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>
+                        <form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV}" ></form>
+                        <a href="#" onclick="serveVideo1();"><p style="color:deepskyblue;">View Video1</p></a>
+                        <form id="serveVideo1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV1}"></form>
+                    </p>
                     <br><br>
                     <p class="text">
                         <p style="font-size:36px;">Image Section</p>

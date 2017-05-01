@@ -99,22 +99,36 @@
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-4"><h4>Video</h4></div>
-                    <div class="col-md-7">
-                        <input type="file" multiple name="myFileVideo" form="lessonInfo">
-                    </div>
-                    <div class="col-md-7">
-                        <input type="text" id="videoLink" class="form-control" name="videoLink" placeholder="Insert URL here" form="lessonInfo">
+                    <div id="videoAdding" class="col-md-7">
+                        <div id="dynamicInputVideo" class="col-md-7">
+                            <input type="text" id="videoLink" class="form-control" name="videoLink[]" placeholder="Insert URL here" form="lessonInfo">
+                        </div>
+                        <%--video Upload Option dropdown box--%>
+                        <select id="videoUploadOption" class="btn btn-lg btn-primary btn-block" onchange="enableOptionButton()">
+                            <option value="" disabled="disabled" selected="selected">Select an upload option to add more video</option>
+                            <option value="1">Paste Link</option>
+                            <option value="2">Upload File</option>
+                        </select>
+                        <%--add more video button--%>
+                        <input id="addOptionButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
                     </div>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-4"><h4>Image</h4></div>
-                    <div class="col-md-7">
+                    <div id="imageAdding" class="col-md-7">
+                        <div id="dynamicInputImage" class="col-md-7">
+                            <input type="file" multiple name="myFileImage[]" form="lessonInfo">
+                        </div>
+                        <%--add more image button--%>
+                        <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more image" onClick="addImageButton('dynamicInputImage');">
+                    </div>
+                    <%--<div class="col-md-7">--%>
                         <%--<form class="btn btn-lg btn-primary btn-block" action="<%= uploadUrlImage %>" method="post" enctype="multipart/form-data">--%>
-                            <input type="file" multiple name="myFileImage" form="lessonInfo">
+                            <%--<input type="file" multiple name="myFileImage" form="lessonInfo">--%>
                             <%--<input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Image">--%>
                         <%--</form>--%>
-                    </div>
+                    <%--</div>--%>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
@@ -128,10 +142,18 @@
                 <div class="help-block"></div>
                 <div class="row">
                     <div class="col-md-4"><h4>Attachment</h4></div>
-                    <div class="col-md-7">
-                        <input type="file" multiple name="myFileAssignment" form="lessonInfo">
-                        <%--<input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Assignment">--%>
+                    <div id="assignmentAdding" class="col-md-7">
+                        <div id="dynamicInputAssignment" class="col-md-7">
+                            <input type="file" multiple name="myFileAssignment[]" form="lessonInfo">
+                        </div>
+                        <%--add more assignment button--%>
+                        <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
                     </div>
+                    <%--<div class="col-md-7">--%>
+                        <%--<input type="file" multiple name="myFileAssignment" form="lessonInfo">--%>
+                        <%--<input type="file" multiple name="myFileAssignment" form="lessonInfo">--%>
+                        <%--<input class="btn btn-lg btn-primary btn-block" type="submit" value="Upload Assignment">--%>
+                    <%--</div>--%>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">

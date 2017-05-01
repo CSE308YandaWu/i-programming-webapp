@@ -2,7 +2,10 @@
     * Created by YandaWu on 4/1/2017.
     */
 
+var addVideoCounter = 1;//add video counter   reset????
+var addVideoLimit = 4;//add video limit
 /**
+ *
  * ---------------------------------------Google sign-in/out functions---------------------------------------
  */
 function onSuccess(googleUser) {
@@ -193,6 +196,46 @@ function serveImage() {
 function serveVideo() {
     document.getElementById("serveVideo").action = "/serve";
     document.getElementById("serveVideo").submit();
+}
+function serveVideo1() {
+    document.getElementById("serveVideo1").action = "/serve";
+    document.getElementById("serveVideo1").submit();
+}
+
+/**
+ * ---------------------------------------Add Content functions---------------------------------------
+ */
+function enableOptionButton(){
+    document.getElementById("addOptionButton").disabled = false;
+}
+function addVideoOptions(divName){
+    var newdiv = document.createElement('div');
+    var e = document.getElementById("videoUploadOption");
+    var strOption = e.options[e.selectedIndex].value;
+    if (addVideoCounter == addVideoLimit)  {
+        alert("You have reached the limit of adding " + addVideoCounter + " video");
+    }else{
+        switch(strOption) {
+            case '1':
+                newdiv.innerHTML = " <br><input type='text' id='videoLink' class='form-control' name='videoLink[]' placeholder='Insert URL here' form='lessonInfo'>";
+                break;
+            case '2':
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>";//no multiple selection allowed , user can only select one file each time
+                break;
+        }
+        document.getElementById(divName).appendChild(newdiv);
+        addVideoCounter++;
+    }
+}
+function addImageButton(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' form='lessonInfo'>";//multiple selection allowed , user can select more than one file each time
+    document.getElementById(divName).appendChild(newdiv);
+}
+function addAssignmentButton(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileAssignment[]' form='lessonInfo'>";//multiple selection allowed , user can select more than one file each time
+    document.getElementById(divName).appendChild(newdiv);
 }
 /**
  * ---------------------------------------test functions---------------------------------------
