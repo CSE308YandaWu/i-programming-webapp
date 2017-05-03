@@ -2,7 +2,10 @@
     * Created by YandaWu on 4/1/2017.
     */
 
+var addVideoCounter = 1;//add video counter   reset????
+var addVideoLimit = 4;//add video limit
 /**
+ *
  * ---------------------------------------Google sign-in/out functions---------------------------------------
  */
 function onSuccess(googleUser) {
@@ -206,9 +209,9 @@ function toCourseContent() {
 /**
  * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
-function serveAssignment() {
-    document.getElementById("serveAssignment").action = "/serve";
-    document.getElementById("serveAssignment").submit();
+function serveAssignment(index) {//assignment index
+    document.getElementById("serveAssignment"+index).action = "/serve";
+    document.getElementById("serveAssignment"+index).submit();
 }
 function serveAssignment1() {
     document.getElementById("serveAssignment1").action = "/serve";
@@ -221,6 +224,50 @@ function serveImage() {
 function serveVideo() {
     document.getElementById("serveVideo").action = "/serve";
     document.getElementById("serveVideo").submit();
+}
+function serveVideo1() {
+    document.getElementById("serveVideo1").action = "/serve";
+    document.getElementById("serveVideo1").submit();
+}
+
+/**
+ * ---------------------------------------Add Content functions---------------------------------------
+ */
+function enableOptionButton(){
+    document.getElementById("addOptionButton").disabled = false;
+}
+function addVideoOptions(divName){
+    var newdiv = document.createElement('div');
+    var e = document.getElementById("videoUploadOption");
+    var strOption = e.options[e.selectedIndex].value;
+    if (addVideoCounter == addVideoLimit)  {
+        alert("You have reached the limit of adding " + addVideoCounter + " video");
+    }else{
+        switch(strOption) {
+            case '1':
+                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                break;
+            case '2':
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                break;
+        }
+        document.getElementById(divName).appendChild(newdiv);
+        addVideoCounter++;
+    }
+}
+function addImageButton(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
+        "<br><textarea class='form-control' rows='2' wrap='soft' name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
+    document.getElementById(divName).appendChild(newdiv);
+}
+function addAssignmentButton(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
+        "<br><textarea class='form-control' rows='2' wrap='soft' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description
+    document.getElementById(divName).appendChild(newdiv);
 }
 /**
  * ---------------------------------------test functions---------------------------------------
