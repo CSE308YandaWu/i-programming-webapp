@@ -32,11 +32,6 @@
 </head>
 <body>
 
-<script>
-    function do_search(){
-        var title = document.getElementById()
-    }
-</script>
 
 <ul class="navUl">
 
@@ -59,33 +54,62 @@
 <h1>--------------------Search Course--------------------</h1>
 
 <div class="container1">
+    <form action="#" type="hidden" id="searchClass">
     <table class="table1">
         <tr>
+            <%--<td>--%>
+                <%--<span ><strong>Course Title:</strong></span>--%>
+            <%--</td>--%>
             <td>
-                <span ><strong>Course Title:</strong></span>
+                <select name="MySelect" id="MySelect" style="color:black">
+                    <option name="Search_by_title" value="title">Search by title</option>
+                    <option name="Search_by_instructor" value="instructor">Search by instructor</option>
+                </select>
             </td>
             <td>
-                <input style="color:black" name="CourseTitle" id="CourseTitle" type="text" size="40" form="searchClass">
+                <input style="color:black" name="UserIn" id="UserIn" type="text" size="40" >
             </td>
+
             <td>
-                <input id="search_btn" type="submit" value="Search" style="color:black" form="searchClass">
+                <button id="seach_btn" onclick="do_search()" style="color: black">Search</button>
+                <%--<input id="search_btn" type="submit" value="Search" style="color:black" >--%>
             </td>
-            <form action="#" type="hidden" id="searchClass"></form>
+            <input type = hidden name="Select_method" id="select_method" />
         </tr>
 
     </table>
+    </form>
+
 
     <div class="resultlist">
         <h2>Search Result</h2>
         <ul class="list-group">
             <%
-                String title = request.getParameter("CourseTitle");
+
+                String input =request.getParameter("UserIn");
+                String method =request.getParameter("Select_method");
+                System.out.println(method);
+                System.out.println(input);
                 List<Course> courses;
-                courses = ObjectifyService.ofy()
-                        .load()
-                        .type(Course.class)
-                        .filter("title =",title)
-                        .list();
+                if(method != null && "title".equals(method)){
+                    courses = ObjectifyService.ofy()
+                            .load()
+                            .type(Course.class)
+                            .filter("title =",input)
+                            .list();
+                    System.out.println("search by title");
+                    System.out.println(courses);
+                }
+                else{
+                    courses = ObjectifyService.ofy()
+                            .load()
+                            .type(Course.class)
+                            .filter("instructor =",input)
+                            .list();
+                    System.out.println("search by instructor");
+                    System.out.println(courses);
+            }
+
                 pageContext.setAttribute("courses", courses);
             %>
             <c:choose>
@@ -122,28 +146,12 @@
                             </div>
                         </li>
 
-                        <%--<li name=x.title >${x.title}</li>--%>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
-            <%--<a href="#" class="list-group-item list-group-item-action">CSE 111--%>
-            <%--<button type="button" class="btn btn-primary" onclick="toEditCourse()">Edit</button>--%>
-            <%--<form id="toEditCourse"><input type="hidden"></form>--%>
-            <%--</a>--%>
-            <%--<a href="#" class="list-group-item list-group-item-action">CSE 123</a>--%>
-            <%--<a href="#" class="list-group-item list-group-item-action">CSE 235</a>--%>
-            <%--<a href="#" class="list-group-item list-group-item-action">CSE 456</a>--%>
-            <%--<a href="#" class="list-group-item list-group-item-action">CSE 222</a>--%>
         </ul>
     </div>
 
-
-    <%--<div class="join_course">--%>
-        <%--<lable>Course Access Code:</lable>--%>
-        <%--<input name="AccessCode" type="text" size="10" value="">--%>
-        <%--<input id="join_btn" type="submit" value="Add" onclick="searchCourseToMain();">--%>
-        <%--<form id="searchCourseToMain"><input type="hidden"></form>--%>
-    <%--</div>--%>
 
 
 </div>
@@ -155,6 +163,7 @@
 <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/SearchCourse.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

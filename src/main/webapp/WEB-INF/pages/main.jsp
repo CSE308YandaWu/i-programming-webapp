@@ -131,7 +131,7 @@
             <div class="inner toplist">
                 <h2>Top 5 Popular Courses</h2>
                 <%
-                    String title = request.getParameter("CourseTitle");
+//                    String title = request.getParameter("CourseTitle");
                     List<Course> courses1;
                     courses1 = ofy()
                             .load()
