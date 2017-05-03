@@ -1,5 +1,6 @@
 package com.iprogramming.controller;
 
+import Beans.Lesson;
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.images.*;
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -45,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class IprogrammingController {
+public class iprogrammingController {
 
     @RequestMapping("/")
     public String home() {
@@ -97,39 +98,38 @@ public class IprogrammingController {
                                       @RequestParam(value = "courseTitle") String courseTitle,
                                       @RequestParam(value = "instructor") String instructor,
                                       @RequestParam(value = "description") String description,
-                                      @RequestParam(value = "status") String status) {
+                                      @RequestParam(value = "status") String status,
+                                      @RequestParam(value = "accessCode") String accessCode) {
 
         String id = new ObjectifyFactory().allocateId(Course.class).getString();
         Course newCourse = new Course(userEmail, id, courseTitle, instructor, description, status);
 
-//        User existUser = ofy().load().type(User.class).id(userEmail).now();
-//        if(existUser.getCreatedCourse() == null){
-//            List<Course> newCreatedCourse = new ArrayList<Course> ();
-//            newCreatedCourse.add(newCourse);
-//            existUser.setCreatedCourse(newCreatedCourse);
-//        }
-//        else existUser.addCreatedCourse(newCourse);
-//        ofy().save().entity(existUser).now();
+        if ((accessCode != null))
+            newCourse.setAccessCode(accessCode);
 
         ofy().save().entity(newCourse).now();
 
 
         return new ModelAndView("editCourse", "model", newCourse);
     }
+
     @RequestMapping(value = "/enrollCourse")
-    public ModelAndView enrollCourse(@RequestParam(value = "courseId")String courseId,
-                                     @RequestParam(value = "userEmail") String userEmail){
+    public ModelAndView enrollCourse(@RequestParam(value = "courseId") String courseId,
+                                     @RequestParam(value = "userEmail") String userEmail) {
 
         Course course = ofy().load().type(Course.class).id(courseId).now();
         User existUser = ofy().load().type(User.class).id(userEmail).now();
-        if(existUser.getJoinedCourse() == null){
-            List<String> newCreatedCourse = new ArrayList<String> ();
+        if (existUser.getJoinedCourse() == null) {
+            List<String> newCreatedCourse = new ArrayList<String>();
             newCreatedCourse.add(course.getId());
+            course.increEnroll();
             existUser.setJoinedCourse(newCreatedCourse);
-        }
-        else if(!(existUser.getJoinedCourse()).contains(course.getId())){
+        } else if (!(existUser.getJoinedCourse()).contains(course.getId())) {
             existUser.getJoinedCourse().add(course.getId());
+            course.increEnroll();
         }
+
+        ofy().save().entity(course).now();
         ofy().save().entity(existUser).now();
 //        if(existUser.getJoinedCourse() == null){
 //            System.out.print("heheheheh!");
@@ -147,7 +147,34 @@ public class IprogrammingController {
 //        ofy().save().entity(existUser).now();
 //        System.out.println(existUser.getJoinedCourse().size());
         return new ModelAndView("main", "model", null);
+    }
 
+    @RequestMapping("/enterCourse")
+    public ModelAndView enterCourse(@RequestParam(value = "courseId") String courseId) {
+        Course c = ofy().load().type(Course.class).id(courseId).now();
+        List<Lesson> lessons = ofy().load().type(Lesson.class).ancestor(c).order("-dateCreated").list();
+
+        ModelAndView mav = new ModelAndView("courseInfo");
+        mav.addObject("course", c);
+        mav.addObject("lessons", lessons);
+
+        return mav;
+    }
+
+    @RequestMapping("/dropCourse")
+    public String dropCourse(@RequestParam(value = "courseId") String courseId,
+                             @RequestParam(value = "userEmail") String userEmail) {
+        Course course = ofy().load().type(Course.class).id(courseId).now();
+        User user = ofy().load().type(User.class).id(userEmail).now();
+
+        if (user.getJoinedCourse().contains(course.getId())) {
+            user.dropJoinedCourse(course);
+            course.decreEnroll();
+        }
+
+        ofy().save().entity(course).now();
+        ofy().save().entity(user).now();
+        return "main";
     }
 
     @RequestMapping("/logout")
@@ -224,12 +251,13 @@ public class IprogrammingController {
             model.put("blobKeyI", blob);
         }
 
-    return new ModelAndView("courseContent", "model", model);
+        return new ModelAndView("courseContent", "model", model);
     }
+
     /* courseContent Page */
     @RequestMapping("/courseContent")
-    public ModelAndView courseContent(){
-        return new ModelAndView("courseContent","model",model);
+    public ModelAndView courseContent() {
+        return new ModelAndView("courseContent", "model", model);
     }
 
     /* lecture upload/serve section, use Blobstore, Cloud Storage */
@@ -241,6 +269,7 @@ public class IprogrammingController {
             .retryMaxAttempts(10)
             .totalRetryPeriodMillis(15000)
             .build());
+
     /* serve assignment/video/image */
     /* courseContent Page serving(video/pdf/image) function */
     @RequestMapping(value = "/serve")
@@ -347,16 +376,16 @@ public class IprogrammingController {
         System.out.println("req:" + req);
 //        Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);                          Bulk upload
 //        List<BlobKey> blobKeys = blobs.get("myFile");                                                 Bulk upload
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        Map<String, List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
         String gcsFileName = finfos.get("myFile").get(0).getGsObjectName();
-        System.out.println("gcs:"+ gcsFileName);
+        System.out.println("gcs:" + gcsFileName);
         BlobKey blobKeys = blobstoreService.createGsBlobKey(gcsFileName);
 
         BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
         BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKeys);
-        System.out.println("fileName:"+ blobInfo.getFilename());
-        System.out.println("Creation:"+ blobInfo.getCreation());
-        System.out.println("getContentType:"+ blobInfo.getContentType());
+        System.out.println("fileName:" + blobInfo.getFilename());
+        System.out.println("Creation:" + blobInfo.getCreation());
+        System.out.println("getContentType:" + blobInfo.getContentType());
 
         if (blobKeys == null) {
             String message = "EMPTY/NULL";
@@ -368,7 +397,7 @@ public class IprogrammingController {
             ImagesService services = ImagesServiceFactory.getImagesService();
             // Make an image from a Cloud Storage object, and transform it.
             Image blobImage = ImagesServiceFactory.makeImageFromBlob(blobKeys);
-            Transform resize = ImagesServiceFactory.makeResize(50,50);
+            Transform resize = ImagesServiceFactory.makeResize(50, 50);
             Image resizedImage = services.applyTransform(resize, blobImage);
             // Write the transformed image back to a Cloud Storage object.
             gcsService.createOrReplace(

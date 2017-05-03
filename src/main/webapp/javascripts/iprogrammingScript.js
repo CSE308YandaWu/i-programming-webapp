@@ -62,9 +62,15 @@ function toSearchCourse() {
 }
 /* Main Page Edit Course button */
 function toEditCourse(a) {
-    document.getElementById("courseId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
+}
+/* Main Page Course button */
+function toCoursePage(a) {
+    document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("toCoursePage").action = "/enterCourse";
+    document.getElementById("toCoursePage").submit();
 }
 /* Edit Course Page Add Unit button */
 function toEditUnit() {
@@ -76,6 +82,28 @@ function toEditLesson() {
     document.getElementById("toEditLesson").action = "/editLesson";
     document.getElementById("toEditLesson").submit();
 }
+
+function courseStatus(){
+    var value = document.getElementById("status").value;
+    var statusRow = document.getElementById("statusRow");
+    if(value == "private")
+        statusRow.style.display = "table-row";
+    if(value == "public")
+        statusRow.style.display = "none";
+}
+
+function checkCode(validCode, button){
+    var input = document.getElementById("inputCode").value;
+    var x = button.parentNode.parentNode.getElementsByTagName("p")[3];
+    if((input == validCode)){
+        button.parentNode.submit();
+    }
+    else {
+        x.style.display = "inline";
+    }
+
+}
+
 /**
  * ---------------------------------------Home/Sign-Out Button functions for all pages---------------------------------------
  */
@@ -198,13 +226,13 @@ function serveVideo() {
  * ---------------------------------------test functions---------------------------------------
  */
 
-function toCoursePage() {
-    var name = document.getElementById("coursename").innerHTML;
-    // alert(name);
-    document.getElementById("nameinput").setAttribute("value", name);
-    // alert(document.getElementById("nameinput").getAttribute("value"));
-    document.getElementById("entercourse").submit();
-}
+// function toCoursePage() {
+//     // var name = document.getElementById("coursename").innerHTML;
+//     // // alert(name);
+//     // document.getElementById("nameinput").setAttribute("value", name);
+//     // alert(document.getElementById("nameinput").getAttribute("value"));
+//     document.getElementById("entercourse").submit();
+// }
 
 function ff20() {
     document.getElementById("myForm").action = "/hello";

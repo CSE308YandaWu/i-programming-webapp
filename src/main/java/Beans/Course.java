@@ -118,4 +118,12 @@ public class Course implements Serializable {
         this.accessCode = accessCode;
     }
 
+    public void increEnroll(){
+        numEnrolled++;
+    }
+
+    public void decreEnroll(){
+        numEnrolled--;
+    }
+
 }

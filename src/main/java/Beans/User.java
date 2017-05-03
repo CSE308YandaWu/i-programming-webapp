@@ -20,14 +20,6 @@ public class User implements Serializable {
     private String userEmail;
     private List<String> joinedCourse;
 
-    //Access data
-    public String getUserEmail() { return userEmail; }
-    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-
-    public List<String> getJoinedCourse() { return joinedCourse; }
-    public void setJoinedCourse(List<String> joinedCourse) { this.joinedCourse = joinedCourse; }
-    public void addJoinedCourse(Course course) { this.joinedCourse.add(course.getId()); }
-
     //Constructors
     public User(){
         joinedCourse = new ArrayList<String>();
@@ -41,5 +33,16 @@ public class User implements Serializable {
     public User(String email, List<String> joinedCourse){
         this.userEmail = email;
         this.joinedCourse = joinedCourse;
+    }
+
+    //Access data
+    public String getUserEmail() { return userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
+
+    public List<String> getJoinedCourse() { return joinedCourse; }
+    public void setJoinedCourse(List<String> joinedCourse) { this.joinedCourse = joinedCourse; }
+    public void addJoinedCourse(Course course) { this.joinedCourse.add(course.getId()); }
+    public void dropJoinedCourse(Course course){
+        joinedCourse.remove(course.getId());
     }
 }

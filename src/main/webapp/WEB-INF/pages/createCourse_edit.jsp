@@ -101,12 +101,22 @@
                     <span><strong>Status:</strong></span>
                 </td>
                 <td>
-                    <select name="status" form="courseinfo">
+                    <select name="status" form="courseinfo" id="status" onchange="courseStatus()">
                         <option value="public">Public</option>
                         <option value="private">Private</option>
                     </select>
                 </td>
             </tr>
+
+            <tr id="statusRow" style="display:none;">
+                <td>
+                    <span><strong>Access Code:</strong></span>
+                </td>
+                <td>
+                    <input name="accessCode" size="40" value="" form="courseinfo">
+                </td>
+            </tr>
+
 
             <tr>
                 <td>
