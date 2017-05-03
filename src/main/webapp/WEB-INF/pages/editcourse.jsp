@@ -63,16 +63,16 @@
                 <h3 class="editlabel">--------Edit Course--------</h3>
                 <div class="course-info">
                     <table class="table1">
-                        <tr><td>User:</td><td>${model.email}</td></tr>
-                        <tr><td>Course Id:</td><td>${model.id}</td></tr>
-                        <tr><td>Course Title:</td><td>${model.title}</td></tr>
-                        <tr><td>Instructor:</td><td>${model.instructor}</td></tr>
-                        <tr><td>Status:</td><td>${model.status}</td></tr>
-                        <c:if test="${model.status == 'private'}">
-                            <tr><td>Access Code: </td><td>${model.accessCode}</td></tr>
+                        <tr><td>User:</td><td>${course.email}</td></tr>
+                        <tr><td>Course Id:</td><td>${course.id}</td></tr>
+                        <tr><td>Course Title:</td><td>${course.title}</td></tr>
+                        <tr><td>Instructor:</td><td>${course.instructor}</td></tr>
+                        <tr><td>Status:</td><td>${course.status}</td></tr>
+                        <c:if test="${course.status == 'private'}">
+                            <tr><td>Access Code: </td><td>${course.accessCode}</td></tr>
                         </c:if>
-                        <tr><td>Description:</td><td>${model.description}</td></tr>
-                        <tr><td>Date Created: </td><td>${model.dateCreated}</td></tr>
+                        <tr><td>Description:</td><td>${course.description}</td></tr>
+                        <tr><td>Date Created: </td><td>${course.dateCreated}</td></tr>
                     </table>
                 </div>
                 <div class="add-btns-group">

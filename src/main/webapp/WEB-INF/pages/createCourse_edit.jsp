@@ -87,15 +87,11 @@
             <tr>
                 <td>
                     <span><strong> <br>Description:</br> </strong></span>
-
-
                 </td>
                 <td>
                     <textarea rows="7" cols="38" name="description" form="courseinfo"></textarea>
                 </td>
-
             </tr>
-
             <tr>
                 <td>
                     <span><strong>Status:</strong></span>

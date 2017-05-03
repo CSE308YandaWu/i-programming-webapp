@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class IprogrammingController {
+public class iprogrammingController {
 
     @RequestMapping("/")
     public String home() {
@@ -110,7 +110,7 @@ public class IprogrammingController {
         ofy().save().entity(newCourse).now();
 
 
-        return new ModelAndView("editCourse", "model", newCourse);
+        return new ModelAndView("editCourse", "course", newCourse);
     }
 
     @RequestMapping(value = "/enrollCourse")
