@@ -1,29 +1,27 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Shanshan Chen
-  Date: 4/6/2017
-  Time: 2:49 AM
+  User: Shanshan Chen, Yanda Wu
+  Date: 5/2/2017
+  Time: 11:56 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
-<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
-<%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>
+<%--<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>--%>
+<%--<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>--%>
+<%--<%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>--%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%--google-sign-in import--%>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
-<%
-    //create uploadUrl for upload form
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-    UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");
-    String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);
-//    String uploadUrlImage = blobstoreService.createUploadUrl("/uploadImage", uploadOptions);
-//    String uploadUrlVideo = blobstoreService.createUploadUrl("/uploadVideo", uploadOptions);
-%>
+<%--<%--%>
+    <%--//create uploadUrl for upload form--%>
+    <%--BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();--%>
+    <%--UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");--%>
+    <%--String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);--%>
+<%--%>--%>
 
 <head>
     <meta charset="utf-8">
@@ -108,8 +106,8 @@
                     <div class="col-md-4"><h4>Video</h4></div>
                     <div id="videoAdding" class="col-md-7">
                         <div id="dynamicInputVideo" class="col-md-7">
-                            <input type="text" id="videoLink" class="form-control" name="videoLinks[]" placeholder="Insert URL here" form="lessonInfo">
-                            <textarea id="videoDescription" class="form-control" rows="3" wrap="soft" name="videoDescriptions[]" placeholder="Add video description here" form="lessonInfo"></textarea>
+                            <%--<input type="text" id="videoLink" class="form-control" name="videoLinks[]" placeholder="Insert URL here" form="lessonInfo">--%>
+                            <%--<textarea id="videoDescription" class="form-control" rows="3" wrap="soft" name="videoDescriptions[]" placeholder="Add video description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--video Upload Option dropdown box--%>
                         <select id="videoUploadOption" class="btn btn-lg btn-primary btn-block" onchange="enableOptionButton()">
@@ -126,8 +124,8 @@
                     <div class="col-md-4"><h4>Image</h4></div>
                     <div id="imageAdding" class="col-md-7">
                         <div id="dynamicInputImage" class="col-md-7">
-                            <input type="file" multiple name="myFileImage[]" form="lessonInfo">
-                            <textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>
+                            <%--<input type="file" multiple name="myFileImage[]" form="lessonInfo">--%>
+                            <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more image button--%>
                         <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more image" onClick="addImageButton('dynamicInputImage');">
@@ -140,8 +138,8 @@
                     <div class="col-md-4"><h4>Attachment</h4></div>
                     <div id="assignmentAdding" class="col-md-7">
                         <div id="dynamicInputAssignment" class="col-md-7">
-                            <input type="file" multiple name="myFileAssignment[]" form="lessonInfo">
-                            <textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>
+                            <%--<input type="file" multiple name="myFileAssignment[]" form="lessonInfo">--%>
+                            <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more assignment button--%>
                         <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
@@ -152,7 +150,7 @@
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
-                        <form id="lessonInfo" action="<%= uploadUrl %>" method="post" enctype="multipart/form-data"><input type="hidden"></form>
+                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data"><input type="hidden"></form>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">

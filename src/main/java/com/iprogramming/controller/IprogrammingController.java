@@ -75,8 +75,16 @@ public class IprogrammingController {
 	public String edit_unit(){return "editUnit";}
 
 	@RequestMapping("/editLesson")
-	public String editLesson(){return "editLesson";}
-
+	public ModelAndView editLesson() {
+        ModelAndView mav = new ModelAndView();
+        /* create uploadUrl for upload form */
+        BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+        UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");
+        String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);
+        mav.addObject("uploadUrl", uploadUrl);
+        mav.setViewName("editLesson");
+        return mav;
+    }
 	@RequestMapping("/searchCourse")
 	public String searchCourse(){
 		return "searchCourse";
@@ -184,8 +192,6 @@ public class IprogrammingController {
 	}
 
 /* Blobstore, upload/serve slides/video/image/pdf controllers */
-//    Map<String, String> model = new HashMap<String, String>();
-    /*  Upload pages */
     /* When confirm button is clicked in editLesson Page */
     @RequestMapping(value = "/editLessonConfirm")
     public ModelAndView editLessonConfirm(@RequestParam(value = "lessonTitle", required = false) String lessonTitle,
@@ -206,27 +212,29 @@ public class IprogrammingController {
         mav.addObject("videoDescriptions", videoDescriptions);
         mav.addObject("imageDescriptions", imageDescriptions);
 
-//        model.put("videoLink",videoLinks.get(0));
-//        model.put("videoLink1",videoLinks.get(1));
+
         mav.addObject("assignmentDescriptions",assignmentDescriptions);
 //        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
 //        ObjectifyService.ofy().save().entity(newCourse).now();
-        /////////////////////////new*************************************************
+        /* get the uploaded video files */
         Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
-        List<String> videoBlobKeysList = new ArrayList<String>();
-        for (int i = 0; i < finfos.get("myFileVideo[]").size(); i++) {
-            String gcsVideoFileName = finfos.get("myFileVideo[]").get(i).getGsObjectName();
-            BlobKey videoBlobKey = blobstoreService.createGsBlobKey(gcsVideoFileName);
-            if (videoBlobKey == null) {
-                System.out.println("uploadVideo error");
-            } else {
-                String blob = videoBlobKey.getKeyString();
-                videoBlobKeysList.add(blob);
-                System.out.println("VIDEO KEY: " + blob);
+
+        if(finfos.get("myFileVideo[]") != null){//if user uploaded video files
+            List<String> videoBlobKeysList = new ArrayList<String>();//video BlobKeys List that saves the video blobkeys
+            for (int i = 0; i < finfos.get("myFileVideo[]").size(); i++) {
+                String gcsVideoFileName = finfos.get("myFileVideo[]").get(i).getGsObjectName();
+                BlobKey videoBlobKey = blobstoreService.createGsBlobKey(gcsVideoFileName);
+                if (videoBlobKey == null) {
+                    System.out.println("uploadVideo error");
+                } else {
+                    String blob = videoBlobKey.getKeyString();
+                    videoBlobKeysList.add(blob);
+                    System.out.println("VIDEO KEY: " + blob);
+                }
             }
+            mav.addObject("videoBlobKeysList",videoBlobKeysList);
         }
-        mav.addObject("videoBlobKeysList",videoBlobKeysList);
-        /////////////////////////new*************************************************
+
 //        String gcsVideoFileName = finfos.get("myFileVideo[]").get(0).getGsObjectName();
 //        BlobKey videoBlobKey = blobstoreService.createGsBlobKey(gcsVideoFileName);
 //        String gcsVideoFileName1 = finfos.get("myFileVideo[]").get(1).getGsObjectName();
@@ -244,18 +252,20 @@ public class IprogrammingController {
 //        }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////new*************************************************
-        List<String> assignmentBlobKeysList = new ArrayList<String>();
-        for (int i = 0; i < finfos.get("myFileAssignment[]").size(); i++) {
-            String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(i).getGsObjectName();
-            BlobKey assignmentBlobKey = blobstoreService.createGsBlobKey(gcsAssignmentFileName);
-            if (assignmentBlobKey == null) {
-                System.out.println("uploadAssignment error");
-            } else {
-                String blob = assignmentBlobKey.getKeyString();
-                assignmentBlobKeysList.add(blob);
+        if(finfos.get("myFileAssignment[]") != null){
+            List<String> assignmentBlobKeysList = new ArrayList<String>();
+            for (int i = 0; i < finfos.get("myFileAssignment[]").size(); i++) {
+                String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(i).getGsObjectName();
+                BlobKey assignmentBlobKey = blobstoreService.createGsBlobKey(gcsAssignmentFileName);
+                if (assignmentBlobKey == null) {
+                    System.out.println("uploadAssignment error");
+                } else {
+                    String blob = assignmentBlobKey.getKeyString();
+                    assignmentBlobKeysList.add(blob);
+                }
             }
+            mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
-        mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         /////////////////////////new*************************************************
 //        String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(0).getGsObjectName();
 //        BlobKey assignmentBlobKey = blobstoreService.createGsBlobKey(gcsAssignmentFileName);
@@ -272,31 +282,34 @@ public class IprogrammingController {
 //            model.put("blobKeyA1", blob1);
 //        }
         /////////////////////////new*************************************************
-        List<String> imageServingUrlList = new ArrayList<String>();
-        for (int i = 0; i < finfos.get("myFileImage[]").size(); i++) {
-            String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
-            BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
-            if (imageBlobKey == null) {
-                System.out.println("uploadImage error");
-            } else {
-                //String blob = imageBlobKey.getKeyString();
-                ImagesService services = ImagesServiceFactory.getImagesService();
-                // Make an image from a Cloud Storage object, and transform it.
-                Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
-                Transform resize = ImagesServiceFactory.makeResize(100, 100);
-                Image resizedImage = services.applyTransform(resize, blobImage);
-                // Write the transformed image back to a Cloud Storage object.
-                gcsService.createOrReplace(
-                        new GcsFilename("i-programming.appspot.com", "resizedImage"+i+".jpeg"),
-                        new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
-                        ByteBuffer.wrap(resizedImage.getImageData()));
-                //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
-                ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage"+i+".jpeg");
-                String url = services.getServingUrl(serve);
-                imageServingUrlList.add(url);
+        if(finfos.get("myFileImage[]") != null){
+            List<String> imageServingUrlList = new ArrayList<String>();
+            for (int i = 0; i < finfos.get("myFileImage[]").size(); i++) {
+                String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
+                BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
+                if (imageBlobKey == null) {
+                    System.out.println("uploadImage error");
+                } else {
+                    //String blob = imageBlobKey.getKeyString();
+                    ImagesService services = ImagesServiceFactory.getImagesService();
+                    // Make an image from a Cloud Storage object, and transform it.
+                    Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
+                    Transform resize = ImagesServiceFactory.makeResize(100, 100);
+                    Image resizedImage = services.applyTransform(resize, blobImage);
+                    // Write the transformed image back to a Cloud Storage object.
+                    gcsService.createOrReplace(
+                            new GcsFilename("i-programming.appspot.com", "resizedImage"+i+".jpeg"),
+                            new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
+                            ByteBuffer.wrap(resizedImage.getImageData()));
+                    //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
+                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage"+i+".jpeg");
+                    String url = services.getServingUrl(serve);
+                    imageServingUrlList.add(url);
+                }
             }
+            mav.addObject("imageServingUrlList",imageServingUrlList);
         }
-        mav.addObject("imageServingUrlList",imageServingUrlList);
+
         /////////////////////////new*************************************************
 //
 //        String gcsImageFileName = finfos.get("myFileImage[]").get(0).getGsObjectName();
