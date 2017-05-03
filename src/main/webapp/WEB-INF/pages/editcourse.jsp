@@ -102,6 +102,14 @@
                         </ol>
                     </ul>
                 </div>
+                <%--<div class="add-btns-group">--%>
+                    <%--<form action="/saveCourse">--%>
+
+                    <%--</form>--%>
+                    <%--<button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson--%>
+                        <%--<form id="safdsafsa"><input type="hidden" ></form>--%>
+                    <%--</button>--%>
+                <%--</div>--%>
             </div>
             <div class="mastfoot">
                 <div class="inner">

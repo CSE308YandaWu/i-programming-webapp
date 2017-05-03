@@ -15,6 +15,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,8 +63,18 @@ public class iprogrammingController {
 	@RequestMapping("/editCourse")
 	public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId){
 	    Course c = ofy().load().type(Course.class).id(courseId).now();
-	    return new ModelAndView("editCourse", "model", c);
+	    return new ModelAndView("editCourse", "course", c);
 	}
+
+	/*-----------Test controller--------------*/
+    @RequestMapping("/backToEditCourse")
+    public ModelAndView backToEditCourse(ModelAndView mav){
+        Course c = new Course();
+        mav.addObject("course",c);
+        mav.setViewName("editCourse");
+	    return mav;
+    }
+    /*-----------End Test controller----------*/
 
     @RequestMapping("/deleteCourse")
     public String deleteCourse(@RequestParam(value = "courseId") String courseId) {
