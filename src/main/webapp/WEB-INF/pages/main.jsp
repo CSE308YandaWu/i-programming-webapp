@@ -136,7 +136,7 @@
                     courses1 = ofy()
                             .load()
                             .type(Course.class)
-//                            .order("-numEnrolled")
+                            .order("-numEnrolled")
                             .limit(5)
                             .list();
                     pageContext.setAttribute("courses1", courses1);
@@ -153,21 +153,27 @@
                                         <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
                                     </div>
                                     <div id="${x.id}" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <p style="color:black">Instructors: ${x.instructor}</p>
-                                            <span>Access Code: <input style="color:black" type="text" name="AccessCode"
-                                                                      value="Code"></span>
-                                            <form action="/enrollCourse">
+                                        <div class="panel-body panelbody">
+                                            <p>Instructors: ${x.instructor}</p>
+                                            <p>Status: ${x.status}</p>
+                                            <form action="/enrollCourse" id="enrollForm">
                                                 <input name="courseId" type="hidden" value="${x.id}">
                                                 <input name="userEmail" type="hidden" value="${user}">
-                                                <input name="confirm" type="submit" value="Enroll">
+                                                <c:choose>
+                                                    <c:when test="${x.status == 'private'}">
+                                                        <p>Access Code: <input type="text" name="accessCode" id="inputCode"></p>
+                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input name="confirm" type="submit" value="Enroll" >
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </form>
+                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-
-                            <%--<li name=x.title >${x.title}</li>--%>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
@@ -199,7 +205,7 @@
                                 <a href="#" onclick="toEditCourse(this)"
                                    class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
-                                        <input type="hidden" value="${x.id}" id="cId" name="courseId">
+                                        <input type="hidden" value="${x.id}" name="courseId">
                                         <input type="submit" value="Delete" class="btn btn-primary">
                                     </form>
                                     <br>
@@ -208,7 +214,7 @@
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
-                    <form id="toEditCourse"><input type="hidden" name="courseId" id="courseId"></form>
+                    <form id="toEditCourse"><input type="hidden" name="courseId" id="editId"></form>
                 </div>
             </div>
             <div class="inner enrolledlist">
@@ -216,11 +222,11 @@
                 <div class="list-group">
                     <%
                         List<Course> joinedCourses = new ArrayList<Course>();
-                        if (existUser.getJoinedCourse() != null){
+                        if (existUser.getJoinedCourse() != null) {
                             Course c;
-                            for (String s: existUser.getJoinedCourse()) {
+                            for (String s : existUser.getJoinedCourse()) {
                                 c = ofy().load().type(Course.class).id(s).now();
-                                if (c!= null)
+                                if (c != null)
                                     joinedCourses.add(c);
                             }
                         }
@@ -232,14 +238,18 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${joinedCourses}">
-                                <form id="entercourse" action="/course_page">
-                                    <a href="#" onclick="toCoursePage()" id="coursename"
-                                       class="list-group-item list-group-item-action">${x.title}</a>
-                                    <input type="hidden" id="nameinput" name="coursename">
-                                </form>
+                                <a href="#" onclick="toCoursePage(this)"
+                                   class="list-group-item list-group-item-action enrolledlink">${x.title}
+                                    <form action="/dropCourse" class="dropbutton">
+                                        <input type="hidden" value="${x.id}" name="courseId">
+                                        <input type="hidden" value="${user}" name="userEmail">
+                                        <input type="submit" value="Drop" class="btn btn-primary">
+                                    </form>
+                                </a>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
+                    <form id="toCoursePage"><input type="hidden" name="courseId" id="cId"></form>
                 </div>
             </div>
             <div class="mastfoot">

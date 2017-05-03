@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: JIAQI ZHANG
@@ -67,6 +68,9 @@
                         <tr><td>Course Title:</td><td>${model.title}</td></tr>
                         <tr><td>Instructor:</td><td>${model.instructor}</td></tr>
                         <tr><td>Status:</td><td>${model.status}</td></tr>
+                        <c:if test="${model.status == 'private'}">
+                            <tr><td>Access Code: </td><td>${model.accessCode}</td></tr>
+                        </c:if>
                         <tr><td>Description:</td><td>${model.description}</td></tr>
                         <tr><td>Date Created: </td><td>${model.dateCreated}</td></tr>
                     </table>

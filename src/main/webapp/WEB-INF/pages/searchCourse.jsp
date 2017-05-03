@@ -100,14 +100,23 @@
                                     <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
                                 </div>
                                 <div id="${x.id}" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <p style="color:black">Instructors: ${x.instructor}</p>
-                                        <span>Access Code: <input style="color:black" type="text" name="AccessCode" value="Code"></span>
-                                        <form action="/enrollCourse">
+                                    <div class="panel-body panelbody">
+                                        <p>Instructors: ${x.instructor}</p>
+                                        <p>Status: ${x.status}</p>
+                                        <form action="/enrollCourse" id="enrollForm">
                                             <input name="courseId" type="hidden" value="${x.id}">
                                             <input name="userEmail" type="hidden" value="${user}">
-                                            <input name="confirm" type="submit" value="Enroll">
+                                            <c:choose>
+                                                <c:when test="${x.status == 'private'}">
+                                                    <p>Access Code: <input type="text" name="accessCode" id="inputCode"></p>
+                                                    <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input name="confirm" type="submit" value="Enroll" >
+                                                </c:otherwise>
+                                            </c:choose>
                                         </form>
+                                        <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
                                     </div>
                                 </div>
                             </div>
