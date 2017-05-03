@@ -2,7 +2,7 @@
     * Created by YandaWu on 4/1/2017.
     */
 
-var addVideoCounter = 1;//add video counter   reset????
+var addVideoCounter = 0;//add video counter   reset????
 var addVideoLimit = 4;//add video limit
 /**
  *
