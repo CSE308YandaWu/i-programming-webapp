@@ -78,14 +78,14 @@
                 <div class="add-btns-group">
                     <button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson
                         <form id="toEditLesson">
-                            <input type="hidden" name="userEmail" value="${model.email}">
-                            <input type="hidden" name="courseId" value="${model.id}">
-                            <input type="hidden" name="courseTitle" value="${model.title}">
-                            <input type="hidden" name="instructor" value="${model.instructor}">
-                            <input type="hidden" name="description" value="${model.description}">
-                            <input type="hidden" name="status" value="${model.status}">
-                            <c:if test="${model.status == 'private'}">
-                                <input type="hidden" name="accessCode" value="${model.accessCode}">
+                            <input type="hidden" name="userEmail" value="${course.email}">
+                            <input type="hidden" name="courseId" value="${course.id}">
+                            <input type="hidden" name="courseTitle" value="${course.title}">
+                            <input type="hidden" name="instructor" value="${course.instructor}">
+                            <input type="hidden" name="description" value="${course.description}">
+                            <input type="hidden" name="status" value="${course.status}">
+                            <c:if test="${course.status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${course.accessCode}">
                             </c:if>
                         </form>
                     </button>
@@ -112,6 +112,15 @@
                 <div class="add-btns-group">
                     <form action="/saveCourse">
                         <input type="submit" class="btn btn-primary" value="Save">
+                        <input type="hidden" name="userEmail" value="${course.email}">
+                        <input type="hidden" name="courseId" value="${course.id}">
+                        <input type="hidden" name="courseTitle" value="${course.title}">
+                        <input type="hidden" name="instructor" value="${course.instructor}">
+                        <input type="hidden" name="description" value="${course.description}">
+                        <input type="hidden" name="status" value="${course.status}">
+                        <c:if test="${course.status == 'private'}">
+                            <input type="hidden" name="accessCode" value="${course.accessCode}">
+                        </c:if>
                     </form>
                     <form action="/main">
                         <input type="submit" class="btn btn-primary" value="Cancel">

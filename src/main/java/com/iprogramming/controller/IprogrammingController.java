@@ -121,18 +121,6 @@ public class iprogrammingController {
         return "editUnit";
     }
 
-    @RequestMapping("/editLesson")
-    public ModelAndView editLesson() {
-        ModelAndView mav = new ModelAndView();
-        /* create uploadUrl for upload form */
-        BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-        UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");
-        String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);
-        mav.addObject("uploadUrl", uploadUrl);
-        mav.setViewName("editLesson");
-        return mav;
-    }
-
     @RequestMapping("/searchCourse")
     public ModelAndView searchCourse(HttpSession session, HttpServletRequest request) {
         String input = request.getParameter("UserIn");
@@ -177,7 +165,7 @@ public class iprogrammingController {
         if ((accessCode != null))
             newCourse.setAccessCode(accessCode);
 
-        ofy().save().entity(newCourse).now();
+        //ofy().save().entity(newCourse).now();
 
         return new ModelAndView("editCourse", "course", newCourse);
     }
@@ -241,7 +229,19 @@ public class iprogrammingController {
     }
 
     @RequestMapping(value = "/saveCourse")
-    public ModelAndView saveCourse(HttpSession session, HttpServletRequest request) {
+    public ModelAndView saveCourse(HttpSession session, HttpServletRequest request,
+                                   @RequestParam(value = "userEmail") String userEmail,
+                                   @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "courseTitle") String courseTitle,
+                                   @RequestParam(value = "instructor") String instructor,
+                                   @RequestParam(value = "description") String description,
+                                   @RequestParam(value = "status") String status,
+                                   @RequestParam(value = "accessCode",required = false) String accessCode) {
+
+        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        if ((accessCode != null))
+            newCourse.setAccessCode(accessCode);
+        ofy().save().entity(newCourse).now();
         return main(session, request);
     }
 
@@ -313,7 +313,12 @@ public class iprogrammingController {
         System.out.println("status: " + status);
         System.out.println("accessCode: " + accessCode);
 
+        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        course.setAccessCode(accessCode);
+
         ModelAndView mav = new ModelAndView();
+        mav.addObject("course", course);
+
         mav.addObject("lessonTitle", lessonTitle);
         mav.addObject("lessonBody", lessonBody);
         mav.addObject("pptLink", pptLink);
@@ -389,7 +394,7 @@ public class iprogrammingController {
             mav.addObject("imageServingUrlList",imageServingUrlList);
         }
         /* redirect to courseContent Page */
-        mav.setViewName("courseContent");
+        mav.setViewName("editCourse");
         return mav;
     }
 
