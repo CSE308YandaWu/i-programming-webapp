@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class iprogrammingController {
+public class IprogrammingController {
 
     @RequestMapping("/")
     public String home() {
