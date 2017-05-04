@@ -108,6 +108,24 @@
                             <li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>
                         </ol>
                     </ul>
+                    <c:choose>
+                        <c:when test="${empty lessonList}">
+                            There is no lessons.
+                        </c:when>
+                        <c:otherwise>
+                            <ol>
+                                <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
+                                    <li>
+                                        <a href="#" onclick="viewLesson(${loop.index});" class="list-group-item list-group-item-action"><p>${lesson.lessonTitle}</p></a>
+                                        <form id="viewLesson${loop.index}" target="_blank">
+                                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                            <input type="hidden" name="courseId" value="${course.id}">
+                                        </form>
+                                    </li>
+                                </c:forEach>
+                            </ol>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="add-btns-group">
                     <form action="/saveCourse">
