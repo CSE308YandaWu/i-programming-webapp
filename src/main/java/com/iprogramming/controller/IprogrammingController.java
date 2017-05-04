@@ -193,7 +193,7 @@ public class IprogrammingController {
     }
 
     @RequestMapping("/enterCourse")
-    public ModelAndView enterCourse(@RequestParam(value = "course") String courseId) {
+    public ModelAndView enterCourse(@RequestParam(value = "courseId") String courseId) {
         Course c = ofy().load().type(Course.class).id(courseId).now();
         List<Lesson> lessons = ofy().load().type(Lesson.class).ancestor(c).order("-dateCreated").list();
 
@@ -232,6 +232,7 @@ public class IprogrammingController {
     public ModelAndView saveCourse(HttpSession session, HttpServletRequest request,
                                    @RequestParam(value = "userEmail") String userEmail,
                                    @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "numEnrolled") int numEnrolled,
                                    @RequestParam(value = "courseTitle") String courseTitle,
                                    @RequestParam(value = "instructor") String instructor,
                                    @RequestParam(value = "description") String description,
@@ -239,8 +240,8 @@ public class IprogrammingController {
                                    @RequestParam(value = "accessCode",required = false) String accessCode) {
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
-        if ((accessCode != null))
-            newCourse.setAccessCode(accessCode);
+        newCourse.setAccessCode(accessCode);
+        newCourse.setNumEnrolled(numEnrolled);
         ofy().save().entity(newCourse).now();
         return main(session, request);
     }
@@ -275,6 +276,7 @@ public class IprogrammingController {
         /* pass the course info to editLesson.jsp */
         mav.addObject("userEmail", userEmail);
         mav.addObject("courseId", courseId);
+        mav.addObject("numEnrolled", numEnrolled);
         mav.addObject("courseTitle", courseTitle);
         mav.addObject("instructor", instructor);
         mav.addObject("description", description);
@@ -300,6 +302,7 @@ public class IprogrammingController {
                                           HttpServletRequest req,
                                           @RequestParam(value = "userEmail") String userEmail,
                                           @RequestParam(value = "courseId") String courseId,
+                                          @RequestParam(value = "numEnrolled") int numEnrolled,
                                           @RequestParam(value = "courseTitle") String courseTitle,
                                           @RequestParam(value = "instructor") String instructor,
                                           @RequestParam(value = "description") String description,
@@ -315,6 +318,7 @@ public class IprogrammingController {
 
         Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
         course.setAccessCode(accessCode);
+        course.setNumEnrolled(numEnrolled);
 
 //        ModelAndView mav = new ModelAndView();
 //        mav.addObject("lessonTitle", lessonTitle);
