@@ -18,7 +18,6 @@ function onSuccess(googleUser) {
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }
     document.getElementById('userEmail').setAttribute("value", googleUser.getBasicProfile().getEmail());
-    //ff20();
     toMain();//from home page.to main page
 
 }

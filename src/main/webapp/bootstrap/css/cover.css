@@ -211,6 +211,9 @@ h2 {
     float: right;
 }
 
+.add-btns-group > form {
+    display: inline;
+}
 .outlinelist {
     text-align: left;
 }

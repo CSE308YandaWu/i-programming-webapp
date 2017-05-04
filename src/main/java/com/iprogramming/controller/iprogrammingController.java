@@ -3,6 +3,7 @@ package com.iprogramming.controller;
 import Beans.Lesson;
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.images.*;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.nio.ByteBuffer;
@@ -16,6 +17,8 @@ import com.googlecode.objectify.ObjectifyFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,39 +57,76 @@ public class iprogrammingController {
         return "home";
     }
 
-	@RequestMapping("/main")
-	public String main(){return "main";}
+    @RequestMapping("/main")
+    public ModelAndView main(HttpSession session, HttpServletRequest request) {
+        //Get and set user
+        if (session.getAttribute("user") == null) {
+            session.setAttribute("user", request.getParameter("userEmail"));
+        }
+        String user = (String) session.getAttribute("user");
+        User existUser = ofy().load().type(User.class).id(user).now();
+        if (existUser == null) {
+            existUser = new User(user);
+            ofy().save().entity(existUser).now();
+        }
+        if (existUser.getJoinedCourse() == null) {
+            System.out.println("this is null");
+        }
+        session.setAttribute("userObject", existUser);
 
-	@RequestMapping("/createCourse")
-	public String createCourse(){return "createCourse_edit";}
+        //Retrieve lists of courses to display on the page
+        List<Course> createdCourses, topCourses;
+        createdCourses = ofy().load().type(Course.class).filter("email", user).order("-dateCreated").list();
+        topCourses = ofy().load().type(Course.class).order("-numEnrolled").limit(5).list();
 
-	@RequestMapping("/editCourse")
-	public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId){
-	    Course c = ofy().load().type(Course.class).id(courseId).now();
-	    return new ModelAndView("editCourse", "course", c);
-	}
+        List<Course> joinedCourses = new ArrayList<Course>();
+        if (existUser.getJoinedCourse() != null) {
+            Course c;
+            for (String s : existUser.getJoinedCourse()) {
+                c = ofy().load().type(Course.class).id(s).now();
+                if (c != null)
+                    joinedCourses.add(c);
+            }
+        }
+
+        ModelAndView mav = new ModelAndView("main");
+
+        mav.addObject("createdCourses", createdCourses);
+        mav.addObject("topCourses", topCourses);
+        mav.addObject("joinedCourses", joinedCourses);
+
+        return mav;
+    }
+
+    @RequestMapping("/createCourse")
+    public String createCourse() {
+        return "createCourse_edit";
+    }
 
 	/*-----------Test controller--------------*/
-    @RequestMapping("/backToEditCourse")
-    public ModelAndView backToEditCourse(ModelAndView mav){
-        Course c = new Course();
-        mav.addObject("course",c);
-        mav.setViewName("editCourse");
-	    return mav;
-    }
+//    @RequestMapping("/backToEditCourse")
+//    public ModelAndView backToEditCourse(ModelAndView mav){
+//        Course c = new Course();
+//        mav.addObject("course",c);
+//        mav.setViewName("editCourse");
+//	    return mav;
+//    }
     /*-----------End Test controller----------*/
 
     @RequestMapping("/deleteCourse")
-    public String deleteCourse(@RequestParam(value = "courseId") String courseId) {
+    public ModelAndView deleteCourse(HttpSession session, HttpServletRequest request,
+                                     @RequestParam(value = "courseId") String courseId) {
         ofy().delete().type(Course.class).id(courseId).now();
-        return "main";
+        return main(session, request);
     }
 
-	@RequestMapping("/editUnit")
-	public String edit_unit(){return "editUnit";}
+    @RequestMapping("/editUnit")
+    public String edit_unit() {
+        return "editUnit";
+    }
 
-	@RequestMapping("/editLesson")
-	public ModelAndView editLesson() {
+    @RequestMapping("/editLesson")
+    public ModelAndView editLesson() {
         ModelAndView mav = new ModelAndView();
         /* create uploadUrl for upload form */
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
@@ -96,15 +136,30 @@ public class iprogrammingController {
         mav.setViewName("editLesson");
         return mav;
     }
-	@RequestMapping("/searchCourse")
-	public String searchCourse(){
-		return "searchCourse";
-	}
 
-	@RequestMapping("/course_page")
-	public String coursePage(){
-		return "courseInfo";
-	}
+    @RequestMapping("/searchCourse")
+    public ModelAndView searchCourse(HttpSession session, HttpServletRequest request) {
+        String input = request.getParameter("UserIn");
+        String method = request.getParameter("Select_method");
+        System.out.println(method);
+        System.out.println(input);
+        List<Course> courses;
+        if (method != null && "title".equals(method)) {
+            courses = ofy().load().type(Course.class).filter("title =", input).list();
+            System.out.println("search by title");
+            System.out.println(courses);
+        } else {
+            courses = ofy().load().type(Course.class).filter("instructor =", input).list();
+            System.out.println("search by instructor");
+            System.out.println(courses);
+        }
+        return new ModelAndView("searchCourse", "result", courses);
+    }
+
+    @RequestMapping("/course_page")
+    public String coursePage() {
+        return "courseInfo";
+    }
 
     /* test pages */
     @RequestMapping("/hello")
@@ -128,12 +183,12 @@ public class iprogrammingController {
 
         ofy().save().entity(newCourse).now();
 
-
         return new ModelAndView("editCourse", "course", newCourse);
     }
 
     @RequestMapping(value = "/enrollCourse")
-    public ModelAndView enrollCourse(@RequestParam(value = "courseId") String courseId,
+    public ModelAndView enrollCourse(HttpSession session, HttpServletRequest request,
+                                     @RequestParam(value = "courseId") String courseId,
                                      @RequestParam(value = "userEmail") String userEmail) {
 
         Course course = ofy().load().type(Course.class).id(courseId).now();
@@ -150,22 +205,7 @@ public class iprogrammingController {
 
         ofy().save().entity(course).now();
         ofy().save().entity(existUser).now();
-//        if(existUser.getJoinedCourse() == null){
-//            System.out.print("heheheheh!");
-//            List<Course> newCreatedCourse = new ArrayList<Course> ();
-//            newCreatedCourse.add(course);
-//            existUser.setJoinedCourse(newCreatedCourse);
-//            System.out.println(existUser.getJoinedCourse().size());
-//
-//
-//        }
-//        if(!(existUser.getJoinedCourse()).contains(course)) {
-//            System.out.println("I don't know!");
-//            existUser.getJoinedCourse().add(course);
-//        }
-//        ofy().save().entity(existUser).now();
-//        System.out.println(existUser.getJoinedCourse().size());
-        return new ModelAndView("main", "model", null);
+        return main(session, request);
     }
 
     @RequestMapping("/enterCourse")
@@ -181,8 +221,9 @@ public class iprogrammingController {
     }
 
     @RequestMapping("/dropCourse")
-    public String dropCourse(@RequestParam(value = "courseId") String courseId,
-                             @RequestParam(value = "userEmail") String userEmail) {
+    public ModelAndView dropCourse(HttpSession session, HttpServletRequest request,
+                                   @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "userEmail") String userEmail) {
         Course course = ofy().load().type(Course.class).id(courseId).now();
         User user = ofy().load().type(User.class).id(userEmail).now();
 
@@ -193,16 +234,28 @@ public class iprogrammingController {
 
         ofy().save().entity(course).now();
         ofy().save().entity(user).now();
-        return "main";
+        return main(session, request);
+    }
+
+
+    @RequestMapping("/editCourse")
+    public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId) {
+        Course c = ofy().load().type(Course.class).id(courseId).now();
+        return new ModelAndView("editCourse", "course", c);
+    }
+
+    @RequestMapping(value = "/saveCourse")
+    public ModelAndView saveCourse(HttpSession session, HttpServletRequest request) {
+        return main(session, request);
     }
 
     @RequestMapping("/logout")
-	public String logout(HttpSession session){
-		session.invalidate();
-		return "home";
-	}
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "home";
+    }
 
-/* Blobstore, upload/serve slides/video/image/pdf controllers */
+    /* Blobstore, upload/serve slides/video/image/pdf controllers */
     /* When confirm button is clicked in editLesson Page */
     @RequestMapping(value = "/editLessonConfirm")
     public ModelAndView editLessonConfirm(@RequestParam(value = "lessonTitle", required = false) String lessonTitle,
@@ -224,13 +277,13 @@ public class iprogrammingController {
         mav.addObject("imageDescriptions", imageDescriptions);
 
 
-        mav.addObject("assignmentDescriptions",assignmentDescriptions);
+        mav.addObject("assignmentDescriptions", assignmentDescriptions);
 //        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
 //        ObjectifyService.ofy().save().entity(newCourse).now();
         /* get the uploaded video files */
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        Map<String, List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
 
-        if(finfos.get("myFileVideo[]") != null){//if user uploaded video files
+        if (finfos.get("myFileVideo[]") != null) {//if user uploaded video files
             List<String> videoBlobKeysList = new ArrayList<String>();//video BlobKeys List that saves the video blobkeys
             for (int i = 0; i < finfos.get("myFileVideo[]").size(); i++) {
                 String gcsVideoFileName = finfos.get("myFileVideo[]").get(i).getGsObjectName();
@@ -243,7 +296,7 @@ public class iprogrammingController {
                     System.out.println("VIDEO KEY: " + blob);
                 }
             }
-            mav.addObject("videoBlobKeysList",videoBlobKeysList);
+            mav.addObject("videoBlobKeysList", videoBlobKeysList);
         }
 
 //        String gcsVideoFileName = finfos.get("myFileVideo[]").get(0).getGsObjectName();
@@ -263,7 +316,7 @@ public class iprogrammingController {
 //        }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////new*************************************************
-        if(finfos.get("myFileAssignment[]") != null){
+        if (finfos.get("myFileAssignment[]") != null) {
             List<String> assignmentBlobKeysList = new ArrayList<String>();
             for (int i = 0; i < finfos.get("myFileAssignment[]").size(); i++) {
                 String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(i).getGsObjectName();
@@ -275,7 +328,7 @@ public class iprogrammingController {
                     assignmentBlobKeysList.add(blob);
                 }
             }
-            mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
+            mav.addObject("assignmentBlobKeysList", assignmentBlobKeysList);
         }
         /////////////////////////new*************************************************
 //        String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(0).getGsObjectName();
@@ -293,7 +346,7 @@ public class iprogrammingController {
 //            model.put("blobKeyA1", blob1);
 //        }
         /////////////////////////new*************************************************
-        if(finfos.get("myFileImage[]") != null){
+        if (finfos.get("myFileImage[]") != null) {
             List<String> imageServingUrlList = new ArrayList<String>();
             for (int i = 0; i < finfos.get("myFileImage[]").size(); i++) {
                 String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
@@ -309,16 +362,16 @@ public class iprogrammingController {
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
-                            new GcsFilename("i-programming.appspot.com", "resizedImage"+i+".jpeg"),
+                            new GcsFilename("i-programming.appspot.com", "resizedImage" + i + ".jpeg"),
                             new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
                             ByteBuffer.wrap(resizedImage.getImageData()));
                     //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
-                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage"+i+".jpeg");
+                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + i + ".jpeg");
                     String url = services.getServingUrl(serve);
                     imageServingUrlList.add(url);
                 }
             }
-            mav.addObject("imageServingUrlList",imageServingUrlList);
+            mav.addObject("imageServingUrlList", imageServingUrlList);
         }
 
         /////////////////////////new*************************************************
@@ -355,7 +408,7 @@ public class iprogrammingController {
 
     /* courseContent Page */
     @RequestMapping("/courseContent")
-    public ModelAndView courseContent(){
+    public ModelAndView courseContent() {
 //        return new ModelAndView("courseContent","model",model);
         return new ModelAndView("courseContent");
     }

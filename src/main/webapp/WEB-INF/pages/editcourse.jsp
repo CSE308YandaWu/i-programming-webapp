@@ -76,9 +76,6 @@
                     </table>
                 </div>
                 <div class="add-btns-group">
-                    <button type="button" class="btn btn-primary" onclick="toEditUnit();">Add Unit
-                        <form id="toEditUnit"><input type="hidden" ></form>
-                    </button>
                     <button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson
                         <form id="toEditLesson"><input type="hidden" ></form>
                     </button>
@@ -102,14 +99,14 @@
                         </ol>
                     </ul>
                 </div>
-                <%--<div class="add-btns-group">--%>
-                    <%--<form action="/saveCourse">--%>
-
-                    <%--</form>--%>
-                    <%--<button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson--%>
-                        <%--<form id="safdsafsa"><input type="hidden" ></form>--%>
-                    <%--</button>--%>
-                <%--</div>--%>
+                <div class="add-btns-group">
+                    <form action="/saveCourse">
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </form>
+                    <form action="/main">
+                        <input type="submit" class="btn btn-primary" value="Cancel">
+                    </form>
+                </div>
             </div>
             <div class="mastfoot">
                 <div class="inner">

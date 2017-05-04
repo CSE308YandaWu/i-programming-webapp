@@ -27,7 +27,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <%--<link rel="icon" href="../../favicon.ico">--%>
 
     <title>Main Page</title>
 
@@ -45,44 +44,6 @@
 </head>
 
 <body>
-<%
-
-
-    if (session.getAttribute("user") == null) {
-        session.setAttribute("user", request.getParameter("userEmail"));
-    }
-    String user = (String) session.getAttribute("user");
-    List<Course> courses, createdCourses;
-//    System.out.println(user);
-    User existUser = ofy()
-            .load()
-            .type(User.class)
-            .id(user)
-            .now();
-
-    if (existUser == null) {
-//        List<Course> createdCourse = new ArrayList<Course>();
-//        List<Course> joinedCourse = new ArrayList<Course>();
-//        createdCourse.add(new Course());
-//        System.out.print(createdCourse);
-        System.out.println("!!!!!!");
-        existUser = new User(user);
-        ofy().save().entity(existUser).now();
-    }
-    if (existUser.getJoinedCourse() == null) {
-        System.out.println("this is null");
-    }
-    session.setAttribute("userObject", existUser);
-
-    courses = ofy()
-            .load()
-            .type(Course.class)
-            .filter("email", user)
-            .order("-dateCreated")
-            .list();
-    pageContext.setAttribute("courses", courses);
-%>
-
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="cover-container">
@@ -94,16 +55,6 @@
                     </h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <%--<li><a>--%>
-                            <%--<%--%>
-                            <%--if(session.getAttribute("user") == null){--%>
-                            <%--String user = request.getParameter("userEmail");--%>
-                            <%--session.setAttribute("user", user);--%>
-                            <%--}--%>
-                            <%--out.println(session.getAttribute("user"));--%>
-                            <%--%>--%>
-                            <%--</a>--%>
-                            <%--</li>--%>
                             <li>
                                 <div id="my-signin2" style="display: none;"></div>
                                 <a id="userEmail"></a>
@@ -130,23 +81,12 @@
             </div>
             <div class="inner toplist">
                 <h2>Top 5 Popular Courses</h2>
-                <%
-//                    String title = request.getParameter("CourseTitle");
-                    List<Course> courses1;
-                    courses1 = ofy()
-                            .load()
-                            .type(Course.class)
-                            .order("-numEnrolled")
-                            .limit(5)
-                            .list();
-                    pageContext.setAttribute("courses1", courses1);
-                %>
                 <c:choose>
-                    <c:when test="${empty courses1}">
+                    <c:when test="${empty topCourses}">
                         Empty!
                     </c:when>
                     <c:otherwise>
-                        <c:forEach var="x" items="${courses1}">
+                        <c:forEach var="x" items="${topCourses}">
                             <li class="list-group-item">
                                 <div class="panel panel-default panel1">
                                     <div class="panel-heading">
@@ -181,27 +121,12 @@
             <div class="inner createdlist">
                 <h2>My Created Courses</h2>
                 <div class="list-group">
-                    <%--<%--%>
-                    <%--if (session.getAttribute("user") == null) {--%>
-                    <%--session.setAttribute("user", request.getParameter("userEmail"));--%>
-                    <%--}--%>
-                    <%--String user = (String) session.getAttribute("user");--%>
-                    <%--List<Course> courses;--%>
-
-                    <%--courses = ObjectifyService.ofy()--%>
-                    <%--.load()--%>
-                    <%--.type(Course.class)--%>
-                    <%--.filter("email", user)--%>
-                    <%--.order("-dateCreated")--%>
-                    <%--.list();--%>
-                    <%--pageContext.setAttribute("courses", courses);--%>
-                    <%--%>--%>
                     <c:choose>
-                        <c:when test="${empty courses}">
+                        <c:when test="${empty createdCourses}">
                             You have not created any courses yet.
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="x" items="${courses}">
+                            <c:forEach var="x" items="${createdCourses}">
                                 <a href="#" onclick="toEditCourse(this)"
                                    class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
@@ -220,18 +145,6 @@
             <div class="inner enrolledlist">
                 <h2>My Enrolled Courses</h2>
                 <div class="list-group">
-                    <%
-                        List<Course> joinedCourses = new ArrayList<Course>();
-                        if (existUser.getJoinedCourse() != null) {
-                            Course c;
-                            for (String s : existUser.getJoinedCourse()) {
-                                c = ofy().load().type(Course.class).id(s).now();
-                                if (c != null)
-                                    joinedCourses.add(c);
-                            }
-                        }
-                        pageContext.setAttribute("joinedCourses", joinedCourses);
-                    %>
                     <c:choose>
                         <c:when test="${empty joinedCourses}">
                             You have not joined any courses yet.

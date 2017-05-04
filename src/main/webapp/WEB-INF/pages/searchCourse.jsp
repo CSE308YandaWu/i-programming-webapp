@@ -84,40 +84,12 @@
     <div class="resultlist">
         <h2>Search Result</h2>
         <ul class="list-group">
-            <%
-
-                String input =request.getParameter("UserIn");
-                String method =request.getParameter("Select_method");
-                System.out.println(method);
-                System.out.println(input);
-                List<Course> courses;
-                if(method != null && "title".equals(method)){
-                    courses = ObjectifyService.ofy()
-                            .load()
-                            .type(Course.class)
-                            .filter("title =",input)
-                            .list();
-                    System.out.println("search by title");
-                    System.out.println(courses);
-                }
-                else{
-                    courses = ObjectifyService.ofy()
-                            .load()
-                            .type(Course.class)
-                            .filter("instructor =",input)
-                            .list();
-                    System.out.println("search by instructor");
-                    System.out.println(courses);
-            }
-
-                pageContext.setAttribute("courses", courses);
-            %>
             <c:choose>
-                <c:when test="${empty courses}">
+                <c:when test="${empty result}">
                     No course found!
                 </c:when>
                 <c:otherwise>
-                    <c:forEach var="x" items="${courses}">
+                    <c:forEach var="x" items="${result}">
                         <li class="list-group-item">
                             <div class="panel panel-default panel1">
                                 <div class="panel-heading">

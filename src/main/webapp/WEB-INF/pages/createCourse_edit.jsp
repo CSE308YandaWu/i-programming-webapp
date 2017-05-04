@@ -56,16 +56,6 @@
 
         <table class="table1">
             <caption>Course Information:</caption>
-            <%--<tr>--%>
-                <%--<td>--%>
-                    <%--<span><strong>Course ID:</strong></span>--%>
-                <%--</td>--%>
-
-                <%--<td>--%>
-                    <%--<input name="courseId" type="text" size="40" value="" form="courseinfo">--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-
             <tr>
                 <td>
                     <span><strong>Course Title:</strong></span>

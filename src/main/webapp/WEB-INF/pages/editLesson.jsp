@@ -151,7 +151,6 @@
                     <div class="col-md-2">
                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
                         <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data"><input type="hidden"></form>
-                        <form action="/backToEditCourse"><input type="submit"></form>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">
