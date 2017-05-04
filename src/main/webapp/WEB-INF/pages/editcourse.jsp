@@ -77,7 +77,17 @@
                 </div>
                 <div class="add-btns-group">
                     <button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson
-                        <form id="toEditLesson"><input type="hidden" ></form>
+                        <form id="toEditLesson">
+                            <input type="hidden" name="userEmail" value="${model.email}">
+                            <input type="hidden" name="courseId" value="${model.id}">
+                            <input type="hidden" name="courseTitle" value="${model.title}">
+                            <input type="hidden" name="instructor" value="${model.instructor}">
+                            <input type="hidden" name="description" value="${model.description}">
+                            <input type="hidden" name="status" value="${model.status}">
+                            <c:if test="${model.status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${model.accessCode}">
+                            </c:if>
+                        </form>
                     </button>
                 </div>
                 <div class="outlinelist">

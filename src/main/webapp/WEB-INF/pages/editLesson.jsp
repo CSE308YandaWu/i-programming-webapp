@@ -8,20 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>--%>
-<%--<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>--%>
-<%--<%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <%--google-sign-in import--%>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
-<%--<%--%>
-    <%--//create uploadUrl for upload form--%>
-    <%--BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();--%>
-    <%--UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");--%>
-    <%--String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);--%>
-<%--%>--%>
 
 <head>
     <meta charset="utf-8">
@@ -150,7 +143,17 @@
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
-                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data"><input type="hidden"></form>
+                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="userEmail" value="${userEmail}">
+                            <input type="hidden" name="courseId" value="${courseId}">
+                            <input type="hidden" name="courseTitle" value="${courseTitle}">
+                            <input type="hidden" name="instructor" value="${instructor}">
+                            <input type="hidden" name="description" value="${description}">
+                            <input type="hidden" name="status" value="${status}">
+                            <c:if test="${status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${accessCode}">
+                            </c:if>
+                        </form>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2">
