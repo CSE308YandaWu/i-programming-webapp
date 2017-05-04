@@ -255,6 +255,7 @@ public class IprogrammingController {
     @RequestMapping("/editLesson")
     public ModelAndView editLesson(@RequestParam(value = "userEmail") String userEmail,
                                    @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "numEnrolled") int numEnrolled,
                                    @RequestParam(value = "courseTitle") String courseTitle,
                                    @RequestParam(value = "instructor") String instructor,
                                    @RequestParam(value = "description") String description,
