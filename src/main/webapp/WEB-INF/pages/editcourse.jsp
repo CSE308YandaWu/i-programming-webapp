@@ -137,22 +137,22 @@
                 </div>
                 <div class="outlinelist">
                     <h3 class="outlinelabel">Course Outline</h3>
-                    <ul>
-                        <li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>
-                        <ol>
-                            <%--<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>--%>
-                            <li><a href="#" onclick="toCourseContent()">Introduction</a>(<a href="#">Edit</a>)
-                                <form id="toCourseContent"><input type="hidden"></form>
-                            </li>
-                            <li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>
-                            <li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>
-                        </ol>
-                        <li><a href="#">Unit 2 - Interpreting Result</a>(<a href="#">Edit</a>)</li>
-                        <ol>
-                            <li><a href="#">Lesson 1....</a>(<a href="#">Edit</a>)</li>
-                            <li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>
-                        </ol>
-                    </ul>
+                    <%--<ul>--%>
+                        <%--<li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--<ol>--%>
+                            <%--&lt;%&ndash;<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>&ndash;%&gt;--%>
+                            <%--<li><a href="#" onclick="toCourseContent()">Introduction</a>(<a href="#">Edit</a>)--%>
+                                <%--<form id="toCourseContent"><input type="hidden"></form>--%>
+                            <%--</li>--%>
+                            <%--<li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>--%>
+                            <%--<li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--</ol>--%>
+                        <%--<li><a href="#">Unit 2 - Interpreting Result</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--<ol>--%>
+                            <%--<li><a href="#">Lesson 1....</a>(<a href="#">Edit</a>)</li>--%>
+                            <%--<li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--</ol>--%>
+                    <%--</ul>--%>
                     <c:choose>
                         <c:when test="${empty lessonList}">
                             There is no lessons.
