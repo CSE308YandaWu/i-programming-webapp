@@ -15,8 +15,7 @@ import java.util.Date;
 public class Lesson {
     @Id
     private long lessonId;
-    @Parent
-    private Key<Course> courseId;
+    private String courseId;
     private String title;
     @Index
     private Date dateCreated;
@@ -41,11 +40,11 @@ public class Lesson {
         this.lessonId = lessonId;
     }
 
-    public Key<Course> getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Key<Course> courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
