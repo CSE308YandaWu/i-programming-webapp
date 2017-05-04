@@ -35,7 +35,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="showAccessCode()">
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="cover-container">
@@ -63,16 +63,59 @@
                 <h3 class="editlabel">--------Edit Course--------</h3>
                 <div class="course-info">
                     <table class="table1">
-                        <tr><td>User:</td><td>${course.email}</td></tr>
-                        <tr><td>Course Id:</td><td>${course.id}</td></tr>
-                        <tr><td>Course Title:</td><td>${course.title}</td></tr>
-                        <tr><td>Instructor:</td><td>${course.instructor}</td></tr>
-                        <tr><td>Status:</td><td>${course.status}</td></tr>
-                        <c:if test="${course.status == 'private'}">
-                            <tr><td>Access Code: </td><td>${course.accessCode}</td></tr>
-                        </c:if>
-                        <tr><td>Description:</td><td>${course.description}</td></tr>
-                        <tr><td>Date Created: </td><td>${course.dateCreated}</td></tr>
+                        <tr>
+                            <td>User:</td>
+                            <td>${course.email}</td>
+                        </tr>
+                        <tr>
+                            <td>Course Id:</td>
+                            <td>${course.id}</td>
+                        </tr>
+                        <tr>
+                            <td>Date Created:</td>
+                            <td>${course.dateCreated}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Enrollment:</td>
+                            <td>${course.numEnrolled}</td>
+                        </tr>
+                        <tr>
+                            <td>Course Title:</td>
+                            <td><input name="courseTitle" value="${course.title}" oninput="setCourseTitle(this)"></td>
+                        </tr>
+                        <tr>
+                            <td>Instructor:</td>
+                            <td><input name="instructor" value="${course.instructor}" oninput="setInstructor(this)">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Status:</td>
+                            <td><select name="status" id="status" onchange="setStatus(this)">
+                                <c:choose>
+                                    <c:when test="${course.status == 'private'}">
+                                        <option value="public">Public</option>
+                                        <option value="private" selected>Private</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="public" selected>Public</option>
+                                        <option value="private">Private</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </select></td>
+                        </tr>
+                        <%--<c:if test="${course.status == 'private'}">--%>
+                            <tr id="statusRow">
+                                <td>Access Code:</td>
+                                <td><input name="accessCode" value="${course.accessCode}" oninput="setAccessCode(this)">
+                                </td>
+                            </tr>
+                        <%--</c:if>--%>
+                        <tr>
+                            <td>Description:</td>
+                            <td><textarea rows="7" cols="50" name="description"
+                                          oninput="setDescription(this)">${course.description}</textarea></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="add-btns-group">
@@ -80,47 +123,66 @@
                         <form id="toEditLesson">
                             <input type="hidden" name="userEmail" value="${course.email}">
                             <input type="hidden" name="courseId" value="${course.id}">
-                            <input type="hidden" name="courseTitle" value="${course.title}">
-                            <input type="hidden" name="instructor" value="${course.instructor}">
-                            <input type="hidden" name="description" value="${course.description}">
-                            <input type="hidden" name="status" value="${course.status}">
-                            <c:if test="${course.status == 'private'}">
-                                <input type="hidden" name="accessCode" value="${course.accessCode}">
-                            </c:if>
+                            <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                            <input type="hidden" name="courseTitle" id="titleEditLesson" value="${course.title}">
+                            <input type="hidden" name="instructor" id="instructorEditLesson"
+                                   value="${course.instructor}">
+                            <input type="hidden" name="description" id="descriptionEditLesson"
+                                   value="${course.description}">
+                            <input type="hidden" name="status" id="statusEditLesson" value="${course.status}">
+                            <input type="hidden" id="accessCodeEditLesson" name="accessCode"
+                                       value="${course.accessCode}">
                         </form>
                     </button>
                 </div>
                 <div class="outlinelist">
                     <h3 class="outlinelabel">Course Outline</h3>
-                    <ul>
-                        <li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>
-                        <ol>
-                            <%--<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>--%>
-                            <li><a href="#" onclick="toCourseContent()">Introduction</a>(<a href="#">Edit</a>)
-                                <form id="toCourseContent"><input type="hidden"></form>
-                            </li>
-                            <li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>
-                            <li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>
-                        </ol>
-                        <li><a href="#">Unit 2 - Interpreting Result</a>(<a href="#">Edit</a>)</li>
-                        <ol>
-                            <li><a href="#">Lesson 1....</a>(<a href="#">Edit</a>)</li>
-                            <li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>
-                        </ol>
-                    </ul>
+                    <%--<ul>--%>
+                        <%--<li><a href="#">Unit 1 - Introduction</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--<ol>--%>
+                            <%--&lt;%&ndash;<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>&ndash;%&gt;--%>
+                            <%--<li><a href="#" onclick="toCourseContent()">Introduction</a>(<a href="#">Edit</a>)--%>
+                                <%--<form id="toCourseContent"><input type="hidden"></form>--%>
+                            <%--</li>--%>
+                            <%--<li><a href="#">Filter image</a>(<a href="#">Edit</a>)</li>--%>
+                            <%--<li><a href="#">How search works</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--</ol>--%>
+                        <%--<li><a href="#">Unit 2 - Interpreting Result</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--<ol>--%>
+                            <%--<li><a href="#">Lesson 1....</a>(<a href="#">Edit</a>)</li>--%>
+                            <%--<li><a href="#">Lesson 2...</a>(<a href="#">Edit</a>)</li>--%>
+                        <%--</ol>--%>
+                    <%--</ul>--%>
+                    <c:choose>
+                        <c:when test="${empty lessonList}">
+                            There is no lessons.
+                        </c:when>
+                        <c:otherwise>
+                            <ol>
+                                <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
+                                    <li>
+                                        <a href="#" onclick="viewLesson(${loop.index});" class="list-group-item list-group-item-action"><p>${lesson.lessonTitle}</p></a>
+                                        <form id="viewLesson${loop.index}" target="_blank">
+                                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                            <input type="hidden" name="courseId" value="${course.id}">
+                                        </form>
+                                    </li>
+                                </c:forEach>
+                            </ol>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="add-btns-group">
                     <form action="/saveCourse">
                         <input type="submit" class="btn btn-primary" value="Save">
                         <input type="hidden" name="userEmail" value="${course.email}">
                         <input type="hidden" name="courseId" value="${course.id}">
-                        <input type="hidden" name="courseTitle" value="${course.title}">
-                        <input type="hidden" name="instructor" value="${course.instructor}">
-                        <input type="hidden" name="description" value="${course.description}">
-                        <input type="hidden" name="status" value="${course.status}">
-                        <c:if test="${course.status == 'private'}">
-                            <input type="hidden" name="accessCode" value="${course.accessCode}">
-                        </c:if>
+                        <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                        <input type="hidden" name="courseTitle" id="title2Save" value="${course.title}">
+                        <input type="hidden" name="instructor" id="instructor2Save" value="${course.instructor}">
+                        <input type="hidden" name="description" id="description2Save" value="${course.description}">
+                        <input type="hidden" name="status" id="status2Save" value="${course.status}">
+                        <input type="hidden" name="accessCode" id="accessCode2Save" value="${course.accessCode}">
                     </form>
                     <form action="/main">
                         <input type="submit" class="btn btn-primary" value="Cancel">

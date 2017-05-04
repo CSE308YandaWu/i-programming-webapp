@@ -101,8 +101,8 @@
                                                 <input name="userEmail" type="hidden" value="${user}">
                                                 <c:choose>
                                                     <c:when test="${x.status == 'private'}">
-                                                        <p>Access Code: <input type="text" name="accessCode" id="inputCode"></p>
-                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)">
+                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
+                                                            <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <input name="confirm" type="submit" value="Enroll" >
