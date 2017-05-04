@@ -245,6 +245,14 @@ function toCourseContent() {
     document.getElementById("toCourseContent").submit();
 }
 /**
+ * ---------------------------------------View lesson buttons(view lesson in editCourse Page)---------------------------------------
+ */
+function viewLesson(lessonIndex) {//assignment index
+    document.getElementById("viewLesson"+lessonIndex).action = "/courseContent";
+    document.getElementById("viewLesson"+lessonIndex).submit();
+}
+
+/**
  * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
 function serveAssignment(index) {//assignment index
