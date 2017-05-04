@@ -146,6 +146,7 @@
                         <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="userEmail" value="${userEmail}">
                             <input type="hidden" name="courseId" value="${courseId}">
+                            <input type="hidden" name="numEnrolled" value="${numEnrolled}">
                             <input type="hidden" name="courseTitle" value="${courseTitle}">
                             <input type="hidden" name="instructor" value="${instructor}">
                             <input type="hidden" name="description" value="${description}">

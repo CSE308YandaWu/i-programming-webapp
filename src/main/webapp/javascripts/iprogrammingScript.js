@@ -1,6 +1,6 @@
 /**
-    * Created by YandaWu on 4/1/2017.
-    */
+ * Created by YandaWu on 4/1/2017.
+ */
 
 var addVideoCounter = 0;//add video counter   reset????
 var addVideoLimit = 4;//add video limit
@@ -85,25 +85,32 @@ function toEditLesson() {
     document.getElementById("toEditLesson").submit();
 }
 
-function courseStatus(){
+function courseStatus() {
     var value = document.getElementById("status").value;
     var statusRow = document.getElementById("statusRow");
-    if(value == "private")
+    if (value == "private")
         statusRow.style.display = "table-row";
-    if(value == "public")
+    if (value == "public")
         statusRow.style.display = "none";
 }
 
-function checkCode(validCode, button){
-    var input = document.getElementById("inputCode").value;
-    var x = button.parentNode.parentNode.getElementsByTagName("p")[3];
-    if((input == validCode)){
-        button.parentNode.submit();
+function checkCode(validCode, button) {
+    var input = button.previousElementSibling.value;
+    // alert(validCode+"("+input+") ");
+    var x = button.parentNode.parentNode.parentNode.getElementsByTagName("p")[3];
+    if ((input == validCode)) {
+        button.parentNode.parentNode.submit();
     }
     else {
         x.style.display = "inline";
     }
-
+}
+function checkCodeEnter(event, validCode, input){
+    if (event.keyCode == 13) {
+        checkCode(validCode, input.nextElementSibling);
+        event.preventDefault();
+        return false;
+    }
 }
 
 /**
@@ -159,7 +166,7 @@ function signOutToHome() {
  */
 
 
-function goBack(){
+function goBack() {
     history.back();
 }
 
@@ -199,6 +206,38 @@ function editLessonToEditCourseCancel() {
     document.getElementById("editLessonToEditCourseCancel").submit();
 }
 /**
+ * ---------------------------------------editCourse Page function---------------------------------------
+ */
+function setCourseTitle(x) {
+    document.getElementById("title2Save").setAttribute("value", x.value);
+    document.getElementById("titleEditLesson").setAttribute("value", x.value);
+}
+function setInstructor(x) {
+    document.getElementById("instructor2Save").setAttribute("value", x.value);
+    document.getElementById("instructorEditLesson").setAttribute("value", x.value);
+}
+function setDescription(x) {
+    document.getElementById("description2Save").setAttribute("value", x.value);
+    document.getElementById("descriptionEditLesson").setAttribute("value", x.value);
+}
+function setAccessCode(x) {
+    document.getElementById("accessCode2Save").setAttribute("value", x.value);
+    document.getElementById("accessCodeEditLesson").setAttribute("value", x.value);
+}
+function setStatus(x){
+    document.getElementById("status2Save").setAttribute("value", x.value);
+    document.getElementById("statusEditLesson").setAttribute("value", x.value);
+    showAccessCode();
+}
+function showAccessCode(){
+    var x = document.getElementById("status").value;
+    var y = document.getElementById("statusRow");
+    if ( x == "public")
+        y.style.display = "none";
+    else
+        y.style.display = "table-row";
+}
+/**
  * ---------------------------------------Other navigation button---------------------------------------
  */
 function toCourseContent() {
@@ -209,8 +248,8 @@ function toCourseContent() {
  * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
 function serveAssignment(index) {//assignment index
-    document.getElementById("serveAssignment"+index).action = "/serve";
-    document.getElementById("serveAssignment"+index).submit();
+    document.getElementById("serveAssignment" + index).action = "/serve";
+    document.getElementById("serveAssignment" + index).submit();
 }
 function serveAssignment1() {
     document.getElementById("serveAssignment1").action = "/serve";
@@ -232,17 +271,17 @@ function serveVideo1() {
 /**
  * ---------------------------------------Add Content functions---------------------------------------
  */
-function enableOptionButton(){
+function enableOptionButton() {
     document.getElementById("addOptionButton").disabled = false;
 }
-function addVideoOptions(divName){
+function addVideoOptions(divName) {
     var newdiv = document.createElement('div');
     var e = document.getElementById("videoUploadOption");
     var strOption = e.options[e.selectedIndex].value;
-    if (addVideoCounter == addVideoLimit)  {
+    if (addVideoCounter == addVideoLimit) {
         alert("You have reached the limit of adding " + addVideoCounter + " video");
-    }else{
-        switch(strOption) {
+    } else {
+        switch (strOption) {
             case '1':
                 newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
                     "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
@@ -256,13 +295,13 @@ function addVideoOptions(divName){
         addVideoCounter++;
     }
 }
-function addImageButton(divName){
+function addImageButton(divName) {
     var newdiv = document.createElement('div');
     newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
         "<br><textarea class='form-control' rows='2' wrap='soft' name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
     document.getElementById(divName).appendChild(newdiv);
 }
-function addAssignmentButton(divName){
+function addAssignmentButton(divName) {
     var newdiv = document.createElement('div');
     newdiv.innerHTML = " <br><input type='file' multiple name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
         "<br><textarea class='form-control' rows='2' wrap='soft' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description

@@ -223,10 +223,15 @@ h2 {
 }
 
 .table1 {
-    width: 50%;
+    width: 70%;
     text-align: left;
     margin-bottom: 100px;
+}
 
+.table1 * td{
+    padding-bottom: 4px;
+    padding-top: 4px;
+    color: black;
 }
 
 .deletebutton,
