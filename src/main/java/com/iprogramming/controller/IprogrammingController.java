@@ -75,13 +75,36 @@ public class IprogrammingController {
 	public String edit_unit(){return "editUnit";}
 
 	@RequestMapping("/editLesson")
-	public ModelAndView editLesson() {
+	public ModelAndView editLesson(@RequestParam(value = "userEmail") String userEmail,
+                                   @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "courseTitle") String courseTitle,
+                                   @RequestParam(value = "instructor") String instructor,
+                                   @RequestParam(value = "description") String description,
+                                   @RequestParam(value = "status") String status,
+                                   @RequestParam(value = "accessCode",required = false) String accessCode) {
+//	    System.out.println("userEmail: " + userEmail);
+//        System.out.println("courseId: " + courseId);
+//        System.out.println("courseTitle: " + courseTitle);
+//        System.out.println("instructor: " + instructor);
+//        System.out.println("description: " + description);
+//        System.out.println("status: " + status);
+//        System.out.println("accessCode: " + accessCode);
         ModelAndView mav = new ModelAndView();
         /* create uploadUrl for upload form */
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
         UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("i-programming.appspot.com");
         String uploadUrl = blobstoreService.createUploadUrl("/editLessonConfirm", uploadOptions);
         mav.addObject("uploadUrl", uploadUrl);
+        /* pass the course info to editLesson.jsp */
+        mav.addObject("userEmail", userEmail);
+        mav.addObject("courseId", courseId);
+        mav.addObject("courseTitle", courseTitle);
+        mav.addObject("instructor", instructor);
+        mav.addObject("description", description);
+        mav.addObject("status", status);
+        if(accessCode!=null){
+            mav.addObject("accessCode", accessCode);
+        }
         mav.setViewName("editLesson");
         return mav;
     }
@@ -202,7 +225,22 @@ public class IprogrammingController {
                                           @RequestParam(value = "videoDescriptions[]", required = false) List<String> videoDescriptions,
                                           @RequestParam(value = "imageDescriptions[]", required = false) List<String> imageDescriptions,
                                           @RequestParam(value = "assignmentDescriptions[]", required = false) List<String> assignmentDescriptions,
-                                          HttpServletRequest req) throws IOException {
+                                          HttpServletRequest req,
+                                          @RequestParam(value = "userEmail") String userEmail,
+                                          @RequestParam(value = "courseId") String courseId,
+                                          @RequestParam(value = "courseTitle") String courseTitle,
+                                          @RequestParam(value = "instructor") String instructor,
+                                          @RequestParam(value = "description") String description,
+                                          @RequestParam(value = "status") String status,
+                                          @RequestParam(value = "accessCode",required = false) String accessCode) throws IOException {
+        System.out.println("userEmail: " + userEmail);
+        System.out.println("courseId: " + courseId);
+        System.out.println("courseTitle: " + courseTitle);
+        System.out.println("instructor: " + instructor);
+        System.out.println("description: " + description);
+        System.out.println("status: " + status);
+        System.out.println("accessCode: " + accessCode);
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("lessonTitle", lessonTitle);
         mav.addObject("lessonBody", lessonBody);
