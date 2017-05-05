@@ -303,6 +303,7 @@ public class iprogrammingController {
                                           @RequestParam(value = "pptDescription", required = false) String pptDescription,
                                           @RequestParam(value = "videoLinks[]", required = false) List<String> videoLinks,
                                           @RequestParam(value = "videoDescriptions[]", required = false) List<String> videoDescriptions,
+                                          @RequestParam(value = "videoTypes[]", required = false) List<String> videoTypes,
                                           @RequestParam(value = "imageDescriptions[]", required = false) List<String> imageDescriptions,
                                           @RequestParam(value = "assignmentDescriptions[]", required = false) List<String> assignmentDescriptions,
                                           HttpServletRequest req,
@@ -399,14 +400,13 @@ public class iprogrammingController {
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
         String id = new ObjectifyFactory().allocateId(Lesson.class).getString();
-        Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions,
+        Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions, videoTypes,
                 imageServingUrlList, imageDescriptions, assignmentBlobKeysList, assignmentDescriptions);
         /* save the lesson into datastore  */
         ofy().save().entity(lesson).now();
         /* get lesson list from the datastore */
 
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
-        System.out.println("fk: " + lessonList.size());
         ModelAndView mav = new ModelAndView();
         /* add course object to the model */
         mav.addObject("course", course);
@@ -426,7 +426,9 @@ public class iprogrammingController {
 //        else
 //            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
         ModelAndView mav = new ModelAndView();
+        //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + lesson.getPPTLink());
         mav.addObject("lesson",lesson);
+        //mav.addObject("pptLink", lesson.getPPTLink());
         mav.setViewName("courseContent");
         return mav;
     }
