@@ -32,90 +32,101 @@
     <link href="../../bootstrap/css/cover.css" rel="stylesheet">
 </head>
 <body>
-
-
-    <ul class="navUl">
-
-        <li>
-            <a href="#" onclick="searchCourseToHome()">I-Programming</a>
-            <form id="searchCourseToHome"><input type="hidden"></form>
-        </li>
-        <li style="float:right">
-            <a href="#" onclick="signOut()">Sign out</a>
-            <form id="signOutToHome"><input type="hidden"></form>
-        </li>
-
-        <li style="float:right">
-            <a id="my-signin2" style="display: none;"></a>
-            <a id="userEmail"></a>
-        </li>
-
-    </ul>
-
-    <h1>Course Search</h1>
-    <br>
-    <div class="container1">
-        <form action="#" type="hidden" id="searchClass">
-            <div class="row">
-                <div class="col-md-2" ></div>
-                <div class="col-md-5" >
-                    <input type="text" class="form-control" name="UserIn" id="UserIn" type="text"  placeholder="Enter course to search for..." required autofocus>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">
+                            <a href="#" onclick="editCourseToHome()">I-Programming</a>
+                            <form id="editCourseToHome"><input type="hidden"></form>
+                        </h3>
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <li>
+                                    <div id="my-signin2" style="display: none;"></div>
+                                    <a id="userEmail"></a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="signOut();">Sign out</a>
+                                    <form id="signOutToHome"><input type="hidden"></form>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                <div class="col-md-2" >
-                    <select name="MySelect" id="MySelect" style="color:black">
-                        <option name="Search_by_title" value="title">Search by title</option>
-                        <option name="Search_by_instructor" value="instructor">Search by instructor</option>
-                    </select>
-                </div>
-                <div class="col-md-1" >
-                    <button id="seach_btn" class="btn btn-primary btn-block" type="submit" onclick="do_search()">Search</button>
-                    <%--<input id="search_btn" type="submit" value="Search" style="color:black" >--%>
-                </div>
-                <input type = hidden name="Select_method" id="select_method" >
-            </div>
-        </form>
-        <br>
-        <div class="resultlist">
-            <h2>Search Result</h2>
-            <ul class="list-group">
-                <c:choose>
-                    <c:when test="${empty result}">
-                        No course found!
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach var="x" items="${result}">
-                            <li class="list-group-item">
-                                <div class="panel panel-default panel1">
-                                    <div class="panel-heading">
-                                        <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
-                                    </div>
-                                    <div id="${x.id}" class="panel-collapse collapse">
-                                        <div class="panel-body panelbody">
-                                            <p>Instructors: ${x.instructor}</p>
-                                            <p>Status: ${x.status}</p>
-                                            <form action="/enrollCourse" id="enrollForm">
-                                                <input name="courseId" type="hidden" value="${x.id}">
-                                                <input name="userEmail" type="hidden" value="${user}">
-                                                <c:choose>
-                                                    <c:when test="${x.status == 'private'}">
-                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
-                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input name="confirm" type="submit" value="Enroll" >
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </form>
-                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
-                                        </div>
-                                    </div>
+                <div class="inner editcourse">
+                    <h1>Course Search</h1>
+                    <div class="container1">
+                        <form action="#" type="hidden" id="searchClass">
+                            <div class="row">
+                                <div class="col-md-8" >
+                                    <input type="text" class="form-control" name="UserIn" id="UserIn" type="text"  placeholder="Enter course to search for..." required autofocus>
                                 </div>
-                            </li>
+                                <div class="col-md-3" >
+                                    <select name="MySelect" id="MySelect" style="color:black">
+                                        <option name="Search_by_title" value="title">Search by title</option>
+                                        <option name="Search_by_instructor" value="instructor">Search by instructor</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2" >
+                                    <button id="seach_btn" class="btn btn-primary btn-block" type="submit" onclick="do_search()">Search</button>
+                                    <%--<input id="search_btn" type="submit" value="Search" style="color:black" >--%>
+                                </div>
+                                <input type = hidden name="Select_method" id="select_method" >
+                            </div>
+                        </form>
+                        <br>
+                        <div class="resultlist">
+                            <h2>Search Result</h2>
+                            <ul class="list-group">
+                                <c:choose>
+                                    <c:when test="${empty result}">
+                                        No course found!
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="x" items="${result}">
+                                            <li class="list-group-item">
+                                                <div class="panel panel-default panel1">
+                                                    <div class="panel-heading">
+                                                        <a data-toggle="collapse" href="#${x.id}">${x.title}</a>
+                                                    </div>
+                                                    <div id="${x.id}" class="panel-collapse collapse">
+                                                        <div class="panel-body panelbody">
+                                                            <p>Instructors: ${x.instructor}</p>
+                                                            <p>Status: ${x.status}</p>
+                                                            <form action="/enrollCourse" id="enrollForm">
+                                                                <input name="courseId" type="hidden" value="${x.id}">
+                                                                <input name="userEmail" type="hidden" value="${user}">
+                                                                <c:choose>
+                                                                    <c:when test="${x.status == 'private'}">
+                                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
+                                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input name="confirm" type="submit" value="Enroll" >
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </form>
+                                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
 
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Developed by Dark Blue Team.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
