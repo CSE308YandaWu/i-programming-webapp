@@ -56,16 +56,6 @@
 
         <table class="table1">
             <caption>Course Information:</caption>
-            <%--<tr>--%>
-                <%--<td>--%>
-                    <%--<span><strong>Course ID:</strong></span>--%>
-                <%--</td>--%>
-
-                <%--<td>--%>
-                    <%--<input name="courseId" type="text" size="40" value="" form="courseinfo">--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-
             <tr>
                 <td>
                     <span><strong>Course Title:</strong></span>
@@ -87,26 +77,32 @@
             <tr>
                 <td>
                     <span><strong> <br>Description:</br> </strong></span>
-
-
                 </td>
                 <td>
                     <textarea rows="7" cols="38" name="description" form="courseinfo"></textarea>
                 </td>
-
             </tr>
-
             <tr>
                 <td>
                     <span><strong>Status:</strong></span>
                 </td>
                 <td>
-                    <select name="status" form="courseinfo">
+                    <select name="status" form="courseinfo" id="status" onchange="courseStatus()">
                         <option value="public">Public</option>
                         <option value="private">Private</option>
                     </select>
                 </td>
             </tr>
+
+            <tr id="statusRow" style="display:none;">
+                <td>
+                    <span><strong>Access Code:</strong></span>
+                </td>
+                <td>
+                    <input name="accessCode" size="40" value="" form="courseinfo">
+                </td>
+            </tr>
+
 
             <tr>
                 <td>

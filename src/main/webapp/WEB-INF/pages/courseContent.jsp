@@ -68,71 +68,120 @@
                 <h3 class = "text" >
                     <br><br>
                     <c:choose>
-                        <c:when test="${model.pptLink!=null}">
+                        <c:when test="${pptLink!=null}">
                             <p class="text">
                             <p style="font-size:36px;">Slide Show Section</p>
                             <br>
                             <br><br>
                             <div id="doc">
-                                <iframe src="${model.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                <iframe src="${pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">nothing</p>
+                            <p style="font-size:36px;">no pptlink</p>
                             <br />
                         </c:otherwise>
                     </c:choose>
 
                     <br><br>
                     <c:choose>
-                        <c:when test="${model.videoLink!=null}">
+                        <c:when test="${videoLinks!=null}">
                             <p class="text">
                             <p style="font-size:36px;">Video Lecture Section</p>
                             <br>
                             <br><br>
                             <div id="doc">
-                                <iframe src="${model.videoLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-                                <%--second video--%>
-                                <iframe src="${model.videoLink1}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                <%--<iframe src="${model.videoLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
+                                <%--&lt;%&ndash;second video&ndash;%&gt;--%>
+                                <%--<iframe src="${model.videoLink1}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
+                                <ul>
+                                    <c:forEach var="listValue" items="${videoLinks}">
+                                        <li><iframe src="${listValue}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></li>
+                                    </c:forEach>
+                                </ul>
                             </div>
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">nothing</p>
+                            <p style="font-size:36px;">no video link</p>
                             <br />
                         </c:otherwise>
                     </c:choose>
                     <br><br>
-                    <p class="text">
-                        <p style="font-size:36px;">Video Section</p>
-                        <br>
-                        <a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>
-                        <form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV}" ></form>
-                        <a href="#" onclick="serveVideo1();"><p style="color:deepskyblue;">View Video1</p></a>
-                        <form id="serveVideo1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV1}"></form>
-                    </p>
+                    <c:choose>
+                        <c:when test="${videoBlobKeysList!=null}">
+                            <p class="text">
+                            <p style="font-size:36px;">Video Section</p>
+                            <br>
+                            <%--<a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>--%>
+                            <%--<form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV}" ></form>--%>
+                            <%--<a href="#" onclick="serveVideo1();"><p style="color:deepskyblue;">View Video1</p></a>--%>
+                            <%--<form id="serveVideo1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV1}"></form>--%>
+                            <ul>
+                                <c:forEach var="listValue" items="${videoBlobKeysList}">
+                                    <video width="800" height="500" controls>
+                                        <source src="http://localhost:8080/serve?key=${listValue}" type="video/mp4">
+                                    </video>
+                                    <%--<a href="#" onclick="serveVideo();"><p style="color:deepskyblue;">View Video</p></a>--%>
+                                    <%--<form id="serveVideo" target="_blank"><input type="hidden" name="key" value="${listValue}" ></form>--%>
+                                </c:forEach>
+                            </ul>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p style="font-size:36px;">no uploaded video file</p>
+                            <br />
+                        </c:otherwise>
+                    </c:choose>
                     <br><br>
-                    <p class="text">
-                        <p style="font-size:36px;">Image Section</p>
-                        <br>
-                        Resized Image:
-                        <br>
-                        <img src=${model.url}>
-                        <br>
-                        <a href="#" onclick="serveImage();"><p style="color:deepskyblue;">View Original Image</p></a>
-                        <form id="serveImage" target="_blank"><input type="hidden" name="key" value="${model.blobKeyI}" ></form>
-                    </p>
+                    <c:choose>
+                        <c:when test="${imageServingUrlList!=null}">
+                            <p class="text">
+                            <p style="font-size:36px;">Image Section</p>
+                            <br>
+                            Resized Image:
+                            <br>
+                            <%--<img src=${model.url}>--%>
+                            <ul>
+                                <c:forEach var="listValue" items="${imageServingUrlList}">
+                                    <img src=${listValue}>
+                                </c:forEach>
+                            </ul>
+                            <br>
+                            <%--<a href="#" onclick="serveImage();"><p style="color:deepskyblue;">View Original Image</p></a>--%>
+                            <%--<form id="serveImage" target="_blank"><input type="hidden" name="key" value="${model.blobKeyI}" ></form>--%>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p style="font-size:36px;">no uploaded image file</p>
+                            <br />
+                        </c:otherwise>
+                    </c:choose>
                     <br><br>
-                    <p class="text">
-                    <p style="font-size:36px;">Assignment Section</p>
-                    <br>
-                    <a href="#" onclick="serveAssignment();"><p style="color:deepskyblue;">View Assignment</p></a>
-                    <form id="serveAssignment" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA}"></form>
-
-                    <a href="#" onclick="serveAssignment1();"><p style="color:deepskyblue;">View Assignment1</p></a>
-                    <form id="serveAssignment1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA1}"></form>
-                    </p>
+                    <c:choose>
+                        <c:when test="${assignmentBlobKeysList!=null}">
+                            <p class="text">
+                            <p style="font-size:36px;">Assignment Section</p>
+                            <br>
+                            <%--<a href="#" onclick="serveAssignment();"><p style="color:deepskyblue;">View Assignment</p></a>--%>
+                            <%--<form id="serveAssignment" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA}"></form>--%>
+                            <%----%>
+                            <%--<a href="#" onclick="serveAssignment1();"><p style="color:deepskyblue;">View Assignment1</p></a>--%>
+                            <%--<form id="serveAssignment1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA1}"></form>--%>
+                            <ul>
+                                <c:forEach var="listValue" items="${assignmentBlobKeysList}" varStatus="loop">
+                                    <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment</p></a>
+                                    <form id="serveAssignment${loop.index}" target="_blank"><input type="hidden" name="key" value="${listValue}"></form>
+                                </c:forEach>
+                            </ul>
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <p style="font-size:36px;">no uploaded image file</p>
+                            <br />
+                        </c:otherwise>
+                    </c:choose>
                     <br><br>
                 </h3>
                 <p class="text">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: JIAQI ZHANG
@@ -61,38 +62,51 @@
                 </div>
             </div>
             <h1 class="cover-heading">
-                <%
-                    String name = request.getParameter("coursename");
-                    pageContext.setAttribute("name", name);
-                    out.println(name);
-                %> Course Page</h1>
+                ${course.title} Course Page</h1>
             <div class="inner cover">
-                <h3 class = "text">Course Description</h3>
-                <p class="text">
-                    END....
-
-
-                </p>
+                <h3 class="text">Course Description</h3>
+                <div class="course-info">
+                    <table class="table1">
+                        <tr>
+                            <td>Course Title:</td>
+                            <td>${course.title}</td>
+                        </tr>
+                        <tr>
+                            <td>Instructor:</td>
+                            <td>${course.instructor}</td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>${course.description}</td>
+                        </tr>
+                        <tr>
+                            <td>Date Created:</td>
+                            <td>${course.dateCreated}</td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="outlinelist">
                     <h3 class="outlinelabel">Course Outline</h3>
-                    <ul>
-                        <li><a href="#">Unit 1 - Introduction</a></li>
-                        <ol>
-                            <li><a href="#" onclick="toCourseContent()">Introduction</a>
-                                <form id="toCourseContent"><input type="hidden"></form>
-                            </li>
-                            <li><a href="#">Filter image</a></li>
-                            <li><a href="#">How search works</a></li>
-                        </ol>
-                        <li><a href="#">Unit 2 - Interpreting Result</a></li>
-                        <ol>
-                            <li><a href="#">Lesson 1....</a></li>
-                            <li><a href="#">Lesson 2...</a></li>
-                        </ol>
-                    </ul>
+                    <c:choose>
+                        <c:when test="${empty lessons}">
+                            There is no lessons.
+                        </c:when>
+                        <c:otherwise>
+                            <ol>
+                                <c:forEach var="lesson" items="${lessons}">
+                                    <li>
+                                        <a href="#" onclick="toCourseContent()"
+                                           class="list-group-item list-group-item-action">${lesson.lessonTitle}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ol>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-
-                <%--</p>--%>
+                <form action="/main">
+                    <input type="submit" class="btn btn-primary add-btns-group" value="Back">
+                </form>
             </div>
             <div class="mastfoot">
                 <div class="inner">
