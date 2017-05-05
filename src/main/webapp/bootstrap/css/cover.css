@@ -209,6 +209,7 @@ h2 {
 
 .add-btns-group {
     float: right;
+    margin-right: 5px;
 }
 
 .add-btns-group > form {
@@ -246,4 +247,9 @@ h2 {
 
 .panelbody{
     color: black;
+}
+
+.errorMsg {
+    display: none;
+    color: red;
 }

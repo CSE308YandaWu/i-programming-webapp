@@ -37,7 +37,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="showAccessCode()">
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
@@ -64,11 +64,11 @@
                 <div class="inner editcourse">
                     <br><br><br>
                     <h2>Edit Course</h2>
-                    <%--div class="add-btns-group">
+                    <div class="add-btns-group">
                         <button type="button" class="btn btn-primary" onclick="toEditUnit();">Edit Course Details
                             <form id="toEditCourseDetails"><input type="hidden"></form>
                         </button>
-                    </div--%>
+                    </div>
                     <h3 class="subheading">Course Details:</h3>
                     <div class="course-info">
                         <table class="table1">

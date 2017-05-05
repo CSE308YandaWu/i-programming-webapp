@@ -94,22 +94,13 @@ function courseStatus() {
         statusRow.style.display = "none";
 }
 
-function checkCode(validCode, button) {
-    var input = button.previousElementSibling.value;
-    // alert(validCode+"("+input+") ");
-    var x = button.parentNode.parentNode.parentNode.getElementsByTagName("p")[3];
-    if ((input == validCode)) {
-        button.parentNode.parentNode.submit();
-        window.alert("You successfully enroll this course!");
+function checkCode(validCode, index) {
+    var input = document.getElementById("accessCode"+index).value;
+    if(input == validCode) {
+        return true;
     }
-    else {
-        x.style.display = "inline";
-    }
-}
-function checkCodeEnter(event, validCode, input){
-    if (event.keyCode == 13) {
-        checkCode(validCode, input.nextElementSibling);
-        event.preventDefault();
+    else{
+        document.getElementById("errorMsg"+index).style.display = "inline";
         return false;
     }
 }
@@ -292,12 +283,14 @@ function addVideoOptions(divName) {
     } else {
         switch (strOption) {
             case '1':
-                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo' >" +//video URL
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2':
-                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo' value='c:/Users/Kennyhuang/desktop/Tickets.pdf'>" +//no multiple selection allowed , user can only select one file each time//video file upload
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
                 break;
         }
         document.getElementById(divName).appendChild(newdiv);

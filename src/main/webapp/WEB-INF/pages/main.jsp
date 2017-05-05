@@ -108,6 +108,10 @@
                                                         <input name="confirm" type="submit" value="Enroll" onclick="return confirmEnroll()" >
                                                     </c:otherwise>
                                                 </c:choose>
+                                                <c:if test="${x.status == 'private'}">
+                                                    <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
+                                                </c:if>
+                                                <input type="submit" value="Enroll">
                                             </form>
                                             <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
                                         </div>
