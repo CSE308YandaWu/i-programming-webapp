@@ -33,6 +33,7 @@ ul.lesson-list {
 }
 
 .ui-icon {
+    margin-right: 7px;
     -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
     transform: scale(1.5);
@@ -47,4 +48,12 @@ ul.lesson-list {
 
 .subheading {
     text-align: left;
+}
+
+.lesson-name {
+    display: inline;
+}
+
+#status {
+    color: #000;
 }
