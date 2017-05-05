@@ -41,7 +41,7 @@
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
-                <div class="masthead clearfix">
+                <div class="">
                     <div class="inner">
                         <h3 class="masthead-brand">
                             <a href="#" onclick="editCourseToHome()">I-Programming</a>
@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 <br><br>
-                <div class="mastfoot">
+                <div >
                     <div class="inner">
                         <p>Developed by Dark Blue Team.</p>
                     </div>

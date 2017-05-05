@@ -224,9 +224,21 @@ public class iprogrammingController {
 
 
     @RequestMapping("/editCourse")
-    public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId) {
+    public ModelAndView editCourse(@RequestParam(value = "userEmail", required = false) String userEmail,
+                                   @RequestParam(value = "courseId") String courseId,
+                                   @RequestParam(value = "numEnrolled", required = false) Integer numEnrolled,
+                                   @RequestParam(value = "courseTitle", required = false) String courseTitle,
+                                   @RequestParam(value = "instructor", required = false) String instructor,
+                                   @RequestParam(value = "description", required = false) String description,
+                                   @RequestParam(value = "status", required = false) String status,
+                                   @RequestParam(value = "accessCode", required = false) String accessCode) {
         System.out.println("editCourse courseID: " + courseId);
         Course c = ofy().load().type(Course.class).id(courseId).now();
+        if (c == null){
+            c = new Course(userEmail, courseId, courseTitle, instructor,description, status);
+            c.setAccessCode(accessCode);
+            c.setNumEnrolled(numEnrolled);
+        }
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         ModelAndView mav = new ModelAndView("editCourse");
         mav.addObject("course", c);
@@ -422,15 +434,27 @@ public class iprogrammingController {
     /* courseContent Page */
     @RequestMapping("/courseContent")
     public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
-                                      @RequestParam(value = "courseId") String courseId,//needed when go back to editCourse Page
+                                      @RequestParam(value = "userEmail") String userEmail,
+                                      @RequestParam(value = "courseId") String courseId,
+                                      @RequestParam(value = "numEnrolled") int numEnrolled,
+                                      @RequestParam(value = "courseTitle") String courseTitle,
+                                      @RequestParam(value = "instructor") String instructor,
+                                      @RequestParam(value = "description") String description,
+                                      @RequestParam(value = "status") String status,
+                                      @RequestParam(value = "accessCode", required = false) String accessCode,
                                       @RequestParam(value = "originalPlace") String originalPlace) {//indicate where to go back
 
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
-
+        Course course = ofy().load().type(Course.class).id(courseId).now();
+        if (course == null){
+            course = new Course(userEmail, courseId, courseTitle, instructor,description, status);
+            course.setAccessCode(accessCode);
+            course.setNumEnrolled(numEnrolled);
+        }
         ModelAndView mav = new ModelAndView();
         System.out.println("courseContent courseID: " + courseId);
         mav.addObject("lesson", lesson);
-        mav.addObject("courseId", courseId);//needed when go back to editCourse Page
+        mav.addObject("course", course);//needed when go back to editCourse Page
         mav.addObject("originalPlace",originalPlace);//indicate where to go back
         mav.setViewName("courseContent");
         return mav;

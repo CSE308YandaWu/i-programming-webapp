@@ -22,7 +22,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Course Content Page</title>
+    <title>Lesson Content</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -62,15 +62,13 @@
                     </nav>
                 </div>
             </div>
-            <h1 class="cover-heading">Course Content Page</h1>
-            <br><br>
-
-            <h1 class="cover-heading">${lesson.lessonTitle}</h1>
-            <p class="text" style=" font-size:25px">${lesson.lessonBody}</p>
+            <br><br><br><br>
+            <h1 class="cover-heading">Lesson: ${lesson.lessonTitle}</h1>
+            <h3 class="cover-heading">${lesson.lessonBody}</h3>
 
             <div class="inner cover">
                 <h3 class = "text" >
-                    <br><br>
+                    <br>
                     <c:choose>
                         <c:when test="${lesson.pptLink!=''}">
                             <p class="text">
@@ -86,11 +84,10 @@
                             <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
                     <c:choose>
                         <c:when test="${lesson.pptDescription!=null}">
                             <p class="text">
-                                <p style="font-size:25px;">${lesson.pptDescription}</p>
+                                <p class="item-descp">${lesson.pptDescription}</p>
                             </p>
                         </c:when>
                         <c:otherwise>
@@ -98,7 +95,7 @@
                             <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
+                    <br>
                     <c:choose>
                         <c:when test="${lesson.videoTypes!=null}">
                             <%--<p class="text">--%>
@@ -114,7 +111,7 @@
                                             <c:when test="${listValue == '1'}">
                                                 <iframe src="${lesson.videoLinks[videoLinkIndex]}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                                 <p class="text">
-                                                    <p style="font-size:25px;">${lesson.videoDescriptions[loop.index]}</p>
+                                                    <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>
                                                 </p>
                                                 <c:set var="videoLinkIndex" value="${videoLinkIndex + 1}" scope="page"/>
                                             </c:when>
@@ -123,7 +120,7 @@
                                                     <source src="http://localhost:8080/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">
                                                 </video>
                                                 <p class="text">
-                                                    <p style="font-size:25px;">${lesson.videoDescriptions[loop.index]}</p>
+                                                    <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>
                                                 </p>
                                                 <c:set var="videoFileIndex" value="${videoFileIndex + 1}" scope="page"/>
                                                 <br />
@@ -139,7 +136,7 @@
                             <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
+                    <br>
                     <c:choose>
                         <c:when test="${lesson.imageServingUrlList!=null}">
                             <%--<p class="text">--%>
@@ -152,7 +149,7 @@
                                 <c:forEach var="listValue" items="${lesson.imageServingUrlList}" varStatus="loop">
                                     <img src=${listValue}><br>
                                     <p class="text">
-                                        <p style="font-size:25px;">${lesson.imageDescriptions[loop.index]}</p>
+                                        <p class="item-descp">${lesson.imageDescriptions[loop.index]}</p>
                                     </p>
                                 </c:forEach>
                             </ul>
@@ -166,7 +163,7 @@
                             <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
+                    <br>
                     <c:choose>
                         <c:when test="${lesson.assignmentBlobKeysList!=null}">
                             <%--<p class="text">--%>
@@ -177,7 +174,7 @@
                                     <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment ${loop.index}</p></a>
                                     <form id="serveAssignment${loop.index}" target="_blank"><input type="hidden" name="key" value="${listValue}"></form>
                                     <p class="text">
-                                        <p style="font-size:25px;">${lesson.assignmentDescriptions[loop.index]}</p>
+                                        <p class="item-descp">${lesson.assignmentDescriptions[loop.index]}</p>
                                     </p>
                                 </c:forEach>
                             </ul>
@@ -188,13 +185,22 @@
                             <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
+                    <br>
                 </h3>
                 <div class="col-md-2">
                     <%--choose where to go back--%>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBackSelector('${originalPlace}')">Back</button>
-                    <form id="backToEditCourse"><input type="hidden" name="courseId" value="${courseId}"></form>
-                    <form id="backToMain"><input type="hidden" name="courseId" value="${courseId}"></form>
+                    <form id="backToEditCourse">
+                        <input type="hidden" name="userEmail" value="${course.email}">
+                        <input type="hidden" name="courseId" value="${course.id}">
+                        <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                        <input type="hidden" name="courseTitle" value="${course.title}">
+                        <input type="hidden" name="instructor" value="${course.instructor}">
+                        <input type="hidden" name="description" value="${course.description}">
+                        <input type="hidden" name="status" value="${course.status}">
+                        <input type="hidden" name="accessCode" value="${course.accessCode}">
+                    </form>
+                    <form id="backToMain"></form>
                 </div>
                 <br><br><br><br><br><br><br><br><br>
                     <%--End of all sections--%>
