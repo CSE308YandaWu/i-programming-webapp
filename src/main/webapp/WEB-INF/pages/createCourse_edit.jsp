@@ -108,66 +108,41 @@
                             <input type="text" class="form-control" name="accessCode" form="courseinfo">
                         </div>
                     </div>
-                    <div class="help-block"></div>
-                    <div>
-                        <form action="/createCourse1" id="courseinfo">
-                            <input name="userEmail" id="formUser" type="hidden" value="${user}">
-                            <input name="confirm" type="submit" value="Confirm">
-                        </form>
-                        <form id="createCourseToMainCancel"><input type="hidden">
-                            <input name="cancel" type="submit" value="Cancel" onclick="createCourseToMainCancel();">
-                        </form>
-                    </div>
-                    <%--<div class="row">
-                        <div class="col-md-4"><h4>Image</h4></div>
-                        <div id="imageAdding" class="col-md-7">
-                            <div id="dynamicInputImage" class="col-md-7">
-                                &lt;%&ndash;<input type="file" multiple name="myFileImage[]" form="lessonInfo">&ndash;%&gt;
-                                &lt;%&ndash;<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>&ndash;%&gt;
-                            </div>
-                            &lt;%&ndash;add more image button&ndash;%&gt;
-                            <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more image" onClick="addImageButton('dynamicInputImage');">
-                        </div>
-                    </div>
-                    <div class="help-block"></div>
-                    &lt;%&ndash;<div class="help-block"></div>
-                    <div class="row">
-                        <div class="col-md-4"><h4>Attachment</h4></div>
-                        <div id="assignmentAdding" class="col-md-7">
-                            <div id="dynamicInputAssignment" class="col-md-7">
-                                &lt;%&ndash;<input type="file" multiple name="myFileAssignment[]" form="lessonInfo">&ndash;%&gt;
-                                &lt;%&ndash;<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>&ndash;%&gt;
-                            </div>
-                            &lt;%&ndash;add more assignment button&ndash;%&gt;
-                            <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
-                        </div>
-                    </div>
-                    <div class="help-block"></div>
-                    <div class="row">
-                        <div class="col-md-5"></div>
-                        <div class="col-md-2">
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
-                            <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="userEmail" value="${userEmail}">
-                                <input type="hidden" name="courseId" value="${courseId}">
-                                <input type="hidden" name="numEnrolled" value="${numEnrolled}">
-                                <input type="hidden" name="courseTitle" value="${courseTitle}">
-                                <input type="hidden" name="instructor" value="${instructor}">
-                                <input type="hidden" name="description" value="${description}">
-                                <input type="hidden" name="status" value="${status}">
-                                <c:if test="${status == 'private'}">
-                                    <input type="hidden" name="accessCode" value="${accessCode}">
-                                </c:if>
-                            </form>
-                        </div>
-                        <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            &lt;%&ndash;<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>&ndash;%&gt;
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
-                            <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
-                        </div>
-                    </div>&ndash;%&gt;--%>
                 </div>
+                <div class="create-course-btns">
+                    <form action="/createCourse1" id="courseinfo">
+                        <input name="userEmail" id="formUser" type="hidden" value="${user}">
+                        <input name="confirm" type="submit" value="Confirm" class="btn btn-primary">
+                    </form>
+                    <form id="createCourseToMainCancel">
+                        <input type="hidden">
+                        <input name="cancel" type="submit" value="Cancel" class="btn btn-primary" onclick="createCourseToMainCancel();">
+                    </form>
+                </div>
+                <%--<div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
+                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="userEmail" value="${userEmail}">
+                            <input type="hidden" name="courseId" value="${courseId}">
+                            <input type="hidden" name="numEnrolled" value="${numEnrolled}">
+                            <input type="hidden" name="courseTitle" value="${courseTitle}">
+                            <input type="hidden" name="instructor" value="${instructor}">
+                            <input type="hidden" name="description" value="${description}">
+                            <input type="hidden" name="status" value="${status}">
+                            <c:if test="${status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${accessCode}">
+                            </c:if>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        &lt;%&ndash;<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>&ndash;%&gt;
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
+                        <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
+                    </div>
+                </div>--%>
             </div>
         </div>
     </div>

@@ -99,6 +99,11 @@ h1 {
     padding: 6px;
 }
 
+.create-course-btns > form {
+    display: inline;
+    color: black;
+}
+
 /*.list-group >a{*/
     /*font-size: 25px;*/
     /*display: block;*/
