@@ -225,10 +225,12 @@ public class iprogrammingController {
 
     @RequestMapping("/editCourse")
     public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId) {
+        System.out.println("editCourse courseID: " + courseId);
         Course c = ofy().load().type(Course.class).id(courseId).now();
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         ModelAndView mav = new ModelAndView("editCourse");
         mav.addObject("course", c);
+        //System.out.println("editCourse course title: " + c.getTitle());
         mav.addObject("lessonList", lessonList);
         return mav;
     }
@@ -426,7 +428,7 @@ public class iprogrammingController {
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
 
         ModelAndView mav = new ModelAndView();
-
+        System.out.println("courseContent courseID: " + courseId);
         mav.addObject("lesson", lesson);
         mav.addObject("courseId", courseId);//needed when go back to editCourse Page
         mav.addObject("originalPlace",originalPlace);//indicate where to go back
