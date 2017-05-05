@@ -105,12 +105,13 @@
                                             <c:choose>
                                                 <c:when test="${x.status == 'private'}">
                                                     <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
-                                                    <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
+                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
                                                 </c:when>
-                                                <c:otherwise>
-                                                    <input name="confirm" type="submit" value="Enroll" onclick="return confirmEnroll()">
-                                                </c:otherwise>
                                             </c:choose>
+                                            <c:if test="${x.status == 'private'}">
+                                                <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
+                                            </c:if>
+                                            <input type="submit" value="Enroll" onclick="return confirmEnroll()">
                                         </form>
                                         <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
                                     </div>

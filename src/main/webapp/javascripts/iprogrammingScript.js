@@ -288,7 +288,7 @@ function addVideoOptions(divName) {
                     "<input type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2':
-                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
                     "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
                     "<input type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
                 break;
@@ -299,7 +299,7 @@ function addVideoOptions(divName) {
 }
 function addImageButton(divName) {
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
         "<br><textarea class='form-control' rows='2' wrap='soft' name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
     document.getElementById(divName).appendChild(newdiv);
 }

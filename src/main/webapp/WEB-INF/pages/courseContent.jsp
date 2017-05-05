@@ -66,24 +66,24 @@
             <br><br>
 
             <h1 class="cover-heading">${lesson.lessonTitle}</h1>
-            <h1 class="cover-heading">${lesson.lessonBody}</h1>
+            <h3 class="cover-heading">${lesson.lessonBody}</h3>
 
             <div class="inner cover">
                 <h3 class = "text" >
                     <br><br>
                     <c:choose>
-                        <c:when test="${lesson.pptLink!=null}">
+                        <c:when test="${lesson.pptLink!=''}">
                             <p class="text">
-                            <p style="font-size:36px;">Slide Show Section</p>
-                            <br><br>
+                            <%--<p style="font-size:36px;">Slide Show Section</p>--%>
+                            <%--<br><br>--%>
                             <div id="doc">
                                 <iframe src="${lesson.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">no pptlink</p>
-                            <br />
+                            <%--<p style="font-size:36px;">no pptlink</p>--%>
+                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br><br>
@@ -94,16 +94,16 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">no pptDescription</p>
-                            <br />
+                            <%--<p style="font-size:36px;">no pptDescription</p>--%>
+                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br><br>
                     <c:choose>
                         <c:when test="${lesson.videoTypes!=null}">
-                            <p class="text">
-                            <p style="font-size:36px;">Video Lecture Section</p>
-                            <br>
+                            <%--<p class="text">--%>
+                            <%--<p style="font-size:36px;">Video Lecture Section</p>--%>
+                            <%--<br>--%>
                             <br><br>
                             <div id="doc">
                                 <c:set var="videoLinkIndex" value="0" scope="page" />
@@ -135,19 +135,19 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">no video </p>
-                            <br />
+                            <%--<p style="font-size:36px;">no video </p>--%>
+                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br><br>
                     <c:choose>
                         <c:when test="${lesson.imageServingUrlList!=null}">
-                            <p class="text">
-                            <p style="font-size:36px;">Image Section</p>
-                            <br>
-                            Resized Image:
-                            <br>
-                            <%--<img src=${model.url}>--%>
+                            <%--<p class="text">--%>
+                            <%--<p style="font-size:36px;">Image Section</p>--%>
+                            <%--<br>--%>
+                            <%--Resized Image:--%>
+                            <%--<br>--%>
+                            <img src=${model.url}>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.imageServingUrlList}" varStatus="loop">
                                     <img src=${listValue}><br>
@@ -162,16 +162,16 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">no uploaded image file</p>
-                            <br />
+                            <%--<p style="font-size:36px;">no uploaded image file</p>--%>
+                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br><br>
                     <c:choose>
                         <c:when test="${lesson.assignmentBlobKeysList!=null}">
-                            <p class="text">
-                            <p style="font-size:36px;">Assignment Section</p>
-                            <br>
+                            <%--<p class="text">--%>
+                            <%--<p style="font-size:36px;">Assignment Section</p>--%>
+                            <%--<br>--%>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.assignmentBlobKeysList}" varStatus="loop">
                                     <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment</p></a>
@@ -184,15 +184,15 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <p style="font-size:36px;">no uploaded assignment file</p>
-                            <br />
+                            <%--<p style="font-size:36px;">no uploaded assignment file</p>--%>
+                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br><br>
                 </h3>
-                <p class="text">
-                    End of all sections
-                </p>
+                <%--<p class="text">--%>
+                    <%--End of all sections--%>
+                <%--</p>--%>
             </div>
             <div class="mastfoot">
                 <div class="inner">
