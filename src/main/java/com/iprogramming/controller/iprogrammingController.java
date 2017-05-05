@@ -229,7 +229,7 @@ public class iprogrammingController {
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         ModelAndView mav = new ModelAndView("editCourse");
         mav.addObject("course", c);
-        mav.addObject("lessonList",lessonList);
+        mav.addObject("lessonList", lessonList);
         return mav;
     }
 
@@ -427,9 +427,32 @@ public class iprogrammingController {
 //            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
         ModelAndView mav = new ModelAndView();
         //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + lesson.getPPTLink());
-        mav.addObject("lesson",lesson);
+        mav.addObject("lesson", lesson);
         //mav.addObject("pptLink", lesson.getPPTLink());
         mav.setViewName("courseContent");
+        return mav;
+    }
+
+    @RequestMapping("/deleteLesson")
+    public ModelAndView deleteLesson(@RequestParam(value = "lessonId", required = false) String lessonId,
+                                     @RequestParam(value = "userEmail") String userEmail,
+                                     @RequestParam(value = "courseId") String courseId,
+                                     @RequestParam(value = "numEnrolled") int numEnrolled,
+                                     @RequestParam(value = "courseTitle") String courseTitle,
+                                     @RequestParam(value = "instructor") String instructor,
+                                     @RequestParam(value = "description") String description,
+                                     @RequestParam(value = "status") String status,
+                                     @RequestParam(value = "accessCode", required = false) String accessCode) {
+        ofy().delete().type(Lesson.class).id(lessonId).now();
+        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        course.setNumEnrolled(numEnrolled);
+        course.setAccessCode(accessCode);
+
+        ModelAndView mav = new ModelAndView("editCourse");
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
+        mav.addObject("lessonList", lessonList);
+        mav.addObject("course", course);
+
         return mav;
     }
 
