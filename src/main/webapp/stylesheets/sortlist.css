@@ -29,7 +29,7 @@ html>body #sortable li {
 }
 
 ul.lesson-list {
-    list-style: "\t";
+    list-style: "    ";
 }
 
 .ui-icon {
