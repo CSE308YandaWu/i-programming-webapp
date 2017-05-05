@@ -56,11 +56,12 @@
                     </div>
                 </div>
                 <div class="inner editcourse">
-                    <h1>Course Search</h1>
+                    <%--Remove this line, or no?--%>
+                    <%--<h2>Course Search</h2>--%>
                     <div class="container1">
                         <form action="#" type="hidden" id="searchClass">
                             <div class="row">
-                                <div class="col-md-8" >
+                                <div class="col-md-7" >
                                     <input type="text" class="form-control" name="UserIn" id="UserIn" type="text"  placeholder="Enter course to search for..." required autofocus>
                                 </div>
                                 <div class="col-md-3" >
@@ -78,7 +79,7 @@
                         </form>
                         <br>
                         <div class="resultlist">
-                            <h2>Search Result</h2>
+                            <h2>Search Results</h2>
                             <ul class="list-group">
                                 <c:choose>
                                     <c:when test="${empty result}">
