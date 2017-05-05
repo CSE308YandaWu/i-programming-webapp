@@ -70,10 +70,6 @@
                 <div class="course-info">
                     <table class="table1">
                         <tr>
-                            <td>Course Title:</td>
-                            <td>${course.title}</td>
-                        </tr>
-                        <tr>
                             <td>Instructor:</td>
                             <td>${course.instructor}</td>
                         </tr>
