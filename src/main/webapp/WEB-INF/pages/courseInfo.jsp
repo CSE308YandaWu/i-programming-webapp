@@ -61,10 +61,11 @@
                     </nav>
                 </div>
             </div>
-            <h1 class="cover-heading">
-                ${course.title} Course Page</h1>
+            <h2 class="cover-heading">
+                ${course.title} Course Page</h2>
             <div class="inner cover">
                 <h3 class="text">Course Description</h3>
+                <br>
                 <div class="course-info">
                     <table class="table1">
                         <tr>
@@ -94,7 +95,7 @@
                         <c:otherwise>
                             <ol>
                                 <c:forEach var="lesson" items="${lessons}" varStatus="loop">
-                                    <li>
+                                    <li style="padding-bottom: 5px">
                                         <a href="#" onclick="viewLesson('${loop.index}')"
                                            class="list-group-item list-group-item-action">${lesson.lessonTitle}
                                         </a>
@@ -110,6 +111,9 @@
                 <form action="/main">
                     <input type="submit" class="btn btn-primary add-btns-group" value="Back">
                 </form>
+                <div class="row">
+                    <%-- used to create padding at bottom --%>
+                </div>
             </div>
             <div class="mastfoot">
                 <div class="inner">
