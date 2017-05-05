@@ -64,13 +64,15 @@ function toSearchCourse() {
 }
 /* Main Page Edit Course button */
 function toEditCourse(a) {
-    document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    // document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("editId").value = document.getElementById("editCourseId").value;
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
 }
 /* Main Page Course button */
-function toCoursePage(a) {
-    document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+function toCoursePage() {
+    // document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("cId").value = document.getElementById("courseId").value;
     document.getElementById("toCoursePage").action = "/enterCourse";
     document.getElementById("toCoursePage").submit();
 }
@@ -301,7 +303,7 @@ function addVideoOptions(divName) {
         switch (strOption) {
             case '1':
                 newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
                     "<input type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2':

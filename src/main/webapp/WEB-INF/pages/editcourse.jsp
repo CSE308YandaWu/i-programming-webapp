@@ -64,11 +64,11 @@
                 <div class="inner editcourse">
                     <br><br><br>
                     <h2>Edit Course</h2>
-                    <div class="add-btns-group">
-                        <button type="button" class="btn btn-primary" onclick="toEditUnit();">Edit Course Details
-                            <form id="toEditCourseDetails"><input type="hidden"></form>
-                        </button>
-                    </div>
+                    <%--<div class="add-btns-group">--%>
+                        <%--<button type="button" class="btn btn-primary" onclick="toEditUnit();">Edit Course Details--%>
+                            <%--<form id="toEditCourseDetails"><input type="hidden"></form>--%>
+                        <%--</button>--%>
+                    <%--</div>--%>
                     <h3 class="subheading">Course Details:</h3>
                     <div class="course-info">
                         <table class="table1">

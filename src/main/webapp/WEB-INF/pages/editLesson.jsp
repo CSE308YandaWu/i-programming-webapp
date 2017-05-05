@@ -91,51 +91,51 @@
                     <div class="col-md-4"><h4>Google SlideShow Link</h4></div>
                     <div class="col-md-7">
                         <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
-                        <textarea id="slideShowDescription" class="form-control" rows="3" wrap="soft" name="pptDescription" placeholder="Add Slide Show description here" form="lessonInfo"></textarea>
+                        <textarea id="slideShowDescription" class="form-control" rows="3" wrap="soft" name="pptDescription" placeholder="Add slideshow description here" form="lessonInfo"></textarea>
                     </div>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Video</h4></div>
+                    <div class="col-md-4"><h4>Videos</h4></div>
                     <div id="videoAdding" class="col-md-7">
-                        <div id="dynamicInputVideo" class="col-md-7">
+                        <div id="dynamicInputVideo">
                             <%--<input type="text" id="videoLink" class="form-control" name="videoLinks[]" placeholder="Insert URL here" form="lessonInfo">--%>
                             <%--<textarea id="videoDescription" class="form-control" rows="3" wrap="soft" name="videoDescriptions[]" placeholder="Add video description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--video Upload Option dropdown box--%>
                         <select id="videoUploadOption" class="btn btn-lg btn-primary btn-block" onchange="enableOptionButton()">
-                            <option value="" disabled="disabled" selected="selected">Select an upload option to add more video</option>
+                            <option value="" disabled="disabled" selected="selected">Select an upload option to add a video</option>
                             <option value="1">Paste Link</option>
                             <option value="2">Upload File</option>
                         </select>
                         <%--add more video button--%>
-                        <input id="addOptionButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                        <input id="addOptionButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
                     </div>
                 </div>
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Image</h4></div>
+                    <div class="col-md-4"><h4>Images</h4></div>
                     <div id="imageAdding" class="col-md-7">
-                        <div id="dynamicInputImage" class="col-md-7">
+                        <div id="dynamicInputImage">
                             <%--<input type="file" multiple name="myFileImage[]" form="lessonInfo">--%>
                             <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more image button--%>
-                        <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more image" onClick="addImageButton('dynamicInputImage');">
+                        <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
                     </div>
                 </div>
                 <div class="help-block"></div>
 
                 <div class="help-block"></div>
                 <div class="row">
-                    <div class="col-md-4"><h4>Attachment</h4></div>
+                    <div class="col-md-4"><h4>Attachments</h4></div>
                     <div id="assignmentAdding" class="col-md-7">
-                        <div id="dynamicInputAssignment" class="col-md-7">
+                        <div id="dynamicInputAssignment">
                             <%--<input type="file" multiple name="myFileAssignment[]" form="lessonInfo">--%>
                             <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more assignment button--%>
-                        <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add more Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                        <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
                     </div>
                 </div>
                 <div class="help-block"></div>

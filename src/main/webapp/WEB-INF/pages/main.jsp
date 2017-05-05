@@ -122,15 +122,18 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${createdCourses}">
-                                <a href="#" onclick="toEditCourse(this)"
-                                   class="list-group-item list-group-item-action">${x.title}
+                                <div class="list-group-item list-group-item-action">
+                                    <a href="#" style="color: black" onclick="toEditCourse()" class="list-group-item-action enrolledlink">
+                                        ${x.title}
+                                    </a>
+
                                     <form action="/deleteCourse" class="deletebutton">
-                                        <input type="hidden" value="${x.id}" name="courseId">
+                                        <input type="hidden" value="${x.id}" name="courseId" id="editCourseId">
                                         <input type="submit" value="Delete" onclick="return confirmDelete()" class="btn btn-primary">
                                     </form>
                                     <br>
                                     <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
-                                </a>
+                                </div>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
@@ -146,14 +149,16 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${joinedCourses}">
-                                <a href="#" onclick="toCoursePage(this)" class="list-group-item list-group-item-action enrolledlink">
-                                    ${x.title}
+                                <div class="list-group-item enrolledlink">
+                                    <a href="#" style="color: black" onclick="toCoursePage()" class="list-group-item-action enrolledlink">
+                                        ${x.title}
+                                    </a>
                                     <form action="/dropCourse" class="dropbutton">
-                                        <input type="hidden" value="${x.id}" name="courseId">
+                                        <input type="hidden" value="${x.id}" name="courseId" id="courseId">
                                         <input type="hidden" value="${user}" name="userEmail">
                                         <input type="submit" value="Drop" onclick="return confirmDrop()" class="btn btn-primary">
                                     </form>
-                                </a>
+                                </div>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
