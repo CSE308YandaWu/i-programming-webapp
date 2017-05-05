@@ -131,7 +131,7 @@
                                    class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
                                         <input type="hidden" value="${x.id}" name="courseId">
-                                        <input type="submit" value="Delete" class="btn btn-primary">
+                                        <input type="submit" value="Delete" onclick="return confirmDelete()" class="btn btn-primary">
                                     </form>
                                     <br>
                                     <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
@@ -151,12 +151,12 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${joinedCourses}">
-                                <a href="#" onclick="toCoursePage(this)"
-                                   class="list-group-item list-group-item-action enrolledlink">${x.title}
+                                <a href="#" onclick="toCoursePage(this)" class="list-group-item list-group-item-action enrolledlink">
+                                    ${x.title}
                                     <form action="/dropCourse" class="dropbutton">
                                         <input type="hidden" value="${x.id}" name="courseId">
                                         <input type="hidden" value="${user}" name="userEmail">
-                                        <input type="submit" value="Drop" class="btn btn-primary">
+                                        <input type="submit" value="Drop" onclick="return confirmDrop()" class="btn btn-primary">
                                     </form>
                                 </a>
                             </c:forEach>
@@ -182,6 +182,7 @@
 <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/confirmEvent.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

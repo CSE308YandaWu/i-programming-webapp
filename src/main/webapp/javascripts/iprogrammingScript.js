@@ -291,11 +291,11 @@ function addVideoOptions(divName) {
     } else {
         switch (strOption) {
             case '1':
-                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo' >" +//video URL
                     "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
                 break;
             case '2':
-                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo' value='c:/Users/Kennyhuang/desktop/Tickets.pdf'>" +//no multiple selection allowed , user can only select one file each time//video file upload
                     "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
                 break;
         }

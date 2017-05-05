@@ -165,7 +165,7 @@
                     <br>
                     <div class="add-btns-group">
                         <form action="/saveCourse">
-                            <input type="submit" class="btn btn-primary" value="Save">
+                            <input type="submit" class="btn btn-primary" onclick="create_course_confirm()" value="Save">
                             <input type="hidden" name="userEmail" value="${course.email}">
                             <input type="hidden" name="courseId" value="${course.id}">
                             <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
