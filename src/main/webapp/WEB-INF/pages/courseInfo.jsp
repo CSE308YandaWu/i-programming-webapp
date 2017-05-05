@@ -96,13 +96,7 @@
                                 <c:forEach var="lesson" items="${lessons}">
                                     <li>
                                         <a href="#" onclick="toCourseContent()"
-                                           class="list-group-item list-group-item-action">${lesson.title}
-                                                <%--<form action="/deleteCourse" class="deletebutton">--%>
-                                                <%--<input type="hidden" value="${lesson.id}" name="courseId">--%>
-                                                <%--<input type="submit" value="Delete" class="btn btn-primary">--%>
-                                                <%--</form>--%>
-                                            <%--<br>--%>
-                                            <%--<span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>--%>
+                                           class="list-group-item list-group-item-action">${lesson.lessonTitle}
                                         </a>
                                     </li>
                                 </c:forEach>
@@ -110,8 +104,9 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-
-                <%--</p>--%>
+                <form action="/main">
+                    <input type="submit" class="btn btn-primary add-btns-group" value="Back">
+                </form>
             </div>
             <div class="mastfoot">
                 <div class="inner">

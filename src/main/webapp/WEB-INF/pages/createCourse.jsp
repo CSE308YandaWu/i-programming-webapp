@@ -57,75 +57,43 @@
                     </nav>
                 </div>
             </div>
-            <div class="inner editLesson">
-                <h2>--------------------Create Course--------------------</h2>
-                <table class="table1">
-                    <tr>
-                        <td>
-                            <span ><strong>Course ID:</strong></span>
-                        </td>
-
-                        <td>
-                            <input name="courseId" style="color:black" type="text" size="40" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span ><strong>Course Title:</strong></span>
-                        </td>
-                        <td>
-                            <input name="courseTitle" style="color:black" type="text" size="40" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span ><strong>Instructor:</strong></span>
-                        </td>
-                        <td>
-                            <input name="instructor" style="color:black" type="text" size="40" value="">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span ><strong> <br>Description:</br> </strong></span>
-
-
-                        </td>
-                        <td>
-                            <textarea rows="7" cols="38" style="color:black"></textarea>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <span><strong>Status:</strong></span>
-                        </td>
-                        <td>
-                            <select style="color:black">
-                                <option value="public">Public</option>
-                                <option value="private">Private</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <input name="confirm" type="submit"  value="Confirm" style="color:black" onclick="createCourseToMainConfirm();">
-                            <form id="createCourseToMainConfirm"><input type="hidden"></form>
-                        </td>
-                        <td>
-                            <input name="cancel" type="submit" value="Cancel"  style="color:black" onclick="createCourseToMainCancel();">
-                            <form id="createCourseToMainCancel"><input type="hidden"></form>
-                        </td>
-                    </tr>
-
-
-                </table>
-
+            <div class="inner editDetails">
+                <h2>Course Details</h2>
+                <h5>*denotes a required field</h5>
+                <div class="help-block"></div>
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Lesson ID:*</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="inputEditLessonID" class="form-control" name="Lesson ID"  placeholder="eg. 1234" required autofocus>
+                    </div>
+                </div>
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Status:*</h4></div>
+                    <div class="col-md-7">
+                        <label class="radio-inline"><input type="radio" name="statusradio">Public</label>
+                        <label class="radio-inline"><input type="radio" name="statusradio">Private</label>
+                    </div>
+                </div>
+                <div class="help-block"></div>
+                <div class="row">
+                    <div class="col-md-4"><h4>Password:</h4></div>
+                    <div class="col-md-7">
+                        <input type="text" id="inputEditTitle" class="form-control" name="Lesson Title" placeholder="Required if private">
+                    </div>
+                </div>
+                <div class="help-block"></div>
+                <div class="row">
+                   <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

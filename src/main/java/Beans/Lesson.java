@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 public class Lesson {
     @Id
-    private long lessonId;
+    private String lessonId;
     @Index
     private String courseId;
     private String lessonTitle;
@@ -39,7 +39,7 @@ public class Lesson {
         dateCreated = new Date();
     }
 
-    public Lesson(String courseId, long lessonId, String lessonTitle, String lessonBody, String pptLink, String pptDescription, List<String> videoLinks,
+    public Lesson(String courseId, String lessonId, String lessonTitle, String lessonBody, String pptLink, String pptDescription, List<String> videoLinks,
                   List<String> videoBlobKeysList, List<String> videoDescriptions, List<String> imageServingUrlList, List<String> imageDescriptions,
                   List<String> assignmentBlobKeysList, List<String> assignmentDescriptions) {
         this.dateCreated = new Date();
@@ -59,7 +59,7 @@ public class Lesson {
     }
 
     /* getters */
-    public long getLessonId() {
+    public String getLessonId() {
         return lessonId;
     }
     public String getCourseId() {
@@ -101,7 +101,7 @@ public class Lesson {
     }
 
     /* setters */
-    public void setLessonId(long lessonId) {
+    public void setLessonId(String lessonId) {
         this.lessonId = lessonId;
     }
     public void setCourseId(String courseId) {

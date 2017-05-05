@@ -1,0 +1,50 @@
+/*
+    File created by Shanshan Chen
+    Purpose: the css style sheet used to implement the sortable list used in editcourse.jsp
+    Uses the library from https://johnny.github.io/jquery-sortable/
+ */
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*width: 60%;*/
+}
+#sortable li {
+    margin: 0 5px 5px 5px;
+    padding: 10px;
+    font-size: 1.5em;
+    height: 2em;
+    text-align: left;
+}
+html>body #sortable li {
+    height: 2em;
+    line-height: 1em;
+}
+.ui-state-highlight {
+    background: #676767;
+    border: #565656;
+    height: 2em;
+    line-height: 1em;
+}
+
+ul.lesson-list {
+    list-style: "    ";
+}
+
+.ui-icon {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+}
+
+.lesson-info {
+    float: left;
+}
+.lesson-edit {
+    float: right;
+}
+
+.subheading {
+    text-align: left;
+}
