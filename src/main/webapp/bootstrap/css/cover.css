@@ -253,3 +253,7 @@ h2 {
     display: none;
     color: red;
 }
+
+.lessonHeading {
+    font-weight: bold;
+}

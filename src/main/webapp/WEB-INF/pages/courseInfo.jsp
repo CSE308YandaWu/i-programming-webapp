@@ -86,18 +86,21 @@
                     </table>
                 </div>
                 <div class="outlinelist">
-                    <h3 class="outlinelabel">Course Outline</h3>
+                    <h3 class="lessonHeading">Lessons</h3>
                     <c:choose>
                         <c:when test="${empty lessons}">
                             There is no lessons.
                         </c:when>
                         <c:otherwise>
                             <ol>
-                                <c:forEach var="lesson" items="${lessons}">
+                                <c:forEach var="lesson" items="${lessons}" varStatus="loop">
                                     <li>
-                                        <a href="#" onclick="toCourseContent()"
+                                        <a href="#" onclick="viewLesson('${loop.index}')"
                                            class="list-group-item list-group-item-action">${lesson.lessonTitle}
                                         </a>
+                                        <form id="viewLesson${loop.index}">
+                                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                        </form>
                                     </li>
                                 </c:forEach>
                             </ol>

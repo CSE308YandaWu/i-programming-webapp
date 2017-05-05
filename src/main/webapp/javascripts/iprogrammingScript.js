@@ -203,22 +203,27 @@ function editLessonToEditCourseCancel() {
 function setCourseTitle(x) {
     document.getElementById("title2Save").setAttribute("value", x.value);
     document.getElementById("titleEditLesson").setAttribute("value", x.value);
+    document.getElementById("titleDeleteLesson").setAttribute("value", x.value);
 }
 function setInstructor(x) {
     document.getElementById("instructor2Save").setAttribute("value", x.value);
     document.getElementById("instructorEditLesson").setAttribute("value", x.value);
+    document.getElementById("instructorDeleteLesson").setAttribute("value", x.value);
 }
 function setDescription(x) {
     document.getElementById("description2Save").setAttribute("value", x.value);
     document.getElementById("descriptionEditLesson").setAttribute("value", x.value);
+    document.getElementById("descriptionDeleteLesson").setAttribute("value", x.value);
 }
 function setAccessCode(x) {
     document.getElementById("accessCode2Save").setAttribute("value", x.value);
     document.getElementById("accessCodeEditLesson").setAttribute("value", x.value);
+    document.getElementById("accessCodeDeleteLesson").setAttribute("value", x.value);
 }
 function setStatus(x){
     document.getElementById("status2Save").setAttribute("value", x.value);
     document.getElementById("statusEditLesson").setAttribute("value", x.value);
+    document.getElementById("statusDeleteLesson").setAttribute("value", x.value);
     showAccessCode();
 }
 function showAccessCode(){
@@ -232,10 +237,7 @@ function showAccessCode(){
 /**
  * ---------------------------------------Other navigation button---------------------------------------
  */
-function toCourseContent() {
-    document.getElementById("toCourseContent").action = "/courseContent";
-    document.getElementById("toCourseContent").submit();
-}
+
 /**
  * ---------------------------------------View lesson buttons(view lesson in editCourse Page)---------------------------------------
  */
@@ -243,7 +245,10 @@ function viewLesson(lessonIndex) {//assignment index
     document.getElementById("viewLesson"+lessonIndex).action = "/courseContent";
     document.getElementById("viewLesson"+lessonIndex).submit();
 }
-
+function deleteLesson(lessonIndex) {//assignment index
+    document.getElementById("viewLesson"+lessonIndex).action = "/deleteLesson";
+    document.getElementById("viewLesson"+lessonIndex).submit();
+}
 /**
  * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
