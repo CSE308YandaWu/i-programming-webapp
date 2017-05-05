@@ -37,7 +37,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="showAccessCode()">
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">

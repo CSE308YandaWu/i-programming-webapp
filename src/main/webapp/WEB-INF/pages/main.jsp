@@ -86,7 +86,7 @@
                         Empty!
                     </c:when>
                     <c:otherwise>
-                        <c:forEach var="x" items="${topCourses}">
+                        <c:forEach var="x" items="${topCourses}" varStatus="loop">
                             <li class="list-group-item">
                                 <div class="panel panel-default panel1">
                                     <div class="panel-heading">
@@ -96,20 +96,24 @@
                                         <div class="panel-body panelbody">
                                             <p>Instructors: ${x.instructor}</p>
                                             <p>Status: ${x.status}</p>
-                                            <form action="/enrollCourse" id="enrollForm">
+                                            <form action="/enrollCourse" id="enrollForm" onsubmit="return checkCode(${x.accessCode},${loop.index})">
                                                 <input name="courseId" type="hidden" value="${x.id}">
                                                 <input name="userEmail" type="hidden" value="${user}">
-                                                <c:choose>
-                                                    <c:when test="${x.status == 'private'}">
-                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
-                                                            <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input name="confirm" type="submit" value="Enroll" >
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <c:if test="${x.status == 'private'}">
+                                                    <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
+                                                </c:if>
+                                                <input type="submit" value="Enroll">
+                                                <%--<c:choose>--%>
+                                                    <%--<c:when test="${x.status == 'private'}">--%>
+                                                        <%--<p>Access Code: <input type="text" name="accessCode">--%>
+                                                            <%--<input name="confirm" type="button" value="Enroll"></p>--%>
+                                                    <%--</c:when>--%>
+                                                    <%--<c:otherwise>--%>
+                                                        <%--<input name="confirm" type="submit" value="Enroll" >--%>
+                                                    <%--</c:otherwise>--%>
+                                                <%--</c:choose>--%>
                                             </form>
-                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
+                                            <p class="errorMsg" id="errorMsg${loop.index}">Access Code is invalid. Fail to enroll.</p>
                                         </div>
                                     </div>
                                 </div>

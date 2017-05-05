@@ -248,3 +248,8 @@ h2 {
 .panelbody{
     color: black;
 }
+
+.errorMsg {
+    display: none;
+    color: red;
+}

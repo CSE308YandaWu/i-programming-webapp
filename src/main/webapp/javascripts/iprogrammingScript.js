@@ -94,21 +94,13 @@ function courseStatus() {
         statusRow.style.display = "none";
 }
 
-function checkCode(validCode, button) {
-    var input = button.previousElementSibling.value;
-    // alert(validCode+"("+input+") ");
-    var x = button.parentNode.parentNode.parentNode.getElementsByTagName("p")[3];
-    if ((input == validCode)) {
-        button.parentNode.parentNode.submit();
+function checkCode(validCode, index) {
+    var input = document.getElementById("accessCode"+index).value;
+    if(input == validCode) {
+        return true;
     }
-    else {
-        x.style.display = "inline";
-    }
-}
-function checkCodeEnter(event, validCode, input){
-    if (event.keyCode == 13) {
-        checkCode(validCode, input.nextElementSibling);
-        event.preventDefault();
+    else{
+        document.getElementById("errorMsg"+index).style.display = "inline";
         return false;
     }
 }
