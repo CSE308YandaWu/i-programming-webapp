@@ -3,6 +3,7 @@ package com.iprogramming.controller;
 import Beans.Lesson;
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.images.*;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.nio.ByteBuffer;
@@ -46,7 +47,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class IprogrammingController {
+public class iprogrammingController {
 
     @RequestMapping("/")
     public String home() {
@@ -195,11 +196,11 @@ public class IprogrammingController {
     @RequestMapping("/enterCourse")
     public ModelAndView enterCourse(@RequestParam(value = "courseId") String courseId) {
         Course c = ofy().load().type(Course.class).id(courseId).now();
-        List<Lesson> lessons = ofy().load().type(Lesson.class).ancestor(c).order("-dateCreated").list();
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
 
         ModelAndView mav = new ModelAndView("courseInfo");
         mav.addObject("course", c);
-        mav.addObject("lessons", lessons);
+        mav.addObject("lessons", lessonList);
 
         return mav;
     }
@@ -225,7 +226,11 @@ public class IprogrammingController {
     @RequestMapping("/editCourse")
     public ModelAndView editCourse(@RequestParam(value = "courseId") String courseId) {
         Course c = ofy().load().type(Course.class).id(courseId).now();
-        return new ModelAndView("editCourse", "course", c);
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
+        ModelAndView mav = new ModelAndView("editCourse");
+        mav.addObject("course", c);
+        mav.addObject("lessonList",lessonList);
+        return mav;
     }
 
     @RequestMapping(value = "/saveCourse")
@@ -237,7 +242,7 @@ public class IprogrammingController {
                                    @RequestParam(value = "instructor") String instructor,
                                    @RequestParam(value = "description") String description,
                                    @RequestParam(value = "status") String status,
-                                   @RequestParam(value = "accessCode",required = false) String accessCode) {
+                                   @RequestParam(value = "accessCode", required = false) String accessCode) {
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
         newCourse.setAccessCode(accessCode);
@@ -260,7 +265,7 @@ public class IprogrammingController {
                                    @RequestParam(value = "instructor") String instructor,
                                    @RequestParam(value = "description") String description,
                                    @RequestParam(value = "status") String status,
-                                   @RequestParam(value = "accessCode",required = false) String accessCode) {
+                                   @RequestParam(value = "accessCode", required = false) String accessCode) {
 //	    System.out.println("userEmail: " + userEmail);
 //        System.out.println("courseId: " + courseId);
 //        System.out.println("courseTitle: " + courseTitle);
@@ -282,14 +287,14 @@ public class IprogrammingController {
         mav.addObject("instructor", instructor);
         mav.addObject("description", description);
         mav.addObject("status", status);
-        if(accessCode!=null){
+        if (accessCode != null) {
             mav.addObject("accessCode", accessCode);
         }
         mav.setViewName("editLesson");
         return mav;
     }
 
-/* Blobstore, upload/serve slides/video/image/pdf controllers */
+    /* Blobstore, upload/serve slides/video/image/pdf controllers */
     /* When confirm button is clicked in editLesson Page */
     @RequestMapping(value = "/editLessonConfirm")
     public ModelAndView editLessonConfirm(@RequestParam(value = "lessonTitle", required = false) String lessonTitle,
@@ -308,7 +313,7 @@ public class IprogrammingController {
                                           @RequestParam(value = "instructor") String instructor,
                                           @RequestParam(value = "description") String description,
                                           @RequestParam(value = "status") String status,
-                                          @RequestParam(value = "accessCode",required = false) String accessCode) throws IOException {
+                                          @RequestParam(value = "accessCode", required = false) String accessCode) throws IOException {
 //        System.out.println("userEmail: " + userEmail);
 //        System.out.println("courseId: " + courseId);
 //        System.out.println("courseTitle: " + courseTitle);
@@ -332,11 +337,11 @@ public class IprogrammingController {
 //        mav.addObject("assignmentDescriptions",assignmentDescriptions);
 
         /* get the uploaded video files */
-        Map<String,List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
+        Map<String, List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
 
         /* save uploaded video files to blob store */
         List<String> videoBlobKeysList = new ArrayList<String>();//video BlobKeys List that saves the video blobkeys
-        if(finfos.get("myFileVideo[]") != null){//if user uploaded video files
+        if (finfos.get("myFileVideo[]") != null) {//if user uploaded video files
             for (int i = 0; i < finfos.get("myFileVideo[]").size(); i++) {
                 String gcsVideoFileName = finfos.get("myFileVideo[]").get(i).getGsObjectName();
                 BlobKey videoBlobKey = blobstoreService.createGsBlobKey(gcsVideoFileName);
@@ -352,7 +357,7 @@ public class IprogrammingController {
         }
         /* save uploaded image files to blob store, and get the serving url */
         List<String> imageServingUrlList = new ArrayList<String>();
-        if(finfos.get("myFileImage[]") != null){
+        if (finfos.get("myFileImage[]") != null) {
             for (int i = 0; i < finfos.get("myFileImage[]").size(); i++) {
                 String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
                 BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
@@ -367,11 +372,11 @@ public class IprogrammingController {
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
-                            new GcsFilename("i-programming.appspot.com", "resizedImage"+i+".jpeg"),
+                            new GcsFilename("i-programming.appspot.com", "resizedImage" + i + ".jpeg"),
                             new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
                             ByteBuffer.wrap(resizedImage.getImageData()));
                     //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
-                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage"+i+".jpeg");
+                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + i + ".jpeg");
                     String url = services.getServingUrl(serve);
                     imageServingUrlList.add(url);
                 }
@@ -380,7 +385,7 @@ public class IprogrammingController {
         }
         /* save uploaded assignment files to blob store */
         List<String> assignmentBlobKeysList = new ArrayList<String>();
-        if(finfos.get("myFileAssignment[]") != null){
+        if (finfos.get("myFileAssignment[]") != null) {
             for (int i = 0; i < finfos.get("myFileAssignment[]").size(); i++) {
                 String gcsAssignmentFileName = finfos.get("myFileAssignment[]").get(i).getGsObjectName();
                 BlobKey assignmentBlobKey = blobstoreService.createGsBlobKey(gcsAssignmentFileName);
@@ -393,14 +398,14 @@ public class IprogrammingController {
             }
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
-        long lessonId = new ObjectifyFactory().allocateId(Lesson.class).getId();
-        Lesson lesson = new Lesson(courseId, lessonId, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions,
+        String id = new ObjectifyFactory().allocateId(Lesson.class).getString();
+        Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions,
                 imageServingUrlList, imageDescriptions, assignmentBlobKeysList, assignmentDescriptions);
         /* save the lesson into datastore  */
         ofy().save().entity(lesson).now();
         /* get lesson list from the datastore */
 
-        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId",courseId).order("dateCreated").list();
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         System.out.println("fk: " + lessonList.size());
         ModelAndView mav = new ModelAndView();
         /* add course object to the model */
@@ -415,9 +420,12 @@ public class IprogrammingController {
     /* courseContent Page */
     @RequestMapping("/courseContent")
     public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
-                                      @RequestParam(value = "courseId", required = false) String courseId){
+                                      @RequestParam(value = "courseId", required = false) String courseId) {
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
-        System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " +lesson.getLessonTitle());
+        if (lesson == null)
+            System.out.println("lesson is null");
+        else
+            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
         ModelAndView mav = new ModelAndView();
         mav.setViewName("courseContent");
         return mav;
