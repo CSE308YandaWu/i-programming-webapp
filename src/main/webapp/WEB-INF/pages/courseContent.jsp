@@ -66,7 +66,7 @@
             <br><br>
 
             <h1 class="cover-heading">${lesson.lessonTitle}</h1>
-            <h3 class="cover-heading">${lesson.lessonBody}</h3>
+            <p class="text" style=" font-size:25px">${lesson.lessonBody}</p>
 
             <div class="inner cover">
                 <h3 class = "text" >

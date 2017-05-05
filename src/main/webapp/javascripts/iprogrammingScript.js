@@ -65,7 +65,7 @@ function toSearchCourse() {
 /* Main Page Edit Course button */
 function toEditCourse(a) {
     // document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
-    document.getElementById("editId").value = document.getElementById("editCourseId");
+    document.getElementById("editId").value = document.getElementById("editCourseId").value;
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
 }
