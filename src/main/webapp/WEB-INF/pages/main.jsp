@@ -121,14 +121,13 @@
                             You have not created any courses yet.
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="x" items="${createdCourses}">
+                            <c:forEach var="x" items="${createdCourses}" varStatus="loop">
                                 <div class="list-group-item list-group-item-action">
-                                    <a href="#" style="color: black" onclick="toEditCourse()" class="list-group-item-action enrolledlink">
+                                    <a href="#" style="color: black" onclick="toEditCourse(${loop.index})" class="list-group-item-action enrolledlink">
                                         ${x.title}
                                     </a>
-
                                     <form action="/deleteCourse" class="deletebutton">
-                                        <input type="hidden" value="${x.id}" name="courseId" id="editCourseId">
+                                        <input type="hidden" value="${x.id}" name="courseId" id="editCourseId${loop.index}">
                                         <input type="submit" value="Delete" onclick="return confirmDelete()" class="btn btn-primary">
                                     </form>
                                     <br>
@@ -148,13 +147,13 @@
                             You have not joined any courses yet.
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="x" items="${joinedCourses}">
+                            <c:forEach var="x" items="${joinedCourses}" varStatus="loop">
                                 <div class="list-group-item enrolledlink">
-                                    <a href="#" style="color: black" onclick="toCoursePage()" class="list-group-item-action enrolledlink">
+                                    <a href="#" style="color: black" onclick="toCoursePage(${loop.index})" class="list-group-item-action enrolledlink">
                                         ${x.title}
                                     </a>
                                     <form action="/dropCourse" class="dropbutton">
-                                        <input type="hidden" value="${x.id}" name="courseId" id="courseId">
+                                        <input type="hidden" value="${x.id}" name="courseId" id="courseId${loop.index}">
                                         <input type="hidden" value="${user}" name="userEmail">
                                         <input type="submit" value="Drop" onclick="return confirmDrop()" class="btn btn-primary">
                                     </form>
