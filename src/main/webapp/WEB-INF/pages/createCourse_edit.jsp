@@ -18,127 +18,148 @@
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
 <head>
-    <title>Search Course</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
-    <%--<link href="../../bootstrap/css/cover.css" rel="stylesheet">--%>
-    <style>
-        .pagecontainer {
-            width: 50%;
-            margin: auto;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%--<link rel="icon" href="../../favicon.ico">--%>
+
+    <title>Edit Lesson</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
+    <link href="../../stylesheets/main.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div class="pagecontainer">
-    <ul class="navUl">
-
-        <li>
-            <a href="#" onclick="createCourseToHome()">I-Programming</a>
-            <form id="createCourseToHome"><input type="hidden"></form>
-        </li>
-        <li style="float:right">
-            <a href="#" onclick="signOut()">Sign out</a>
-            <form id="signOutToHome"><input type="hidden"></form>
-        </li>
-        <li style="float:right">
-            <a id="my-signin2" style="display: none;"></a>
-            <a id="userEmail"></a>
-        </li>
-
-
-    </ul>
-
-    <h1>--------------------Create Course--------------------</h1>
-    <div class="container1">
-
-
-        <table class="table1">
-            <caption>Course Information:</caption>
-            <tr>
-                <td>
-                    <span><strong>Course Title:</strong></span>
-                </td>
-                <td>
-                    <input name="courseTitle" type="text" size="40" value="" form="courseinfo">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <span><strong>Instructor:</strong></span>
-                </td>
-                <td>
-                    <input name="instructor" type="text" size="40" value="" form="courseinfo">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <span><strong> <br>Description:</br> </strong></span>
-                </td>
-                <td>
-                    <textarea rows="7" cols="38" name="description" form="courseinfo"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span><strong>Status:</strong></span>
-                </td>
-                <td>
-                    <select name="status" form="courseinfo" id="status" onchange="courseStatus()">
-                        <option value="public">Public</option>
-                        <option value="private">Private</option>
-                    </select>
-                </td>
-            </tr>
-
-            <tr id="statusRow" style="display:none;">
-                <td>
-                    <span><strong>Access Code:</strong></span>
-                </td>
-                <td>
-                    <input name="accessCode" size="40" value="" form="courseinfo">
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">
+                            <a href="#" onclick="editLessonToHome()">I-Programming</a>
+                            <form id="editLessonToHome"><input type="hidden"></form>
+                        </h3>
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <li>
+                                    <div id="my-signin2" style="display: none;"></div>
+                                    <a id="userEmail"></a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="signOut()">Sign out</a>
+                                    <form id="signOutToHome"><input type="hidden"></form>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="inner editLesson">
+                    <h2>Create Course</h2>
+                    <h5>*denotes a required field</h5>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3" ><h4>Course Title*:</h4></div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="courseTitle" required autofocus form="courseinfo">
+                        </div>
+                    </div>
+                    <div class="help-block"></div>
+                    <div class="row">
+                        <div class="col-md-3" ><h4>Instructor:</h4></div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="instructor" form="courseinfo">
+                        </div>
+                    </div>
+                    <div class="help-block"></div>
+                    <div class="row">
+                        <div class="col-md-3"><h4>Description:</h4></div>
+                        <div class="col-md-6">
+                            <textarea class="form-control" name="description" rows="7" form="courseinfo"></textarea>
+                        </div>
+                    </div>
+                    <div class="help-block"></div>
+                    <div class="row">
+                        <div class="col-md-3"><h4>Status:</h4></div>
+                        <div class="col-md-6">
+                            <select name="status" form="courseinfo" id="status" onchange="courseStatus()">
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="statusRow">
+                        <div class="col-md-3"><h4>Access Code:</h4></div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="accessCode" form="courseinfo">
+                        </div>
+                    </div>
+                </div>
+                <div class="create-course-btns">
                     <form action="/createCourse1" id="courseinfo">
                         <input name="userEmail" id="formUser" type="hidden" value="${user}">
-                        <input name="confirm" type="submit" value="Confirm">
+                        <input name="confirm" type="submit" value="Confirm" class="btn btn-primary">
                     </form>
-                </td>
-                <td>
-                    <form id="createCourseToMainCancel"><input type="hidden">
-                        <input name="cancel" type="submit" value="Cancel" onclick="createCourseToMainCancel();">
+                    <form id="createCourseToMainCancel">
+                        <input type="hidden">
+                        <input name="cancel" type="submit" value="Cancel" class="btn btn-primary" onclick="createCourseToMainCancel();">
                     </form>
-                </td>
-            </tr>
-
-
-        </table>
-
-
+                </div>
+                <%--<div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
+                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="userEmail" value="${userEmail}">
+                            <input type="hidden" name="courseId" value="${courseId}">
+                            <input type="hidden" name="numEnrolled" value="${numEnrolled}">
+                            <input type="hidden" name="courseTitle" value="${courseTitle}">
+                            <input type="hidden" name="instructor" value="${instructor}">
+                            <input type="hidden" name="description" value="${description}">
+                            <input type="hidden" name="status" value="${status}">
+                            <c:if test="${status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${accessCode}">
+                            </c:if>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        &lt;%&ndash;<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>&ndash;%&gt;
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
+                        <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
+                    </div>
+                </div>--%>
+            </div>
+        </div>
     </div>
 
-</div>
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>

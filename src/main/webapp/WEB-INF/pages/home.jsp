@@ -56,8 +56,10 @@
             </div>
             <div class="inner cover">
                 <h1 class="cover-heading">Welcome to I-Programming!</h1>
-                <p class="lead">I-Programing is an online platform that not only allows you to teach the world and share your knowledge by easily creating your own online courses,
-                    but also allows you to gain the knowledge by taking the online course that was created by others. </p>
+                <p class="lead">I-Programing is an online web application that allows you to create, share, and access
+                    courses on a variety of subjects.  Each of the courses is made by anyone anywhere in the world who
+                    wishes to share their knowledge with the rest of the world.  By providing this platform, we hope to
+                    cultivate a worldwide community of intellectuals.  Sign up or login below to join us.</p>
                 <%--<p class="lead">--%>
                 <%--google SignIn Button--%>
                     <div id="my-signin2" class="btn" data-onsuccess="onSignIn"></div>

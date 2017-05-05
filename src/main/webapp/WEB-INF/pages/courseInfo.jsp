@@ -5,6 +5,7 @@
   Date: 4/6/2017
   Time: 3:29 AM
   To change this template use File | Settings | File Templates.
+  This file generates the non-owner user's view of a course
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Course Page</title>
+    <title>Course Page - Owner</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,16 +62,13 @@
                     </nav>
                 </div>
             </div>
-            <h1 class="cover-heading">
-                ${course.title} Course Page</h1>
+            <h2 class="cover-heading">
+                ${course.title} Course Page</h2>
             <div class="inner cover">
                 <h3 class="text">Course Description</h3>
+                <br>
                 <div class="course-info">
                     <table class="table1">
-                        <tr>
-                            <td>Course Title:</td>
-                            <td>${course.title}</td>
-                        </tr>
                         <tr>
                             <td>Instructor:</td>
                             <td>${course.instructor}</td>
@@ -94,7 +92,7 @@
                         <c:otherwise>
                             <ol>
                                 <c:forEach var="lesson" items="${lessons}" varStatus="loop">
-                                    <li>
+                                    <li style="padding-bottom: 5px">
                                         <a href="#" onclick="viewLesson('${loop.index}')"
                                            class="list-group-item list-group-item-action">${lesson.lessonTitle}
                                         </a>
@@ -113,6 +111,9 @@
                 <form action="/main">
                     <input type="submit" class="btn btn-primary add-btns-group" value="Back">
                 </form>
+                <div class="row">
+                    <%-- used to create padding at bottom --%>
+                </div>
             </div>
             <div class="mastfoot">
                 <div class="inner">
