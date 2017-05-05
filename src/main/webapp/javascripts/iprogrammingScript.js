@@ -221,10 +221,10 @@ function setAccessCode(x) {
     document.getElementById("accessCodeDeleteLesson").setAttribute("value", x.value);
 }
 function setStatus(x){
+    showAccessCode();
     document.getElementById("status2Save").setAttribute("value", x.value);
     document.getElementById("statusEditLesson").setAttribute("value", x.value);
     document.getElementById("statusDeleteLesson").setAttribute("value", x.value);
-    showAccessCode();
 }
 function showAccessCode(){
     var x = document.getElementById("status").value;
