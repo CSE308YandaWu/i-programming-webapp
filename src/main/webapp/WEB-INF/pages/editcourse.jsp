@@ -155,7 +155,7 @@
                                                 <input type="hidden" name="lessonId" value="${lesson.lessonId}">
                                                 <%--needed for the go back button, to indicate where is the viewLesson action come from --%>
                                                 <input type="hidden" name="originalPlace" value="editCoursePage">
-                                                
+
                                                 <input type="hidden" name="userEmail" value="${course.email}">
                                                 <input type="hidden" name="courseId" value="${course.id}">
                                                 <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
