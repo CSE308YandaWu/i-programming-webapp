@@ -64,13 +64,15 @@ function toSearchCourse() {
 }
 /* Main Page Edit Course button */
 function toEditCourse(a) {
-    document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    // document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("editId").value = document.getElementById("editCourseId");
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
 }
 /* Main Page Course button */
-function toCoursePage(a) {
-    document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+function toCoursePage() {
+    // document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
+    document.getElementById("cId").value = document.getElementById("courseId").value;
     document.getElementById("toCoursePage").action = "/enterCourse";
     document.getElementById("toCoursePage").submit();
 }
