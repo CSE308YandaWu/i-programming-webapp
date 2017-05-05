@@ -209,6 +209,7 @@ h2 {
 
 .add-btns-group {
     float: right;
+    margin-right: 5px;
 }
 
 .add-btns-group > form {
@@ -226,12 +227,6 @@ h2 {
     width: 70%;
     text-align: left;
     margin-bottom: 100px;
-}
-
-.table1 * td{
-    padding-bottom: 4px;
-    padding-top: 4px;
-    color: black;
 }
 
 .deletebutton,

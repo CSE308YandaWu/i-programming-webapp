@@ -71,77 +71,101 @@
                     <h3 class="subheading">Course Details:</h3>
                     <div class="course-info">
                         <table class="table1">
-                            <tr><td>User:</td><td>${model.email}</td></tr>
-                            <tr><td>Course Id:</td><td>${model.id}</td></tr>
-                            <tr><td>Course Title:</td><td>${model.title}</td></tr>
-                            <tr><td>Instructor:</td><td>${model.instructor}</td></tr>
-                            <tr><td>Status:</td><td>${model.status}</td></tr>
-                            <tr><td>Description:</td><td>${model.description}</td></tr>
-                            <tr><td>Date Created: </td><td>${model.dateCreated}</td></tr>
+                            <tr><td>User:</td><td>${course.email}</td></tr>
+                            <tr><td>Course Id:</td><td>${course.id}</td></tr>
+                            <tr><td>Course Title:</td><td>${course.title}</td></tr>
+                            <tr><td>Instructor:</td><td>${course.instructor}</td></tr>
+                            <tr><td>Status:</td><td>${course.status}</td></tr>
+                            <tr><td>Description:</td><td>${course.description}</td></tr>
+                            <tr><td>Date Created: </td><td>${course.dateCreated}</td></tr>
                         </table>
                     </div>
                     <div class="outlinelist">
+                        <button type="button" class="btn btn-primary add-btns-group" onclick="toEditLesson();">Add Lesson
+                            <form id="toEditLesson">
+                                <input type="hidden" name="userEmail" value="${course.email}">
+                                <input type="hidden" name="courseId" value="${course.id}">
+                                <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                                <input type="hidden" name="courseTitle" id="titleEditLesson" value="${course.title}">
+                                <input type="hidden" name="instructor" id="instructorEditLesson"
+                                       value="${course.instructor}">
+                                <input type="hidden" name="description" id="descriptionEditLesson"
+                                       value="${course.description}">
+                                <input type="hidden" name="status" id="statusEditLesson" value="${course.status}">
+                                <input type="hidden" id="accessCodeEditLesson" name="accessCode"
+                                       value="${course.accessCode}">
+                            </form>
+                        </button>
                         <h3 class="subheading">Lessons</h3>
-                            <ul id="sortable" class="lesson-list">
-                                <%--<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>--%>
-                                <li class="ui-state-default">
-                                    <div class="lesson-info">
-                                        <span class="ui-icon ui-icon-triangle-2-n-s"></span> Introduction
-                                    </div>
-                                    <div class="lesson-edit">
-                                        <a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>
-                                        <a href="#" onclick="<%--editCourseContent()--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                        <a href="#" onclick="<%--deleteCourse()--%>"><span class="ui-icon ui-icon-trash"></span></a>
-                                        <form id="toCourseContent"><input type="hidden"></form>
-                                    </div>
-                                </li>
-                                <li class="ui-state-default">
-                                    <div class="lesson-info">
-                                        <span class="ui-icon ui-icon-triangle-2-n-s"></span> Basics
-                                    </div>
-                                    <div class="lesson-edit">
-                                        <a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>
-                                        <a href="#" onclick="<%--editCourseContent()--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                        <a href="#" onclick="<%--deleteCourse()--%>"><span class="ui-icon ui-icon-trash"></span></a>
-                                    </div>
-                                </li>
-                                <li class="ui-state-default">
-                                    <div class="lesson-info">
-                                        <span class="ui-icon ui-icon-triangle-2-n-s"></span> Intermediate
-                                    </div>
-                                    <div class="lesson-edit">
-                                        <a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>
-                                        <a href="#" onclick="<%--editCourseContent()--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                        <a href="#" onclick="<%--deleteCourse()--%>"><span class="ui-icon ui-icon-trash"></span></a>
-                                    </div>
-                                </li>
-                                <li class="ui-state-default">
-                                    <div class="lesson-info">
-                                        <span class="ui-icon ui-icon-triangle-2-n-s"></span> Advanced
-                                    </div>
-                                    <div class="lesson-edit">
-                                        <a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>
-                                        <a href="#" onclick="<%--editCourseContent()--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                        <a href="#" onclick="<%--deleteCourse()--%>"><span class="ui-icon ui-icon-trash"></span></a>
-                                    </div>
-                                </li>
-                            </ul>
+                            <c:choose>
+                                <c:when test="${empty lessonList}">
+                                    There is no lessons.
+                                </c:when>
+                                <c:otherwise>
+                                    <ol id="sortable" class="lesson-list">
+                                        <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
+                                            <li class="ui-state-default">
+                                                <div class="lesson-info">
+                                                    <span class="ui-icon ui-icon-triangle-2-n-s"></span> ${lesson.lessonTitle}
+                                                </div>
+                                                <div class="lesson-edit">
+                                                    <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
+                                                    <a href="#" onclick="<%--editCourseContent()--%>"><span class="ui-icon ui-icon-pencil"></span></a>
+                                                    <a href="#" onclick="<%--deleteCourse()--%>"><span class="ui-icon ui-icon-trash"></span></a>
+                                                </div>
+                                                <form id="viewLesson${loop.index}" target="_blank">
+                                                    <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                                </form>
+                                            </li>
+                                        </c:forEach>
+                                    </ol>
+                                </c:otherwise>
+                            </c:choose>
+                        <%--<ul id="sortable" class="lesson-list">--%>
+                            <%--&lt;%&ndash;<li><a href="#">Introduction</a>(<a href="#">Edit</a>)</li>&ndash;%&gt;--%>
+                            <%--<li class="ui-state-default">--%>
+                                <%--<div class="lesson-info">--%>
+                                    <%--<span class="ui-icon ui-icon-triangle-2-n-s"></span> Introduction--%>
+                                <%--</div>--%>
+                                <%--<div class="lesson-edit">--%>
+                                    <%--<a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;editCourseContent()&ndash;%&gt;"><span class="ui-icon ui-icon-pencil"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;deleteCourse()&ndash;%&gt;"><span class="ui-icon ui-icon-trash"></span></a>--%>
+                                    <%--&lt;%&ndash;<form id="toCourseContent"><input type="hidden"></form>&ndash;%&gt;--%>
+                                <%--</div>--%>
+                            <%--</li>--%>
+                            <%--<li class="ui-state-default">--%>
+                                <%--<div class="lesson-info">--%>
+                                    <%--<span class="ui-icon ui-icon-triangle-2-n-s"></span> Basics--%>
+                                <%--</div>--%>
+                                <%--<div class="lesson-edit">--%>
+                                    <%--<a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;editCourseContent()&ndash;%&gt;"><span class="ui-icon ui-icon-pencil"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;deleteCourse()&ndash;%&gt;"><span class="ui-icon ui-icon-trash"></span></a>--%>
+                                <%--</div>--%>
+                            <%--</li>--%>
+                            <%--<li class="ui-state-default">--%>
+                                <%--<div class="lesson-info">--%>
+                                    <%--<span class="ui-icon ui-icon-triangle-2-n-s"></span> Intermediate--%>
+                                <%--</div>--%>
+                                <%--<div class="lesson-edit">--%>
+                                    <%--<a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;editCourseContent()&ndash;%&gt;"><span class="ui-icon ui-icon-pencil"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;deleteCourse()&ndash;%&gt;"><span class="ui-icon ui-icon-trash"></span></a>--%>
+                                <%--</div>--%>
+                            <%--</li>--%>
+                            <%--<li class="ui-state-default">--%>
+                                <%--<div class="lesson-info">--%>
+                                    <%--<span class="ui-icon ui-icon-triangle-2-n-s"></span> Advanced--%>
+                                <%--</div>--%>
+                                <%--<div class="lesson-edit">--%>
+                                    <%--<a href="#" onclick="toCourseContent()"><span class="ui-icon ui-icon-document"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;editCourseContent()&ndash;%&gt;"><span class="ui-icon ui-icon-pencil"></span></a>--%>
+                                    <%--<a href="#" onclick="&lt;%&ndash;deleteCourse()&ndash;%&gt;"><span class="ui-icon ui-icon-trash"></span></a>--%>
+                                <%--</div>--%>
+                            <%--</li>--%>
+                        <%--</ul>--%>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="toEditLesson();" style="float: left">Add Lesson
-                        <form id="toEditLesson">
-                            <input type="hidden" name="userEmail" value="${course.email}">
-                            <input type="hidden" name="courseId" value="${course.id}">
-                            <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
-                            <input type="hidden" name="courseTitle" id="titleEditLesson" value="${course.title}">
-                            <input type="hidden" name="instructor" id="instructorEditLesson"
-                                   value="${course.instructor}">
-                            <input type="hidden" name="description" id="descriptionEditLesson"
-                                   value="${course.description}">
-                            <input type="hidden" name="status" id="statusEditLesson" value="${course.status}">
-                            <input type="hidden" id="accessCodeEditLesson" name="accessCode"
-                                   value="${course.accessCode}">
-                        </form>
-                    </button>
                 </div>
                 <br>
                 <br>
