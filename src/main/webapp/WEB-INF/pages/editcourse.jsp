@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <td>Status:</td>
-                                <td><select name="status" id="status" onchange="setStatus(this)" style="color: #000;">
+                                <td><select name="status" id="status" onchange="setStatus(this)">
                                     <c:choose>
                                         <c:when test="${course.status == 'private'}">
                                             <option value="public">Public</option>
@@ -145,7 +145,7 @@
                                 <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
                                     <li class="ui-state-default">
                                         <div class="lesson-info">
-                                            <span class="ui-icon ui-icon-triangle-2-n-s"></span><p style="display: inline">${lesson.lessonTitle}</p>
+                                            <span class="ui-icon ui-icon-triangle-2-n-s"></span><p class="lesson-name">${lesson.lessonTitle}</p>
                                         </div>
                                         <div class="lesson-edit">
                                             <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
@@ -165,7 +165,7 @@
                     <br>
                     <div class="add-btns-group">
                         <form action="/saveCourse">
-                            <input type="submit" class="btn btn-primary" value="Save">
+                            <input type="submit" class="btn btn-primary" onclick="create_course_confirm()" value="Save">
                             <input type="hidden" name="userEmail" value="${course.email}">
                             <input type="hidden" name="courseId" value="${course.id}">
                             <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
