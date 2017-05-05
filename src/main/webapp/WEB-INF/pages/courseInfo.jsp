@@ -101,6 +101,9 @@
                                         </a>
                                         <form id="viewLesson${loop.index}">
                                             <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                            <%--tell courseContent page where is the viewLesson action from--%>
+                                            <input type="hidden" name="originalPlace" value="courseInfoPage">
+                                            <input type="hidden" name="courseId" value="${course.id}">
                                         </form>
                                     </li>
                                 </c:forEach>
