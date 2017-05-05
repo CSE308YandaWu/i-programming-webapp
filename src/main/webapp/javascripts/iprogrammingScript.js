@@ -161,6 +161,18 @@ function signOutToHome() {
 function goBack() {
     history.back();
 }
+/* let the courseContent page select which page to go back */
+function goBackSelector(originalPlace) {
+    if(originalPlace=="editCoursePage"){
+        //back to editCourse Page
+        document.getElementById("backToEditCourse").action = "/editCourse";
+        document.getElementById("backToEditCourse").submit();
+    }else{//from the main
+        //back to main Page
+        document.getElementById("backToMain").action = "/main";
+        document.getElementById("backToMain").submit();
+    }
+}
 
 /* createCourse Page confirm button */
 function createCourseToMainConfirm() {

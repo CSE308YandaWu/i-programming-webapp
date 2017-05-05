@@ -419,16 +419,17 @@ public class iprogrammingController {
 
     /* courseContent Page */
     @RequestMapping("/courseContent")
-    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId) {
+    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
+                                      @RequestParam(value = "courseId") String courseId,//needed when go back to editCourse Page
+                                      @RequestParam(value = "originalPlace") String originalPlace) {//indicate where to go back
+
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
-//        if (lesson == null)
-//            System.out.println("lesson is null");
-//        else
-//            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
+
         ModelAndView mav = new ModelAndView();
-        //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + lesson.getPPTLink());
+
         mav.addObject("lesson", lesson);
-        //mav.addObject("pptLink", lesson.getPPTLink());
+        mav.addObject("courseId", courseId);//needed when go back to editCourse Page
+        mav.addObject("originalPlace",originalPlace);//indicate where to go back
         mav.setViewName("courseContent");
         return mav;
     }

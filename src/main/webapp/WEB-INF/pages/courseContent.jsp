@@ -190,10 +190,17 @@
                     </c:choose>
                     <br><br>
                 </h3>
-                <%--<p class="text">--%>
+                <div class="col-md-2">
+                    <%--choose where to go back--%>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBackSelector('${originalPlace}')">Back</button>
+                    <form id="backToEditCourse"><input type="hidden" name="courseId" value="${courseId}"></form>
+                    <form id="backToMain"><input type="hidden" name="courseId" value="${courseId}"></form>
+                </div>
+                <br><br><br><br><br><br><br><br><br>
                     <%--End of all sections--%>
                 <%--</p>--%>
             </div>
+
             <div class="mastfoot">
                 <div class="inner">
                     <p>Developed by Dark Blue Team.</p>
