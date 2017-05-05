@@ -369,7 +369,7 @@ public class iprogrammingController {
                     ImagesService services = ImagesServiceFactory.getImagesService();
                     // Make an image from a Cloud Storage object, and transform it.
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
-                    Transform resize = ImagesServiceFactory.makeResize(100, 100);
+                    Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
