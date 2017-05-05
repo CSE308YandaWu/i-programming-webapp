@@ -79,14 +79,14 @@
                         </form>
                         <br>
                         <div class="resultlist">
-                            <h2>Search Results</h2>
+                            <h2>Search Result</h2>
                             <ul class="list-group">
                                 <c:choose>
                                     <c:when test="${empty result}">
                                         No course found!
                                     </c:when>
                                     <c:otherwise>
-                                        <c:forEach var="x" items="${result}">
+                                        <c:forEach var="x" items="${result}" varStatus="loop">
                                             <li class="list-group-item">
                                                 <div class="panel panel-default panel1">
                                                     <div class="panel-heading">
@@ -96,25 +96,19 @@
                                                         <div class="panel-body panelbody">
                                                             <p>Instructors: ${x.instructor}</p>
                                                             <p>Status: ${x.status}</p>
-                                                            <form action="/enrollCourse" id="enrollForm">
+                                                            <form action="/enrollCourse" id="enrollForm" onsubmit="return checkCode(${x.accessCode},${loop.index})">
                                                                 <input name="courseId" type="hidden" value="${x.id}">
                                                                 <input name="userEmail" type="hidden" value="${user}">
-                                                                <c:choose>
-                                                                    <c:when test="${x.status == 'private'}">
-                                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
-                                                                        <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <input name="confirm" type="submit" value="Enroll" >
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                                <c:if test="${x.status == 'private'}">
+                                                                    <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
+                                                                </c:if>
+                                                                <input type="submit" value="Enroll">
                                                             </form>
-                                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
+                                                            <p class="errorMsg" id="errorMsg${loop.index}">Access Code is invalid. Fail to enroll.</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
-
                                         </c:forEach>
                                     </c:otherwise>
                                 </c:choose>

@@ -229,7 +229,7 @@ public class iprogrammingController {
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         ModelAndView mav = new ModelAndView("editCourse");
         mav.addObject("course", c);
-        mav.addObject("lessonList",lessonList);
+        mav.addObject("lessonList", lessonList);
         return mav;
     }
 
@@ -303,6 +303,7 @@ public class iprogrammingController {
                                           @RequestParam(value = "pptDescription", required = false) String pptDescription,
                                           @RequestParam(value = "videoLinks[]", required = false) List<String> videoLinks,
                                           @RequestParam(value = "videoDescriptions[]", required = false) List<String> videoDescriptions,
+                                          @RequestParam(value = "videoTypes[]", required = false) List<String> videoTypes,
                                           @RequestParam(value = "imageDescriptions[]", required = false) List<String> imageDescriptions,
                                           @RequestParam(value = "assignmentDescriptions[]", required = false) List<String> assignmentDescriptions,
                                           HttpServletRequest req,
@@ -368,7 +369,7 @@ public class iprogrammingController {
                     ImagesService services = ImagesServiceFactory.getImagesService();
                     // Make an image from a Cloud Storage object, and transform it.
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
-                    Transform resize = ImagesServiceFactory.makeResize(100, 100);
+                    Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
@@ -399,14 +400,13 @@ public class iprogrammingController {
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
         String id = new ObjectifyFactory().allocateId(Lesson.class).getString();
-        Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions,
+        Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions, videoTypes,
                 imageServingUrlList, imageDescriptions, assignmentBlobKeysList, assignmentDescriptions);
         /* save the lesson into datastore  */
         ofy().save().entity(lesson).now();
         /* get lesson list from the datastore */
 
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
-        System.out.println("fk: " + lessonList.size());
         ModelAndView mav = new ModelAndView();
         /* add course object to the model */
         mav.addObject("course", course);
@@ -419,15 +419,40 @@ public class iprogrammingController {
 
     /* courseContent Page */
     @RequestMapping("/courseContent")
-    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
-                                      @RequestParam(value = "courseId", required = false) String courseId) {
+    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId) {
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
-        if (lesson == null)
-            System.out.println("lesson is null");
-        else
-            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
+//        if (lesson == null)
+//            System.out.println("lesson is null");
+//        else
+//            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
         ModelAndView mav = new ModelAndView();
+        //System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + lesson.getPPTLink());
+        mav.addObject("lesson", lesson);
+        //mav.addObject("pptLink", lesson.getPPTLink());
         mav.setViewName("courseContent");
+        return mav;
+    }
+
+    @RequestMapping("/deleteLesson")
+    public ModelAndView deleteLesson(@RequestParam(value = "lessonId", required = false) String lessonId,
+                                     @RequestParam(value = "userEmail") String userEmail,
+                                     @RequestParam(value = "courseId") String courseId,
+                                     @RequestParam(value = "numEnrolled") int numEnrolled,
+                                     @RequestParam(value = "courseTitle") String courseTitle,
+                                     @RequestParam(value = "instructor") String instructor,
+                                     @RequestParam(value = "description") String description,
+                                     @RequestParam(value = "status") String status,
+                                     @RequestParam(value = "accessCode", required = false) String accessCode) {
+        ofy().delete().type(Lesson.class).id(lessonId).now();
+        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        course.setNumEnrolled(numEnrolled);
+        course.setAccessCode(accessCode);
+
+        ModelAndView mav = new ModelAndView("editCourse");
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
+        mav.addObject("lessonList", lessonList);
+        mav.addObject("course", course);
+
         return mav;
     }
 

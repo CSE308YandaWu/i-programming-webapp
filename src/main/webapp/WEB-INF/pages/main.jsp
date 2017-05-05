@@ -86,7 +86,7 @@
                         Empty!
                     </c:when>
                     <c:otherwise>
-                        <c:forEach var="x" items="${topCourses}">
+                        <c:forEach var="x" items="${topCourses}" varStatus="loop">
                             <li class="list-group-item">
                                 <div class="panel panel-default panel1">
                                     <div class="panel-heading">
@@ -96,20 +96,15 @@
                                         <div class="panel-body panelbody">
                                             <p>Instructors: ${x.instructor}</p>
                                             <p>Status: ${x.status}</p>
-                                            <form action="/enrollCourse" id="enrollForm">
+                                            <form action="/enrollCourse" id="enrollForm" onsubmit="return checkCode(${x.accessCode},${loop.index})">
                                                 <input name="courseId" type="hidden" value="${x.id}">
                                                 <input name="userEmail" type="hidden" value="${user}">
-                                                <c:choose>
-                                                    <c:when test="${x.status == 'private'}">
-                                                        <p>Access Code: <input type="text" name="accessCode" onkeypress="checkCodeEnter(event,${x.accessCode},this)">
-                                                            <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input name="confirm" type="submit" value="Enroll" >
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <c:if test="${x.status == 'private'}">
+                                                    <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
+                                                </c:if>
+                                                <input type="submit" value="Enroll">
                                             </form>
-                                            <p style="display: none; color: red;">Access Code is invalid. Fail to enroll.</p>
+                                            <p class="errorMsg" id="errorMsg${loop.index}">Access Code is invalid. Fail to enroll.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +126,7 @@
                                    class="list-group-item list-group-item-action">${x.title}
                                     <form action="/deleteCourse" class="deletebutton">
                                         <input type="hidden" value="${x.id}" name="courseId">
-                                        <input type="submit" value="Delete" class="btn btn-primary">
+                                        <input type="submit" value="Delete" onclick="return confirmDelete()" class="btn btn-primary">
                                     </form>
                                     <br>
                                     <span>Instructor: ${x.instructor}; ${x.numEnrolled} enrolled</span>
@@ -151,12 +146,12 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="x" items="${joinedCourses}">
-                                <a href="#" onclick="toCoursePage(this)"
-                                   class="list-group-item list-group-item-action enrolledlink">${x.title}
+                                <a href="#" onclick="toCoursePage(this)" class="list-group-item list-group-item-action enrolledlink">
+                                    ${x.title}
                                     <form action="/dropCourse" class="dropbutton">
                                         <input type="hidden" value="${x.id}" name="courseId">
                                         <input type="hidden" value="${user}" name="userEmail">
-                                        <input type="submit" value="Drop" class="btn btn-primary">
+                                        <input type="submit" value="Drop" onclick="return confirmDrop()" class="btn btn-primary">
                                     </form>
                                 </a>
                             </c:forEach>
@@ -182,6 +177,7 @@
 <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/confirmEvent.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

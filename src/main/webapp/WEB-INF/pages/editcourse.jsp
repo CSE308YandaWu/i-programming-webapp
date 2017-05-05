@@ -37,7 +37,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="showAccessCode()">
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
@@ -64,11 +64,11 @@
                 <div class="inner editcourse">
                     <br><br><br>
                     <h2>Edit Course</h2>
-                    <%--div class="add-btns-group">
+                    <div class="add-btns-group">
                         <button type="button" class="btn btn-primary" onclick="toEditUnit();">Edit Course Details
                             <form id="toEditCourseDetails"><input type="hidden"></form>
                         </button>
-                    </div--%>
+                    </div>
                     <h3 class="subheading">Course Details:</h3>
                     <div class="course-info">
                         <table class="table1">
@@ -150,22 +150,29 @@
                                         <div class="lesson-edit">
                                             <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
                                             <a href="#" onclick="<%--editLesson(${loop.index});--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                            <a href="#" onclick="<%--deleteLesson(${loop.index});--%>"><span class="ui-icon ui-icon-trash"></span></a>
-                                            <form id="viewLesson${loop.index}" target="_blank">
+                                            <a href="#" onclick="deleteLesson(${loop.index});"><span class="ui-icon ui-icon-trash"></span></a>
+                                            <form id="viewLesson${loop.index}">
                                                 <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                                <input type="hidden" name="userEmail" value="${course.email}">
                                                 <input type="hidden" name="courseId" value="${course.id}">
+                                                <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                                                <input type="hidden" name="courseTitle" id="titleDeleteLesson" value="${course.title}">
+                                                <input type="hidden" name="instructor" id="instructorDeleteLesson" value="${course.instructor}">
+                                                <input type="hidden" name="description" id="descriptionDeleteLesson" value="${course.description}">
+                                                <input type="hidden" name="status" id="statusDeleteLesson" value="${course.status}">
+                                                <input type="hidden" name="accessCode" id="accessCodeDeleteLesson" value="${course.accessCode}">
                                             </form>
                                         </div>
                                     </li>
                                 </c:forEach>
-                            </ul
+                            </ul>
                             </c:otherwise>
                         </c:choose>
                     </div>
                     <br>
                     <div class="add-btns-group">
                         <form action="/saveCourse">
-                            <input type="submit" class="btn btn-primary" value="Save">
+                            <input type="submit" class="btn btn-primary" onclick="create_course_confirm()" value="Save">
                             <input type="hidden" name="userEmail" value="${course.email}">
                             <input type="hidden" name="courseId" value="${course.id}">
                             <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">

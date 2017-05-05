@@ -26,6 +26,7 @@ public class Lesson {
     private List<String> videoLinks;
     private List<String> videoBlobKeysList;
     private List<String> videoDescriptions;
+    private List<String> videoTypes;
     private List<String> imageServingUrlList;
     private List<String> imageDescriptions;
     private List<String> assignmentBlobKeysList;
@@ -40,7 +41,7 @@ public class Lesson {
     }
 
     public Lesson(String courseId, String lessonId, String lessonTitle, String lessonBody, String pptLink, String pptDescription, List<String> videoLinks,
-                  List<String> videoBlobKeysList, List<String> videoDescriptions, List<String> imageServingUrlList, List<String> imageDescriptions,
+                  List<String> videoBlobKeysList, List<String> videoDescriptions, List<String> videoTypes, List<String> imageServingUrlList, List<String> imageDescriptions,
                   List<String> assignmentBlobKeysList, List<String> assignmentDescriptions) {
         this.dateCreated = new Date();
         this.courseId = courseId;
@@ -52,90 +53,130 @@ public class Lesson {
         this.videoLinks = videoLinks;
         this.videoBlobKeysList = videoBlobKeysList;
         this.videoDescriptions = videoDescriptions;
+        this.videoTypes = videoTypes;
         this.imageServingUrlList = imageServingUrlList;
         this.imageDescriptions = imageDescriptions;
         this.assignmentBlobKeysList = assignmentBlobKeysList;
         this.assignmentDescriptions = assignmentDescriptions;
     }
 
-    /* getters */
     public String getLessonId() {
         return lessonId;
     }
+
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
+    }
+
     public String getCourseId() {
         return courseId;
     }
-    public Date getDateCreated() {
-        return dateCreated;
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
+
     public String getLessonTitle() {
         return lessonTitle;
     }
+
+    public void setLessonTitle(String lessonTitle) {
+        this.lessonTitle = lessonTitle;
+    }
+
     public String getLessonBody() {
         return lessonBody;
     }
-    public String getPPTLink() {
+
+    public void setLessonBody(String lessonBody) {
+        this.lessonBody = lessonBody;
+    }
+
+    public String getPptLink() {
         return pptLink;
     }
-    public String getPPTDescription() {
+
+    public void setPptLink(String pptLink) {
+        this.pptLink = pptLink;
+    }
+
+    public String getPptDescription() {
         return pptDescription;
     }
+
+    public void setPptDescription(String pptDescription) {
+        this.pptDescription = pptDescription;
+    }
+
     public List<String> getVideoLinks() {
         return videoLinks;
     }
+
+    public void setVideoLinks(List<String> videoLinks) {
+        this.videoLinks = videoLinks;
+    }
+
     public List<String> getVideoBlobKeysList() {
         return videoBlobKeysList;
     }
-    public List<String> getVideoDescriptions() {return videoDescriptions;}
+
+    public void setVideoBlobKeysList(List<String> videoBlobKeysList) {
+        this.videoBlobKeysList = videoBlobKeysList;
+    }
+
+    public List<String> getVideoDescriptions() {
+        return videoDescriptions;
+    }
+
+    public void setVideoDescriptions(List<String> videoDescriptions) {
+        this.videoDescriptions = videoDescriptions;
+    }
+
+    public List<String> getVideoTypes() {
+        return videoTypes;
+    }
+
+    public void setVideoTypes(List<String> videoTypes) {
+        this.videoTypes = videoTypes;
+    }
+
     public List<String> getImageServingUrlList() {
         return imageServingUrlList;
     }
+
+    public void setImageServingUrlList(List<String> imageServingUrlList) {
+        this.imageServingUrlList = imageServingUrlList;
+    }
+
     public List<String> getImageDescriptions() {
         return imageDescriptions;
     }
+
+    public void setImageDescriptions(List<String> imageDescriptions) {
+        this.imageDescriptions = imageDescriptions;
+    }
+
     public List<String> getAssignmentBlobKeysList() {
         return assignmentBlobKeysList;
     }
+
+    public void setAssignmentBlobKeysList(List<String> assignmentBlobKeysList) {
+        this.assignmentBlobKeysList = assignmentBlobKeysList;
+    }
+
     public List<String> getAssignmentDescriptions() {
         return assignmentDescriptions;
     }
 
-    /* setters */
-    public void setLessonId(String lessonId) {
-        this.lessonId = lessonId;
+    public void setAssignmentDescriptions(List<String> assignmentDescriptions) {
+        this.assignmentDescriptions = assignmentDescriptions;
     }
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+
+    public Date getDateCreated() {
+        return dateCreated;
     }
+
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
-    public void setLessonTitle(String lessonTitle) {
-        this.lessonTitle = lessonTitle;
-    }
-    public void setLessonBody(String lessonBody) {
-        this.lessonBody = lessonBody;
-    }
-    public void setPPTLink(String pptLink) {
-        this.pptLink = pptLink;
-    }
-    public void setPPTDescription(String pptDescription) {
-        this.pptDescription = pptDescription;
-    }
-    public void setVideoLinks(List<String> videoLinks) {
-        this.videoLinks = videoLinks;
-    }
-    public void setVideoBlobKeysList(List<String> videoBlobKeysList) {
-        this.videoBlobKeysList = videoBlobKeysList;
-    }
-    public void setVideoDescriptions(List<String> videoDescriptions) {
-        this.videoDescriptions = videoDescriptions;
-    }
-    public void setImageServingUrlList(List<String> imageServingUrlList) {this.imageServingUrlList = imageServingUrlList;}
-    public void setImageDescriptions(List<String> imageDescriptions) {
-        this.imageDescriptions = imageDescriptions;
-    }
-    public void setAssignmentBlobKeysList(List<String> assignmentBlobKeysList) { this.assignmentBlobKeysList = assignmentBlobKeysList;}
-    public void setAssignmentDescriptions(List<String> assignmentDescriptions) { this.assignmentDescriptions = assignmentDescriptions;}
-
 }

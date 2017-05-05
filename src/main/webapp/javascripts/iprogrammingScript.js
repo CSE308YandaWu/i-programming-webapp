@@ -94,21 +94,13 @@ function courseStatus() {
         statusRow.style.display = "none";
 }
 
-function checkCode(validCode, button) {
-    var input = button.previousElementSibling.value;
-    // alert(validCode+"("+input+") ");
-    var x = button.parentNode.parentNode.parentNode.getElementsByTagName("p")[3];
-    if ((input == validCode)) {
-        button.parentNode.parentNode.submit();
+function checkCode(validCode, index) {
+    var input = document.getElementById("accessCode"+index).value;
+    if(input == validCode) {
+        return true;
     }
-    else {
-        x.style.display = "inline";
-    }
-}
-function checkCodeEnter(event, validCode, input){
-    if (event.keyCode == 13) {
-        checkCode(validCode, input.nextElementSibling);
-        event.preventDefault();
+    else{
+        document.getElementById("errorMsg"+index).style.display = "inline";
         return false;
     }
 }
@@ -211,23 +203,28 @@ function editLessonToEditCourseCancel() {
 function setCourseTitle(x) {
     document.getElementById("title2Save").setAttribute("value", x.value);
     document.getElementById("titleEditLesson").setAttribute("value", x.value);
+    document.getElementById("titleDeleteLesson").setAttribute("value", x.value);
 }
 function setInstructor(x) {
     document.getElementById("instructor2Save").setAttribute("value", x.value);
     document.getElementById("instructorEditLesson").setAttribute("value", x.value);
+    document.getElementById("instructorDeleteLesson").setAttribute("value", x.value);
 }
 function setDescription(x) {
     document.getElementById("description2Save").setAttribute("value", x.value);
     document.getElementById("descriptionEditLesson").setAttribute("value", x.value);
+    document.getElementById("descriptionDeleteLesson").setAttribute("value", x.value);
 }
 function setAccessCode(x) {
     document.getElementById("accessCode2Save").setAttribute("value", x.value);
     document.getElementById("accessCodeEditLesson").setAttribute("value", x.value);
+    document.getElementById("accessCodeDeleteLesson").setAttribute("value", x.value);
 }
 function setStatus(x){
+    showAccessCode();
     document.getElementById("status2Save").setAttribute("value", x.value);
     document.getElementById("statusEditLesson").setAttribute("value", x.value);
-    showAccessCode();
+    document.getElementById("statusDeleteLesson").setAttribute("value", x.value);
 }
 function showAccessCode(){
     var x = document.getElementById("status").value;
@@ -240,10 +237,7 @@ function showAccessCode(){
 /**
  * ---------------------------------------Other navigation button---------------------------------------
  */
-function toCourseContent() {
-    document.getElementById("toCourseContent").action = "/courseContent";
-    document.getElementById("toCourseContent").submit();
-}
+
 /**
  * ---------------------------------------View lesson buttons(view lesson in editCourse Page)---------------------------------------
  */
@@ -251,7 +245,10 @@ function viewLesson(lessonIndex) {//assignment index
     document.getElementById("viewLesson"+lessonIndex).action = "/courseContent";
     document.getElementById("viewLesson"+lessonIndex).submit();
 }
-
+function deleteLesson(lessonIndex) {//assignment index
+    document.getElementById("viewLesson"+lessonIndex).action = "/deleteLesson";
+    document.getElementById("viewLesson"+lessonIndex).submit();
+}
 /**
  * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
  */
@@ -292,11 +289,13 @@ function addVideoOptions(divName) {
         switch (strOption) {
             case '1':
                 newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2':
-                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>";//video description
+                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
                 break;
         }
         document.getElementById(divName).appendChild(newdiv);
@@ -305,7 +304,7 @@ function addVideoOptions(divName) {
 }
 function addImageButton(divName) {
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
+    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
         "<br><textarea class='form-control' rows='2' wrap='soft' name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
     document.getElementById(divName).appendChild(newdiv);
 }
