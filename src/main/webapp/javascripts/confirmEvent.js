@@ -10,3 +10,8 @@ function confirmDelete(){
     return confirm("Are you sure you want to delete?");
 
 }
+
+function confirmEnroll(){
+    window.alert("You successfully enrolled this course!");
+    return true
+}

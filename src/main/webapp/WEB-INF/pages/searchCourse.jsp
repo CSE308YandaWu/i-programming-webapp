@@ -108,7 +108,7 @@
                                                     <input name="confirm" type="button" value="Enroll" onclick="checkCode(${x.accessCode},this)"></p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input name="confirm" type="submit" value="Enroll" >
+                                                    <input name="confirm" type="submit" value="Enroll" onclick="return confirmEnroll()">
                                                 </c:otherwise>
                                             </c:choose>
                                         </form>

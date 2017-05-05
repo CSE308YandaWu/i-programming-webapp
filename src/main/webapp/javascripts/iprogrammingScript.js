@@ -100,6 +100,7 @@ function checkCode(validCode, button) {
     var x = button.parentNode.parentNode.parentNode.getElementsByTagName("p")[3];
     if ((input == validCode)) {
         button.parentNode.parentNode.submit();
+        window.alert("You successfully enroll this course!");
     }
     else {
         x.style.display = "inline";
