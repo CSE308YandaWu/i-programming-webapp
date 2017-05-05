@@ -171,7 +171,7 @@
                             <%--<br>--%>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.assignmentBlobKeysList}" varStatus="loop">
-                                    <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment${loop.index}</p></a>
+                                    <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment ${loop.index}</p></a>
                                     <form id="serveAssignment${loop.index}" target="_blank"><input type="hidden" name="key" value="${listValue}"></form>
                                     <p class="text">
                                         <p class="item-descp">${lesson.assignmentDescriptions[loop.index]}</p>
@@ -190,8 +190,17 @@
                 <div class="col-md-2">
                     <%--choose where to go back--%>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBackSelector('${originalPlace}')">Back</button>
-                    <form id="backToEditCourse"><input type="hidden" name="courseId" value="${courseId}"></form>
-                    <form id="backToMain"><input type="hidden" name="courseId" value="${courseId}"></form>
+                    <form id="backToEditCourse">
+                        <input type="hidden" name="userEmail" value="${course.email}">
+                        <input type="hidden" name="courseId" value="${course.id}">
+                        <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                        <input type="hidden" name="courseTitle" value="${course.title}">
+                        <input type="hidden" name="instructor" value="${course.instructor}">
+                        <input type="hidden" name="description" value="${course.description}">
+                        <input type="hidden" name="status" value="${course.status}">
+                        <input type="hidden" name="accessCode" value="${course.accessCode}">
+                    </form>
+                    <form id="backToMain"></form>
                 </div>
                 <br><br><br><br><br><br><br><br><br>
                     <%--End of all sections--%>
