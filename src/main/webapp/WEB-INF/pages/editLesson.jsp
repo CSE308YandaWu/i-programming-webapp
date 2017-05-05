@@ -25,7 +25,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Main Page</title>
+    <title>Edit Lesson</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">

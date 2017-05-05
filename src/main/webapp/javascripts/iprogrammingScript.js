@@ -89,7 +89,7 @@ function courseStatus() {
     var value = document.getElementById("status").value;
     var statusRow = document.getElementById("statusRow");
     if (value == "private")
-        statusRow.style.display = "table-row";
+        statusRow.style.display = "initial";
     if (value == "public")
         statusRow.style.display = "none";
 }

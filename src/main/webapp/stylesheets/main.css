@@ -37,7 +37,7 @@ h1 {
     width: 100%;
     height: 500px;
     border-collapse: separate;
-    padding: 25px 50px 75px 100px;
+    padding: 25px 50px 75px 50px;
     /*border-spacing: 30px 30px;*/
 }
 
@@ -85,6 +85,15 @@ h1 {
     color: black;
 }
 
+#status {
+    height: 2.5em;
+    width: 50%;
+    color: black;
+}
+
+#statusRow {
+    display: none;
+}
 
 /*.list-group >a{*/
     /*font-size: 25px;*/

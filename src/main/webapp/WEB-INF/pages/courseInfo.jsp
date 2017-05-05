@@ -5,6 +5,7 @@
   Date: 4/6/2017
   Time: 3:29 AM
   To change this template use File | Settings | File Templates.
+  This file generates the non-owner user's view of a course
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
     <meta name="author" content="">
     <%--<link rel="icon" href="../../favicon.ico">--%>
 
-    <title>Course Page</title>
+    <title>Course Page - Owner</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
