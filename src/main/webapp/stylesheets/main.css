@@ -80,7 +80,10 @@ h1 {
     margin-left: 20px;
 }
 
-.
+#MySelect {
+    height: 2.5em;
+    color: black;
+}
 
 
 /*.list-group >a{*/
