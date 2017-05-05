@@ -229,6 +229,11 @@ h2 {
     margin-bottom: 100px;
 }
 
+.table1 * td{
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
 .deletebutton,
 .dropbutton {
     float: right;
