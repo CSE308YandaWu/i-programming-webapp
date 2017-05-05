@@ -61,6 +61,7 @@
                     <div class="container1">
                         <form action="#" type="hidden" id="searchClass">
                             <div class="row">
+                                <div class="col-md-1" ><h4>Search:</h4></div>
                                 <div class="col-md-7" >
                                     <input type="text" class="form-control" name="UserIn" id="UserIn" type="text"  placeholder="Enter course to search for..." required autofocus>
                                 </div>
@@ -68,18 +69,20 @@
                                     <select name="MySelect" id="MySelect" style="color:black">
                                         <option name="Search_by_title" value="title">Search by title</option>
                                         <option name="Search_by_instructor" value="instructor">Search by instructor</option>
+                                        <%--<option name="Search_by_course_id" value="course-id">Search by ID</option>--%>
+                                        <%--<option name="Search_by_description" value="description">Search descriptions</option>--%>
                                     </select>
                                 </div>
-                                <div class="col-md-2" >
-                                    <button id="seach_btn" class="btn btn-primary btn-block" type="submit" onclick="do_search()">Search</button>
+                                <div class="col-md-1" >
+                                    <button id="search_btn" class="btn btn-block btn-primary btn-block" type="submit" onclick="do_search()">Go!</button>
                                     <%--<input id="search_btn" type="submit" value="Search" style="color:black" >--%>
                                 </div>
                                 <input type = hidden name="Select_method" id="select_method" >
                             </div>
                         </form>
-                        <br>
+                        <br><br><br>
                         <div class="resultlist">
-                            <h2>Search Result</h2>
+                            <h2>Search Results</h2>
                             <ul class="list-group">
                                 <c:choose>
                                     <c:when test="${empty result}">

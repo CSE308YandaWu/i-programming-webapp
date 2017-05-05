@@ -95,6 +95,10 @@ h1 {
     display: none;
 }
 
+#search_btn {
+    padding: 6px;
+}
+
 /*.list-group >a{*/
     /*font-size: 25px;*/
     /*display: block;*/
