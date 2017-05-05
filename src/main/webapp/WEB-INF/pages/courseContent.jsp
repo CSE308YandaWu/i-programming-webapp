@@ -203,7 +203,9 @@
                         <input type="hidden" name="status" value="${course.status}">
                         <input type="hidden" name="accessCode" value="${course.accessCode}">
                     </form>
-                    <form id="backToMain"></form>
+                    <form id="backToCourseInfo">
+                        <input type="hidden" name="courseId" value="${course.id}">
+                    </form>
                 </div>
                 <br><br><br><br><br><br><br><br><br>
                     <%--End of all sections--%>

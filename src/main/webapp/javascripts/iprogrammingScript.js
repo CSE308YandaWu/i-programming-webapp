@@ -169,8 +169,8 @@ function goBackSelector(originalPlace) {
         document.getElementById("backToEditCourse").submit();
     }else{//from the main
         //back to main Page
-        document.getElementById("backToMain").action = "/main";
-        document.getElementById("backToMain").submit();
+        document.getElementById("backToCourseInfo").action = "/enterCourse";
+        document.getElementById("backToCourseInfo").submit();
     }
 }
 

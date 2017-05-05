@@ -434,15 +434,15 @@ public class iprogrammingController {
     /* courseContent Page */
     @RequestMapping("/courseContent")
     public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
-                                      @RequestParam(value = "userEmail") String userEmail,
+                                      @RequestParam(value = "userEmail", required = false) String userEmail,
                                       @RequestParam(value = "courseId") String courseId,
-                                      @RequestParam(value = "numEnrolled") int numEnrolled,
-                                      @RequestParam(value = "courseTitle") String courseTitle,
-                                      @RequestParam(value = "instructor") String instructor,
-                                      @RequestParam(value = "description") String description,
-                                      @RequestParam(value = "status") String status,
+                                      @RequestParam(value = "numEnrolled", required = false) Integer numEnrolled,
+                                      @RequestParam(value = "courseTitle", required = false) String courseTitle,
+                                      @RequestParam(value = "instructor", required = false) String instructor,
+                                      @RequestParam(value = "description", required = false) String description,
+                                      @RequestParam(value = "status", required = false) String status,
                                       @RequestParam(value = "accessCode", required = false) String accessCode,
-                                      @RequestParam(value = "originalPlace") String originalPlace) {//indicate where to go back
+                                      @RequestParam(value = "originalPlace", required = false) String originalPlace) {//indicate where to go back
 
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
         Course course = ofy().load().type(Course.class).id(courseId).now();
