@@ -419,14 +419,14 @@ public class iprogrammingController {
 
     /* courseContent Page */
     @RequestMapping("/courseContent")
-    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId,
-                                      @RequestParam(value = "courseId", required = false) String courseId) {
+    public ModelAndView courseContent(@RequestParam(value = "lessonId", required = false) String lessonId) {
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
-        if (lesson == null)
-            System.out.println("lesson is null");
-        else
-            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
+//        if (lesson == null)
+//            System.out.println("lesson is null");
+//        else
+//            System.out.print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~lessonTitle: " + lesson.getLessonTitle());
         ModelAndView mav = new ModelAndView();
+        mav.addObject("lesson",lesson);
         mav.setViewName("courseContent");
         return mav;
     }

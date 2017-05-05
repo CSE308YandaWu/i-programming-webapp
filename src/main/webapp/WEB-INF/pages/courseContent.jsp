@@ -68,13 +68,13 @@
                 <h3 class = "text" >
                     <br><br>
                     <c:choose>
-                        <c:when test="${pptLink!=null}">
+                        <c:when test="${lesson.pptLink != null}">
                             <p class="text">
                             <p style="font-size:36px;">Slide Show Section</p>
                             <br>
                             <br><br>
                             <div id="doc">
-                                <iframe src="${pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                <iframe src="${lesson.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
@@ -86,7 +86,7 @@
 
                     <br><br>
                     <c:choose>
-                        <c:when test="${videoLinks!=null}">
+                        <c:when test="${lesson.videoLinks != null}">
                             <p class="text">
                             <p style="font-size:36px;">Video Lecture Section</p>
                             <br>
@@ -96,7 +96,7 @@
                                 <%--&lt;%&ndash;second video&ndash;%&gt;--%>
                                 <%--<iframe src="${model.videoLink1}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>--%>
                                 <ul>
-                                    <c:forEach var="listValue" items="${videoLinks}">
+                                    <c:forEach var="listValue" items="${lesson.videoLinks}">
                                         <li><iframe src="${listValue}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></li>
                                     </c:forEach>
                                 </ul>
@@ -110,7 +110,7 @@
                     </c:choose>
                     <br><br>
                     <c:choose>
-                        <c:when test="${videoBlobKeysList!=null}">
+                        <c:when test="${lesson.videoBlobKeysList != null}">
                             <p class="text">
                             <p style="font-size:36px;">Video Section</p>
                             <br>
@@ -119,7 +119,7 @@
                             <%--<a href="#" onclick="serveVideo1();"><p style="color:deepskyblue;">View Video1</p></a>--%>
                             <%--<form id="serveVideo1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyV1}"></form>--%>
                             <ul>
-                                <c:forEach var="listValue" items="${videoBlobKeysList}">
+                                <c:forEach var="listValue" items="${lesson.videoBlobKeysList}">
                                     <video width="800" height="500" controls>
                                         <source src="http://localhost:8080/serve?key=${listValue}" type="video/mp4">
                                     </video>
@@ -136,7 +136,7 @@
                     </c:choose>
                     <br><br>
                     <c:choose>
-                        <c:when test="${imageServingUrlList!=null}">
+                        <c:when test="${lesson.imageServingUrlList!=null}">
                             <p class="text">
                             <p style="font-size:36px;">Image Section</p>
                             <br>
@@ -144,7 +144,7 @@
                             <br>
                             <%--<img src=${model.url}>--%>
                             <ul>
-                                <c:forEach var="listValue" items="${imageServingUrlList}">
+                                <c:forEach var="listValue" items="${lesson.imageServingUrlList}">
                                     <img src=${listValue}>
                                 </c:forEach>
                             </ul>
@@ -160,7 +160,7 @@
                     </c:choose>
                     <br><br>
                     <c:choose>
-                        <c:when test="${assignmentBlobKeysList!=null}">
+                        <c:when test="${lesson.assignmentBlobKeysList!=null}">
                             <p class="text">
                             <p style="font-size:36px;">Assignment Section</p>
                             <br>
@@ -170,7 +170,7 @@
                             <%--<a href="#" onclick="serveAssignment1();"><p style="color:deepskyblue;">View Assignment1</p></a>--%>
                             <%--<form id="serveAssignment1" target="_blank"><input type="hidden" name="key" value="${model.blobKeyA1}"></form>--%>
                             <ul>
-                                <c:forEach var="listValue" items="${assignmentBlobKeysList}" varStatus="loop">
+                                <c:forEach var="listValue" items="${lesson.assignmentBlobKeysList}" varStatus="loop">
                                     <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">View Assignment</p></a>
                                     <form id="serveAssignment${loop.index}" target="_blank"><input type="hidden" name="key" value="${listValue}"></form>
                                 </c:forEach>
