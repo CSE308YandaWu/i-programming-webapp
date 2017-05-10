@@ -3,7 +3,11 @@
  */
 
 var addVideoCounter = 0;//add video counter   reset????
-var addVideoLimit = 4;//add video limit
+var addVideoLimit = 3;//add video limit
+var addImageCounter = 0;//add image counter
+var addImageLimit = 10;//add image limit
+var addAssignmentCounter = 0;//add assignment counter
+var addAssignmentLimit = 5;//add assignment limit
 /**
  *
  * ---------------------------------------Google sign-in/out functions---------------------------------------
@@ -291,43 +295,90 @@ function serveVideo1() {
  * ---------------------------------------Add Content functions---------------------------------------
  */
 function enableOptionButton() {
-    document.getElementById("addOptionButton").disabled = false;
+    document.getElementById("addOptionButtonVideo").disabled = false;
 }
 function addVideoOptions(divName) {
-    var newdiv = document.createElement('div');
+    document.getElementById("deleteOptionButtonVideo").disabled = false;
     var e = document.getElementById("videoUploadOption");
     var strOption = e.options[e.selectedIndex].value;
     if (addVideoCounter == addVideoLimit) {
         alert("You have reached the limit of adding " + addVideoCounter + " video");
     } else {
+        var newdiv = document.createElement('div');
         switch (strOption) {
             case '1':
-                newdiv.innerHTML = " <br><input type='text' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
-                    "<textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
-                    "<input type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
+                newdiv.innerHTML = " <input type='text' id='videoLink"+addVideoCounter+"' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                    "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2':
-                newdiv.innerHTML = " <br><input type='file' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
-                    "<br><textarea class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
-                    "<input type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
+                newdiv.innerHTML = "<input type='file' id='videoLink"+addVideoCounter+"'class='form-control' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                    "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
+                    "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
                 break;
         }
         document.getElementById(divName).appendChild(newdiv);
         addVideoCounter++;
+        document.getElementById("deleteOptionButtonVideo").disabled = false;
+    }
+}
+function deleteVideoOptions() {
+    var videoLink = document.getElementById("videoLink"+(addVideoCounter-1));
+    videoLink.parentNode.removeChild(videoLink);
+    var videoDescription = document.getElementById("videoDescription"+(addVideoCounter-1));
+    videoDescription.parentNode.removeChild(videoDescription);
+    var videoType = document.getElementById("videoType"+(addVideoCounter-1));
+    videoType.parentNode.removeChild(videoType);
+    addVideoCounter--;
+    if(addVideoCounter <= 0){
+        document.getElementById("deleteOptionButtonVideo").disabled = true;
     }
 }
 function addImageButton(divName) {
-    var newdiv = document.createElement('div');
-    newdiv.innerHTML = " <br><input type='file' multiple name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
-        "<br><textarea class='form-control' rows='2' wrap='soft' name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
-    document.getElementById(divName).appendChild(newdiv);
+    if (addImageCounter == addImageLimit) {
+        alert("You have reached the limit of adding " + addImageCounter + " image");
+    } else {
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML = "<input type='file' multiple id='image"+addImageCounter+"' name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
+            "<textarea class='form-control' rows='2' wrap='soft' id='imageDescription"+addImageCounter+"'name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
+        document.getElementById(divName).appendChild(newdiv);
+        addImageCounter++;
+        document.getElementById("deleteOptionButtonImage").disabled = false;
+    }
+}
+function deleteImageButton() {
+    var image = document.getElementById("image"+(addImageCounter-1));
+    image.parentNode.removeChild(image);
+    var imageDescription = document.getElementById("imageDescription"+(addImageCounter-1));
+    imageDescription.parentNode.removeChild(imageDescription);
+    addImageCounter--;
+    if(addImageCounter <= 0){
+        document.getElementById("deleteOptionButtonImage").disabled = true;
+    }
 }
 function addAssignmentButton(divName) {
-    var newdiv = document.createElement('div');
-    newdiv.innerHTML = " <br><input type='file' multiple name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
-        "<br><textarea class='form-control' rows='2' wrap='soft' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description
-    document.getElementById(divName).appendChild(newdiv);
+    if (addAssignmentCounter == addAssignmentLimit) {
+        alert("You have reached the limit of adding " + addAssignmentCounter + " assignment");
+    } else {
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML = "<input type='file' multiple id='assignment"+addAssignmentCounter+"'name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
+            "<textarea class='form-control' rows='2' wrap='soft' id='assignmentDescription"+addAssignmentCounter+"' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description
+        document.getElementById(divName).appendChild(newdiv);
+        addAssignmentCounter++;
+        document.getElementById("deleteOptionButtonAssignment").disabled = false;
+    }
 }
+function deleteAssignmentButton() {
+    var assignment = document.getElementById("assignment"+(addAssignmentCounter-1));
+    assignment.parentNode.removeChild(assignment);
+    var assignmentDescription = document.getElementById("assignmentDescription"+(addAssignmentCounter-1));
+    assignmentDescription.parentNode.removeChild(assignmentDescription);
+    addAssignmentCounter--;
+    if(addAssignmentCounter<=0){
+        document.getElementById("deleteOptionButtonAssignment").disabled = true;
+    }
+}
+
 /**
  * ---------------------------------------test functions---------------------------------------
  */

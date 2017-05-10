@@ -109,7 +109,10 @@
                             <option value="2">Upload File</option>
                         </select>
                         <%--add more video button--%>
-                        <input id="addOptionButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                        <div id="optionButtonVideo" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                            <input id="deleteOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Video" disabled="disabled" onClick="deleteVideoOptions();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
@@ -121,7 +124,10 @@
                             <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more image button--%>
-                        <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
+                        <div id="optionButtonImage" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925"  type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
+                            <input id="deleteOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Image" disabled="disabled" onClick="deleteImageButton();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
@@ -135,7 +141,10 @@
                             <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more assignment button--%>
-                        <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                        <div id="optionButtonAssignment" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925;"   type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                            <input id="deleteOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Assignment" disabled="disabled" onClick="deleteAssignmentButton();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
