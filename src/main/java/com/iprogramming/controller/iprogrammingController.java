@@ -452,7 +452,7 @@ public class iprogrammingController {
                                       @RequestParam(value = "status", required = false) String status,
                                       @RequestParam(value = "accessCode", required = false) String accessCode,
                                       @RequestParam(value = "originalPlace", required = false) String originalPlace) {//indicate where to go back
-
+        System.out.println("IM here course Content");
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
         Course course = ofy().load().type(Course.class).id(courseId).now();
         if (course == null){

@@ -208,7 +208,32 @@ function editUnitToEditCourseCancel() {
 /* editLesson Page confirm button */
 function editLessonConfirm() {
     //document.getElementById("lessonInfo").action = "/editLessonConfirm";
-    document.getElementById("lessonInfo").submit();
+
+    var videoUploadCheck = 1;//check if user input all files into the chosen option filed
+    for(var i = 0;i < addVideoCounter; i++) {//check video field
+        if (document.getElementById("videoLink" + i).value == "") {
+            alert("You must upload a video or paste a link in Video Option row " + (i + 1));
+            videoUploadCheck = 0;
+            return;
+        }
+    }
+    for(var i = 0;i < addImageCounter; i++) {//check image field
+        if (document.getElementById("image" + i).value == "") {
+            alert("You must upload a image in Image Option row " + (i + 1));
+            videoUploadCheck = 0;
+            return;
+        }
+    }
+    for(var i = 0;i < addAssignmentCounter; i++){//check assignment field
+        if(document.getElementById("assignment" + i).value == "") {
+            alert("You must upload a file in File Option row "+(i+1));
+            videoUploadCheck = 0;
+            return;
+        }
+    }
+    if(videoUploadCheck == 1) {//all checking passed, submit the form
+        document.getElementById("lessonInfo").submit();
+    }
 }
 /* createCourse Page cancel button */
 function editLessonToEditCourseCancel() {
