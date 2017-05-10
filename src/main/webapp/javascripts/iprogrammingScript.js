@@ -63,16 +63,16 @@ function toSearchCourse() {
     document.getElementById("searchCourse").submit();
 }
 /* Main Page Edit Course button */
-function toEditCourse(a) {
+function toEditCourse(index) {
     // document.getElementById("editId").setAttribute("value", a.getElementsByTagName("input")[0].value);
-    document.getElementById("editId").value = document.getElementById("editCourseId").value;
+    document.getElementById("editId").value = document.getElementById("editCourseId"+index).value;
     document.getElementById("toEditCourse").action = "/editCourse";
     document.getElementById("toEditCourse").submit();
 }
 /* Main Page Course button */
-function toCoursePage() {
+function toCoursePage(index) {
     // document.getElementById("cId").setAttribute("value", a.getElementsByTagName("input")[0].value);
-    document.getElementById("cId").value = document.getElementById("courseId").value;
+    document.getElementById("cId").value = document.getElementById("courseId"+index).value;
     document.getElementById("toCoursePage").action = "/enterCourse";
     document.getElementById("toCoursePage").submit();
 }

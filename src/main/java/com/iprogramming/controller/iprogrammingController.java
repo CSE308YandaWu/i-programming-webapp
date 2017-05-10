@@ -7,19 +7,16 @@ import com.google.appengine.api.images.*;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.nio.ByteBuffer;
-import java.security.KeyFactory;
 import java.util.*;
 
 import Beans.Course;
 import Beans.User;
-import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import javax.annotation.PostConstruct;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,23 +28,28 @@ import com.google.appengine.api.blobstore.BlobInfoFactory;
 //[START gcs_imports]
 import com.google.appengine.tools.cloudstorage.GcsFileOptions;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
-import com.google.appengine.tools.cloudstorage.GcsInputChannel;
-import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
 import com.google.appengine.tools.cloudstorage.GcsService;
 import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
 import com.google.appengine.tools.cloudstorage.RetryParams;
 //[END gcs_imports]
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.Channels;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class iprogrammingController {
+
+    /* lecture upload/serve section, use Blobstore, Cloud Storage */
+    /* all blobs need this */
+    private BlobstoreService blobstoreService;
+
+
+    @PostConstruct
+    public void init(){
+        blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+
+    }
 
     @RequestMapping("/")
     public String home() {
@@ -373,6 +375,13 @@ public class iprogrammingController {
         /* save uploaded image files to blob store, and get the serving url */
         List<String> imageServingUrlList = new ArrayList<String>();
         if (finfos.get("myFileImage[]") != null) {
+             /* image processing */
+            final GcsService gcsService  = GcsServiceFactory.createGcsService(new RetryParams.Builder()
+                    .initialRetryDelayMillis(10)
+                    .retryMaxAttempts(10)
+                    .totalRetryPeriodMillis(15000)
+                    .build());
+
             for (int i = 0; i < finfos.get("myFileImage[]").size(); i++) {
                 String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
                 BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
@@ -483,15 +492,15 @@ public class iprogrammingController {
         return mav;
     }
 
-    /* lecture upload/serve section, use Blobstore, Cloud Storage */
-    /* all blobs need this */
-    private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-    /* image processing */
-    private final GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
-            .initialRetryDelayMillis(10)
-            .retryMaxAttempts(10)
-            .totalRetryPeriodMillis(15000)
-            .build());
+//    /* lecture upload/serve section, use Blobstore, Cloud Storage */
+//    /* all blobs need this */
+//    private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+//    /* image processing */
+//    private final GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
+//            .initialRetryDelayMillis(10)
+//            .retryMaxAttempts(10)
+//            .totalRetryPeriodMillis(15000)
+//            .build());
 
     /* serve assignment/video/image */
     /* courseContent Page serving(video/pdf/image) function */
