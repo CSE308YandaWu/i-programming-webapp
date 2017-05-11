@@ -335,23 +335,6 @@ function serveAssignment(index) {//assignment index
     document.getElementById("serveAssignment" + index).action = "/serve";
     document.getElementById("serveAssignment" + index).submit();
 }
-function serveAssignment1() {
-    document.getElementById("serveAssignment1").action = "/serve";
-    document.getElementById("serveAssignment1").submit();
-}
-function serveImage() {
-    document.getElementById("serveImage").action = "/serve";
-    document.getElementById("serveImage").submit();
-}
-function serveVideo() {
-    document.getElementById("serveVideo").action = "/serve";
-    document.getElementById("serveVideo").submit();
-}
-function serveVideo1() {
-    document.getElementById("serveVideo1").action = "/serve";
-    document.getElementById("serveVideo1").submit();
-}
-
 /**
  * ---------------------------------------Add Content functions---------------------------------------
  */
@@ -443,16 +426,3 @@ function deleteAssignmentButton() {
 /**
  * ---------------------------------------test functions---------------------------------------
  */
-
-function ff20() {
-    document.getElementById("myForm").action = "/hello";
-    document.getElementById("myForm").submit();
-}
-function ff10() {
-    document.getElementById("myForm2").action = "/";
-    document.getElementById("myForm2").submit();
-}
-function ff30() {
-    document.getElementById("serve").action = "/serve";
-    document.getElementById("serve").submit();
-}

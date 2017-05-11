@@ -282,13 +282,7 @@ public class iprogrammingController {
                                    @RequestParam(value = "description") String description,
                                    @RequestParam(value = "status") String status,
                                    @RequestParam(value = "accessCode", required = false) String accessCode) {
-//	    System.out.println("userEmail: " + userEmail);
-//        System.out.println("courseId: " + courseId);
-//        System.out.println("courseTitle: " + courseTitle);
-//        System.out.println("instructor: " + instructor);
-//        System.out.println("description: " + description);
-//        System.out.println("status: " + status);
-//        System.out.println("accessCode: " + accessCode);
+
         ModelAndView mav = new ModelAndView();
         /* create uploadUrl for upload form */
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
@@ -331,27 +325,12 @@ public class iprogrammingController {
                                           @RequestParam(value = "description") String description,
                                           @RequestParam(value = "status") String status,
                                           @RequestParam(value = "accessCode", required = false) String accessCode) throws IOException {
-//        System.out.println("userEmail: " + userEmail);
-//        System.out.println("courseId: " + courseId);
-//        System.out.println("courseTitle: " + courseTitle);
-//        System.out.println("instructor: " + instructor);
-//        System.out.println("description: " + description);
-//        System.out.println("status: " + status);
-//        System.out.println("accessCode: " + accessCode);
+
 
         Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
         course.setAccessCode(accessCode);
         course.setNumEnrolled(numEnrolled);
 
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("lessonTitle", lessonTitle);
-//        mav.addObject("lessonBody", lessonBody);
-//        mav.addObject("pptLink", pptLink);
-//        mav.addObject("pptDescription", pptDescription);
-//        mav.addObject("videoLinks", videoLinks);
-//        mav.addObject("videoDescriptions", videoDescriptions);
-//        mav.addObject("imageDescriptions", imageDescriptions);
-//        mav.addObject("assignmentDescriptions",assignmentDescriptions);
 
         /* get the uploaded video files */
         Map<String, List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
@@ -370,7 +349,6 @@ public class iprogrammingController {
                     System.out.println("VIDEO KEY: " + blob);
                 }
             }
-            //mav.addObject("videoBlobKeysList",videoBlobKeysList);
         }
         /* save uploaded image files to blob store, and get the serving url */
         List<String> imageServingUrlList = new ArrayList<String>();
@@ -388,7 +366,6 @@ public class iprogrammingController {
                 if (imageBlobKey == null) {
                     System.out.println("uploadImage error");
                 } else {
-                    //String blob = imageBlobKey.getKeyString();
                     ImagesService services = ImagesServiceFactory.getImagesService();
                     // Make an image from a Cloud Storage object, and transform it.
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
@@ -405,7 +382,6 @@ public class iprogrammingController {
                     imageServingUrlList.add(url);
                 }
             }
-            //mav.addObject("imageServingUrlList",imageServingUrlList);
         }
         /* save uploaded assignment files to blob store */
         List<String> assignmentBlobKeysList = new ArrayList<String>();
@@ -492,16 +468,7 @@ public class iprogrammingController {
         return mav;
     }
 
-//    /* lecture upload/serve section, use Blobstore, Cloud Storage */
-//    /* all blobs need this */
-//    private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-//    /* image processing */
-//    private final GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
-//            .initialRetryDelayMillis(10)
-//            .retryMaxAttempts(10)
-//            .totalRetryPeriodMillis(15000)
-//            .build());
-
+    /* lecture upload/serve section, use Blobstore, Cloud Storage */
     /* serve assignment/video/image */
     /* courseContent Page serving(video/pdf/image) function */
     @RequestMapping(value = "/serve")
