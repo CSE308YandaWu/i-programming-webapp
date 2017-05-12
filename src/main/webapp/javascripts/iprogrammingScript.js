@@ -2,51 +2,6 @@
  * Created by YandaWu on 4/1/2017.
  */
 
-var addVideoCounter = 0;//add video counter
-var addVideoLimit = 3;//add video limit is 3
-var addImageCounter = 0;//add image counter
-var addImageLimit = 10;//add image limit is 10
-var addAssignmentCounter = 0;//add assignment counter
-var addAssignmentLimit = 5;//add assignment limit is 5
-/**
- *
- * ---------------------------------------Google sign-in/out functions---------------------------------------
- */
-function onSuccess(googleUser) {
-    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    /* if user email changes, we might need to use the id_token to save the userInfo */
-    // alert(googleUser.getBasicProfile().getName());
-    // var id_token = googleUser.getAuthResponse().id_token;
-    // alert(id_token);
-    if (document.getElementById('userEmail') != null) {//home page doesn't have userEmial
-        document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
-    }
-    document.getElementById('userEmail').setAttribute("value", googleUser.getBasicProfile().getEmail());
-    toMain();//from home page.to main page
-
-}
-function onFailure(error) {
-    console.log(error);
-}
-function renderButton() {
-    gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-    });
-}
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.');
-        signOutToHome();//back to home after sign out
-    });
-    //document.getElementById('userEmail').style.display='none';
-}
 /**
  * ---------------------------------------Button functions in all pages---------------------------------------
  */
@@ -80,11 +35,7 @@ function toCoursePage(index) {
     document.getElementById("toCoursePage").action = "/enterCourse";
     document.getElementById("toCoursePage").submit();
 }
-/* Edit Course Page Add Unit button */
-function toEditUnit() {
-    document.getElementById("toEditUnit").action = "/editUnit";
-    document.getElementById("toEditUnit").submit();
-}
+
 /* Edit Course Page Add lesson button */
 function toEditLesson() {
     document.getElementById("toEditLesson").action = "/editLesson";
@@ -139,11 +90,7 @@ function editCourseToHome() {
     document.getElementById("editCourseToHome").action = "/main";
     document.getElementById("editCourseToHome").submit();
 }
-/* editUnit Page Home button */
-function editUnitToHome() {
-    document.getElementById("editUnitToHome").action = "/main";
-    document.getElementById("editUnitToHome").submit();
-}
+
 /* editLesson Page Home button */
 function editLessonToHome() {
     document.getElementById("editLessonToHome").action = "/main";
@@ -154,11 +101,7 @@ function courseContentToHome() {
     document.getElementById("courseContentToHome").action = "/main";
     document.getElementById("courseContentToHome").submit();
 }
-/* signOut function for all pages back to home page */
-function signOutToHome() {
-    document.getElementById("signOutToHome").action = "/logout";
-    document.getElementById("signOutToHome").submit();
-}
+
 /**
  * ---------------------------------------Back navigation button functions for all pages---------------------------------------
  */
@@ -180,11 +123,6 @@ function goBackSelector(originalPlace) {
     }
 }
 
-/* createCourse Page confirm button */
-function createCourseToMainConfirm() {
-    document.getElementById("createCourseToMainConfirm").action = "/main";
-    document.getElementById("createCourseToMainConfirm").submit();
-}
 /* createCourse Page cancel button */
 function createCourseToMainCancel() {
     document.getElementById("createCourseToMainCancel").action = "/main";
@@ -195,82 +133,8 @@ function searchCourseToMain() {
     document.getElementById("searchCourseToMain").action = "/main";
     document.getElementById("searchCourseToMain").submit();
 }
-/* editUnit Page confirm button */
-function editUnitToEditCourseConfirm() {
-    document.getElementById("editUnitToEditCourseConfirm").action = "/editCourse";
-    document.getElementById("editUnitToEditCourseConfirm").submit();
-}
-/* editUnit Page cancel button */
-function editUnitToEditCourseCancel() {
-    document.getElementById("editUnitToEditCourseCancel").action = "/editCourse";
-    document.getElementById("editUnitToEditCourseCancel").submit();
-}
 
-/* editLesson Page confirm button */
-function editLessonConfirm() {
-    //document.getElementById("lessonInfo").action = "/editLessonConfirm";
-    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?///check if the entered url is valid
-    var videoUploadCheck = 1;//check if user input all files into the chosen option filed
-    for(var i = 0;i < addVideoCounter; i++) {//check video field
-        if (document.getElementById("videoLink" + i).value == "") {
-            alert("You must upload a video or paste a link in Video Option row " + (i + 1) + " if you choose to upload one");
-            videoUploadCheck = 0;
-            return;
-        }
-    }
-    for(var i = 0;i < addImageCounter; i++) {//check image field
-        if (document.getElementById("image" + i).value == "") {
-            alert("You must upload a image in Image Option row " + (i + 1) + " if you choose to upload one");
-            videoUploadCheck = 0;
-            return;
-        }
-    }
-    for(var i = 0;i < addAssignmentCounter; i++){//check assignment field
-        if(document.getElementById("assignment" + i).value == "") {
-            alert("You must upload a file in File Option row " + (i + 1) + " if you choose to upload one");
-            videoUploadCheck = 0;
-            return;
-        }
-    }
-    if (document.getElementById("slideShowLink").value != "") {//check slide show link field
-        if(regexp.test(document.getElementById("slideShowLink").value) != true){
-            alert("You must enter a valid Slide Show Link if you choose to enter one");
-            videoUploadCheck = 0;
-            return;
-        }
-    }
-    for(var i = 0;i < addVideoCounter; i++) {//check video field
-        if (document.getElementById("videoLink" + i).value != "") {
-            if((regexp.test(document.getElementById("videoLink" + i).value) != true)
-                && (isVideo(document.getElementById("videoLink" + i).value) != true)){//if it is not a valid url or video
-                alert("You must enter a valid video link in row " + (i + 1) + " if you choose to enter one");
-                videoUploadCheck = 0;
-                return;
-            }
-        }
-    }
-    if(videoUploadCheck == 1) {//all checking passed, submit the form
-        document.getElementById("lessonInfo").submit();
-    }
-}
-function getExtension(filename) {//get uploaded file's extension
-    var parts = filename.split('.');
-    return parts[parts.length - 1];
-}
-function isVideo(filename) {//check if the uploaded file is a video
-    var ext = getExtension(filename);
-    switch (ext.toLowerCase()) {
-        case 'm4v':
-        case 'avi':
-        case 'mpg':
-        case 'mp4':
-        case 'ogg':
-        case 'webm':
-            // etc
-            return true;
-    }
-    return false;
-}
+
 /* createCourse Page cancel button */
 function editLessonToEditCourseCancel() {
     document.getElementById("editLessonToEditCourseCancel").action = "/editCourse";
@@ -313,9 +177,6 @@ function showAccessCode(){
     else
         y.style.display = "table-row";
 }
-/**
- * ---------------------------------------Other navigation button---------------------------------------
- */
 
 /**
  * ---------------------------------------View lesson buttons(view lesson in editCourse Page)---------------------------------------
@@ -328,101 +189,3 @@ function deleteLesson(lessonIndex) {//assignment index
     document.getElementById("viewLesson"+lessonIndex).action = "/deleteLesson";
     document.getElementById("viewLesson"+lessonIndex).submit();
 }
-/**
- * ---------------------------------------Serve buttons(serves content in courseContentPage)---------------------------------------
- */
-function serveAssignment(index) {//assignment index
-    document.getElementById("serveAssignment" + index).action = "/serve";
-    document.getElementById("serveAssignment" + index).submit();
-}
-/**
- * ---------------------------------------Add Content functions---------------------------------------
- */
-function enableOptionButton() {
-    document.getElementById("addOptionButtonVideo").disabled = false;
-}
-function addVideoOptions(divName) {
-    document.getElementById("deleteOptionButtonVideo").disabled = false;
-    var e = document.getElementById("videoUploadOption");
-    var strOption = e.options[e.selectedIndex].value;
-    if (addVideoCounter == addVideoLimit) {
-        alert("You have reached the limit of adding " + addVideoCounter + " video");
-    } else {
-        var newdiv = document.createElement('div');
-        switch (strOption) {
-            case '1':
-                newdiv.innerHTML = " <input type='text' id='videoLink"+addVideoCounter+"' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
-                    "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
-                    "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
-                break;
-            case '2':
-                newdiv.innerHTML = "<input type='file' id='videoLink"+addVideoCounter+"'class='form-control' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
-                    "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
-                    "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
-                break;
-        }
-        document.getElementById(divName).appendChild(newdiv);
-        addVideoCounter++;
-        document.getElementById("deleteOptionButtonVideo").disabled = false;
-    }
-}
-function deleteVideoOptions() {
-    var videoLink = document.getElementById("videoLink"+(addVideoCounter-1));
-    videoLink.parentNode.removeChild(videoLink);
-    var videoDescription = document.getElementById("videoDescription"+(addVideoCounter-1));
-    videoDescription.parentNode.removeChild(videoDescription);
-    var videoType = document.getElementById("videoType"+(addVideoCounter-1));
-    videoType.parentNode.removeChild(videoType);
-    addVideoCounter--;
-    if(addVideoCounter <= 0){
-        document.getElementById("deleteOptionButtonVideo").disabled = true;
-    }
-}
-function addImageButton(divName) {
-    if (addImageCounter == addImageLimit) {
-        alert("You have reached the limit of adding " + addImageCounter + " image");
-    } else {
-        var newdiv = document.createElement('div');
-        newdiv.innerHTML = "<input type='file' multiple id='image"+addImageCounter+"' name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
-            "<textarea class='form-control' rows='2' wrap='soft' id='imageDescription"+addImageCounter+"'name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
-        document.getElementById(divName).appendChild(newdiv);
-        addImageCounter++;
-        document.getElementById("deleteOptionButtonImage").disabled = false;
-    }
-}
-function deleteImageButton() {
-    var image = document.getElementById("image"+(addImageCounter-1));
-    image.parentNode.removeChild(image);
-    var imageDescription = document.getElementById("imageDescription"+(addImageCounter-1));
-    imageDescription.parentNode.removeChild(imageDescription);
-    addImageCounter--;
-    if(addImageCounter <= 0){
-        document.getElementById("deleteOptionButtonImage").disabled = true;
-    }
-}
-function addAssignmentButton(divName) {
-    if (addAssignmentCounter == addAssignmentLimit) {
-        alert("You have reached the limit of adding " + addAssignmentCounter + " assignment");
-    } else {
-        var newdiv = document.createElement('div');
-        newdiv.innerHTML = "<input type='file' multiple id='assignment"+addAssignmentCounter+"'name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
-            "<textarea class='form-control' rows='2' wrap='soft' id='assignmentDescription"+addAssignmentCounter+"' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description
-        document.getElementById(divName).appendChild(newdiv);
-        addAssignmentCounter++;
-        document.getElementById("deleteOptionButtonAssignment").disabled = false;
-    }
-}
-function deleteAssignmentButton() {
-    var assignment = document.getElementById("assignment"+(addAssignmentCounter-1));
-    assignment.parentNode.removeChild(assignment);
-    var assignmentDescription = document.getElementById("assignmentDescription"+(addAssignmentCounter-1));
-    assignmentDescription.parentNode.removeChild(assignmentDescription);
-    addAssignmentCounter--;
-    if(addAssignmentCounter<=0){
-        document.getElementById("deleteOptionButtonAssignment").disabled = true;
-    }
-}
-
-/**
- * ---------------------------------------test functions---------------------------------------
- */

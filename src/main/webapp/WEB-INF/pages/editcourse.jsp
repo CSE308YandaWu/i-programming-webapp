@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: JIAQI ZHANG
+  User: JIAQI ZHANG, YANDA WU
   Date: 4/5/2017
   Time: 11:32 PM
   To change this template use File | Settings | File Templates.
@@ -37,7 +37,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body onload="showAccessCode()">
+<%--if user click the back button from this page, the editLesson page will need to be refreshed to generate a new blobstore uploadUrl--%>
+<body onload="showAccessCode();refreshBackFromEditCoursePage();">
+
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
@@ -64,11 +66,6 @@
                 <div class="inner editcourse">
                     <br><br><br>
                     <h2>Edit Course</h2>
-                    <%--<div class="add-btns-group">--%>
-                        <%--<button type="button" class="btn btn-primary" onclick="toEditUnit();">Edit Course Details--%>
-                            <%--<form id="toEditCourseDetails"><input type="hidden"></form>--%>
-                        <%--</button>--%>
-                    <%--</div>--%>
                     <h3 class="subheading">Course Details:</h3>
                     <div class="course-info">
                         <table class="table1">
@@ -229,7 +226,9 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/refreshEditLesson.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
