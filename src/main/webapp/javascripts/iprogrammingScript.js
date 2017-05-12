@@ -5,7 +5,6 @@
 /**
  * ---------------------------------------Button functions in all pages---------------------------------------
  */
-
 /* Home Page sign-in button */
 function toMain() {
     document.getElementById("formToMain").action = "/main";
@@ -62,45 +61,6 @@ function checkCode(validCode, index) {
     }
 }
 
-/**
- * ---------------------------------------Home/Sign-Out Button functions for all pages---------------------------------------
- */
-/* Main Page Home button */
-function mainToHome() {
-    document.getElementById("mainToHome").action = "/main";
-    document.getElementById("mainToHome").submit();
-}
-/* create_course Page Home button */
-function createCourseToHome() {
-    document.getElementById("createCourseToHome").action = "/main";
-    document.getElementById("createCourseToHome").submit();
-}
-/* search_course Page Home button */
-function searchCourseToHome() {
-    document.getElementById("searchCourseToHome").action = "/main";
-    document.getElementById("searchCourseToHome").submit();
-}
-/* courseInfo Page Home button */
-function courseInfoToHome() {
-    document.getElementById("courseInfoToHome").action = "/main";
-    document.getElementById("courseInfoToHome").submit();
-}
-/* editCourse Page Home button */
-function editCourseToHome() {
-    document.getElementById("editCourseToHome").action = "/main";
-    document.getElementById("editCourseToHome").submit();
-}
-
-/* editLesson Page Home button */
-function editLessonToHome() {
-    document.getElementById("editLessonToHome").action = "/main";
-    document.getElementById("editLessonToHome").submit();
-}
-/* courseContent Page Home button */
-function courseContentToHome() {
-    document.getElementById("courseContentToHome").action = "/main";
-    document.getElementById("courseContentToHome").submit();
-}
 
 /**
  * ---------------------------------------Back navigation button functions for all pages---------------------------------------
