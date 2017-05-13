@@ -25,6 +25,7 @@ public class Course implements Serializable {
     private String description;
     private String status;
     private String accessCode;
+    private String lessonOrder;
     @Index
     private Date dateCreated;
     @Index
@@ -36,7 +37,7 @@ public class Course implements Serializable {
         numEnrolled = 0;
     }
 
-    public Course(String userEmail, String id, String title, String instructor, String description, String status) {
+    public Course(String userEmail, String id, String title, String instructor, String description, String status, String lessonOrder) {
         this();
         this.email = userEmail;
         this.id = id;
@@ -44,6 +45,7 @@ public class Course implements Serializable {
         this.instructor = instructor;
         this.description = description;
         this.status = status;
+        this.lessonOrder = lessonOrder;
     }
 
     //Getters and Setters
@@ -94,6 +96,15 @@ public class Course implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getLessonOrder() {
+        return lessonOrder;
+    }
+
+    public void setLessonOrder(String lessonOrder) {
+        this.lessonOrder = lessonOrder;
+    }
+
 
     public Date getDateCreated() {
         return dateCreated;
