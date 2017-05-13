@@ -11,7 +11,6 @@ function confirmDelete(){
 
 }
 
-function confirmEnroll(){
-    window.alert("You successfully enrolled this course!");
-    return true
+function confirmEnroll(id,list){
+    window.alert(list[1]);
 }

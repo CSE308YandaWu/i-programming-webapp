@@ -102,7 +102,7 @@
                                                 <c:if test="${x.status == 'private'}">
                                                     <p>Access Code: <input type="text" id="accessCode${loop.index}" name="accessCode"></p>
                                                 </c:if>
-                                                <input type="submit" value="Enroll">
+                                                <input type="submit" value="Enroll" onclick="confirmEnroll('${x.id}')">
                                             </form>
                                             <p class="errorMsg" id="errorMsg${loop.index}">Access Code is invalid. Fail to enroll.</p>
                                         </div>
