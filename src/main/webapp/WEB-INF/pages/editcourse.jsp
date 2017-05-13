@@ -140,7 +140,8 @@
                             <c:otherwise>
                             <ul id="sortable" class="lesson-list">
                                 <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
-                                    <li class="ui-state-default">
+                                    <%--loop.index is lesson order index--%>
+                                    <li class="ui-state-default" id="${loop.index}">
                                         <div class="lesson-info">
                                             <span class="ui-icon ui-icon-triangle-2-n-s"></span><p class="lesson-name">${lesson.lessonTitle}</p>
                                         </div>
@@ -172,7 +173,7 @@
                     <br>
                     <div class="add-btns-group">
                         <form action="/saveCourse">
-                            <input type="submit" class="btn btn-primary" onclick="create_course_confirm()" value="Save">
+                            <input type="submit" class="btn btn-primary" onclick="editCourseToMain()" value="Save">
                             <input type="hidden" name="userEmail" value="${course.email}">
                             <input type="hidden" name="courseId" value="${course.id}">
                             <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
@@ -181,6 +182,8 @@
                             <input type="hidden" name="description" id="description2Save" value="${course.description}">
                             <input type="hidden" name="status" id="status2Save" value="${course.status}">
                             <input type="hidden" name="accessCode" id="accessCode2Save" value="${course.accessCode}">
+                            <%--lesson order--%>
+                            <input type="hidden" name="lessonOrder" id="lessonOrderID">
                         </form>
                         <form action="/main">
                             <input type="submit" class="btn btn-primary" value="Cancel">

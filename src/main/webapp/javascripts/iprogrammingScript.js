@@ -41,6 +41,14 @@ function toEditLesson() {
     document.getElementById("toEditLesson").submit();
 }
 
+/* Edit Course Page Save button */
+function editCourseToMain(lessonList) {
+    /* get the new lesson order list and send it */
+    var lessonOrder = sel.sortable("toArray");
+    //alert(lessonOrder);
+    document.getElementById("lessonOrderID").value = lessonOrder;
+}
+
 function courseStatus() {
     var value = document.getElementById("status").value;
     var statusRow = document.getElementById("statusRow");

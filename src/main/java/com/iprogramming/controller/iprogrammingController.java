@@ -158,7 +158,9 @@ public class iprogrammingController {
                                       @RequestParam(value = "accessCode") String accessCode) {
 
         String id = new ObjectifyFactory().allocateId(Course.class).getString();
-        Course newCourse = new Course(userEmail, id, courseTitle, instructor, description, status);
+        /* still creating course, no lesson no order */
+        String lessonOrder = null;
+        Course newCourse = new Course(userEmail, id, courseTitle, instructor, description, status,lessonOrder);
 
         if ((accessCode != null))
             newCourse.setAccessCode(accessCode);
@@ -196,8 +198,23 @@ public class iprogrammingController {
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
 
         ModelAndView mav = new ModelAndView("courseInfo");
-        mav.addObject("course", c);
-        mav.addObject("lessons", lessonList);
+        /* 1. not (nothing from the editCourse.jsp, empty course) , 2. not (nothing yet from other pages) */
+        if( (!c.getLessonOrder().equalsIgnoreCase("[object Object]")) && (c.getLessonOrder() != null)){
+            //System.out.println("Then we have something real: "+ c.getLessonOrder());
+            List<Lesson> updatedLessonList = new ArrayList<Lesson>();
+            List<String> lessonOrderList = new ArrayList<String>(Arrays.asList(c.getLessonOrder().split(",")));
+            //System.out.println("Hi "+ lessonOrderList.size());
+            //System.out.println("Here comes the real list: "+ lessonOrderList);
+            for(int i = 0; i < lessonOrderList.size(); i++){
+                updatedLessonList.add(lessonList.get(Integer.parseInt(lessonOrderList.get(i))));
+            }
+            mav.addObject("course", c);
+            mav.addObject("lessons", updatedLessonList);
+
+        }else{/* 1. nothing from the editCourse.jsp, empty course, 2. nothing yet from other pages */
+            mav.addObject("course", c);
+            mav.addObject("lessons", lessonList);
+        }
 
         return mav;
     }
@@ -229,17 +246,41 @@ public class iprogrammingController {
                                    @RequestParam(value = "description", required = false) String description,
                                    @RequestParam(value = "status", required = false) String status,
                                    @RequestParam(value = "accessCode", required = false) String accessCode) {
+
+        ModelAndView mav = new ModelAndView("editCourse");
+        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
+
         Course c = ofy().load().type(Course.class).id(courseId).now();
         if (c == null){
-            c = new Course(userEmail, courseId, courseTitle, instructor,description, status);
+            /* no lesson if no course */
+            String lessonOrder = null;
+            c = new Course(userEmail, courseId, courseTitle, instructor,description, status,lessonOrder);
             c.setAccessCode(accessCode);
             c.setNumEnrolled(numEnrolled);
+
+            mav.addObject("course", c);
+            mav.addObject("lessonList", lessonList);
+
+        }else{
+            if( (!c.getLessonOrder().equalsIgnoreCase("[object Object]")) && (c.getLessonOrder() != null)){
+                System.out.println("????"+ c.getLessonOrder());
+                List<Lesson> updatedLessonList = new ArrayList<Lesson>();
+//            System.out.println("Hello " + c.getLessonOrder());
+                List<String> lessonOrderList = new ArrayList<String>(Arrays.asList(c.getLessonOrder().split(",")));
+//            System.out.println("Hi "+ lessonOrderList.size());
+//            System.out.println("what up "+ lessonOrderList);
+                for(int i = 0; i < lessonOrderList.size(); i++){
+                    int index = Integer.parseInt(lessonOrderList.get(i));
+                    updatedLessonList.add(lessonList.get(index));
+                }
+                mav.addObject("course", c);
+                mav.addObject("lessonList", updatedLessonList);
+
+            }else{//no lesson no lesson order(empty class)
+                mav.addObject("course", c);
+                mav.addObject("lessonList", lessonList);
+            }
         }
-        List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
-        ModelAndView mav = new ModelAndView("editCourse");
-        mav.addObject("course", c);
-        //System.out.println("editCourse course title: " + c.getTitle());
-        mav.addObject("lessonList", lessonList);
         return mav;
     }
 
@@ -252,9 +293,12 @@ public class iprogrammingController {
                                    @RequestParam(value = "instructor") String instructor,
                                    @RequestParam(value = "description") String description,
                                    @RequestParam(value = "status") String status,
-                                   @RequestParam(value = "accessCode", required = false) String accessCode) {
+                                   @RequestParam(value = "accessCode", required = false) String accessCode,
+                                   @RequestParam(value = "lessonOrder") String lessonOrder) {
 
-        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        //System.out.println("From javascript: " + lessonOrder);
+
+        Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status, lessonOrder);
         newCourse.setAccessCode(accessCode);
         newCourse.setNumEnrolled(numEnrolled);
         ofy().save().entity(newCourse).now();
@@ -319,11 +363,11 @@ public class iprogrammingController {
                                           @RequestParam(value = "status") String status,
                                           @RequestParam(value = "accessCode", required = false) String accessCode) throws IOException {
 
-
-        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+        /* not saving it until user click save in editCourse page */
+        String lessonOrder = null;
+        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status,lessonOrder);
         course.setAccessCode(accessCode);
         course.setNumEnrolled(numEnrolled);
-
 
         /* get the uploaded video files */
         Map<String, List<FileInfo>> finfos = blobstoreService.getFileInfos(req);
@@ -408,7 +452,6 @@ public class iprogrammingController {
         /* save the lesson into datastore  */
         ofy().save().entity(lesson).now();
         /* get lesson list from the datastore */
-
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
         ModelAndView mav = new ModelAndView();
         /* add course object to the model */
@@ -436,7 +479,9 @@ public class iprogrammingController {
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
         Course course = ofy().load().type(Course.class).id(courseId).now();
         if (course == null){
-            course = new Course(userEmail, courseId, courseTitle, instructor,description, status);
+            /* no lesson if no course */
+            String lessonOrder = null;
+            course = new Course(userEmail, courseId, courseTitle, instructor,description, status, lessonOrder);
             course.setAccessCode(accessCode);
             course.setNumEnrolled(numEnrolled);
         }
@@ -486,7 +531,10 @@ public class iprogrammingController {
 
         /* now delete the lesson from datastore */
         ofy().delete().type(Lesson.class).id(lessonId).now();
-        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
+
+        /* not saving it until user click save in editCourse page */
+        String lessonOrder = null;
+        Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status,lessonOrder);
         course.setNumEnrolled(numEnrolled);
         course.setAccessCode(accessCode);
 
