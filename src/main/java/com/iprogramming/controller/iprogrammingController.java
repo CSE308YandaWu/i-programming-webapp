@@ -36,6 +36,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @Controller
 public class iprogrammingController {
 
@@ -165,7 +166,7 @@ public class iprogrammingController {
 
         //ofy().save().entity(newCourse).now();
 
-        return new ModelAndView("editCourse", "course", newCourse);
+        return new ModelAndView("editcourse", "course", newCourse);
     }
 
     @RequestMapping(value = "/enrollCourse")
@@ -220,7 +221,7 @@ public class iprogrammingController {
     }
 
 
-    @RequestMapping("/editCourse")
+    @RequestMapping(value = "/editCourse")
     public ModelAndView editCourse(@RequestParam(value = "userEmail", required = false) String userEmail,
                                    @RequestParam(value = "courseId") String courseId,
                                    @RequestParam(value = "numEnrolled", required = false) Integer numEnrolled,
