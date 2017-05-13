@@ -114,6 +114,20 @@ public class iprogrammingController {
     @RequestMapping("/deleteCourse")
     public ModelAndView deleteCourse(HttpSession session, HttpServletRequest request,
                                      @RequestParam(value = "courseId") String courseId) {
+        //Delete the reference in every user's joinedCourse List
+        List<User> users = ofy().load().type(User.class).list();
+        for (User u : users) {
+            Boolean b = u.getJoinedCourse().remove(courseId);
+        }
+        ofy().save().entities(users).now();
+
+        //Delete the lessons belong to this course
+        List<Lesson> lessons = ofy().load().type(Lesson.class).filter("courseId", courseId).list();
+        for (Lesson l: lessons) {
+            deleteLesson(l.getLessonId(),null,null, 0,null,null,null,null,null);
+        }
+
+        //Delete the course Entity
         ofy().delete().type(Course.class).id(courseId).now();
         return main(session, request);
     }
