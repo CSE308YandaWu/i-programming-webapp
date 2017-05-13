@@ -1,0 +1,132 @@
+/*
+ *
+ * Created by Shanshan Chen
+ * File to dictate the general physical layout of the site (height, width, centering, alignment, etc.)
+ *
+ */
+
+/* BASE STRUCTURE
+ * with extra markup and styles for table-esque vertical and horizontal centering
+ */
+
+html,
+body {
+    height: 100%;
+    background-color: #333;
+}
+
+body {
+    color: #fff;
+    text-align: center;
+    background-color: #333;
+    /*text-shadow: 0 1px 3px rgba(0, 0, 0, .5);*/
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+
+/*  */
+.site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%; /* For at least Firefox */
+    min-height: 100%;
+    -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/*
+ * Cover
+ */
+
+.cover {
+    padding: 0 20px;
+}
+
+.cover .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Links */
+a,
+a:focus,
+a:hover {
+    color: #000;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+.text {
+    text-align: left;
+}
+
+/* Padding for spacing */
+.inner {
+    padding: 30px;
+}
+
+/* button groups*/
+.add-btns-group {
+    float: right;
+    margin-right: 5px;
+}
+
+.add-btns-group > form {
+    display: inline;
+}
+
+.outlinelist {
+    text-align: left;
+}
+
+/*UNUSED
+.table1 {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top: 2%;
+    margin-bottom: 100px;
+}
+
+.table1 td{
+    padding: 30px;
+    text-align: right;
+}
+
+.table1 {
+    width: 70%;
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.table1 * td{
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+
+ */

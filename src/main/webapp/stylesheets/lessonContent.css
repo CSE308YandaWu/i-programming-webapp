@@ -1,0 +1,9 @@
+/* CSS file specifically for the courseContent.jsp (lesson content) page */
+
+.lessonHeading {
+    font-weight: bold;
+}
+
+.item-descp {
+    font-size: 16pt;
+}

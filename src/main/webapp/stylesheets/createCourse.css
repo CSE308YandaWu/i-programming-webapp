@@ -1,0 +1,9 @@
+/*
+    File created by Shanshan Chen
+    CSS file for the create Course page (createcourse.jsp)
+ */
+
+.create-course-btns > form {
+    display: inline;
+    color: black;
+}
