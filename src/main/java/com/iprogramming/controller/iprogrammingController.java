@@ -115,6 +115,20 @@ public class iprogrammingController {
     @RequestMapping("/deleteCourse")
     public ModelAndView deleteCourse(HttpSession session, HttpServletRequest request,
                                      @RequestParam(value = "courseId") String courseId) {
+        //Delete the reference in every user's joinedCourse List
+        List<User> users = ofy().load().type(User.class).list();
+        for (User u : users) {
+            Boolean b = u.getJoinedCourse().remove(courseId);
+        }
+        ofy().save().entities(users).now();
+
+        //Delete the lessons belong to this course
+        List<Lesson> lessons = ofy().load().type(Lesson.class).filter("courseId", courseId).list();
+        for (Lesson l: lessons) {
+            deleteLesson(l.getLessonId(),null,null, 0,null,null,null,null,null);
+        }
+
+        //Delete the course Entity
         ofy().delete().type(Course.class).id(courseId).now();
         return main(session, request);
     }
@@ -506,20 +520,15 @@ public class iprogrammingController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
         //System.out.println("Serving:" + key);
         //BlobKey bk = new BlobKey("encoded_gs_key:L2dzL2ktcHJvZ3JhbW1pbmcuYXBwc3BvdC5jb20vazc4UkZJeVdjQXotU0RRRDB1M1JqUQ");
-//        res.setContentType("application/force-download");
-//        res.setHeader("Content-Transfer-Encoding", "binary");
-//        String fname = bi.loadBlobInfo(blobKey).getFilename();
-//        res.setContentType("application/x-download");
-//        res.setHeader("Content-Disposition", "attachment; filename=" + fname);
-//        String ss = "wow";
-//        res.setHeader("Content-Disposition","attachment; filename="+ss+".jpg");
-        //res.setContentType("application/pdf");
-        //res.setHeader("Content-Disposition", "attachment;filename=sample.pdf");
+
         BlobKey bk = new BlobKey(key);
         BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
         BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
         res.setContentType(blobInfo.getContentType());
+
         //System.out.println(blobInfo.getContentType());
+
+        res.setHeader("Content-Disposition","inline; filename="+blobInfo.getFilename());
 
         blobstoreService.serve(bk, res);
         //res.sendRedirect("/serve-blob?key=" + bk.getKeyString());
