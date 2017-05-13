@@ -462,20 +462,28 @@ public class iprogrammingController {
         /* load the to-be-deleted lesson from datastore to get the VideoBlobKeysList and AssignmentBlobKeysList */
         Lesson lesson = ofy().load().type(Lesson.class).id(lessonId).now();
         /* delete all videos in that lesson from blobstore */
-        for (String videoBlobKey : lesson.getVideoBlobKeysList()) {
-            BlobKey blobKey = new BlobKey(videoBlobKey);
-            blobstoreService.delete(blobKey);
+        if(lesson.getVideoBlobKeysList() != null){
+            for (String videoBlobKey : lesson.getVideoBlobKeysList()) {
+                BlobKey blobKey = new BlobKey(videoBlobKey);
+                blobstoreService.delete(blobKey);
+            }
         }
         /* delete all images in that lesson from blobstore */
-        for (String imageBlobKey : lesson.getImageBlobKeysList()) {
-            BlobKey blobKey = new BlobKey(imageBlobKey);
-            blobstoreService.delete(blobKey);
+        if(lesson.getImageBlobKeysList() != null){
+            for (String imageBlobKey : lesson.getImageBlobKeysList()) {
+                BlobKey blobKey = new BlobKey(imageBlobKey);
+                blobstoreService.delete(blobKey);
+            }
         }
+
         /* delete all assignments in that lesson from blobstore */
-        for (String assignmentBlobKey : lesson.getAssignmentBlobKeysList()) {
-            BlobKey blobKey = new BlobKey(assignmentBlobKey);
-            blobstoreService.delete(blobKey);
+        if(lesson.getAssignmentBlobKeysList() != null){
+            for (String assignmentBlobKey : lesson.getAssignmentBlobKeysList()) {
+                BlobKey blobKey = new BlobKey(assignmentBlobKey);
+                blobstoreService.delete(blobKey);
+            }
         }
+
         /* now delete the lesson from datastore */
         ofy().delete().type(Lesson.class).id(lessonId).now();
         Course course = new Course(userEmail, courseId, courseTitle, instructor, description, status);
