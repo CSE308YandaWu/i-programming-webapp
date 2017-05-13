@@ -505,20 +505,15 @@ public class iprogrammingController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
         //System.out.println("Serving:" + key);
         //BlobKey bk = new BlobKey("encoded_gs_key:L2dzL2ktcHJvZ3JhbW1pbmcuYXBwc3BvdC5jb20vazc4UkZJeVdjQXotU0RRRDB1M1JqUQ");
-//        res.setContentType("application/force-download");
-//        res.setHeader("Content-Transfer-Encoding", "binary");
-//        String fname = bi.loadBlobInfo(blobKey).getFilename();
-//        res.setContentType("application/x-download");
-//        res.setHeader("Content-Disposition", "attachment; filename=" + fname);
-//        String ss = "wow";
-//        res.setHeader("Content-Disposition","attachment; filename="+ss+".jpg");
-        //res.setContentType("application/pdf");
-        //res.setHeader("Content-Disposition", "attachment;filename=sample.pdf");
+
         BlobKey bk = new BlobKey(key);
         BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
         BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
         res.setContentType(blobInfo.getContentType());
+
         //System.out.println(blobInfo.getContentType());
+
+        res.setHeader("Content-Disposition","inline; filename="+blobInfo.getFilename());
 
         blobstoreService.serve(bk, res);
         //res.sendRedirect("/serve-blob?key=" + bk.getKeyString());
