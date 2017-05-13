@@ -2,3 +2,14 @@
     File created by Shanshan Chen
     CSS file for courseInfo.jsp
  */
+
+.table1 {
+    width: 70%;
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.table1 * td{
+    padding-bottom: 4px;
+    padding-top: 4px;
+}

@@ -45,6 +45,11 @@ h2 {
     vertical-align: top;
 }
 
+/* Padding for spacing */
+.inner {
+    padding: 30px;
+}
+
 /*
  * Cover
  */
@@ -67,7 +72,7 @@ h2 {
 a,
 a:focus,
 a:hover {
-    color: #000;
+    color: #fff;
 }
 
 /* Custom default button */
@@ -82,11 +87,6 @@ a:hover {
 
 .text {
     text-align: left;
-}
-
-/* Padding for spacing */
-.inner {
-    padding: 30px;
 }
 
 /* button groups*/

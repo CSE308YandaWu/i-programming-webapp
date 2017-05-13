@@ -14,6 +14,10 @@
     float: right;
 }
 
+.panel-heading > a {
+    color: #000;
+}
+
 .resultlist {
     text-align: left;
     color: gray;

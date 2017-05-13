@@ -27,8 +27,9 @@
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../stylesheets/sortlist.css">
+    <link href="../../stylesheets/layout.css" rel="stylesheet">
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../stylesheets/editCourse.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
