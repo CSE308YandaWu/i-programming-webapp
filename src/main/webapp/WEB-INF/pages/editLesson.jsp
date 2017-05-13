@@ -42,8 +42,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
-<body>
+<%--if user click the back button from editCourse, s/he will be redirected to this page and it needs to be refreshed to generate a new blobstore uploadUrl--%>
+<body onload="refreshEditLesson();">
 
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
@@ -52,7 +52,7 @@
                 <div class="inner">
                     <h3 class="masthead-brand">
                         <a href="#" onclick="editLessonToHome()">I-Programming</a>
-                        <form id="editLessonToHome"><input type="hidden"></form>
+                        <form id="backToHome"><input type="hidden"></form>
                     </h3>
                     <nav>
                         <ul class="nav masthead-nav">
@@ -109,7 +109,10 @@
                             <option value="2">Upload File</option>
                         </select>
                         <%--add more video button--%>
-                        <input id="addOptionButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                        <div id="optionButtonVideo" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                            <input id="deleteOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Video" disabled="disabled" onClick="deleteVideoOptions();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
@@ -121,7 +124,10 @@
                             <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more image button--%>
-                        <input id="addImageButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
+                        <div id="optionButtonImage" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925"  type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
+                            <input id="deleteOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Image" disabled="disabled" onClick="deleteImageButton();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
@@ -135,7 +141,10 @@
                             <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
                         </div>
                         <%--add more assignment button--%>
-                        <input id="addAssignmentButton" class="btn btn-lg btn-primary btn-block" type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                        <div id="optionButtonAssignment" class="btn btn-lg btn-primary btn-block">
+                            <input id="addOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925;"   type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                            <input id="deleteOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Assignment" disabled="disabled" onClick="deleteAssignmentButton();">
+                        </div>
                     </div>
                 </div>
                 <div class="help-block"></div>
@@ -174,7 +183,11 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/editLessonFunctions.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/refreshEditLesson.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

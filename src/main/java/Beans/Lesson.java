@@ -28,8 +28,10 @@ public class Lesson {
     private List<String> videoDescriptions;
     private List<String> videoTypes;
     private List<String> imageServingUrlList;
+    private List<String> imageBlobKeysList;
     private List<String> imageDescriptions;
     private List<String> assignmentBlobKeysList;
+    private List<String> assignmentFileNameList;
     private List<String> assignmentDescriptions;
 
     @Index
@@ -40,9 +42,10 @@ public class Lesson {
         dateCreated = new Date();
     }
 
-    public Lesson(String courseId, String lessonId, String lessonTitle, String lessonBody, String pptLink, String pptDescription, List<String> videoLinks,
-                  List<String> videoBlobKeysList, List<String> videoDescriptions, List<String> videoTypes, List<String> imageServingUrlList, List<String> imageDescriptions,
-                  List<String> assignmentBlobKeysList, List<String> assignmentDescriptions) {
+    public Lesson(String courseId, String lessonId, String lessonTitle, String lessonBody, String pptLink, String pptDescription,
+                  List<String> videoLinks, List<String> videoBlobKeysList, List<String> videoDescriptions, List<String> videoTypes,
+                  List<String> imageServingUrlList, List<String> imageBlobKeysList, List<String> imageDescriptions,
+                  List<String> assignmentBlobKeysList, List<String> assignmentFileNameList, List<String> assignmentDescriptions) {
         this.dateCreated = new Date();
         this.courseId = courseId;
         this.lessonId = lessonId;
@@ -55,8 +58,10 @@ public class Lesson {
         this.videoDescriptions = videoDescriptions;
         this.videoTypes = videoTypes;
         this.imageServingUrlList = imageServingUrlList;
+        this.imageBlobKeysList = imageBlobKeysList;
         this.imageDescriptions = imageDescriptions;
         this.assignmentBlobKeysList = assignmentBlobKeysList;
+        this.assignmentFileNameList = assignmentFileNameList;
         this.assignmentDescriptions = assignmentDescriptions;
     }
 
@@ -147,7 +152,13 @@ public class Lesson {
     public void setImageServingUrlList(List<String> imageServingUrlList) {
         this.imageServingUrlList = imageServingUrlList;
     }
+    public List<String> getImageBlobKeysList() {
+        return imageBlobKeysList;
+    }
 
+    public void setImageBlobKeysList(List<String> imageBlobKeysList) {
+        this.imageBlobKeysList = imageBlobKeysList;
+    }
     public List<String> getImageDescriptions() {
         return imageDescriptions;
     }
@@ -162,6 +173,14 @@ public class Lesson {
 
     public void setAssignmentBlobKeysList(List<String> assignmentBlobKeysList) {
         this.assignmentBlobKeysList = assignmentBlobKeysList;
+    }
+
+    public List<String> getAssignmentFileNameList() {
+        return assignmentFileNameList;
+    }
+
+    public void setAssignmentFileNameList(List<String> assignmentFileNameList) {
+        this.assignmentFileNameList = assignmentFileNameList;
     }
 
     public List<String> getAssignmentDescriptions() {

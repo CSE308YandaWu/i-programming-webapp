@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: JIAQI ZHANG
+  User: JIAQI ZHANG, YANDA WU
   Date: 4/6/2017
   Time: 3:29 AM
   To change this template use File | Settings | File Templates.
@@ -46,7 +46,7 @@
                 <div class="inner">
                     <h3 class="masthead-brand">
                         <a href="#" onclick="courseInfoToHome()">I-Programming</a>
-                        <form id="courseInfoToHome"><input type="hidden"></form>
+                        <form id="backToHome"><input type="hidden"></form>
                     </h3>
                     <nav>
                         <ul class="nav masthead-nav">
@@ -133,6 +133,8 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

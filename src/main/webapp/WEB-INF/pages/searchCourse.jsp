@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: GangdiHuang
+  User: GangdiHuang, YANDA WU
   Date: 4/5/17
   Time: 6:39 PM
   To change this template use File | Settings | File Templates.
@@ -38,8 +38,8 @@
                 <div class="masthead clearfix">
                     <div class="inner">
                         <h3 class="masthead-brand">
-                            <a href="#" onclick="editCourseToHome()">I-Programming</a>
-                            <form id="editCourseToHome"><input type="hidden"></form>
+                            <a href="#" onclick="searchCourseToHome()">I-Programming</a>
+                            <form id="backToHome"><input type="hidden"></form>
                         </h3>
                         <nav>
                             <ul class="nav masthead-nav">
@@ -134,6 +134,8 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/SearchCourse.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
