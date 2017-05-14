@@ -7,7 +7,7 @@ var sel = $( "#sortable" );
 
 $(function() {
     sel.sortable({
-        placeholder: "ui-state-highlight"
+        //placeholder: "ui-state-highlight"
     });
     sel.disableSelection();
 });

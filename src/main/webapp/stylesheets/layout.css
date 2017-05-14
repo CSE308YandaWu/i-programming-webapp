@@ -12,13 +12,13 @@
 html,
 body {
     height: 100%;
-    background-color: #333;
+    background-color: #cecece;
 }
 
 body {
-    color: #fff;
+    color: #000;
     text-align: center;
-    background-color: #333;
+    background-color: #cecece;
     /*text-shadow: 0 1px 3px rgba(0, 0, 0, .5);*/
 }
 
@@ -27,7 +27,7 @@ h1 {
 }
 
 h2 {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    /*text-shadow: 0 1px 3px rgba(0, 0, 0, .5);*/
 }
 
 /*  */
@@ -43,6 +43,12 @@ h2 {
 .site-wrapper-inner {
     display: table-cell;
     vertical-align: top;
+}
+
+.shadow {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
 }
 
 /* Padding for spacing */

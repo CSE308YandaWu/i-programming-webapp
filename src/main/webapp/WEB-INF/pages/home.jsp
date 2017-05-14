@@ -31,7 +31,7 @@
 
     <!-- Custom styles for this template -->
     <%--<link href="../../stylesheets/layout.css" rel="stylesheet">--%>
-    <%--<link href="../../stylesheets/navigation.css" rel="stylesheet">--%>
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
     <link href="../../stylesheets/home.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -126,7 +126,7 @@
                 <div class="col-lg-12">
                     <h1>Contact Us</h1>
                     <p>We are the Dark Blue Development Team.</p>
-                    <p>Contact us at darkblue.cse.308@gmail.com for more information.</p>
+                    <p>Contact us at cse308.darkblue@gmail.com for more information.</p>
                     <br>
                     <img src="../../media/logo-cropped.png">
                 </div>

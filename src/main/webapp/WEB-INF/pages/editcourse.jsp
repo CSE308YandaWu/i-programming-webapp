@@ -39,31 +39,33 @@
     <![endif]-->
 </head>
 <%--if user click the back button from this page, the editLesson page will need to be refreshed to generate a new blobstore uploadUrl--%>
-<body onload="showAccessCode();refreshBackFromEditCoursePage();">
+<body onload="showAccessCode();refreshBackFromEditCoursePage();" id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
+                <form id="backToHome"><input type="hidden"></form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="welcome-user">
+                    Welcome, <span id="my-signin2" style="display: none;"></span>
+                    <p id="userEmail" style="display:inline"></p>
+                </li>
+                <li>
+                    <button class="btn navbar-btn" onclick="signOut()">Sign Out
+                        <form id="signOutToHome"><input type="hidden"></form></button>
+                </li>
+            </ul>
+
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
-                <div class="">
-                    <div class="inner">
-                        <h3 class="masthead-brand">
-                            <a href="#" onclick="editCourseToHome()">I-Programming</a>
-                            <form id="backToHome"><input type="hidden"></form>
-                        </h3>
-                        <nav>
-                            <ul class="nav masthead-nav">
-                                <li>
-                                    <div id="my-signin2" style="display: none;"></div>
-                                    <a id="userEmail"></a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="signOut();">Sign out</a>
-                                    <form id="signOutToHome"><input type="hidden"></form>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
                 <div class="inner editcourse">
                     <br><br><br>
                     <h2>Edit Course</h2>
@@ -83,7 +85,6 @@
                             <tr>
                                 <td>Instructor:</td>
                                 <td><input type="text" class="form-control" name="instructor" value="${course.instructor}" oninput="setInstructor(this)"></td>
-                                </td>
                             </tr>
                             <tr>
                                 <td>Status:</td>
@@ -104,7 +105,6 @@
                             <tr id="statusRow">
                                 <td>Access Code:</td>
                                 <td><input type="text" class="form-control" name="accessCode" value="${course.accessCode}" oninput="setAccessCode(this)"></td>
-                                </td>
                             </tr>
                             <%--</c:if>--%>
                             <tr>
@@ -113,30 +113,12 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="add-btns-group">
-                        <button type="button" class="btn btn-primary" onclick="toEditLesson();">Add Lesson
-                            <form id="toEditLesson">
-                                <input type="hidden" name="userEmail" value="${course.email}">
-                                <input type="hidden" name="courseId" value="${course.id}">
-                                <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
-                                <input type="hidden" name="courseTitle" id="titleEditLesson" value="${course.title}">
-                                <input type="hidden" name="instructor" id="instructorEditLesson"
-                                       value="${course.instructor}">
-                                <input type="hidden" name="description" id="descriptionEditLesson"
-                                       value="${course.description}">
-                                <input type="hidden" name="status" id="statusEditLesson" value="${course.status}">
-                                <input type="hidden" id="accessCodeEditLesson" name="accessCode"
-                                       value="${course.accessCode}">
-                            </form>
-                        </button>
-                    </div>
+                    <hr>
                     <div class="outlinelist">
                         <h3 class="subheading">Lessons</h3>
-                        <br>
-
                         <c:choose>
                             <c:when test="${empty lessonList}">
-                                There are no lessons.
+                                There are no lessons. <br><br>
                             </c:when>
                             <c:otherwise>
                             <ul id="sortable" class="lesson-list">
@@ -171,6 +153,24 @@
                             </ul>
                             </c:otherwise>
                         </c:choose>
+                        <ul><li id="addLesson">
+                            <div class="add-lesson">
+                                <a href="#" onclick="toEditLesson();" class="list-group-item list-group-item-action">(Click here to add a lesson)</a>
+                                <form id="toEditLesson">
+                                    <input type="hidden" name="userEmail" value="${course.email}">
+                                    <input type="hidden" name="courseId" value="${course.id}">
+                                    <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                                    <input type="hidden" name="courseTitle" id="titleEditLesson" value="${course.title}">
+                                    <input type="hidden" name="instructor" id="instructorEditLesson"
+                                           value="${course.instructor}">
+                                    <input type="hidden" name="description" id="descriptionEditLesson"
+                                           value="${course.description}">
+                                    <input type="hidden" name="status" id="statusEditLesson" value="${course.status}">
+                                    <input type="hidden" id="accessCodeEditLesson" name="accessCode"
+                                           value="${course.accessCode}">
+                                </form>
+                            </div>
+                        </li></ul>
                     </div>
                     <br>
                     <div class="add-btns-group">
@@ -192,30 +192,30 @@
                         </form>
                     </div>
                     <%-- ALTERNATE SAVE AND CANCEL BUTTON LOCATIONS --%>
-                    <div class="row">
-                        <%--div class="col-md-4"></div>
-                        <div class="col-md-2">
-                            <form action="/saveCourse">
-                                <input type="submit" class="btn btn-primary" value="Save">
-                                <input type="hidden" name="userEmail" value="${course.email}">
-                                <input type="hidden" name="courseId" value="${course.id}">
-                                <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
-                                <input type="hidden" name="courseTitle" id="title2Save" value="${course.title}">
-                                <input type="hidden" name="instructor" id="instructor2Save" value="${course.instructor}">
-                                <input type="hidden" name="description" id="description2Save" value="${course.description}">
-                                <input type="hidden" name="status" id="status2Save" value="${course.status}">
-                                <input type="hidden" name="accessCode" id="accessCode2Save" value="${course.accessCode}">
-                            </form>
-                        </div>
-                        <div class="col-md-2">
-                            <form action="/main">
-                                <input type="submit" class="btn btn-primary" value="Cancel">
-                            </form>
-                        </div--%>
-                    </div>
+                    <%--<div class="row">--%>
+                        <%--&lt;%&ndash;div class="col-md-4"></div>--%>
+                        <%--<div class="col-md-2">--%>
+                            <%--<form action="/saveCourse">--%>
+                                <%--<input type="submit" class="btn btn-primary" value="Save">--%>
+                                <%--<input type="hidden" name="userEmail" value="${course.email}">--%>
+                                <%--<input type="hidden" name="courseId" value="${course.id}">--%>
+                                <%--<input type="hidden" name="numEnrolled" value="${course.numEnrolled}">--%>
+                                <%--<input type="hidden" name="courseTitle" id="title2Save" value="${course.title}">--%>
+                                <%--<input type="hidden" name="instructor" id="instructor2Save" value="${course.instructor}">--%>
+                                <%--<input type="hidden" name="description" id="description2Save" value="${course.description}">--%>
+                                <%--<input type="hidden" name="status" id="status2Save" value="${course.status}">--%>
+                                <%--<input type="hidden" name="accessCode" id="accessCode2Save" value="${course.accessCode}">--%>
+                            <%--</form>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-2">--%>
+                            <%--<form action="/main">--%>
+                                <%--<input type="submit" class="btn btn-primary" value="Cancel">--%>
+                            <%--</form>--%>
+                        <%--</div&ndash;%&gt;--%>
+                    <%--</div>--%>
                 </div>
-                <br><br>
-                <div >
+                <br>
+                <div>
                     <div class="inner">
                         <p>Developed by Dark Blue Team.</p>
                     </div>
@@ -229,7 +229,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
@@ -242,8 +242,8 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script src="../../jQuery/jquery-sortable.js"></script>
-    <script src="../../jQueryScripts/jquery-1.12.4.js"></script>
-    <script src="../../jQueryScripts/jquery-ui.js"></script>
+    <script src="../../jQuery/jquery-3.2.1.js"></script>
+    <script src="../../jQuery/jquery-ui.js"></script>
     <script src="../../javascripts/sortableList.js"></script>
 </body>
 </html>

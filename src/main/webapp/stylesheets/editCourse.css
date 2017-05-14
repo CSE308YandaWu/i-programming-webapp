@@ -32,6 +32,11 @@ ul.lesson-list {
     list-style: "    ";
 }
 
+#addLesson {
+    list-style-type: none;
+    margin-right: 50px;
+}
+
 .ui-icon {
     margin-right: 7px;
     -ms-transform: scale(1.5); /* IE 9 */
@@ -44,6 +49,18 @@ ul.lesson-list {
 }
 .lesson-edit {
     float: right;
+}
+
+.add-lesson > a {
+    /*padding-left: 48%;*/
+    /*padding-right: 48%;*/
+    text-align: center;
+    color: #777;
+    background-color: #ddd;
+}
+
+.add-lesson > a:hover {
+    background-color: #e8e8e8;
 }
 
 .subheading {
@@ -61,10 +78,19 @@ ul.lesson-list {
 .table1 {
     width: 70%;
     text-align: left;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .table1 * td{
     padding-bottom: 4px;
     padding-top: 4px;
+}
+
+hr {
+    border-top: 1px solid #9c9c9c;
+}
+
+h3.subheading {
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
