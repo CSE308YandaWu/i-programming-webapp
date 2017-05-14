@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
+                <a class="navbar-brand" href="#" onclick="courseInfoToHome()">I-Programming</a>
                 <form id="backToHome"><input type="hidden"></form>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
