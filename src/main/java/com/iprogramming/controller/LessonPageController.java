@@ -392,10 +392,10 @@ public class LessonPageController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
 
         BlobKey bk = new BlobKey(key);
-        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
-        res.setContentType(blobInfo.getContentType());
-        res.setHeader("Content-Disposition","inline; filename=" + blobInfo.getFilename());
+//        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+//        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
+//        res.setContentType(blobInfo.getContentType());
+//        res.setHeader("Content-Disposition","inline; filename=" + blobInfo.getFilename());
         blobstoreService.serve(bk, res);
     }
 }
