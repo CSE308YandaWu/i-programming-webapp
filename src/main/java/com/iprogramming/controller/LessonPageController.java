@@ -8,6 +8,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.nio.ByteBuffer;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import Beans.Course;
 import com.googlecode.objectify.ObjectifyFactory;
@@ -42,7 +43,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LessonPageController {
-
     /* lecture upload/serve section, use Blobstore, Cloud Storage */
     /* all blobs need this */
     private BlobstoreService blobstoreService;
@@ -51,7 +51,7 @@ public class LessonPageController {
     public void init(){
         blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     }
-////////////////////////////////////////////////////////////////////////////////////////////////// debugging /////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/editLessonReal")
     public ModelAndView editLessonReal(@RequestParam(value = "lessonId") String lessonId,
                                      @RequestParam(value = "userEmail") String userEmail,
@@ -171,12 +171,13 @@ public class LessonPageController {
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
                     Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
+                    int randomNumEdit = ThreadLocalRandom.current().nextInt(0, 100000 + 1);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
-                            new GcsFilename("i-programming.appspot.com", "resizedImage" + i + ".jpeg"),
+                            new GcsFilename("i-programming.appspot.com", "resizedImage" + randomNumEdit + i + ".jpeg"),
                             new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
                             ByteBuffer.wrap(resizedImage.getImageData()));
-                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + i + ".jpeg");
+                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + randomNumEdit + i + ".jpeg");
                     String url = services.getServingUrl(serve);
                     imageServingUrlList.add(url);
                 }
@@ -250,7 +251,7 @@ public class LessonPageController {
         mav.setViewName("editCourse");
         return mav;
     }
-///////////////////////////////////////////////////////////////////////// if debug fail maybe just delete above code ////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/editLesson")
     public ModelAndView editLesson(@RequestParam(value = "userEmail") String userEmail,
                                    @RequestParam(value = "courseId") String courseId,
@@ -352,13 +353,14 @@ public class LessonPageController {
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
                     Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
+                    int randomNum = ThreadLocalRandom.current().nextInt(0, 100000 + 1);
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
-                            new GcsFilename("i-programming.appspot.com", "resizedImage" + i + ".jpeg"),
+                            new GcsFilename("i-programming.appspot.com", "resizedImage" + randomNum + i + ".jpeg"),
                             new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
                             ByteBuffer.wrap(resizedImage.getImageData()));
                     //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
-                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + i + ".jpeg");
+                    ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + randomNum + i + ".jpeg");
                     String url = services.getServingUrl(serve);
                     imageServingUrlList.add(url);
                 }

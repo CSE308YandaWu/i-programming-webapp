@@ -8,12 +8,12 @@
  */
 /* called from EditCoursePage, set teh visited page */
 function refreshBackFromEditCoursePage(){
-    sessionStorage.setItem("editCoursePageVisited", "True");
+    // sessionStorage.setItem("editCoursePageVisited", "True");
 }
 /* called from editLesson page, refresh the editLesson page */
 function refreshEditLesson(){
-    if (sessionStorage.getItem("editCoursePageVisited")) {
-        sessionStorage.removeItem("editCoursePageVisited");
-        window.location.reload(true); // force refresh editCourse Page
-    }
+    // if (sessionStorage.getItem("editCoursePageVisited")) {
+    //     sessionStorage.removeItem("editCoursePageVisited");
+    //     window.location.reload(true); // force refresh editCourse Page
+    // }
 }
