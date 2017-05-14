@@ -207,7 +207,7 @@ public class MainPageController {
                                    @RequestParam(value = "accessCode", required = false) String accessCode,
                                    @RequestParam(value = "lessonOrder") String lessonOrder) {
 
-        System.out.println("From javascript: " + lessonOrder);
+        //System.out.println("From javascript: " + lessonOrder);
 
         Course newCourse = new Course(userEmail, courseId, courseTitle, instructor, description, status, lessonOrder);
         newCourse.setAccessCode(accessCode);
