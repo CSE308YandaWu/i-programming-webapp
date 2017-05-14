@@ -40,109 +40,103 @@
 </head>
 
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
+                <form id="backToHome"><input type="hidden"></form>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="welcome-user">
+                        Welcome, <span id="my-signin2" style="display: none;"></span>
+                        <p id="userEmail" style="display:inline"></p>
+                    </li>
+                    <li>
+                        <button class="btn navbar-btn" onclick="signOut()">Sign Out
+                            <form id="signOutToHome"><input type="hidden"></form></button>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-<div class="site-wrapper">
-    <div class="site-wrapper-inner">
-        <div class="cover-container">
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand">
-                        <a href="#" onclick="courseInfoToHome()">I-Programming</a>
-                        <form id="backToHome"><input type="hidden"></form>
-                    </h3>
-                    <nav>
-                        <ul class="nav masthead-nav">
-                            <li>
-                                <div id="my-signin2" style="display: none;"></div>
-                                <a id="userEmail"></a>
-                            </li>
-                            <li>
-                                <a href="#" onclick="signOut();">Sign out</a>
-                                <form id="signOutToHome"><input type="hidden"></form>
-                            </li>
-                        </ul>
-                    </nav>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="inner course-info">
+                    <h2 class="cover-heading">${course.title} Course Page</h2>
+                    <h3>Instructor: ${course.instructor}</h3>
+                    <h4>${course.description}</h4>
                 </div>
-            </div>
-            <h2 class="cover-heading">
-                ${course.title} Course Page</h2>
-            <div class="inner cover">
-                <h3 class="text">Course Description</h3>
-                <br>
-                <div class="course-info">
-                    <table class="table1">
-                        <tr>
-                            <td>Instructor:</td>
-                            <td>${course.instructor}</td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td>${course.description}</td>
-                        </tr>
-                        <tr>
-                            <td>Date Created:</td>
-                            <td>${course.dateCreated}</td>
-                        </tr>
-                    </table>
+                <div class="inner cover">
+                    <div class="outlinelist">
+                        <h3 class="lessonHeading subheading">Lessons</h3>
+                        <c:choose>
+                            <c:when test="${empty lessons}">
+                                There are no lessons.
+                            </c:when>
+                            <c:otherwise>
+                                <ol>
+                                    <c:forEach var="lesson" items="${lessons}" varStatus="loop">
+                                        <li style="padding-bottom: 5px">
+                                            <a href="#" onclick="viewLesson('${loop.index}')"
+                                               class="list-group-item list-group-item-action">${lesson.lessonTitle}
+                                            </a>
+                                            <form id="viewLesson${loop.index}">
+                                                <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                                <%--tell courseContent page where is the viewLesson action from--%>
+                                                <input type="hidden" name="originalPlace" value="courseInfoPage">
+                                                <input type="hidden" name="courseId" value="${course.id}">
+                                            </form>
+                                        </li>
+                                    </c:forEach>
+                                </ol>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                    <form action="/main">
+                        <input type="submit" class="btn btn-primary add-btns-group" value="Back">
+                    </form>
+                    <div class="row">
+                        <%-- used to create padding at bottom --%>
+                    </div>
                 </div>
-                <div class="outlinelist">
-                    <h3 class="lessonHeading">Lessons</h3>
-                    <c:choose>
-                        <c:when test="${empty lessons}">
-                            There are no lessons.
-                        </c:when>
-                        <c:otherwise>
-                            <ol>
-                                <c:forEach var="lesson" items="${lessons}" varStatus="loop">
-                                    <li style="padding-bottom: 5px">
-                                        <a href="#" onclick="viewLesson('${loop.index}')"
-                                           class="list-group-item list-group-item-action">${lesson.lessonTitle}
-                                        </a>
-                                        <form id="viewLesson${loop.index}">
-                                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
-                                            <%--tell courseContent page where is the viewLesson action from--%>
-                                            <input type="hidden" name="originalPlace" value="courseInfoPage">
-                                            <input type="hidden" name="courseId" value="${course.id}">
-                                        </form>
-                                    </li>
-                                </c:forEach>
-                            </ol>
-                        </c:otherwise>
-                    </c:choose>
+                <div>
+                    <div class="inner">
+                        <p>Developed by Dark Blue Team.</p>
+                    </div>
                 </div>
-                <form action="/main">
-                    <input type="submit" class="btn btn-primary add-btns-group" value="Back">
-                </form>
-                <div class="row">
-                    <%-- used to create padding at bottom --%>
-                </div>
-            </div>
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Developed by Dark Blue Team.</p>
-                </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../../jQuery/jquery-3.2.1.js"></script>
 </body>
 </html>
 

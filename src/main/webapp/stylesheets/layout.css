@@ -109,30 +109,7 @@ a:hover {
     text-align: left;
 }
 
-/*UNUSED
-.table1 {
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-    padding-top: 2%;
-    margin-bottom: 100px;
+h3.subheading {
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
-
-.table1 td{
-    padding: 30px;
-    text-align: right;
-}
-
-.table1 {
-    width: 70%;
-    text-align: left;
-    margin-bottom: 100px;
-}
-
-.table1 * td{
-    padding-bottom: 4px;
-    padding-top: 4px;
-}
-
-
- */
