@@ -357,14 +357,13 @@ public class LessonPageController {
                 if (assignmentBlobKey == null) {
                     System.out.println("uploadAssignment error");
                 } else {
-                    BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-                    BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
+                    //BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+                    //BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
 
                     String blob = assignmentBlobKey.getKeyString();
-                    if((blob != null) && (blobInfo != null)){
-                        assignmentBlobKeysList.add(blob);
-                        assignmentFileNameList.add(blobInfo.getFilename());
-                    }
+                    assignmentBlobKeysList.add(blob);
+                    //System.out.println("????????");
+                    assignmentFileNameList.add("Assignment");
                 }
             }
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
