@@ -44,7 +44,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"onclick="createCourseToHome()">I-Programming</a>
+                <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
                 <form id="backToHome"><input type="hidden"></form>
             </div>
             <ul class="nav navbar-nav navbar-right">
@@ -85,7 +85,6 @@
                             <tr>
                                 <td>Instructor:</td>
                                 <td><input type="text" class="form-control" name="instructor" value="${course.instructor}" oninput="setInstructor(this)"></td>
-                                </td>
                             </tr>
                             <tr>
                                 <td>Status:</td>
@@ -106,7 +105,6 @@
                             <tr id="statusRow">
                                 <td>Access Code:</td>
                                 <td><input type="text" class="form-control" name="accessCode" value="${course.accessCode}" oninput="setAccessCode(this)"></td>
-                                </td>
                             </tr>
                             <%--</c:if>--%>
                             <tr>
@@ -118,35 +116,42 @@
                     <hr>
                     <div class="outlinelist">
                         <h3 class="subheading">Lessons</h3>
-                        <ul id="sortable" class="lesson-list">
-                            <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
-                                <%--loop.index is lesson order index--%>
-                                <li class="ui-state-default" id="${loop.index}">
-                                    <div class="lesson-info">
-                                        <span class="ui-icon ui-icon-triangle-2-n-s"></span><p class="lesson-name">${lesson.lessonTitle}</p>
-                                    </div>
-                                    <div class="lesson-edit">
-                                        <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
-                                        <a href="#" onclick="<%--editLesson(${loop.index});--%>"><span class="ui-icon ui-icon-pencil"></span></a>
-                                        <a href="#" onclick="deleteLesson(${loop.index});"><span class="ui-icon ui-icon-trash"></span></a>
-                                        <form id="viewLesson${loop.index}">
-                                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
-                                            <%--needed for the go back button, to indicate where is the viewLesson action come from --%>
-                                            <input type="hidden" name="originalPlace" value="editCoursePage">
+                        <c:choose>
+                            <c:when test="${empty lessonList}">
+                                There are no lessons. <br><br>
+                            </c:when>
+                            <c:otherwise>
+                            <ul id="sortable" class="lesson-list">
+                                <c:forEach var="lesson" items="${lessonList}" varStatus="loop">
+                                    <%--loop.index is lesson order index--%>
+                                    <li class="ui-state-default" id="${loop.index}">
+                                        <div class="lesson-info">
+                                            <span class="ui-icon ui-icon-triangle-2-n-s"></span><p class="lesson-name">${lesson.lessonTitle}</p>
+                                        </div>
+                                        <div class="lesson-edit">
+                                            <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
+                                            <a href="#" onclick="<%--editLesson(${loop.index});--%>"><span class="ui-icon ui-icon-pencil"></span></a>
+                                            <a href="#" onclick="deleteLesson(${loop.index});"><span class="ui-icon ui-icon-trash"></span></a>
+                                            <form id="viewLesson${loop.index}">
+                                                <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                                                <%--needed for the go back button, to indicate where is the viewLesson action come from --%>
+                                                <input type="hidden" name="originalPlace" value="editCoursePage">
 
-                                            <input type="hidden" name="userEmail" value="${course.email}">
-                                            <input type="hidden" name="courseId" value="${course.id}">
-                                            <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
-                                            <input type="hidden" name="courseTitle" id="titleDeleteLesson" value="${course.title}">
-                                            <input type="hidden" name="instructor" id="instructorDeleteLesson" value="${course.instructor}">
-                                            <input type="hidden" name="description" id="descriptionDeleteLesson" value="${course.description}">
-                                            <input type="hidden" name="status" id="statusDeleteLesson" value="${course.status}">
-                                            <input type="hidden" name="accessCode" id="accessCodeDeleteLesson" value="${course.accessCode}">
-                                        </form>
-                                    </div>
-                                </li>
-                            </c:forEach>
-                        </ul>
+                                                <input type="hidden" name="userEmail" value="${course.email}">
+                                                <input type="hidden" name="courseId" value="${course.id}">
+                                                <input type="hidden" name="numEnrolled" value="${course.numEnrolled}">
+                                                <input type="hidden" name="courseTitle" id="titleDeleteLesson" value="${course.title}">
+                                                <input type="hidden" name="instructor" id="instructorDeleteLesson" value="${course.instructor}">
+                                                <input type="hidden" name="description" id="descriptionDeleteLesson" value="${course.description}">
+                                                <input type="hidden" name="status" id="statusDeleteLesson" value="${course.status}">
+                                                <input type="hidden" name="accessCode" id="accessCodeDeleteLesson" value="${course.accessCode}">
+                                            </form>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                            </c:otherwise>
+                        </c:choose>
                         <ul><li id="addLesson">
                             <div class="add-lesson">
                                 <a href="#" onclick="toEditLesson();" class="list-group-item list-group-item-action">(Click here to add a lesson)</a>
@@ -223,7 +228,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/bootstrap/js/bootstrap.js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
