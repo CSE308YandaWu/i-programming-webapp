@@ -27,12 +27,12 @@ function addVideoOptions(divName) {
         var newdiv = document.createElement('div');
         switch (strOption) {
             case '1'://generate video Link input field with video description input filed, and hidden form indicating the video type that will be used later in the controller
-                newdiv.innerHTML = " <input type='text' id='videoLink"+addVideoCounter+"' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                newdiv.innerHTML = " <input type='text' id='videoLink" + addVideoCounter + "' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
                     "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
                     "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
             case '2'://generate video file input field with video description input filed, and hidden form indicating the video type that will be used later in the controller
-                newdiv.innerHTML = "<input type='file' id='videoLink"+addVideoCounter+"'class='form-control' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
+                newdiv.innerHTML = "<input type='file' id='videoLink" + addVideoCounter + "'class='form-control' name='myFileVideo[]' accept='video/*' form='lessonInfo'>" +//no multiple selection allowed , user can only select one file each time//video file upload
                     "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
                     "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='2' form='lessonInfo'>";//video type, if video file is chosen, video type = 2
                 break;
@@ -61,7 +61,7 @@ function addImageButton(divName) {
         alert("You have reached the limit of adding " + addImageCounter + " image");
     } else {
         var newdiv = document.createElement('div');
-        newdiv.innerHTML = "<input type='file' multiple id='image"+addImageCounter+"' name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
+        newdiv.innerHTML = "<input type='file' id='image" + addImageCounter + "' name='myFileImage[]' accept='image/*' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//image file upload
             "<textarea class='form-control' rows='2' wrap='soft' id='imageDescription"+addImageCounter+"'name='imageDescriptions[]' placeholder='Add Image description here' form='lessonInfo'></textarea>";//assignment file upload
         document.getElementById(divName).appendChild(newdiv);
         addImageCounter++;
@@ -85,7 +85,7 @@ function addAssignmentButton(divName) {
         alert("You have reached the limit of adding " + addAssignmentCounter + " assignment");
     } else {
         var newdiv = document.createElement('div');
-        newdiv.innerHTML = "<input type='file' multiple id='assignment"+addAssignmentCounter+"'name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
+        newdiv.innerHTML = "<input type='file' id='assignment"+addAssignmentCounter+"'name='myFileAssignment[]' form='lessonInfo'>" +//multiple selection allowed , user can select more than one file each time//assignment file upload
             "<textarea class='form-control' rows='2' wrap='soft' id='assignmentDescription"+addAssignmentCounter+"' name='assignmentDescriptions[]' placeholder='Add Assignment description here' form='lessonInfo'></textarea>";//assignment description
         document.getElementById(divName).appendChild(newdiv);
         addAssignmentCounter++;

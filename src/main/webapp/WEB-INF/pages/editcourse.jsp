@@ -147,9 +147,10 @@
                                         </div>
                                         <div class="lesson-edit">
                                             <a href="#" onclick="viewLesson(${loop.index});"><span class="ui-icon ui-icon-document"></span></a>
-                                            <a href="#" onclick="<%--editLesson(${loop.index});--%>"><span class="ui-icon ui-icon-pencil"></span></a>
+                                            <a href="#" onclick="editLesson(${loop.index});"><span class="ui-icon ui-icon-pencil"></span></a>
                                             <a href="#" onclick="deleteLesson(${loop.index});"><span class="ui-icon ui-icon-trash"></span></a>
                                             <form id="viewLesson${loop.index}">
+                                                <%--lessonId is used to determine if the action is editing/adding lesson--%>
                                                 <input type="hidden" name="lessonId" value="${lesson.lessonId}">
                                                 <%--needed for the go back button, to indicate where is the viewLesson action come from --%>
                                                 <input type="hidden" name="originalPlace" value="editCoursePage">

@@ -163,6 +163,8 @@
                             <c:if test="${status == 'private'}">
                                 <input type="hidden" name="accessCode" value="${accessCode}">
                             </c:if>
+                            <%--lessonId is used to determine if the action is editing/adding lesson--%>
+                            <input type="hidden" name="lessonId" value="${lessonId}">
                         </form>
                     </div>
                     <div class="col-md-1"></div>
