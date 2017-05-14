@@ -362,8 +362,7 @@ public class LessonPageController {
 
                     String blob = assignmentBlobKey.getKeyString();
                     assignmentBlobKeysList.add(blob);
-                    //System.out.println("????????");
-                    assignmentFileNameList.add("Assignment");
+                    assignmentFileNameList.add("Assignment "+ (i + 1) );
                 }
             }
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
