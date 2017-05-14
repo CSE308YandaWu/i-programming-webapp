@@ -38,11 +38,14 @@ h2 {
     min-height: 100%;
     -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
     box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+    background-image: url("../media/blue-polygons.jpg"); /*Source: http://www.threepullpa.com/464170-navy-blue-polygon-background.html*/
+    padding: 0 5% 5%;
 }
 
 .site-wrapper-inner {
     display: table-cell;
     vertical-align: top;
+    background-color: #cecece;
 }
 
 .shadow {
