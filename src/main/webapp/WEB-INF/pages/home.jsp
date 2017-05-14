@@ -31,7 +31,7 @@
 
     <!-- Custom styles for this template -->
     <%--<link href="../../stylesheets/layout.css" rel="stylesheet">--%>
-    <%--<link href="../../stylesheets/navigation.css" rel="stylesheet">--%>
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
     <link href="../../stylesheets/home.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
