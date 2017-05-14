@@ -46,6 +46,7 @@ h2 {
     display: table-cell;
     vertical-align: top;
     background-color: #cecece;
+    border-radius: 20px;
 }
 
 .shadow {
