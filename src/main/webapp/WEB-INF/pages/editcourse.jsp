@@ -239,10 +239,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="../javascripts/jquery-sortable.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../jQuery/jquery-sortable.js"></script>
+    <script src="../../jQueryScripts/jquery-1.12.4.js"></script>
+    <script src="../../jQueryScripts/jquery-ui.js"></script>
     <script src="../../javascripts/sortableList.js"></script>
 </body>
 </html>
