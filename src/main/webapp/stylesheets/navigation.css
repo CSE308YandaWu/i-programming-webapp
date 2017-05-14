@@ -3,6 +3,18 @@ Created by Shanshan Chen
 File for navigation bars and footers
  */
 
+.navbar-brand {
+    /*padding: 25px 15px;*/
+    font-size: 2em;
+}
+
+#welcome-user {
+    color: #9d9d9d;
+    margin-top: 15px;
+    margin-right: 25px;
+}
+
+
 /*
  * Header
  */
