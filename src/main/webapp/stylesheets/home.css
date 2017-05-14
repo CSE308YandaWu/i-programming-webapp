@@ -1,0 +1,122 @@
+/*
+    File created by Shanshan Chen
+    CSS file for home.jsp
+
+    Source for scrolling:
+ * Start Bootstrap - Scrolling Nav (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+
+    Source for shadowing:
+    https://css-tricks.com/snippets/css/css-box-shadow/
+ */
+
+body {
+    width: 100%;
+    height: 100%;
+    color: #000;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+
+h1 {
+    padding-bottom: 0.5em;
+}
+
+.name {
+    font-size: 5em;
+    font-family: monospace;
+}
+
+/* Sections - the scroller will work with any sort of height, fixed, undefined, or percentage based.
+The padding is very important (> 150px) to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children
+of those sections to manage the look and feel of the site. */
+
+.section {
+    padding-left: inherit;
+    padding-right: inherit;
+    line-height: 1.5;
+    font-size: large;
+}
+
+.intro-section {
+    height: 100%;
+    padding-top: 20%;
+    text-align: center;
+    background: transparent;
+    color: #fff;
+}
+
+.about-section {
+    height: 75%;
+    padding-top: 15%;
+    text-align: center;
+    background: #3b0d6d;
+    color: #e2dbe2;
+}
+
+.contact-section {
+    height: 65%;
+    padding-top: 7.5%;
+    text-align: center;
+    background-image: url("../media/dark-blue-fade.jpg");
+    /*background: #001a9a;*/
+    color: #bce8f1;
+
+}
+
+.shadow {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+}
+
+.intro-shadow {
+    -moz-box-shadow:    inset 0 90px 10px #000000;
+    -webkit-box-shadow: inset 0 90px 10px #000000;
+    box-shadow:         inset 0 90px 10px #000000;
+}
+
+/* css for background matrix video */
+
+#video-background {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+#video-background.collapsing {
+  display:none;
+}
+
+/* button to go back to top */
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display:none;
+    background-color: #214d73;
+    border-color: #122a40;
+}

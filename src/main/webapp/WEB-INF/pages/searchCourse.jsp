@@ -24,12 +24,14 @@
     <title>Course Search</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/mainPage.css">
     <!-- Bootstrap core CSS -->
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
+    <link href="../../stylesheets/layout.css" rel="stylesheet">
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
+    <link href="../../stylesheets/searchCourse.css" rel="stylesheet">
 </head>
 <body>
     <div class="site-wrapper">
@@ -55,10 +57,10 @@
                         </nav>
                     </div>
                 </div>
-                <div class="inner editcourse">
+                <div class="inner">
                     <%--Remove this line, or no?--%>
                     <%--<h2>Course Search</h2>--%>
-                    <div class="container1">
+                    <div class="searchContainer">
                         <form action="#" type="hidden" id="searchClass">
                             <div class="row">
                                 <div class="col-md-1" ><h4>Search:</h4></div>

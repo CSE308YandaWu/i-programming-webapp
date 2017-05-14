@@ -1,0 +1,62 @@
+/* CSS page for the main page */
+
+.createdlist,
+.enrolledlist {
+    text-align: left;
+    color: gray;
+    width: 50%;
+}
+
+.toplist {
+    text-align: left;
+    color: gray;
+    width: 40%;
+    float: right;
+}
+
+.panel-heading > a {
+    color: #000;
+}
+
+.resultlist {
+    text-align: left;
+    color: gray;
+    width: 40%;
+    margin: auto;
+}
+
+.panel1 {
+    margin-bottom: 3px;
+}
+
+.deletebutton,
+.dropbutton {
+    float: right;
+}
+
+.enrolledlink {
+    padding-bottom: 20px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.panelbody{
+    color: black;
+}
+
+.errorMsg {
+    display: none;
+    color: red;
+}
+
+.coursefunctions {
+    float: left;
+    margin-left: 20%;
+}
+
+
+/*.list-group >a{*/
+    /*font-size: 25px;*/
+    /*display: block;*/
+
+/*}*/

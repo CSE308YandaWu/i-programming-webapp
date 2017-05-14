@@ -32,8 +32,9 @@
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
-    <link href="../../stylesheets/main.css" rel="stylesheet">
+    <link href="../../stylesheets/layout.css" rel="stylesheet">
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
+    <link href="../../stylesheets/createCourse.css" rel="stylesheet">
 
     <!-- Latest compiled JavaScript -->
     <script src="../../bootstrap/js/bootstrap.min.js"></script>

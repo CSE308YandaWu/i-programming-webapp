@@ -27,8 +27,9 @@
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../stylesheets/sortlist.css">
+    <link href="../../stylesheets/layout.css" rel="stylesheet">
+    <link href="../../stylesheets/navigation.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../stylesheets/editCourse.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -239,10 +240,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="../javascripts/jquery-sortable.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../jQuery/jquery-sortable.js"></script>
+    <script src="../../jQueryScripts/jquery-1.12.4.js"></script>
+    <script src="../../jQueryScripts/jquery-ui.js"></script>
     <script src="../../javascripts/sortableList.js"></script>
 </body>
 </html>

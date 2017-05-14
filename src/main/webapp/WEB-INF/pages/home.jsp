@@ -1,9 +1,10 @@
 <%--
   Created by IntelliJ IDEA.
-  User: YandaWu
+  User: Shanshan Chen
   Date: 4/5/2017
   Time: 12:50 PM
-  To change this template use File | Settings | File Templates.
+  The home page of this application.
+  TODO: figure out collapsing navbar bug, and determine if other sections needed
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -29,7 +30,9 @@
     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../../bootstrap/css/cover.css" rel="stylesheet">
+    <%--<link href="../../stylesheets/layout.css" rel="stylesheet">--%>
+    <%--<link href="../../stylesheets/navigation.css" rel="stylesheet">--%>
+    <link href="../../stylesheets/home.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,52 +41,117 @@
     <![endif]-->
 </head>
 
-<body>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<div class="site-wrapper">
-    <div class="site-wrapper-inner">
-        <div class="cover-container">
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand">I-Programming</h3>
-                    <nav>
-                        <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Help</a></li>
-                            <%--<li><a href="#">Sign in</a></li>--%>
-                        </ul>
-                    </nav>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <%--<span class="sr-only">Toggle navigation</span>--%>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">I-Programming</a>
             </div>
-            <div class="inner cover">
-                <h1 class="cover-heading">Welcome to I-Programming!</h1>
-                <p class="lead">I-Programing is an online web application that allows you to create, share, and access
-                    courses on a variety of subjects.  Each of the courses is made by anyone anywhere in the world who
-                    wishes to share their knowledge with the rest of the world.  By providing this platform, we hope to
-                    cultivate a worldwide community of intellectuals.  Sign up or login below to join us.</p>
-                <%--<p class="lead">--%>
-                <%--google SignIn Button--%>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove the "back-to-top" option -->
+                    <li class="hidden active">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <%--<ul class="nav navbar-nav navbar-right">--%>
+                    <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
+                    <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
+                <%--</ul>--%>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section intro-shadow">
+        <div class="section container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Welcome to</h2>
+                    <h1 class="name">I-Programming</h1>
+                    <h4>Start learning with us today:</h4>
+                    <%--google SignIn Button--%>
                     <div id="my-signin2" class="btn" data-onsuccess="onSignIn"></div>
                     <form id="formToMain"><input type="hidden" id="userEmail" name="userEmail"></form>
-                <%--</p>--%>
-            </div>
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Developed by Dark Blue Team.</p>
+                    <p></p><p>-or-</p>
+                    <a class="btn btn-default page-scroll" href="#about">Learn More</a>
                 </div>
             </div>
-
+            <video autoplay loop muted poster="../../media/matrix-frame.jpg" id="video-background">
+                <source src="../../media/matrix.mp4" type="video/mp4">Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- About Section -->
+    <section id="about" class="about-section shadow">
+        <div class="section container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About I-Programming</h1>
+                    <p>
+                        I-Programing is an online web application that allows you to create, share,
+                        and access courses on a variety of subjects. Each of the courses can be made
+                        by anyone anywhere in the world who wishes to share their knowledge with the
+                        rest of the world. By providing this platform, we hope to cultivate a
+                        worldwide community of intellectuals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section shadow">
+        <div class="section container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Contact Us</h1>
+                    <p>We are the Dark Blue Development Team.</p>
+                    <p>Contact us at darkblue.cse.308@gmail.com for more information.</p>
+                    <br>
+                    <img src="../../media/logo-cropped.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Button to go back to top -->
+    <a id="back-to-top" href="#page-top" class="btn btn-primary btn-lg back-to-top page-scroll" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../jQueryScripts/jQueryEasing.min.js"></script>
+    <script src="../../javascripts/scrollingNavbar.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
