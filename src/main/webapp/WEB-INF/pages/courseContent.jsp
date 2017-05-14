@@ -120,6 +120,7 @@
                                             <c:otherwise>
                                                 <video width="800" height="500" controls>
                                                     <source src="http://localhost:8080/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">
+                                                    <%--<source src="http://i-programming.appspot.com/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">--%>
                                                 </video>
                                                 <p class="text">
                                                     <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>

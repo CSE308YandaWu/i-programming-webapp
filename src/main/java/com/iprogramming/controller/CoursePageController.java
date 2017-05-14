@@ -103,7 +103,7 @@ public class CoursePageController {
 
         }else{
             if( (!c.getLessonOrder().equalsIgnoreCase("[object Object]")) && (c.getLessonOrder() != null)){
-                System.out.println("????"+ c.getLessonOrder());
+                //System.out.println("????"+ c.getLessonOrder());
                 List<Lesson> updatedLessonList = new ArrayList<Lesson>();
 //            System.out.println("Hello " + c.getLessonOrder());
                 List<String> lessonOrderList = new ArrayList<String>(Arrays.asList(c.getLessonOrder().split(",")));

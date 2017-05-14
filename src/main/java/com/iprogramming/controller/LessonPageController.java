@@ -51,7 +51,7 @@ public class LessonPageController {
     public void init(){
         blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* this is the REAL edit Lesson function */
     @RequestMapping("/editLessonReal")
     public ModelAndView editLessonReal(@RequestParam(value = "lessonId") String lessonId,
                                      @RequestParam(value = "userEmail") String userEmail,
@@ -62,15 +62,6 @@ public class LessonPageController {
                                      @RequestParam(value = "description") String description,
                                      @RequestParam(value = "status") String status,
                                      @RequestParam(value = "accessCode", required = false) String accessCode) {
-        System.out.println("edit LESSON REAL lessonId: " + lessonId);
-        System.out.println("edit LESSON REAL userEmail: " + userEmail);
-        System.out.println("edit LESSON REAL courseId: " + courseId);
-        System.out.println("edit LESSON REAL numEnrolled: " + numEnrolled);
-        System.out.println("edit LESSON REAL courseTitle: " + courseTitle);
-        System.out.println("edit LESSON REAL instructor: " + instructor);
-        System.out.println("edit LESSON REAL description: " + description);
-        System.out.println("edit LESSON REAL status: " + status);
-        System.out.println("edit LESSON REAL accessCode: " + accessCode);
 
         ModelAndView mav = new ModelAndView();
         /* create uploadUrl for upload form */
@@ -98,7 +89,7 @@ public class LessonPageController {
 
     /* Blobstore, upload/serve slides/video/image/pdf controllers */
     /* When confirm button is clicked in editLesson Page */
-//    @SuppressWarnings("Duplicates")
+    @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/editLessonRealConfirm")
     public ModelAndView editLessonRealConfirm(@RequestParam(value = "lessonTitle", required = false) String lessonTitle,
                                           @RequestParam(value = "lessonBody", required = false) String lessonBody,
@@ -120,7 +111,7 @@ public class LessonPageController {
                                           @RequestParam(value = "status") String status,
                                           @RequestParam(value = "accessCode", required = false) String accessCode) throws IOException {
 
-        System.out.println("edit LESSON REAL CONFIRM lessonId: " + lessonId);
+//        System.out.println("edit LESSON REAL CONFIRM lessonId: " + lessonId);
 
         /* not saving it until user click save in editCourse page */
         String lessonOrder = null;
@@ -142,7 +133,6 @@ public class LessonPageController {
                 } else {
                     String blob = videoBlobKey.getKeyString();
                     videoBlobKeysList.add(blob);
-//                    System.out.println("editLessonRealConfirm VIDEO KEY: " + blob);
                 }
             }
         }
@@ -195,15 +185,14 @@ public class LessonPageController {
                 if (assignmentBlobKey == null) {
                     System.out.println("uploadAssignment error");
                 } else {
-                    BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-                    BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
+                    //BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+                    //BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
 
                     String blob = assignmentBlobKey.getKeyString();
                     assignmentBlobKeysList.add(blob);
-                    assignmentFileNameList.add(blobInfo.getFilename());
+                    assignmentFileNameList.add("Assignment "+ (i + 1) );
                 }
             }
-            //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
 
         /* load the to-be-edited lesson from datastore to get the VideoBlobKeysList and AssignmentBlobKeysList */
@@ -214,31 +203,20 @@ public class LessonPageController {
         lesson.setPptLink(pptLink);
         lesson.setPptDescription(pptDescription);
         lesson.setVideoLinks(videoLinks);
-        //System.out.println("??????????????"+ lesson.getVideoBlobKeysList());
         lesson.setVideoBlobKeysList(videoBlobKeysList);
-        //System.out.println("And ?????????????????????????"+ lesson.getVideoBlobKeysList());
         lesson.setVideoDescriptions(videoDescriptions);
         lesson.setVideoTypes(videoTypes);
         lesson.setImageServingUrlList(imageServingUrlList);
-        System.out.println("And ?????????????????????????"+ lesson.getImageServingUrlList());
         lesson.setImageBlobKeysList(imageBlobKeysList);
         lesson.setImageDescriptions(imageDescriptions);
         lesson.setAssignmentBlobKeysList(assignmentBlobKeysList);
         lesson.setAssignmentFileNameList(assignmentFileNameList);
         lesson.setAssignmentDescriptions(assignmentDescriptions);
-        System.out.println("editLessonRealConfirm lesson edited");
-//        /* now delete the lesson from datastore */
-//        ofy().delete().type(Lesson.class).id(lessonId).now();
-//        Lesson lesson = new Lesson(courseId, lessonId, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions, videoTypes,
-//                imageServingUrlList, imageBlobKeysList, imageDescriptions, assignmentBlobKeysList,assignmentFileNameList, assignmentDescriptions);
+//        System.out.println("editLessonRealConfirm lesson edited");
+
         /* save the lesson back into datastore  */
-        System.out.println(lesson.getLessonId()+"===========");
+
         ofy().save().entity(lesson).now();
-        Lesson lesson1 = ofy().load().type(Lesson.class).id(lessonId).now();
-        //System.out.println("now where >>>>>>??????????????????????"+ lesson1.getLessonId());
-        //System.out.println("now where >>>>>>??????????????????????"+ lesson1.getLessonTitle());
-        System.out.println("now where >>>>>>??????????????????????"+ lesson1.getVideoBlobKeysList());
-        System.out.println("now where >>>>>>???!!!!!!!!!!!!!!!!?????????"+ lesson1.getImageServingUrlList());
 
         /* get lesson list from the datastore */
         List<Lesson> lessonList = ofy().load().type(Lesson.class).filter("courseId", courseId).order("dateCreated").list();
@@ -251,7 +229,7 @@ public class LessonPageController {
         mav.setViewName("editCourse");
         return mav;
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   /* this is the ADD lesson function */
     @RequestMapping("/editLesson")
     public ModelAndView editLesson(@RequestParam(value = "userEmail") String userEmail,
                                    @RequestParam(value = "courseId") String courseId,
@@ -284,6 +262,7 @@ public class LessonPageController {
 
     /* Blobstore, upload/serve slides/video/image/pdf controllers */
     /* When confirm button is clicked in editLesson Page */
+    @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/editLessonConfirm")
     public ModelAndView editLessonConfirm(@RequestParam(value = "lessonTitle", required = false) String lessonTitle,
                                           @RequestParam(value = "lessonBody", required = false) String lessonBody,
@@ -378,12 +357,12 @@ public class LessonPageController {
                 if (assignmentBlobKey == null) {
                     System.out.println("uploadAssignment error");
                 } else {
-                    BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-                    BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
+                    //BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+                    //BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
 
                     String blob = assignmentBlobKey.getKeyString();
                     assignmentBlobKeysList.add(blob);
-                    assignmentFileNameList.add(blobInfo.getFilename());
+                    assignmentFileNameList.add("Assignment "+ (i + 1) );
                 }
             }
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
@@ -412,10 +391,10 @@ public class LessonPageController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
 
         BlobKey bk = new BlobKey(key);
-        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
-        res.setContentType(blobInfo.getContentType());
-        res.setHeader("Content-Disposition","inline; filename=" + blobInfo.getFilename());
+//        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+//        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
+//        res.setContentType(blobInfo.getContentType());
+//        res.setHeader("Content-Disposition","inline; filename=" + blobInfo.getFilename());
         blobstoreService.serve(bk, res);
     }
 }
