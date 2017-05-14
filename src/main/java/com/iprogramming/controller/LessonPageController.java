@@ -361,7 +361,7 @@ public class LessonPageController {
                     BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
 
                     String blob = assignmentBlobKey.getKeyString();
-                    if(blob != null){
+                    if((blob != null) && (blobInfo != null)){
                         assignmentBlobKeysList.add(blob);
                         assignmentFileNameList.add(blobInfo.getFilename());
                     }
