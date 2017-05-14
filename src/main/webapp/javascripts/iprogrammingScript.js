@@ -149,11 +149,15 @@ function showAccessCode(){
 /**
  * ---------------------------------------View lesson buttons(view lesson in editCourse Page)---------------------------------------
  */
-function viewLesson(lessonIndex) {//assignment index
+function viewLesson(lessonIndex) {//lesson index stands for which lesson is clicked
     document.getElementById("viewLesson"+lessonIndex).action = "/courseContent";
     document.getElementById("viewLesson"+lessonIndex).submit();
 }
-function deleteLesson(lessonIndex) {//assignment index
+function editLesson(lessonIndex) {//lesson index stands for which lesson is clicked
+    document.getElementById("viewLesson"+lessonIndex).action = "/editLessonReal";
+    document.getElementById("viewLesson"+lessonIndex).submit();
+}
+function deleteLesson(lessonIndex) {//lesson index stands for which lesson is clicked
     document.getElementById("viewLesson"+lessonIndex).action = "/deleteLesson";
     document.getElementById("viewLesson"+lessonIndex).submit();
 }
