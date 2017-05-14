@@ -4,7 +4,7 @@
   Date: 4/5/2017
   Time: 12:50 PM
   The home page of this application.
-  TODO: figure out collapsing navbar bug, and determine if other sections needed
+  TODO: determine if other sections needed
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -44,8 +44,8 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container-fluid">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <%--<span class="sr-only">Toggle navigation</span>--%>
@@ -70,10 +70,6 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <%--<ul class="nav navbar-nav navbar-right">--%>
-                    <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
-                    <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
-                <%--</ul>--%>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -145,10 +141,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../jQuery/jquery-3.2.1.js"></script>
+    <script src="../../jQuery/jquery-ui.js"></script>
     <script src="../../jQueryScripts/jQueryEasing.min.js"></script>
     <script src="../../javascripts/scrollingNavbar.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

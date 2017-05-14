@@ -44,20 +44,26 @@
     <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
                 <form id="backToHome"><input type="hidden"></form>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li id="welcome-user">
-                    Welcome, <span id="my-signin2" style="display: none;"></span>
-                    <p id="userEmail" style="display:inline"></p>
-                </li>
-                <li>
-                    <button class="btn navbar-btn" onclick="signOut()">Sign Out
-                        <form id="signOutToHome"><input type="hidden"></form></button>
-                </li>
-            </ul>
-
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="welcome-user">
+                        Welcome, <span id="my-signin2" style="display: none;"></span>
+                        <p id="userEmail" style="display:inline"></p>
+                    </li>
+                    <li>
+                        <button class="btn navbar-btn" onclick="signOut()">Sign Out
+                            <form id="signOutToHome"><input type="hidden"></form></button>
+                    </li>
+                </ul>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

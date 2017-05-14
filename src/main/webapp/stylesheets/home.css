@@ -88,9 +88,9 @@ of those sections to manage the look and feel of the site. */
 }
 
 .intro-shadow {
-    -moz-box-shadow:    inset 0 90px 10px #000000;
-    -webkit-box-shadow: inset 0 90px 10px #000000;
-    box-shadow:         inset 0 90px 10px #000000;
+    -moz-box-shadow:    inset 0 60px 10px #000000;
+    -webkit-box-shadow: inset 0 60px 10px #000000;
+    box-shadow:         inset 0 60px 10px #000000;
 }
 
 /* css for background matrix video */
@@ -119,4 +119,8 @@ of those sections to manage the look and feel of the site. */
     display:none;
     background-color: #214d73;
     border-color: #122a40;
+}
+
+.container-fluid {
+    padding-left: auto;
 }
