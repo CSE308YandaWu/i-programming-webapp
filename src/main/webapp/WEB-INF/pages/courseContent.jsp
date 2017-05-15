@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+<%--this is needed for the signin-out function so every page should have this --%>
 <meta name="google-signin-client_id" content="340280548361-mli8u43jgqf6ijkkkffk6ilmke2hkphl.apps.googleusercontent.com">
 
 <head>
@@ -182,7 +182,7 @@
                             <%--<br>--%>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.assignmentBlobKeysList}" varStatus="loop">
-                                    <a href="#" onclick="serveAssignment(${loop.index});"><p style="color:deepskyblue;">${lesson.assignmentFileNameList[loop.index]}</p></a>
+                                    <a href="#" onclick="serveAssignment(${loop.index}); return false;"><p style="color:deepskyblue;">${lesson.assignmentFileNameList[loop.index]}</p></a>
                                     <form id="serveAssignment${loop.index}" target="_blank"><input type="hidden" name="key" value="${listValue}"></form>
                                     <p class="text">
                                         <p class="item-descp">${lesson.assignmentDescriptions[loop.index]}</p>
