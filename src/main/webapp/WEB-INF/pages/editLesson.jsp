@@ -113,15 +113,15 @@
                                 <%--<textarea id="videoDescription" class="form-control" rows="3" wrap="soft" name="videoDescriptions[]" placeholder="Add video description here" form="lessonInfo"></textarea>--%>
                             </div>
                             <%--video Upload Option dropdown box--%>
-                            <select id="videoUploadOption" class="btn btn-lg btn-primary btn-block" onchange="enableOptionButton()">
+                            <select id="videoUploadOption" class="btn btn-primary btn-block" onchange="enableOptionButton()">
                                 <option value="" disabled="disabled" selected="selected">Select an upload option to add a video</option>
                                 <option value="1">Paste Link</option>
                                 <option value="2">Upload File</option>
                             </select>
                             <%--add more video button--%>
-                            <div id="optionButtonVideo" class="btn btn-lg btn-primary btn-block">
-                                <input id="addOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
-                                <input id="deleteOptionButtonVideo" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Video" disabled="disabled" onClick="deleteVideoOptions();">
+                            <div id="optionButtonVideo">
+                                <input id="addOptionButtonVideo" class="add-delete-btn btn btn-primary" type="button" value="Add Video" disabled="disabled" onClick="addVideoOptions('dynamicInputVideo');">
+                                <input id="deleteOptionButtonVideo" class="add-delete-btn btn btn-primary" type="button" value="Delete Video" disabled="disabled" onClick="deleteVideoOptions();">
                             </div>
                         </div>
                     </div>
@@ -134,9 +134,9 @@
                                 <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
                             </div>
                             <%--add more image button--%>
-                            <div id="optionButtonImage" class="btn btn-lg btn-primary btn-block">
-                                <input id="addOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925"  type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
-                                <input id="deleteOptionButtonImage" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Image" disabled="disabled" onClick="deleteImageButton();">
+                            <div id="optionButtonImage">
+                                <input id="addOptionButtonImage" class="add-delete-btn btn btn-primary" type="button" value="Add Image" onClick="addImageButton('dynamicInputImage');">
+                                <input id="deleteOptionButtonImage" class="add-delete-btn btn btn-primary" type="button" value="Delete Image" disabled="disabled" onClick="deleteImageButton();">
                             </div>
                         </div>
                     </div>
@@ -151,38 +151,42 @@
                                 <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
                             </div>
                             <%--add more assignment button--%>
-                            <div id="optionButtonAssignment" class="btn btn-lg btn-primary btn-block">
-                                <input id="addOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925;"   type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
-                                <input id="deleteOptionButtonAssignment" style="background-color: #0f0f0f; border-color: #ac2925" type="button" value="Delete Assignment" disabled="disabled" onClick="deleteAssignmentButton();">
+                            <div id="optionButtonAssignment">
+                                <input id="addOptionButtonAssignment" class="add-delete-btn btn btn-primary"  type="button" value="Add Assignment" onClick="addAssignmentButton('dynamicInputAssignment');">
+                                <input id="deleteOptionButtonAssignment" class="add-delete-btn btn btn-primary" type="button" value="Delete Assignment" disabled="disabled" onClick="deleteAssignmentButton();">
                             </div>
                         </div>
                     </div>
-                    <div class="help-block"></div>
-                    <div class="row">
-                        <div class="col-md-5"></div>
-                        <div class="col-md-2">
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
-                            <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="userEmail" value="${userEmail}">
-                                <input type="hidden" name="courseId" value="${courseId}">
-                                <input type="hidden" name="numEnrolled" value="${numEnrolled}">
-                                <input type="hidden" name="courseTitle" value="${courseTitle}">
-                                <input type="hidden" name="instructor" value="${instructor}">
-                                <input type="hidden" name="description" value="${description}">
-                                <input type="hidden" name="status" value="${status}">
-                                <c:if test="${status == 'private'}">
-                                    <input type="hidden" name="accessCode" value="${accessCode}">
-                                </c:if>
-                                <%--lessonId is used to determine if the action is editing/adding lesson--%>
-                                <input type="hidden" name="lessonId" value="${lessonId}">
-                            </form>
-                        </div>
-                        <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <%--<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>--%>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
-                            <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
+                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="userEmail" value="${userEmail}">
+                            <input type="hidden" name="courseId" value="${courseId}">
+                            <input type="hidden" name="numEnrolled" value="${numEnrolled}">
+                            <input type="hidden" name="courseTitle" value="${courseTitle}">
+                            <input type="hidden" name="instructor" value="${instructor}">
+                            <input type="hidden" name="description" value="${description}">
+                            <input type="hidden" name="status" value="${status}">
+                            <c:if test="${status == 'private'}">
+                                <input type="hidden" name="accessCode" value="${accessCode}">
+                            </c:if>
+                            <%--lessonId is used to determine if the action is editing/adding lesson--%>
+                            <input type="hidden" name="lessonId" value="${lessonId}">
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <%--<button class="btn btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>--%>
+                        <button class="btn btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
+                        <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
+                    </div>
+                </div>
+                <div>
+                    <div class="inner">
+                        <p>Developed by Dark Blue Team.</p>
                     </div>
                 </div>
             </div>
