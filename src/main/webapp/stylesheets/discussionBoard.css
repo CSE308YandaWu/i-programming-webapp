@@ -1,0 +1,353 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+    color: #23527c;
+}
+
+ul{
+    list-style: none none;
+}
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+body {
+    color: #fff;
+    text-align: center;
+    overflow: auto;
+}
+
+h2 {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+hr {
+    display: block;
+    margin: 0.5em auto;
+    border: 1px inset;
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+    width: 100%;
+    height: 100%; /* For at least Firefox */
+    min-height: 100%;
+    background-color: #9fa8a3;
+    overflow:auto;
+}
+.post-comment, .comment-list{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    text-align: left;
+}
+textarea {
+    width: 90%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+#sortSelect{
+    padding:5px;
+    margin-bottom: 0px;
+    margin-top: 0;
+    border-radius:4px;
+    background: #f8f8f8;
+    color:#888;
+    cursor:pointer;
+    float: right;
+    width: 200px;
+}
+input[type=text]{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+.post-btn, .back-btn{
+    background-color: dimgrey;
+    width: 80px;
+}
+.post-btn:hover,
+.back-btn:hover{
+    background-color: #434343;
+}
+.back-btn{
+    float: right;
+    margin-top: 20px;
+    margin-right: 5%;
+}
+li > .post-btn{
+    margin-left: 80%;
+}
+.reply{
+    margin-left: 5%;
+    margin-top: 10px;
+    width: 80%;
+}
+.reply-box{
+    width: 85%;
+}
+.date{
+    font-size: 13px;
+    color: #9d9d9d;
+}
+.comment-item{
+    padding: 5px 10px;
+    border: 1px solid gainsboro;
+    border-radius: 8px;
+}
+.reply-item{
+    margin-left: 5%;
+    padding: 5px 10px;
+    border: 0.5px solid gainsboro;
+    border-radius: 8px;
+}
+.site-wrapper-inner {
+    background-color: whitesmoke;
+    /*display: table-cell;*/
+    width: 60%;
+    min-height: 100%;
+    margin: 77px auto 35px;
+    color: #3b3a36;
+    padding-bottom: 5%;
+    /*vertical-align: top;*/
+}
+
+.text-heading {
+    padding-left: 40px;
+    padding-top: 1px;
+    text-align: left;
+}
+
+.text-heading > h2 {
+    font-weight: 700;
+}
+
+/* Padding for spacing */
+.inner {
+    padding-top: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.masthead-brand > a{
+    color: rgba(255, 255, 255, .75);
+}
+.masthead-nav > li {
+    display: inline-block;
+}
+
+.masthead-nav > li + li {
+    margin-left: 20px;
+}
+
+.masthead-nav > li > a {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff; /* IE8 proofing */
+    color: rgba(255, 255, 255, .75);
+    border-bottom: 2px solid transparent;
+}
+
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+    background-color: transparent;
+    border-bottom-color: #a9a9a9;
+    border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.masthead-nav > .active > a,
+.masthead-nav > .active > a:hover,
+.masthead-nav > .active > a:focus {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .masthead-brand {
+        float: left;
+    }
+
+    .masthead-nav {
+        float: right;
+    }
+}
+
+/*
+ * Cover
+ */
+
+.cover {
+    padding: 0 20px;
+}
+
+.cover .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+
+.mastfoot {
+    color: #999; /* IE8 proofing */
+    color: rgba(255, 255, 255, .5);
+}
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+    /* Pull out the header and footer */
+    .masthead {
+        position: fixed;
+        top: 0;
+    }
+
+    .mastfoot {
+        position: fixed;
+        bottom: 0;
+    }
+
+    /* Start the vertical centering */
+    .site-wrapper-inner {
+        vertical-align: middle;
+    }
+
+    /* Handle the widths */
+    .masthead,
+    .mastfoot,
+    .cover-container {
+        background-color: #3b3a36;
+        width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    }
+}
+
+/*@media (min-width: 992px) {*/
+    /*.masthead,*/
+    /*.mastfoot,*/
+    /*.cover-container {*/
+        /*width: 100%;*/
+    /*}*/
+/*}*/
+
+.createdlist,
+.enrolledlist {
+    text-align: left;
+    color: gray;
+    width: 50%;
+}
+
+.toplist {
+    text-align: left;
+    color: gray;
+    width: 40%;
+    float: right;
+}
+
+.resultlist {
+    text-align: left;
+    color: gray;
+    width: 40%;
+    margin: auto;
+}
+
+.panel-heading > a {
+    color: gray;
+}
+
+.panel1 {
+    margin-bottom: 3px;
+}
+
+.coursefunctions {
+    float: left;
+    margin-left: 20%;
+}
+
+.add-btns-group {
+    float: right;
+    margin-right: 5px;
+}
+
+.add-btns-group > form {
+    display: inline;
+}
+.outlinelist {
+    text-align: left;
+}
+
+.text {
+    text-align: left;
+}
+
+.table1 {
+    width: 70%;
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.table1 * td{
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.deletebutton,
+.dropbutton {
+    float: right;
+}
+
+.enrolledlink {
+    padding-bottom: 20px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.panelbody{
+    color: black;
+}
+
+.errorMsg {
+    display: none;
+    color: red;
+}
+
+.lessonHeading {
+    font-weight: bold;
+}
+
+.item-descp {
+    font-size: 16pt;
+}

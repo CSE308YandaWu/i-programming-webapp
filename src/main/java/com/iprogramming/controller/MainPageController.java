@@ -1,5 +1,6 @@
 package com.iprogramming.controller;
 
+import Beans.Comment;
 import Beans.Course;
 import Beans.Lesson;
 import Beans.User;
@@ -99,9 +100,23 @@ public class MainPageController {
             deleteLesson(l.getLessonId(),null,null, 0,null,null,null,null,null);
         }
 
+        //Delete the comments in the discussion board of this course
+        List<Comment> comments = ofy().load().type(Comment.class).filter("courseId", courseId).list();
+        for (Comment c: comments)
+            deleteComment(c.getId());
+
         //Delete the course Entity
         ofy().delete().type(Course.class).id(courseId).now();
         return main(session, request);
+    }
+
+    public void deleteComment(String commentId){
+        //delete comment
+        ofy().delete().type(Comment.class).id(commentId).now();
+        //delete replies
+        List<Comment> replies = ofy().load().type(Comment.class).filter("courseId", commentId).list();
+        ofy().delete().entities(replies);
+        return;
     }
 
     @RequestMapping("/deleteLesson")

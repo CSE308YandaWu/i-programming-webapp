@@ -1,11 +1,13 @@
 package Beans;
 
+import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Parent;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by JIAQI ZHANG on 5/2/2017.
@@ -13,39 +15,49 @@ import java.util.Date;
 @Entity
 public class Comment {
     @Id
-    private long id;
-    @Parent
-    private Lesson lesson;
+    private String id;
+    @Index
+    private String courseId;
     private String author;
-    private String message;
+    private String comment;
     @Index
     private int likes;
     @Index
     private Date dateCreated;
+    private List<String> repliesId;
 
     //Constructors
     public Comment(){
+        id = new ObjectifyFactory().allocateId(Comment.class).getString();
         dateCreated = new Date();
         likes = 0;
+        repliesId = new ArrayList<>();
+    }
+
+    public Comment(String courseId, String author, String comment){
+        this();
+        this.courseId = courseId;
+        this.author = author;
+        this.comment = comment;
     }
 
 
 
     //Getters and Setters
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Lesson getLesson() {
-        return lesson;
+    public String getLesson() {
+        return courseId;
     }
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
+    public void setLesson(String courseId) {
+        this.courseId = courseId;
     }
 
     public String getAuthor() {
@@ -56,12 +68,12 @@ public class Comment {
         this.author = author;
     }
 
-    public String getMessage() {
-        return message;
+    public String getComment() {
+        return comment;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getLikes() {

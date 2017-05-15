@@ -103,6 +103,10 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
+                    <form action="/discussionBoard">
+                        <input type="submit" class="btn btn-primary" value="Discussion Board">
+                        <input type="hidden" name="courseId" value="${course.id}">
+                    </form>
                     <form action="/main">
                         <input type="submit" class="btn btn-primary add-btns-group" value="Back">
                     </form>
