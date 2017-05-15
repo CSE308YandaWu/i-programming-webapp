@@ -34,32 +34,38 @@
     <link href="../../stylesheets/searchCourse.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" onclick="searchCourseToHome()">I-Programming</a>
+                <form id="backToHome"><input type="hidden"></form>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="welcome-user">
+                        Welcome, <span id="my-signin2"></span>
+                        <p id="userEmail"></p>
+                    </li>
+                    <li>
+                        <button class="btn navbar-btn" onclick="signOut()">Sign Out
+                            <form id="signOutToHome"><input type="hidden"></form></button>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                        <h3 class="masthead-brand">
-                            <a href="#" onclick="searchCourseToHome()">I-Programming</a>
-                            <form id="backToHome"><input type="hidden"></form>
-                        </h3>
-                        <nav>
-                            <ul class="nav masthead-nav">
-                                <li>
-                                    <div id="my-signin2" style="display: none;"></div>
-                                    <a id="userEmail"></a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="signOut();">Sign out</a>
-                                    <form id="signOutToHome"><input type="hidden"></form>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
                 <div class="inner">
-                    <%--Remove this line, or no?--%>
-                    <%--<h2>Course Search</h2>--%>
                     <div class="searchContainer">
                         <form action="#" type="hidden" id="searchClass">
                             <div class="row">
@@ -121,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mastfoot">
+                <div>
                     <div class="inner">
                         <p>Developed by Dark Blue Team.</p>
                     </div>

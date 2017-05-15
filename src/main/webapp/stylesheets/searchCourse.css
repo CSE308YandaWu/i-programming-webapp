@@ -57,6 +57,7 @@
     padding: 6px;
 }
 
-/* UNUSED
-
- */
+.site-wrapper-inner {
+    vertical-align: top;
+    padding-top: 7%;
+}

@@ -46,29 +46,38 @@
     <![endif]-->
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" onclick="createCourseToHome()">I-Programming</a>
+                <form id="backToHome"><input type="hidden"></form>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="welcome-user">
+                        Welcome, <span id="my-signin2"></span>
+                        <p id="userEmail"></p>
+                    </li>
+                    <li>
+                        <button class="btn navbar-btn" onclick="signOut()">Sign Out
+                            <form id="signOutToHome"><input type="hidden"></form></button>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                        <h3 class="masthead-brand">
-                            <a href="#" onclick="createCourseToHome()">I-Programming</a>
-                            <form id="backToHome"><input type="hidden"></form>
-                        </h3>
-                        <nav>
-                            <ul class="nav masthead-nav">
-                                <li>
-                                    <div id="my-signin2" style="display: none;"></div>
-                                    <a id="userEmail"></a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="signOut()">Sign out</a>
-                                    <form id="signOutToHome"><input type="hidden"></form>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
                 <div class="inner editLesson">
                     <h2>Create Course</h2>
                     <h5>*denotes a required field</h5>
@@ -144,6 +153,11 @@
                         <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
                     </div>
                 </div>--%>
+                <div>
+                    <div class="inner">
+                        <p>Developed by Dark Blue Team.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
