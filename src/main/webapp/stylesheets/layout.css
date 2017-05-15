@@ -117,3 +117,11 @@ h3.subheading {
     margin-top: 30px;
     margin-bottom: 20px;
 }
+
+#my-signin2 {
+    display: none;
+}
+
+#userEmail {
+    display:inline;
+}

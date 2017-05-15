@@ -55,8 +55,8 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li id="welcome-user">
-                        Welcome, <span id="my-signin2" style="display: none;"></span>
-                        <p id="userEmail" style="display:inline"></p>
+                        Welcome, <span id="my-signin2"></span>
+                        <p id="userEmail"></p>
                     </li>
                     <li>
                         <button class="btn navbar-btn" onclick="signOut()">Sign Out

@@ -53,7 +53,7 @@
                     <nav>
                         <ul class="nav masthead-nav">
                             <li>
-                                <div id="my-signin2" style="display: none;"></div>
+                                <div id="my-signin2"></div>
                                 <a id="userEmail"></a>
                             </li>
                             <li>
