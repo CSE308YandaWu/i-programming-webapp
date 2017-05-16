@@ -67,137 +67,99 @@ public class Lesson {
         this.assignmentFileNameList = assignmentFileNameList;
         this.assignmentDescriptions = assignmentDescriptions;
     }
-
+    
+    /* getter */
     public String getLessonId() {
         return lessonId;
     }
-
-    public void setLessonId(String lessonId) {
-        this.lessonId = lessonId;
-    }
-
     public String getCourseId() {
         return courseId;
     }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
     public String getLessonTitle() {
         return lessonTitle;
     }
-
-    public void setLessonTitle(String lessonTitle) {
-        this.lessonTitle = lessonTitle;
-    }
-
     public String getLessonBody() {
         return lessonBody;
     }
-
-    public void setLessonBody(String lessonBody) {
-        this.lessonBody = lessonBody;
-    }
-
     public String getPptLink() {
         return pptLink;
     }
-
-    public void setPptLink(String pptLink) {
-        this.pptLink = pptLink;
-    }
-
     public String getPptDescription() {
         return pptDescription;
     }
-
-    public void setPptDescription(String pptDescription) {
-        this.pptDescription = pptDescription;
-    }
-
     public List<String> getVideoLinks() {
         return videoLinks;
     }
-
-    public void setVideoLinks(List<String> videoLinks) {
-        this.videoLinks = videoLinks;
-    }
-
     public List<String> getVideoBlobKeysList() {
         return videoBlobKeysList;
     }
-
-    public void setVideoBlobKeysList(List<String> videoBlobKeysList) {
-        this.videoBlobKeysList = videoBlobKeysList;
-    }
-
     public List<String> getVideoDescriptions() {
         return videoDescriptions;
     }
-
-    public void setVideoDescriptions(List<String> videoDescriptions) {
-        this.videoDescriptions = videoDescriptions;
-    }
-
     public List<String> getVideoTypes() {
         return videoTypes;
     }
-
-    public void setVideoTypes(List<String> videoTypes) {
-        this.videoTypes = videoTypes;
-    }
-
     public List<String> getImageServingUrlList() {
         return imageServingUrlList;
-    }
-
-    public void setImageServingUrlList(List<String> imageServingUrlList) {
-        this.imageServingUrlList = imageServingUrlList;
     }
     public List<String> getImageBlobKeysList() {
         return imageBlobKeysList;
     }
-
-    public void setImageBlobKeysList(List<String> imageBlobKeysList) {
-        this.imageBlobKeysList = imageBlobKeysList;
-    }
-    public List<String> getImageDescriptions() {
-        return imageDescriptions;
-    }
-
-    public void setImageDescriptions(List<String> imageDescriptions) {
-        this.imageDescriptions = imageDescriptions;
-    }
-
+    public List<String> getImageDescriptions() {return imageDescriptions;}
     public List<String> getAssignmentBlobKeysList() {
         return assignmentBlobKeysList;
     }
-
-    public void setAssignmentBlobKeysList(List<String> assignmentBlobKeysList) {
-        this.assignmentBlobKeysList = assignmentBlobKeysList;
-    }
-
     public List<String> getAssignmentFileNameList() {
         return assignmentFileNameList;
     }
-
-    public void setAssignmentFileNameList(List<String> assignmentFileNameList) {
-        this.assignmentFileNameList = assignmentFileNameList;
-    }
-
     public List<String> getAssignmentDescriptions() {
         return assignmentDescriptions;
     }
-
-    public void setAssignmentDescriptions(List<String> assignmentDescriptions) {
-        this.assignmentDescriptions = assignmentDescriptions;
-    }
-
     public Date getDateCreated() {
         return dateCreated;
     }
 
+    /* setter */
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
+    }
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+    public void setLessonTitle(String lessonTitle) {
+        this.lessonTitle = lessonTitle;
+    }
+    public void setLessonBody(String lessonBody) {
+        this.lessonBody = lessonBody;
+    }
+    public void setPptLink(String pptLink) {
+        this.pptLink = pptLink;
+    }
+    public void setPptDescription(String pptDescription) {
+        this.pptDescription = pptDescription;
+    }
+    public void setVideoLinks(List<String> videoLinks) {
+        this.videoLinks = videoLinks;
+    }
+    public void setVideoBlobKeysList(List<String> videoBlobKeysList) {
+        this.videoBlobKeysList = videoBlobKeysList;
+    }
+    public void setVideoDescriptions(List<String> videoDescriptions) {
+        this.videoDescriptions = videoDescriptions;
+    }
+    public void setVideoTypes(List<String> videoTypes) {
+        this.videoTypes = videoTypes;
+    }
+    public void setImageServingUrlList(List<String> imageServingUrlList) {this.imageServingUrlList = imageServingUrlList;}
+    public void setImageBlobKeysList(List<String> imageBlobKeysList) {
+        this.imageBlobKeysList = imageBlobKeysList;
+    }
+    public void setImageDescriptions(List<String> imageDescriptions) {
+        this.imageDescriptions = imageDescriptions;
+    }
+    public void setAssignmentBlobKeysList(List<String> assignmentBlobKeysList) {this.assignmentBlobKeysList = assignmentBlobKeysList;}
+    public void setAssignmentFileNameList(List<String> assignmentFileNameList) {this.assignmentFileNameList = assignmentFileNameList;}
+    public void setAssignmentDescriptions(List<String> assignmentDescriptions) {this.assignmentDescriptions = assignmentDescriptions;}
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
