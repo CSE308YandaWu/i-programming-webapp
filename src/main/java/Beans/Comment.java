@@ -12,6 +12,9 @@ import java.util.List;
 /**
  * Created by JIAQI ZHANG on 5/2/2017.
  */
+/*
+ * A Bean class representing a comment in the discussion board.
+ */
 @Entity
 public class Comment {
     @Id

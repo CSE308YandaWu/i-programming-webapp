@@ -5,6 +5,9 @@
   Time: 3:41 AM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--This is the page for creating course --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -112,7 +115,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row" id="statusRow">
+                    <div class="row" id="statusRow" hidden>
                         <div class="col-md-3"><h4>Access Code:</h4></div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="accessCode" form="courseinfo">
@@ -129,30 +132,6 @@
                         <input name="cancel" type="submit" value="Cancel" class="btn btn-primary" onclick="createCourseToMainCancel();">
                     </form>
                 </div>
-                <%--<div class="row">
-                    <div class="col-md-5"></div>
-                    <div class="col-md-2">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonConfirm();">Save</button>
-                        <form id="lessonInfo" action="${uploadUrl}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="userEmail" value="${userEmail}">
-                            <input type="hidden" name="courseId" value="${courseId}">
-                            <input type="hidden" name="numEnrolled" value="${numEnrolled}">
-                            <input type="hidden" name="courseTitle" value="${courseTitle}">
-                            <input type="hidden" name="instructor" value="${instructor}">
-                            <input type="hidden" name="description" value="${description}">
-                            <input type="hidden" name="status" value="${status}">
-                            <c:if test="${status == 'private'}">
-                                <input type="hidden" name="accessCode" value="${accessCode}">
-                            </c:if>
-                        </form>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        &lt;%&ndash;<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="editLessonToEditCourseCancel();">Cancel</button>&ndash;%&gt;
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="goBack()">Cancel</button>
-                        <form id="editLessonToEditCourseCancel"><input type="hidden"></form>
-                    </div>
-                </div>--%>
                 <div>
                     <div class="inner">
                         <p>Developed by Dark Blue Team.</p>

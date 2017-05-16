@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomePageController {
-
+    /* redirect back to home page */
     @RequestMapping("/")
     public String home() {
         return "home";

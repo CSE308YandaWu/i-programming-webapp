@@ -5,6 +5,9 @@
   Time: 11:56 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--This is the edit lesson page --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -7,10 +7,7 @@
  */
 function onSuccess(googleUser) {
     console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    /* if user email changes, we might need to use the id_token to save the userInfo */
-    // alert(googleUser.getBasicProfile().getName());
-    // var id_token = googleUser.getAuthResponse().id_token;
-    // alert(id_token);
+
     if (document.getElementById('userEmail') != null) {//home page doesn't have userEmial
         document.getElementById('userEmail').innerHTML = (googleUser.getBasicProfile().getEmail());
     }

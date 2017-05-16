@@ -49,15 +49,6 @@ function editCourseToMain(lessonList) {
     document.getElementById("lessonOrderID").value = lessonOrder;
 }
 
-function courseStatus() {
-    var value = document.getElementById("status").value;
-    var statusRow = document.getElementById("statusRow");
-    if (value == "private")
-        statusRow.style.display = "initial";
-    if (value == "public")
-        statusRow.style.display = "none";
-}
-
 function checkCode(validCode, index) {
     var input = document.getElementById("accessCode"+index).value;
     if(input == validCode) {
@@ -69,12 +60,23 @@ function checkCode(validCode, index) {
     }
 }
 
+/* createCourse_edit.jsp AccessCode display control */
+function courseStatus() {
+    var value = document.getElementById("status").value;
+    var statusRow = document.getElementById("statusRow");
+    if (value == "private")
+        statusRow.style.display = "initial";
+    if (value == "public")
+        statusRow.style.display = "none";
+}
 
 /**
  * ---------------------------------------Back navigation button functions for all pages---------------------------------------
  */
 
-
+/*
+ * Go back without form data submission
+ */
 function goBack() {
     history.back();
 }

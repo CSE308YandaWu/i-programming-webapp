@@ -13,7 +13,7 @@ import java.util.List;
  * Created by YandaWu on 4/15/2017.
  * Edited by Shanshan Chen on 4/20/17
  */
-/* we might need to use beans later */
+/* This is a bean for each user */
 @Entity
 public class User implements Serializable {
     @Id
@@ -41,6 +41,7 @@ public class User implements Serializable {
 
     public List<String> getJoinedCourse() { return joinedCourse; }
     public void setJoinedCourse(List<String> joinedCourse) { this.joinedCourse = joinedCourse; }
+    
     public void addJoinedCourse(Course course) { this.joinedCourse.add(course.getId()); }
     public void dropJoinedCourse(Course course){
         joinedCourse.remove(course.getId());
