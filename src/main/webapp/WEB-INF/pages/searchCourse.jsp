@@ -94,7 +94,7 @@
                             <ul class="list-group">
                                 <c:choose>
                                     <c:when test="${empty result}">
-                                        No course found!
+                                        No courses found!  Please try entering the exact search term.
                                     </c:when>
                                     <c:otherwise>
                                         <c:forEach var="x" items="${result}" varStatus="loop">

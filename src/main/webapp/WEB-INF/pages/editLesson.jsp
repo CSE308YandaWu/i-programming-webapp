@@ -100,7 +100,7 @@
                     <div class="row">
                         <div class="col-md-4"><h4>Google SlideShow Link</h4></div>
                         <div class="col-md-7">
-                            <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert URL here" form="lessonInfo">
+                            <input type="text" id="slideShowLink" class="form-control" name="pptLink" placeholder="Insert the Google Slideshow embed URL here" form="lessonInfo">
                             <textarea id="slideShowDescription" class="form-control" rows="3" wrap="soft" name="pptDescription" placeholder="Add slideshow description here" form="lessonInfo"></textarea>
                         </div>
                     </div>

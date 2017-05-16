@@ -53,11 +53,12 @@ of those sections to manage the look and feel of the site. */
     padding-right: inherit;
     line-height: 1.5;
     font-size: large;
+    vertical-align: middle;
 }
 
 .intro-section {
     height: 100%;
-    padding-top: 20%;
+    padding-top: 175px;
     text-align: center;
     background: transparent;
     color: #fff;
@@ -65,7 +66,7 @@ of those sections to manage the look and feel of the site. */
 
 .about-section {
     height: 75%;
-    padding-top: 15%;
+    padding-top: 150px;
     text-align: center;
     background: #3b0d6d;
     color: #e2dbe2;
@@ -73,7 +74,7 @@ of those sections to manage the look and feel of the site. */
 
 .contact-section {
     height: 65%;
-    padding-top: 7.5%;
+    padding-top: 25px;
     text-align: center;
     background-image: url("../media/dark-blue-fade.jpg");
     /*background: #001a9a;*/

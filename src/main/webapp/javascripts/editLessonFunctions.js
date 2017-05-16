@@ -27,7 +27,7 @@ function addVideoOptions(divName) {
         var newdiv = document.createElement('div');
         switch (strOption) {
             case '1'://generate video Link input field with video description input filed, and hidden form indicating the video type that will be used later in the controller
-                newdiv.innerHTML = " <input type='text' id='videoLink" + addVideoCounter + "' class='form-control' name='videoLinks[]' placeholder='Insert URL here' form='lessonInfo'>" +//video URL
+                newdiv.innerHTML = " <input type='text' id='videoLink" + addVideoCounter + "' class='form-control' name='videoLinks[]' placeholder='Insert YouTube embed URL here' form='lessonInfo'>" +//video URL
                     "<textarea id='videoDescription"+addVideoCounter+"'class='form-control' rows='3' wrap='soft' name='videoDescriptions[]' placeholder='Add Video description here' form='lessonInfo'></textarea>"+//video description
                     "<input id='videoType"+addVideoCounter+"'type='hidden' name='videoTypes[]' value='1' form='lessonInfo'>";//video type, if video link is chosen, video type = 1
                 break;
