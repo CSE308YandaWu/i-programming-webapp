@@ -7,6 +7,9 @@
   Time: 12:28 AM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%--This is the discussion board page --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%--this is needed for the signin-out function so every page should have this --%>

@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
   This page is used to display the search results returned when the user is looking for a new course to add
 --%>
+
+
+<%--This is the serarch course page --%>
+
 <%@ page import="Beans.Course" %>
 <%@ page import="Beans.User" %>
 <%@ page import="java.util.List" %>

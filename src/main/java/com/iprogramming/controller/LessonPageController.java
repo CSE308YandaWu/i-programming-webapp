@@ -111,7 +111,6 @@ public class LessonPageController {
                                           @RequestParam(value = "status") String status,
                                           @RequestParam(value = "accessCode", required = false) String accessCode) throws IOException {
 
-//        System.out.println("edit LESSON REAL CONFIRM lessonId: " + lessonId);
 
         /* not saving it until user click save in editCourse page */
         String lessonOrder = null;
@@ -151,7 +150,6 @@ public class LessonPageController {
                 String gcsImageFileName = finfos.get("myFileImage[]").get(i).getGsObjectName();
                 BlobKey imageBlobKey = blobstoreService.createGsBlobKey(gcsImageFileName);
                 if (imageBlobKey == null) {
-                    //System.out.println("uploadImage error");
                 } else {
                     String blob = imageBlobKey.getKeyString();
                     imageBlobKeysList.add(blob);
@@ -185,9 +183,6 @@ public class LessonPageController {
                 if (assignmentBlobKey == null) {
                     System.out.println("uploadAssignment error");
                 } else {
-                    //BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-                    //BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
-
                     String blob = assignmentBlobKey.getKeyString();
                     assignmentBlobKeysList.add(blob);
                     assignmentFileNameList.add("Assignment "+ (i + 1) );
@@ -206,7 +201,6 @@ public class LessonPageController {
         if(videoLinks != null){
             for(int i = 0; i < videoLinks.size(); i++){
                 videoLinks.set(i,videoLinks.get(i).replace("com/watch?v=","com/embed/"));
-                //System.out.println(videoLinks.get(i));
             }
         }
         lesson.setVideoLinks(videoLinks);
@@ -219,7 +213,6 @@ public class LessonPageController {
         lesson.setAssignmentBlobKeysList(assignmentBlobKeysList);
         lesson.setAssignmentFileNameList(assignmentFileNameList);
         lesson.setAssignmentDescriptions(assignmentDescriptions);
-//        System.out.println("editLessonRealConfirm lesson edited");
 
         /* save the lesson back into datastore  */
 
@@ -310,7 +303,6 @@ public class LessonPageController {
                 } else {
                     String blob = videoBlobKey.getKeyString();
                     videoBlobKeysList.add(blob);
-                    //System.out.println("VIDEO KEY: " + blob);
                 }
             }
         }
@@ -345,7 +337,6 @@ public class LessonPageController {
                             new GcsFilename("i-programming.appspot.com", "resizedImage" + randomNum + i + ".jpeg"),
                             new GcsFileOptions.Builder().mimeType("image/jpeg").build(),
                             ByteBuffer.wrap(resizedImage.getImageData()));
-                    //ServingUrlOptions serve = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));     Bulk upload
                     ServingUrlOptions serve = ServingUrlOptions.Builder.withGoogleStorageFileName("/gs/i-programming.appspot.com/resizedImage" + randomNum + i + ".jpeg");
                     String url = services.getServingUrl(serve);
                     imageServingUrlList.add(url);
@@ -364,15 +355,12 @@ public class LessonPageController {
                 if (assignmentBlobKey == null) {
                     System.out.println("uploadAssignment error");
                 } else {
-                    //BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-                    //BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(assignmentBlobKey);
 
                     String blob = assignmentBlobKey.getKeyString();
                     assignmentBlobKeysList.add(blob);
                     assignmentFileNameList.add("Assignment "+ (i + 1) );
                 }
             }
-            //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
         String id = new ObjectifyFactory().allocateId(Lesson.class).getString();
 
@@ -380,7 +368,6 @@ public class LessonPageController {
         if(videoLinks != null){
             for(int i = 0; i < videoLinks.size(); i++){
                 videoLinks.set(i,videoLinks.get(i).replace("com/watch?v=","com/embed/"));
-                //System.out.println(videoLinks.get(i));
             }
         }
 
@@ -407,10 +394,6 @@ public class LessonPageController {
     public void see(HttpServletResponse res, @RequestParam(value = "key") String key) throws IOException {
 
         BlobKey bk = new BlobKey(key);
-//        BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
-//        BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(bk);
-//        res.setContentType(blobInfo.getContentType());
-//        res.setHeader("Content-Disposition","inline; filename=" + blobInfo.getFilename());
         blobstoreService.serve(bk, res);
     }
 }

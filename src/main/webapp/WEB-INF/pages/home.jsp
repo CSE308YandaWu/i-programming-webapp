@@ -6,6 +6,9 @@
   The home page of this application.
   TODO: determine if other sections needed
 --%>
+
+<%--This is the home page --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">

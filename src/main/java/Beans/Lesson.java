@@ -13,6 +13,9 @@ import java.util.List;
  * Created by JIAQI ZHANG on 5/1/2017.
  * Edited by YANDA WU on 5/4/2017.
  */
+/*
+ * A Bean representing a lesson entity. It contains several basic info for a lesson.
+ */
 @Entity
 public class Lesson {
     @Id
