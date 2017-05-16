@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -23,19 +24,22 @@ public class SearchCoursePageController {
     public ModelAndView searchCourse(HttpSession session, HttpServletRequest request) {
         String input = request.getParameter("UserIn");
         String method = request.getParameter("Select_method");
-        System.out.println(method);
-        System.out.println(input);
-        List<Course> courses;
+
+
+        List<Course> courses = ofy().load().type(Course.class).list();
+        List<Course> result = new ArrayList<>();
         if (method != null && "title".equals(method)) {
-            courses = ofy().load().type(Course.class).filter("title =", input).list();
-            System.out.println("search by title");
-            System.out.println(courses);
-        } else {
-            courses = ofy().load().type(Course.class).filter("instructor =", input).list();
-            System.out.println("search by instructor");
-            System.out.println(courses);
+            for (Course c: courses) {
+                if (c.getTitle().toLowerCase().contains(input.toLowerCase()))
+                    result.add(c);
+            }
+        } else if(method != null && "instructor".equals(method) ){
+            for (Course c: courses) {
+                if (c.getInstructor().toLowerCase().contains(input.toLowerCase()))
+                    result.add(c);
+            }
         }
-        return new ModelAndView("searchCourse", "result", courses);
+        return new ModelAndView("searchCourse", "result", result);
     }
 }
 
