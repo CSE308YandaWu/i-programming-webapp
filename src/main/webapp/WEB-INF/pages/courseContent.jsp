@@ -85,16 +85,14 @@
                     <c:choose>
                         <c:when test="${lesson.pptLink!=''}">
                             <p class="text">
-                            <%--<p style="font-size:36px;">Slide Show Section</p>--%>
-                            <%--<br><br>--%>
-                            <div id="doc">
+
+                            <div id="doc" class="content">
                                 <iframe src="${lesson.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <%--<p style="font-size:36px;">no pptlink</p>--%>
-                            <%--<br />--%>
+
                         </c:otherwise>
                     </c:choose>
                     <c:choose>
@@ -104,16 +102,13 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <%--<p style="font-size:36px;">no pptDescription</p>--%>
-                            <%--<br />--%>
+
                         </c:otherwise>
                     </c:choose>
                     <br>
                     <c:choose>
                         <c:when test="${lesson.videoTypes!=null}">
-                            <%--<p class="text">--%>
-                            <%--<p style="font-size:36px;">Video Lecture Section</p>--%>
-                            <%--<br>--%>
+
                             <br><br>
                             <div id="doc">
                                 <c:set var="videoLinkIndex" value="0" scope="page" />
@@ -122,16 +117,16 @@
                                     <c:forEach var="listValue" items="${lesson.videoTypes}" varStatus="loop">
                                         <c:choose>
                                             <c:when test="${listValue == '1'}">
-                                                <iframe src="${lesson.videoLinks[videoLinkIndex]}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                                <iframe class="content" src="${lesson.videoLinks[videoLinkIndex]}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                                 <p class="text">
                                                     <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>
                                                 </p>
                                                 <c:set var="videoLinkIndex" value="${videoLinkIndex + 1}" scope="page"/>
                                             </c:when>
                                             <c:otherwise>
-                                                <video width="800" height="500" controls>
-                                                    <source src="http://localhost:8080/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">
-                                                    <%--<source src="http://i-programming.appspot.com/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">--%>
+                                                <video class="content" width="800" height="500" controls>
+                                                    <%--<source src="http://localhost:8080/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">--%>
+                                                    <source src="http://i-programming.appspot.com/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">
                                                 </video>
                                                 <p class="text">
                                                     <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>
@@ -146,43 +141,33 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <%--<p style="font-size:36px;">no video </p>--%>
-                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br>
                     <c:choose>
                         <c:when test="${lesson.imageServingUrlList!=null}">
-                            <%--<p class="text">--%>
-                            <%--<p style="font-size:36px;">Image Section</p>--%>
-                            <%--<br>--%>
-                            <%--Resized Image:--%>
-                            <%--<br>--%>
+
                             <img src=${model.url}>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.imageServingUrlList}" varStatus="loop">
-                                    <img src=${listValue}><br>
+                                    <img class="content" src=${listValue}><br>
                                     <p class="text">
                                         <p class="item-descp">${lesson.imageDescriptions[loop.index]}</p>
                                     </p>
                                 </c:forEach>
                             </ul>
                             <br>
-                            <%--<a href="#" onclick="serveImage();"><p style="color:deepskyblue;">View Original Image</p></a>--%>
-                            <%--<form id="serveImage" target="_blank"><input type="hidden" name="key" value="${model.blobKeyI}" ></form>--%>
+
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <%--<p style="font-size:36px;">no uploaded image file</p>--%>
-                            <%--<br />--%>
+
                         </c:otherwise>
                     </c:choose>
                     <br>
                     <c:choose>
                         <c:when test="${lesson.assignmentBlobKeysList!=null}">
-                            <%--<p class="text">--%>
-                            <%--<p style="font-size:36px;">Assignment Section</p>--%>
-                            <%--<br>--%>
+
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.assignmentBlobKeysList}" varStatus="loop">
                                     <a href="#" onclick="serveAssignment(${loop.index}); return false;"><p style="color:deepskyblue;">${lesson.assignmentFileNameList[loop.index]}</p></a>
@@ -195,8 +180,6 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-                            <%--<p style="font-size:36px;">no uploaded assignment file</p>--%>
-                            <%--<br />--%>
                         </c:otherwise>
                     </c:choose>
                     <br>

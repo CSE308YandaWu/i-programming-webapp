@@ -81,13 +81,10 @@
                                     <select name="MySelect" id="MySelect" style="color:black">
                                         <option name="Search_by_title" value="title">Search by title</option>
                                         <option name="Search_by_instructor" value="instructor">Search by instructor</option>
-                                        <%--<option name="Search_by_course_id" value="course-id">Search by ID</option>--%>
-                                        <%--<option name="Search_by_description" value="description">Search descriptions</option>--%>
                                     </select>
                                 </div>
                                 <div class="col-md-1" >
                                     <button id="search_btn" class="btn btn-block btn-primary btn-block" type="submit" onclick="do_search()">Go!</button>
-                                    <%--<input id="search_btn" type="submit" value="Search" style="color:black" >--%>
                                 </div>
                                 <input type = hidden name="Select_method" id="select_method" >
                             </div>
@@ -98,7 +95,7 @@
                             <ul class="list-group">
                                 <c:choose>
                                     <c:when test="${empty result}">
-                                        No courses found!  Please try entering the exact search term.
+                                        No courses found!
                                     </c:when>
                                     <c:otherwise>
                                         <c:forEach var="x" items="${result}" varStatus="loop">

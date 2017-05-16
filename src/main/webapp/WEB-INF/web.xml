@@ -29,8 +29,4 @@
 	<listener>
 		<listener-class>Beans.OfyHelper</listener-class>
 	</listener>
-    <!--<listener>-->
-        <!--<listener-class>com.example.guestbook.OfyHelper</listener-class>-->
-    <!--</listener>-->
-    <!-- [END Objectify] -->
 </web-app>

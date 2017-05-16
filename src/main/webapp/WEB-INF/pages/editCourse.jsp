@@ -200,28 +200,6 @@
                             <input type="submit" class="btn btn-primary" value="Cancel">
                         </form>
                     </div>
-                    <%-- ALTERNATE SAVE AND CANCEL BUTTON LOCATIONS --%>
-                    <%--<div class="row">--%>
-                        <%--&lt;%&ndash;div class="col-md-4"></div>--%>
-                        <%--<div class="col-md-2">--%>
-                            <%--<form action="/saveCourse">--%>
-                                <%--<input type="submit" class="btn btn-primary" value="Save">--%>
-                                <%--<input type="hidden" name="userEmail" value="${course.email}">--%>
-                                <%--<input type="hidden" name="courseId" value="${course.id}">--%>
-                                <%--<input type="hidden" name="numEnrolled" value="${course.numEnrolled}">--%>
-                                <%--<input type="hidden" name="courseTitle" id="title2Save" value="${course.title}">--%>
-                                <%--<input type="hidden" name="instructor" id="instructor2Save" value="${course.instructor}">--%>
-                                <%--<input type="hidden" name="description" id="description2Save" value="${course.description}">--%>
-                                <%--<input type="hidden" name="status" id="status2Save" value="${course.status}">--%>
-                                <%--<input type="hidden" name="accessCode" id="accessCode2Save" value="${course.accessCode}">--%>
-                            <%--</form>--%>
-                        <%--</div>--%>
-                        <%--<div class="col-md-2">--%>
-                            <%--<form action="/main">--%>
-                                <%--<input type="submit" class="btn btn-primary" value="Cancel">--%>
-                            <%--</form>--%>
-                        <%--</div&ndash;%&gt;--%>
-                    <%--</div>--%>
                 </div>
                 <br>
                 <div>

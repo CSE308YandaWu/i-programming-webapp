@@ -35,7 +35,7 @@ function signOut() {
         console.log('User signed out.');
         signOutToHome();//back to home after sign out
     });
-    //document.getElementById('userEmail').style.display='none';
+
 }
 /* signOut function for all pages back to home page */
 function signOutToHome() {

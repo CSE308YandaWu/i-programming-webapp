@@ -160,6 +160,7 @@ public class LessonPageController {
                     Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     int randomNumEdit = ThreadLocalRandom.current().nextInt(0, 100000 + 1);
+
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
                             new GcsFilename("i-programming.appspot.com", "resizedImage" + randomNumEdit + i + ".jpeg"),
@@ -327,11 +328,13 @@ public class LessonPageController {
                     imageBlobKeysList.add(blob);
 
                     ImagesService services = ImagesServiceFactory.getImagesService();
+
                     // Make an image from a Cloud Storage object, and transform it.
                     Image blobImage = ImagesServiceFactory.makeImageFromBlob(imageBlobKey);
                     Transform resize = ImagesServiceFactory.makeResize(800, 500);
                     Image resizedImage = services.applyTransform(resize, blobImage);
                     int randomNum = ThreadLocalRandom.current().nextInt(0, 100000 + 1);
+
                     // Write the transformed image back to a Cloud Storage object.
                     gcsService.createOrReplace(
                             new GcsFilename("i-programming.appspot.com", "resizedImage" + randomNum + i + ".jpeg"),
