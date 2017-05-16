@@ -14,6 +14,9 @@ import java.util.List;
  * Created by JIAQI ZHANG on 4/17/2017.
  * Edit By Gangdi Huang
  */
+/*
+ * A Bean representing a course entity. It contains several basic info for a course.
+ */
 @Entity
 public class Course implements Serializable {
     @Id
