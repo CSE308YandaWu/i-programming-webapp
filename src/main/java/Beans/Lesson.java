@@ -67,7 +67,7 @@ public class Lesson {
         this.assignmentFileNameList = assignmentFileNameList;
         this.assignmentDescriptions = assignmentDescriptions;
     }
-    
+
     /* getter */
     public String getLessonId() {
         return lessonId;
