@@ -202,6 +202,13 @@ public class LessonPageController {
         lesson.setLessonBody(lessonBody);
         lesson.setPptLink(pptLink);
         lesson.setPptDescription(pptDescription);
+        /* add embed into the video link */
+        if(videoLinks != null){
+            for(int i = 0; i < videoLinks.size(); i++){
+                videoLinks.set(i,videoLinks.get(i).replace("com/watch?v=","com/embed/"));
+                //System.out.println(videoLinks.get(i));
+            }
+        }
         lesson.setVideoLinks(videoLinks);
         lesson.setVideoBlobKeysList(videoBlobKeysList);
         lesson.setVideoDescriptions(videoDescriptions);
@@ -368,6 +375,15 @@ public class LessonPageController {
             //mav.addObject("assignmentBlobKeysList",assignmentBlobKeysList);
         }
         String id = new ObjectifyFactory().allocateId(Lesson.class).getString();
+
+        /* add embed into the video link */
+        if(videoLinks != null){
+            for(int i = 0; i < videoLinks.size(); i++){
+                videoLinks.set(i,videoLinks.get(i).replace("com/watch?v=","com/embed/"));
+                //System.out.println(videoLinks.get(i));
+            }
+        }
+
         Lesson lesson = new Lesson(courseId, id, lessonTitle, lessonBody, pptLink, pptDescription, videoLinks, videoBlobKeysList, videoDescriptions, videoTypes,
                 imageServingUrlList, imageBlobKeysList, imageDescriptions, assignmentBlobKeysList,assignmentFileNameList, assignmentDescriptions);
         /* save the lesson into datastore  */
