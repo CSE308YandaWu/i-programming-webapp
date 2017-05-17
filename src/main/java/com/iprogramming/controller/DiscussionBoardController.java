@@ -27,8 +27,9 @@ public class DiscussionBoardController {
         Course course = ofy().load().type(Course.class).id(courseId).now();
 
         //load comments
-        List<Comment> comments = ofy().load().type(Comment.class).filter("courseId", courseId).order("-dateCreated").list();;
-        if(sort != null)
+        List<Comment> comments = ofy().load().type(Comment.class).filter("courseId", courseId).order("-dateCreated").list();
+        ;
+        if (sort != null)
             if (sort.equals("top"))
                 comments = ofy().load().type(Comment.class).filter("courseId", courseId).order("-likes").list();
 
@@ -40,6 +41,7 @@ public class DiscussionBoardController {
                 replyMap.put(c.getId(), replies);
             }
         }
+
 
         ModelAndView mav = new ModelAndView("discussionBoard");
         mav.addObject("course", course);
@@ -54,45 +56,65 @@ public class DiscussionBoardController {
                               @RequestParam(value = "commentId", required = false) String commentId,
                               @RequestParam(value = "comment") String comment) {
         Comment newComment;
-        if(commentId == null)
+        if (commentId == null)
             newComment = new Comment(courseId, user, comment);
         else
             newComment = new Comment(commentId, user, comment);
         ofy().save().entity(newComment).now();
-        return "redirect:/discussionBoard?courseId="+courseId;
+        return "redirect:/discussionBoard?courseId=" + courseId;
     }
 
     @RequestMapping(value = "/sortComment")
     public String sortComment(@RequestParam(value = "courseId") String courseId,
-                              @RequestParam(value = "sortMethod") String sort){
-        return "redirect:/discussionBoard?courseId="+courseId+"&sortMethod="+sort;
+                              @RequestParam(value = "sortMethod") String sort) {
+        return "redirect:/discussionBoard?courseId=" + courseId + "&sortMethod=" + sort;
     }
 
     @RequestMapping(value = "/likeComment")
     public String likeComment(@RequestParam(value = "courseId") String courseId,
-                              @RequestParam(value = "commentId") String commentId){
+                              @RequestParam(value = "commentId") String commentId,
+                              @RequestParam(value = "userEmail") String userEmail) {
         Comment comment = ofy().load().type(Comment.class).id(commentId).now();
-        comment.setLikes(comment.getLikes()+1);
+
+        Map<String, Integer> likeMap = comment.getLikeStatus();
+        if (likeMap.get(userEmail) == null) {
+            likeMap.put(userEmail, 0);
+        }
+        likeMap.put(userEmail, likeMap.get(userEmail) + 1);
+
+        comment.setLikeStatus(likeMap);
+        comment.setLikes(comment.getLikes() + 1);
         ofy().save().entity(comment).now();
-        return "redirect:/discussionBoard?courseId="+courseId;
+        return "redirect:/discussionBoard?courseId=" + courseId;
     }
+
     @RequestMapping(value = "/dislikeComment")
     public String dislikeComment(@RequestParam(value = "courseId") String courseId,
-                                 @RequestParam(value = "commentId") String commentId){
+                                 @RequestParam(value = "commentId") String commentId,
+                                 @RequestParam(value = "userEmail") String userEmail) {
         Comment comment = ofy().load().type(Comment.class).id(commentId).now();
-        comment.setLikes(comment.getLikes()-1);
+
+        Map<String, Integer> likeMap = comment.getLikeStatus();
+        if (likeMap.get(userEmail) == null) {
+            likeMap.put(userEmail, 0);
+        }
+        likeMap.put(userEmail, likeMap.get(userEmail) - 1);
+
+        comment.setLikeStatus(likeMap);
+        comment.setLikes(comment.getLikes() - 1);
         ofy().save().entity(comment).now();
-        return "redirect:/discussionBoard?courseId="+courseId;
+        return "redirect:/discussionBoard?courseId=" + courseId;
     }
+
     @RequestMapping(value = "/deleteComment")
     public String deleteComment(@RequestParam(value = "courseId") String courseId,
-                                @RequestParam(value = "commentId") String commentId){
+                                @RequestParam(value = "commentId") String commentId) {
         //delete comment
         ofy().delete().type(Comment.class).id(commentId).now();
         //delete replies
         List<Comment> replies = ofy().load().type(Comment.class).filter("courseId", commentId).list();
         ofy().delete().entities(replies);
-        return "redirect:/discussionBoard?courseId="+courseId;
+        return "redirect:/discussionBoard?courseId=" + courseId;
     }
 
 }

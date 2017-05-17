@@ -85,14 +85,12 @@
                     <c:choose>
                         <c:when test="${lesson.pptLink!=''}">
                             <p class="text">
-
-                            <div id="doc" class="content">
+                            <div id="doc">
                                 <iframe src="${lesson.pptLink}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                             </p>
                         </c:when>
                         <c:otherwise>
-
                         </c:otherwise>
                     </c:choose>
                     <c:choose>
@@ -102,7 +100,6 @@
                             </p>
                         </c:when>
                         <c:otherwise>
-
                         </c:otherwise>
                     </c:choose>
                     <br>
@@ -117,14 +114,14 @@
                                     <c:forEach var="listValue" items="${lesson.videoTypes}" varStatus="loop">
                                         <c:choose>
                                             <c:when test="${listValue == '1'}">
-                                                <iframe class="content" src="${lesson.videoLinks[videoLinkIndex]}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                                                <iframe src="${lesson.videoLinks[videoLinkIndex]}" frameborder="0" width="800" height="500" allowfullscreen="true"  mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                                 <p class="text">
                                                     <p class="item-descp">${lesson.videoDescriptions[loop.index]}</p>
                                                 </p>
                                                 <c:set var="videoLinkIndex" value="${videoLinkIndex + 1}" scope="page"/>
                                             </c:when>
                                             <c:otherwise>
-                                                <video class="content" width="800" height="500" controls>
+                                                <video width="800" height="500" controls>
                                                     <%--<source src="http://localhost:8080/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">--%>
                                                     <source src="http://i-programming.appspot.com/serve?key=${lesson.videoBlobKeysList[videoFileIndex]}" type="video/mp4">
                                                 </video>
@@ -141,6 +138,7 @@
                             </p>
                         </c:when>
                         <c:otherwise>
+
                         </c:otherwise>
                     </c:choose>
                     <br>
@@ -150,7 +148,7 @@
                             <img src=${model.url}>
                             <ul>
                                 <c:forEach var="listValue" items="${lesson.imageServingUrlList}" varStatus="loop">
-                                    <img class="content" src=${listValue}><br>
+                                    <img src=${listValue}><br>
                                     <p class="text">
                                         <p class="item-descp">${lesson.imageDescriptions[loop.index]}</p>
                                     </p>
@@ -180,6 +178,7 @@
                             </p>
                         </c:when>
                         <c:otherwise>
+
                         </c:otherwise>
                     </c:choose>
                     <br>
@@ -203,7 +202,7 @@
                 </div>
                 <br><br><br><br><br><br><br><br><br>
                     <%--End of all sections--%>
-                <%--</p>--%>
+
             </div>
 
             <div>
