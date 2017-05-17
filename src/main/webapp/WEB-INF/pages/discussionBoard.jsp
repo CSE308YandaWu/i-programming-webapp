@@ -91,16 +91,34 @@
                             <h4>${x.author} <span class="date">${x.dateCreated}</span></h4>
                             <p>${x.comment}</p>
                             <a href="#reply${loop.index}" data-toggle="collapse">Reply</a>&nbsp;&nbsp;
-                            <a href="#" onclick="likeComment(${loop.index})">Like</a>&nbsp;&nbsp;
-                            <a href="#" onclick="dislikeComment(${loop.index})">Dislike</a>&nbsp;&nbsp;${x.likes}&nbsp;&nbsp;
-                                    <c:if test="${x.author eq userObject.userEmail}">
-                                        <a href="#" onclick="deleteComment(${loop.index})">Delete</a>
-                                        <form id="deleteComment${loop.index}" action="/deleteComment">
-                                            <input type="hidden" name="courseId" value="${course.id}">
-                                            <input type="hidden" name="commentId" value="${x.id}">
-                                        </form>
-                                    </c:if>
+                            <c:if test="${x.author eq userObject.userEmail}">
+                                <a href="#" onclick="deleteComment(${loop.index})">Delete</a>
+                                <form id="deleteComment${loop.index}" class="deleteComment" action="/deleteComment">
+                                    <input type="hidden" name="courseId" value="${course.id}">
+                                    <input type="hidden" name="commentId" value="${x.id}">
+                                </form>
+                            </c:if>&nbsp;&nbsp;
+                            <c:choose>
+                                <c:when test="${empty x.likeStatus[userObject.userEmail]||x.likeStatus[userObject.userEmail] < 1}">
+                                    <a href="#" onclick="likeComment(${loop.index})">Like</a>&nbsp;&nbsp;
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="#" onclick="likeComment(${loop.index})" class="disabled">Like</a>&nbsp;&nbsp;
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${empty x.likeStatus[userObject.userEmail]||x.likeStatus[userObject.userEmail] > -1}">
+                                    <a href="#" onclick="dislikeComment(${loop.index})">Dislike</a>&nbsp;&nbsp;
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="#" onclick="dislikeComment(${loop.index})" class="disabled">Dislike</a>&nbsp;&nbsp;
+                                </c:otherwise>
+                            </c:choose>
+                                <%--<a href="#" onclick="likeComment(${loop.index})">Like</a>&nbsp;&nbsp;--%>
+                                <%--<a href="#" onclick="dislikeComment(${loop.index})">Dislike</a>&nbsp;&nbsp;--%>
+                                ${x.likes}
                             <form id="likeForm${loop.index}">
+                                <input type="hidden" name="userEmail" value="${userObject.userEmail}">
                                 <input type="hidden" name="courseId" value="${course.id}">
                                 <input type="hidden" name="commentId" value="${x.id}">
                             </form>
@@ -118,7 +136,6 @@
                                 <c:if test="${!empty replyMap[x.id]}">
                                     <c:forEach var="reply" items="${replyMap[x.id]}">
                                         <div class="reply-item">
-                                                <%--<span style="float: right">${reply.likes} likes</span>--%>
                                             <h4>${reply.author} <span class="date">${reply.dateCreated}</span></h4>
                                             <p>${reply.comment}</p>
                                         </div>
@@ -152,7 +169,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/googleSignInFunctions.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/homePageNavigation.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/iprogrammingScript.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/courseContentPageFunctions.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/javascripts/courseContentPageFunctions.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

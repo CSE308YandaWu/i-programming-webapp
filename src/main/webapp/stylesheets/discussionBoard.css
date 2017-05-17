@@ -144,6 +144,15 @@ li > .post-btn{
     font-weight: 700;
 }
 
+.deleteComment{
+    display: inline;
+}
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: grey;
+}
 /* Padding for spacing */
 .inner {
     padding-top: 5px;

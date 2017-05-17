@@ -5,9 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by JIAQI ZHANG on 5/2/2017.
@@ -27,14 +25,15 @@ public class Comment {
     private int likes;
     @Index
     private Date dateCreated;
-    private List<String> repliesId;
+    Map<String, Integer> likeStatus;
+
 
     //Constructors
     public Comment(){
         id = new ObjectifyFactory().allocateId(Comment.class).getString();
         dateCreated = new Date();
         likes = 0;
-        repliesId = new ArrayList<>();
+        likeStatus = new HashMap<String, Integer>();
     }
 
     public Comment(String courseId, String author, String comment){
@@ -93,5 +92,13 @@ public class Comment {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Map<String, Integer> getLikeStatus() {
+        return likeStatus;
+    }
+
+    public void setLikeStatus(Map<String, Integer> likeStatus) {
+        this.likeStatus = likeStatus;
     }
 }
