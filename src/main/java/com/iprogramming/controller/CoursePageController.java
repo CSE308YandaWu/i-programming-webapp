@@ -45,7 +45,6 @@ public class CoursePageController {
         if ((accessCode != null))
             newCourse.setAccessCode(accessCode);
 
-        //ofy().save().entity(newCourse).now();
 
         return new ModelAndView("editCourse", "course", newCourse);
     }
@@ -58,11 +57,9 @@ public class CoursePageController {
         ModelAndView mav = new ModelAndView("courseInfo");
         /* 1. not (nothing from the editCourse.jsp, empty course) , 2. not (nothing yet from other pages) */
         if( (!c.getLessonOrder().equalsIgnoreCase("[object Object]")) && (c.getLessonOrder() != null)){
-            //System.out.println("Then we have something real: "+ c.getLessonOrder());
             List<Lesson> updatedLessonList = new ArrayList<Lesson>();
             List<String> lessonOrderList = new ArrayList<String>(Arrays.asList(c.getLessonOrder().split(",")));
-            //System.out.println("Hi "+ lessonOrderList.size());
-            //System.out.println("Here comes the real list: "+ lessonOrderList);
+
             for(int i = 0; i < lessonOrderList.size(); i++){
                 updatedLessonList.add(lessonList.get(Integer.parseInt(lessonOrderList.get(i))));
             }
@@ -103,12 +100,11 @@ public class CoursePageController {
 
         }else{
             if( (!c.getLessonOrder().equalsIgnoreCase("[object Object]")) && (c.getLessonOrder() != null)){
-                //System.out.println("????"+ c.getLessonOrder());
+
                 List<Lesson> updatedLessonList = new ArrayList<Lesson>();
-//            System.out.println("Hello " + c.getLessonOrder());
+
                 List<String> lessonOrderList = new ArrayList<String>(Arrays.asList(c.getLessonOrder().split(",")));
-//            System.out.println("Hi "+ lessonOrderList.size());
-//            System.out.println("what up "+ lessonOrderList);
+
                 for(int i = 0; i < lessonOrderList.size(); i++){
                     int index = Integer.parseInt(lessonOrderList.get(i));
                     updatedLessonList.add(lessonList.get(index));

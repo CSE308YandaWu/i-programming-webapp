@@ -112,8 +112,7 @@
                         <div class="col-md-4"><h4>Videos</h4></div>
                         <div id="videoAdding" class="col-md-7">
                             <div id="dynamicInputVideo">
-                                <%--<input type="text" id="videoLink" class="form-control" name="videoLinks[]" placeholder="Insert URL here" form="lessonInfo">--%>
-                                <%--<textarea id="videoDescription" class="form-control" rows="3" wrap="soft" name="videoDescriptions[]" placeholder="Add video description here" form="lessonInfo"></textarea>--%>
+
                             </div>
                             <%--video Upload Option dropdown box--%>
                             <select id="videoUploadOption" class="btn btn-primary btn-block" onchange="enableOptionButton()">
@@ -133,8 +132,7 @@
                         <div class="col-md-4"><h4>Images</h4></div>
                         <div id="imageAdding" class="col-md-7">
                             <div id="dynamicInputImage">
-                                <%--<input type="file" multiple name="myFileImage[]" form="lessonInfo">--%>
-                                <%--<textarea id="imageDescription" class="form-control" rows="2" wrap="soft" name="imageDescriptions[]" placeholder="Add image description here" form="lessonInfo"></textarea>--%>
+
                             </div>
                             <%--add more image button--%>
                             <div id="optionButtonImage">
@@ -150,8 +148,7 @@
                         <div class="col-md-4"><h4>Attachments</h4></div>
                         <div id="assignmentAdding" class="col-md-7">
                             <div id="dynamicInputAssignment">
-                                <%--<input type="file" multiple name="myFileAssignment[]" form="lessonInfo">--%>
-                                <%--<textarea id="assignmentDescription" class="form-control" rows="2" wrap="soft" name="assignmentDescriptions[]" placeholder="Add assignment description here" form="lessonInfo"></textarea>--%>
+
                             </div>
                             <%--add more assignment button--%>
                             <div id="optionButtonAssignment">
