@@ -10,11 +10,6 @@
 
 <%--This is the serarch course page --%>
 
-<%@ page import="Beans.Course" %>
-<%@ page import="Beans.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.googlecode.objectify.Key" %>
-<%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>

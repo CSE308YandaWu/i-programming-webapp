@@ -104,7 +104,7 @@
                                         </div>
                                         <div id="${x.id}" class="panel-collapse collapse">
                                             <div class="panel-body panelbody">
-                                                <p>Instructors: ${x.instructor}</p>
+                                                <p>Instructors: ${x.instructor}; ${x.numEnrolled} enrolled</p>
                                                 <p>Status: ${x.status}</p>
                                                 <form action="/enrollCourse" id="enrollForm" onsubmit="return checkCode(${x.accessCode},${loop.index})">
                                                     <input name="courseId" type="hidden" value="${x.id}">
